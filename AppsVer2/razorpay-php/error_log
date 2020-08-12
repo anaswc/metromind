@@ -1,0 +1,14 @@
+[05-May-2020 09:58:18 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php55/root/usr/lib64/php/modules/imagick.so' - libMagickWand.so.5: cannot open shared object file: No such file or directory in Unknown on line 0
+[05-May-2020 09:58:18 UTC] PHP Fatal error:  Call to a member function create() on a non-object in /home/metromindapp/public_html/razorpay-php/testOrder.php on line 7
+[05-May-2020 10:12:05 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php55/root/usr/lib64/php/modules/imagick.so' - libMagickWand.so.5: cannot open shared object file: No such file or directory in Unknown on line 0
+[05-May-2020 10:12:05 UTC] PHP Fatal error:  Call to a member function create() on a non-object in /home/metromindapp/public_html/razorpay-php/testOrder.php on line 11
+[05-May-2020 10:12:57 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php55/root/usr/lib64/php/modules/imagick.so' - libMagickWand.so.5: cannot open shared object file: No such file or directory in Unknown on line 0
+[05-May-2020 10:12:57 UTC] PHP Fatal error:  Call to a member function create() on a non-object in /home/metromindapp/public_html/razorpay-php/testOrder.php on line 13
+[05-May-2020 10:15:36 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php55/root/usr/lib64/php/modules/imagick.so' - libMagickWand.so.5: cannot open shared object file: No such file or directory in Unknown on line 0
+[05-May-2020 10:15:36 UTC] PHP Fatal error:  Call to a member function create() on a non-object in /home/metromindapp/public_html/razorpay-php/testOrder.php on line 13
+[05-May-2020 10:18:33 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/opt/cpanel/ea-php55/root/usr/lib64/php/modules/imagick.so' - libMagickWand.so.5: cannot open shared object file: No such file or directory in Unknown on line 0
+[05-May-2020 10:18:33 UTC] PHP Fatal error:  Call to a member function create() on a non-object in /home/metromindapp/public_html/razorpay-php/testOrder.php on line 13
+[06-May-2020 11:18:05 UTC] PHP Fatal error:  Uncaught Error: Call to a member function create() on null in /home/metromindapp/public_html/razorpay-php/testOrder.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/metromindapp/public_html/razorpay-php/testOrder.php on line 13

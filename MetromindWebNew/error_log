@@ -1,0 +1,22 @@
+[27-Mar-2020 08:57:33 America/Chicago] PHP Fatal error:  Call to undefined function link_tag() in /home4/nationalpark/public_html/MetroMind/application/controllers/admin/Admin.php on line 23
+[27-Mar-2020 09:06:03 America/Chicago] PHP Fatal error:  Call to undefined function link_tag() in /home4/nationalpark/public_html/MetroMind/application/controllers/admin/Admin.php on line 23
+[27-Mar-2020 22:20:31 America/Chicago] PHP Fatal error:  Call to undefined function link_tag() in /home4/nationalpark/public_html/MetroMind/application/controllers/admin/Admin.php on line 23
+[27-Mar-2020 22:37:25 America/Chicago] PHP Fatal error:  Call to undefined function base_url() in /home4/nationalpark/public_html/MetroMind/application/controllers/admin/Admin.php on line 23
+[28-Mar-2020 14:08:24 America/Chicago] PHP Parse error:  syntax error, unexpected 'col' (T_STRING), expecting ']' in /home4/nationalpark/public_html/MetromindWeb/application/views/admin/specialities/create.php on line 107
+[28-Mar-2020 14:29:35 America/Chicago] PHP Parse error:  syntax error, unexpected 'die' (T_EXIT), expecting ',' or ';' in /home4/nationalpark/public_html/MetromindWeb/application/views/admin/specialities/update.php on line 109
+[28-Mar-2020 14:36:04 America/Chicago] PHP Parse error:  syntax error, unexpected '}' in /home4/nationalpark/public_html/MetromindWeb/application/views/admin/specialities/update.php on line 110
+[28-Mar-2020 14:46:34 America/Chicago] PHP Parse error:  syntax error, unexpected '"' in /home4/nationalpark/public_html/MetromindWeb/application/views/admin/specialities/update.php on line 110
+[29-Mar-2020 04:35:50 America/Chicago] PHP Parse error:  syntax error, unexpected '<' in /home4/nationalpark/public_html/MetromindWeb/application/views/admin/specialities/update.php on line 110
+[29-Mar-2020 13:04:45 America/Chicago] PHP Parse error:  syntax error, unexpected 'admin' (T_STRING) in /home4/nationalpark/public_html/MetromindWeb/application/controllers/admin/Symptom.php on line 84
+[30-Mar-2020 04:34:16 America/Chicago] PHP Parse error:  syntax error, unexpected end of file in /home4/nationalpark/public_html/MetromindWeb/application/views/admin/doctor/update.php on line 448
+[30-Mar-2020 06:10:17 America/Chicago] PHP Parse error:  syntax error, unexpected '}' in /home4/nationalpark/public_html/MetromindWeb/application/views/admin/doctor/update.php on line 347
+[30-Mar-2020 06:15:43 America/Chicago] PHP Parse error:  syntax error, unexpected '&&' (T_BOOLEAN_AND) in /home4/nationalpark/public_html/MetromindWeb/application/views/admin/doctor/update.php on line 347
+[30-Mar-2020 11:49:11 America/Chicago] PHP Fatal error:  Cannot access empty property in /home4/nationalpark/public_html/MetromindWeb/application/controllers/admin/Doctor.php on line 190
+[30-Mar-2020 12:43:37 America/Chicago] PHP Parse error:  syntax error, unexpected ']' in /home4/nationalpark/public_html/MetromindWeb/application/controllers/admin/Doctor.php on line 135
+[30-Mar-2020 12:47:37 America/Chicago] PHP Fatal error:  Call to undefined method CI_Input::doctor_model() in /home4/nationalpark/public_html/MetromindWeb/application/controllers/admin/Doctor.php on line 178
+[31-Mar-2020 01:38:08 America/Chicago] PHP Parse error:  syntax error, unexpected end of file, expecting variable (T_VARIABLE) or '$' in /home4/nationalpark/public_html/MetromindWeb/application/helpers/axcoder_helper.php on line 2177
+[31-Mar-2020 13:02:39 America/Chicago] PHP Fatal error:  Call to undefined method Cms_model::delete_cms() in /home4/nationalpark/public_html/MetromindWeb/application/controllers/admin/Cms.php on line 155
+[31-Mar-2020 14:05:58 America/Chicago] PHP Parse error:  syntax error, unexpected 'foreach' (T_FOREACH) in /home4/nationalpark/public_html/MetromindWeb/application/views/admin/doctor/view.php on line 111
+[31-Mar-2020 14:06:25 America/Chicago] PHP Parse error:  syntax error, unexpected 'foreach' (T_FOREACH) in /home4/nationalpark/public_html/MetromindWeb/application/views/admin/doctor/view.php on line 111
+[01-Apr-2020 03:27:24 America/Chicago] PHP Parse error:  syntax error, unexpected ';' in /home4/nationalpark/public_html/MetromindWeb/application/controllers/admin/Doctor.php on line 172
+[01-Apr-2020 06:02:57 America/Chicago] PHP Parse error:  syntax error, unexpected '<' in /home4/nationalpark/public_html/MetromindWeb/application/views/admin/doctor/update.php on line 221
