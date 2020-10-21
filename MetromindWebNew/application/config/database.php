@@ -76,6 +76,7 @@ $query_builder = TRUE;
 $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
+	// 'username' => 'root',
 	'username' => 'metromindapp_app_full',
 	'password' => 'h7$enjY?CBD?',
 	'database' => 'metromindapp_app_full',
