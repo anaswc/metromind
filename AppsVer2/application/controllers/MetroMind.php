@@ -562,7 +562,7 @@ class MetroMind extends CI_Controller
 
 				if ($this->Login_model->loginType == 1) {
 
-					if ($result['doctorImageUrl'] <> '' && file_exists('../uploads/doctors/' . $result['doctorImageUrl']))
+					if ($result['doctorImageUrl'] <> '' && file_exists(AXUPLOADDOCTORIMAGEPATH . $result[$i]['doctorImageUrl'])!== null)
 
 						$result['imageUrl'] =  AXUPLOADDOCTORIMAGEPATH . $result['doctorImageUrl'];
 
@@ -800,7 +800,7 @@ class MetroMind extends CI_Controller
 
 				$this->Login_model->add_api_token_members($this->input->post_get('uniqueId'), $token);
 
-				if ($result['doctorImageUrl'] <> '' && file_exists('../uploads/doctors/' . $result['doctorImageUrl'])) {
+				if ($result['doctorImageUrl'] <> '' && file_exists(AXUPLOADDOCTORIMAGEPATH . $result[$i]['doctorImageUrl'])!== null) {
 
 					$result['doctorImageUrl'] =  AXUPLOADDOCTORIMAGEPATH . $result['doctorImageUrl'];
 
@@ -1568,15 +1568,19 @@ class MetroMind extends CI_Controller
 
 				$i	= 0;
 
+
+
 				foreach ($result as $row) {
 
-					if ($result[$i]['doctorImageUrl'] <> '' && file_exists('../uploads/doctors/' . $result[$i]['doctorImageUrl'])) {
+
+					if ($result[$i]['doctorImageUrl'] <> '' && file_exists(AXUPLOADDOCTORIMAGEPATH . $result[$i]['doctorImageUrl'])!== null) {
 
 						$result[$i]['doctorImageUrl'] =  AXUPLOADDOCTORIMAGEPATH . $result[$i]['doctorImageUrl'];
 
 					} else {
 
 						$result[$i]['doctorImageUrl'] = AXUPLOADPATH . 'no_image.png';
+						
 
 					}
 
@@ -1704,6 +1708,8 @@ class MetroMind extends CI_Controller
 
 			$this->Login_model->add_api_token_members($this->input->post_get('uniqueId'), $token);
 
+
+
 			$response = ['status' => $status, 'token' => $token,  'result' => $result, 'message' => HTTP_STATUS_CODES[200]];
 
 			$this->response($response, 200);
@@ -1746,7 +1752,7 @@ class MetroMind extends CI_Controller
 
 				$status = 200;
 
-				if ($result['doctorImageUrl'] <> '' && file_exists('../uploads/doctors/' . $result['doctorImageUrl'])) {
+				if ($result['doctorImageUrl'] <> '' && file_exists(AXUPLOADDOCTORIMAGEPATH . $result[$i]['doctorImageUrl'])!== null) {
 
 					$result['doctorImageUrl'] =  AXUPLOADDOCTORIMAGEPATH . $result['doctorImageUrl'];
 
@@ -4684,7 +4690,7 @@ class MetroMind extends CI_Controller
 
 				$status = 200;
 
-				if ($result['doctorImageUrl'] <> '' && file_exists('../uploads/doctors/' . $result['doctorImageUrl'])) {
+				if ($result['doctorImageUrl'] <> '' && file_exists(AXUPLOADDOCTORIMAGEPATH . $result[$i]['doctorImageUrl'])!== null) {
 
 					$result['doctorImageUrl'] =  AXUPLOADDOCTORIMAGEPATH . $result['doctorImageUrl'];
 
@@ -5052,7 +5058,7 @@ class MetroMind extends CI_Controller
 
 					if ($this->Signup_model->loginType == 1) {
 
-						if ($result['doctorImageUrl'] <> '' && file_exists('../uploads/doctors/' . $result['doctorImageUrl']))
+						if ($result['doctorImageUrl'] <> '' && file_exists(AXUPLOADDOCTORIMAGEPATH . $result[$i]['doctorImageUrl'])!== null)
 
 							$result['imageUrl'] =  AXUPLOADDOCTORIMAGEPATH . $result['doctorImageUrl'];
 
