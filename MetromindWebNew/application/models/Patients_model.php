@@ -82,7 +82,8 @@ class  Patients_model extends CI_Model {
 				'patientPassword'      => $password,
 				'createdDate'      => $createdDate,
 				'status' => $status,
-				'seoUri' => $seoUri1
+				'seoUri' => $seoUri1,
+				'deviceRegistrationId'=>'12345'
 				
 				
 			);
@@ -238,7 +239,9 @@ class  Patients_model extends CI_Model {
 			$this->load->helper('url');
 			$seoUri = url_title($this->input->post('patientEmail'), 'dash', TRUE);
 			$modifiedDate=date('Y-m-d H:i:s');
-			$password=$this->encryption->encrypt($this->input->post('password'));
+			$password=$this->encryption->encrypt($this->input->post('patientPassword'));
+			//echo $password;
+			//echo $this->input->post('patientPassword');
 			$status=1;
 			$data = array(
 				'firstName' => $this->input->post('firstName'),

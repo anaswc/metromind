@@ -229,7 +229,7 @@ if (atposition<1 || dotposition<atposition+2 || dotposition+2>=x.length){
                           <div class="form-group row">
                             <label for="input-rounded" class="col-sm-12 form-control-label">Password<span class="mandatory">* </span> </label>
                             <div class="col-sm-12">
-                              <input type="patientPassword" name="patientPassword" value="<?php echo $this->encryption->decrypt($patient_item['patientPassword'])?>" class="form-control" required>
+                              <input type="text" name="patientPassword" value="<?php echo $this->encryption->decrypt($patient_item['patientPassword'])?>" class="form-control" required>
                             </div>
                           </div>
                           </div>
@@ -238,7 +238,7 @@ if (atposition<1 || dotposition<atposition+2 || dotposition+2>=x.length){
                           <div class="form-group row">
                             <label for="input-rounded" class="col-sm-12 form-control-label">Phone<span class="mandatory">* </span> </label>
                             <div class="col-sm-12">
-                              <input type="text" name="patientMobile" id="patientMobile" value="<?php echo $patient_item['patientMobile']?>" class="form-control" required onBlur="checkPatientMobile(this.value)">
+                              <input type="text" name="patientMobile" id="patientMobile" value="<?php echo $patient_item['patientMobile']?>" class="form-control" required>
                             </div>
                           </div>
                         </div>

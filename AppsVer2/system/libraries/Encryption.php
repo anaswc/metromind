@@ -552,6 +552,7 @@ class CI_Encryption {
 		return $this->{'_'.$this->_driver.'_decrypt'}($data, $params);
 	}
 
+
 	// --------------------------------------------------------------------
 
 	/**

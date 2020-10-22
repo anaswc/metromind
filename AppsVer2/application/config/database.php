@@ -609,12 +609,15 @@ $db['default'] = array(
 	'hostname' => 'localhost',
 
 
+	'username' => 'root',
+	
+	'password' => '23!45f!vWDDQdpj8',
 
-	'username' => 'metromindapp_app_full',
+	//'username' => 'metromindapp_app_full',
 
 
 
-	'password' => 'h7$enjY?CBD?',
+	//'password' => 'h7$enjY?CBD?',
 
 
 

@@ -10,23 +10,23 @@ defined('HTTP')    					OR define("HTTP","http://".$_SERVER['HTTP_HOST']."/");
 
 
 
-define("AXUPLOADPATH",				HTTP."uploads/");
+define("AXUPLOADPATH",				HTTP."metromind/metromind-backend-php/MetromindWebNew/uploads/");
 
 
 
-define("AXUPLOADDOCTORIMAGEPATH",	HTTP."uploads/doctors/");
+define("AXUPLOADDOCTORIMAGEPATH",	HTTP."metromind/metromind-backend-php/MetromindWebNew/uploads/doctors/");
 
 
 
-define("AXUPLOADPATIENTIMAGEPATH",	HTTP."uploads/patients/");
+define("AXUPLOADPATIENTIMAGEPATH",	HTTP."metromind/metromind-backend-php/MetromindWebNew/uploads/patients/");
 
 
 
-define("AXUPLOADSPECIALITYIMAGEPATH",	HTTP."uploads/speciality/");
+define("AXUPLOADSPECIALITYIMAGEPATH",	HTTP."metromind/metromind-backend-php/MetromindWebNew/uploads/speciality/");
 
 
 
-define("AXUPLOADSYMPTOMSIMAGEPATH",	HTTP."uploads/symptoms/");
+define("AXUPLOADSYMPTOMSIMAGEPATH",	HTTP."metromind/metromind-backend-php/MetromindWebNew/uploads/symptoms/");
 
 defined('RAZORAPIKEY')    		OR define("RAZORAPIKEY","rzp_live_N2yXqxyPS2UgdK");
 

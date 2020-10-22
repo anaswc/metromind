@@ -77,13 +77,13 @@ Class Login extends CI_Controller {
 
 			$this->load->model('Admin_Login_Model');
 
-			if($this->input->post('security_code') != $this->session->userdata['security_code']){
+			// if($this->input->post('security_code') != $this->session->userdata['security_code']){
 
-				$this->session->set_flashdata('error', 'CAPTCHA validation failed, please try again');
+			// 	$this->session->set_flashdata('error', 'CAPTCHA validation failed, please try again');
 
-				return redirect(base_url('admin/login'));
+			// 	return redirect(base_url('admin/login'));
 
-			}else {
+			// }else {
 
 				$validate=$this->Admin_Login_Model->validatelogin($userName,$password);
 
@@ -146,7 +146,7 @@ elseif ($validate[0]["adminType"] == 2) {
 
 				}
 
-			}
+		//	}
 
 		} else {
 

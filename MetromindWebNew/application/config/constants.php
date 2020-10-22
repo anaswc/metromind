@@ -85,11 +85,11 @@ defined('EXIT__AUTO_MIN')      OR define('EXIT__AUTO_MIN', 9); // lowest automat
 defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
 define("AXUNIQUEIDDOCTOR",		"METROMINDD");
 define("AXUNIQUEIDPATIENT",		"METROMINDP");
-define("AXUPLOADPATIENTSPATH",		"uploads/patients/");
-define("AXSYMPTOMSUPLOADPATH",		"uploads/symptoms/");
-define("AXUPLOADSETTINGPATH",		"uploads/setting/");
-define("AXUPLOADDOCTORSPATH",		"uploads/doctor/");
-define("AXUPLOADPATH",			"uploads/speciality/");
+define("AXUPLOADPATIENTSPATH",		"metromind/metromind-backend-php/MetromindWebNew/uploads/patients/");
+define("AXSYMPTOMSUPLOADPATH",		"metromind/metromind-backend-php/MetromindWebNew/uploads/symptoms/");
+define("AXUPLOADSETTINGPATH",		"metromind/metromind-backend-php/MetromindWebNew/uploads/setting/");
+define("AXUPLOADDOCTORSPATH",		"metromind/metromind-backend-php/MetromindWebNew/uploads/doctor/");
+define("AXUPLOADPATH",			"metromind/metromind-backend-php/MetromindWebNew/uploads/speciality/");
 define("AXADMINMAIL",		"vasanth@ekselan.com");
 
 //define("HTTP",							"http://metromindapp.com/MetromindWeb/");
