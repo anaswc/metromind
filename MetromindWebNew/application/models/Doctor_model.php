@@ -1129,7 +1129,10 @@ public function get_count() {
 				
 				return 0;
 			}
-	return 1;
+			else{
+				return 1;
+			}
+	
 	
 	}		
 		

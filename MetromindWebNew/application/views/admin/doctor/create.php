@@ -16,39 +16,73 @@
 <script type="text/javascript">
 
 function checkDoctorEmail(doctorEmail) {
-	
+  
     var doctorEmail=document.getElementById('doctorEmail').value;
-	
-   
-
+  if(doctorEmail.length != 0)
+  {
     $.ajax(
         {   
             url: "<?php echo base_url(); ?>admin/doctor/checkEmail", 
-            type: "POST",             // Type of request to be send, called as method
-            data : {doctorEmail:doctorEmail}, // Data sent to server, a set of key/value pairs (i.e. form fields and values)
+            type: "POST",            
+            data : {doctorEmail:doctorEmail}, 
             dataType : "JSON",
             success:function(data)
             {  
                 if(data == 0)
                 {
                    alert("Email already exist !!");
-				   document.getElementById('doctorEmail').value="";
+           document.getElementById('doctorEmail').value="";
                 }
-				     
+             
             }
             
         }
     );
-	
-	
+    $.ajax(
+        {   
+            url: "<?php echo base_url(); ?>admin/patients/checkEmail", 
+            type: "POST",             // Type of request to be send, called as method
+            data : {patientEmail:doctorEmail}, // Data sent to server, a set of key/value pairs (i.e. form fields and values)
+            dataType : "JSON",
+            success:function(data)
+            {  
+                if(data == 0)
+                {
+                   alert("Email already exist !!");
+           document.getElementById('checkDoctorEmail').value="";
+                }
+             
+            }
+            
+        }
+    );
+
+
+
+
+
+  }
+
+  
+   
+
+   
+
+  
+
+
+
+  
+  
 } 
 
 
 
 function checkDoctorMobile(doctorMobile) {
-	
+  
     var doctorMobile=document.getElementById('doctorMobile').value;
-	
+  if(doctorMobile.length != 0)
+  {
    
 
     $.ajax(
@@ -62,15 +96,15 @@ function checkDoctorMobile(doctorMobile) {
                 if(data == 0)
                 {
                    alert("Mobile number already exist !!");
-				   document.getElementById('doctorMobile').value="";
+           document.getElementById('doctorMobile').value="";
                 }
-				     
+             
             }
             
         }
     );
-	
-	
+  }
+  
 } 
 
 
@@ -217,7 +251,7 @@ function Cancel(){
               <div class="form-group row">
                 <label for="input-rounded" class="col-sm-12 form-control-label">Specialization</label>
                 <div class="col-sm-12">
-                  <select name="symptomIds[]" class="form-control" id="symptomIds" multiple="multiple" style="height:200px !important;">
+                  <select name="symptomIds[]" class="form-control " id="symptomIds" multiple="multiple" style="height:200px !important; overflow-y: scroll !important;">
                     <option value="" selected="selected">-select-</option>
                     <?php foreach($symptom as $row):?>
                     <option value="<?php echo $row["symptomId"]?>"><?php echo $row["symptomName"]?></option>
@@ -455,9 +489,9 @@ $(document).ready(function(){
    imgheight = this.height;
    
    if(imgwidth != maxwidth || imgheight != maxheight){
-		alert("Image size must be "+maxwidth+"X"+maxheight);
-		$('#doctorImageUrl').val('');
-  	}
+    alert("Image size must be "+maxwidth+"X"+maxheight);
+    $('#doctorImageUrl').val('');
+    }
  };
  img.onerror = function() {
   alert("not a valid file: " + file.type);
