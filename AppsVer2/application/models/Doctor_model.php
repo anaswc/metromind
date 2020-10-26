@@ -338,6 +338,8 @@ class Doctor_model extends CI_Model {
 							specialization,
 							
 							axdoctors.specialityId,
+							
+							
 
 							loginStatus,
 							

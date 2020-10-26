@@ -562,7 +562,7 @@ class MetroMind extends CI_Controller
 
 				if ($this->Login_model->loginType == 1) {
 
-					if ($result['doctorImageUrl'] <> '' && file_exists(AXUPLOADDOCTORIMAGEPATH . $result[$i]['doctorImageUrl'])!== null)
+					if ($result['doctorImageUrl'] <> '' && file_exists(AXUPLOADDOCTORIMAGEPATH . $result['doctorImageUrl'])!== null)
 
 						$result['imageUrl'] =  AXUPLOADDOCTORIMAGEPATH . $result['doctorImageUrl'];
 
