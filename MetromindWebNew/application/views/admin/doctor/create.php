@@ -64,15 +64,6 @@ function checkDoctorEmail(doctorEmail) {
   }
 
   
-   
-
-   
-
-  
-
-
-
-  
   
 } 
 
@@ -97,6 +88,36 @@ function checkDoctorMobile(doctorMobile) {
                 {
                    alert("Mobile number already exist !!");
            document.getElementById('doctorMobile').value="";
+                }
+             
+            }
+            
+        }
+    );
+  }
+  
+} 
+// --------------------------------
+function checkDoctorMedicalregistration(medicalRegistrationNumber) {
+  
+    var medicalRegistrationNumber=document.getElementById('medicalRegistrationNumber').value;
+   
+  if(medicalRegistrationNumber.length != 0)
+  {
+   
+
+    $.ajax(
+        {   
+            url: "<?php echo base_url(); ?>admin/doctor/checkMedicalRegistraionNo", 
+            type: "POST",             // Type of request to be send, called as method
+            data : {medicalRegistrationNumber:medicalRegistrationNumber}, // Data sent to server, a set of key/value pairs (i.e. form fields and values)
+            dataType : "JSON",
+            success:function(data)
+            {  
+                if(data == 0)
+                {
+                   alert("Medical Registration number already exist !!");
+           document.getElementById('medicalRegistrationNumber').value="";
                 }
              
             }
@@ -337,7 +358,7 @@ function Cancel(){
               <div class="form-group row">
                 <label for="input-rounded" class="col-sm-12 form-control-label">Medical registration number<span class="mandatory">* </span> </label>
                 <div class="col-sm-12">
-                  <input type="text" name="medicalRegistrationNumber" value="" class="form-control" required>
+                  <input type="text" name="medicalRegistrationNumber" id="medicalRegistrationNumber" value="" class="form-control" required onBlur="checkDoctorMedicalregistration(this.value)" >
                 </div>
               </div>
             </div>

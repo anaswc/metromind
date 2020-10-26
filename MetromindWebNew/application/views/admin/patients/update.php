@@ -275,7 +275,7 @@ if (atposition<1 || dotposition<atposition+2 || dotposition+2>=x.length){
                           <div class="form-group row">
                             <label for="input-rounded" class="col-sm-12 form-control-label">Date of Birth<span class="mandatory">* </span> </label>
                             <div class="col-sm-12">
-                              <input type="date" name="birthDate" value="<?php echo $patient_item['birthDate']?>" class="form-control" required>
+                              <input type="date" name="birthDate" max="<?php echo date('Y-m-d') ?>" value="<?php echo $patient_item['birthDate']?>" class="form-control" required>
                             </div>
                           </div>
                         </div>

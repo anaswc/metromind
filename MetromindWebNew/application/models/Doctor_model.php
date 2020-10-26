@@ -1159,7 +1159,31 @@ public function get_count() {
 			}
 	return 1;
 	
-	}		
+	}	
+
+
+	public function validateDoctorMedicalregistraion($medicalRegistrationNumber,$doctorId){
+
+			$this->db->select('*');
+
+			$this->db->from('axdoctors');
+			
+			if($doctorId  <> '')
+				$this->db->where('doctorId  != ',$doctorId);
+
+			if($medicalRegistrationNumber != "")
+				$this->db->where('medicalRegistrationNumber',$medicalRegistrationNumber);	
+
+			$query1 	= $this->db->get();
+//echo $this->db->last_query();exit;
+			if($query1->num_rows() > 0)
+			{
+				
+				return 0;
+			}
+	return 1;
+	
+	}	
 		
 }
 ?>

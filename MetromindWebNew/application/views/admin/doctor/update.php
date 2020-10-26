@@ -26,10 +26,10 @@
 <script type="text/javascript">
 
 function checkDoctorEmail(doctorEmail) {
-	
+  
 
     var doctorEmail=document.getElementById('doctorEmail').value;
-	
+  
    
     $.ajax(
         {   
@@ -42,21 +42,21 @@ function checkDoctorEmail(doctorEmail) {
                 if(data == 0)
                 {
                    alert("Email already exist !!");
-				   document.getElementById('doctorEmail').value="";
+           document.getElementById('doctorEmail').value="";
                 }
-				     
+             
             }
             
         }
     );
-	
-	
+  
+  
 } 
 
 function checkDoctorMobile(doctorMobile) {
-	
+  
     var doctorMobile=document.getElementById('doctorMobile').value;
-	
+  
    
 
     $.ajax(
@@ -70,15 +70,15 @@ function checkDoctorMobile(doctorMobile) {
                 if(data == 0)
                 {
                    alert("Mobile number already exist !!");
-				   document.getElementById('doctorMobile').value="";
+           document.getElementById('doctorMobile').value="";
                 }
-				     
+             
             }
             
         }
     );
-	
-	
+  
+  
 } 
 
  function validateEmail() 
@@ -102,7 +102,7 @@ if (atposition<1 || dotposition<atposition+2 || dotposition+2>=x.length){
     
 <script>
 function Cancel(){
-	document.location.href="<?php echo base_url('admin/doctor'); ?>";
+  document.location.href="<?php echo base_url('admin/doctor'); ?>";
 }
 </script>    
 
@@ -133,17 +133,17 @@ function Cancel(){
                   <div class='text-center error'><?php echo $this->session->flashdata('error'); ?></div>
                 <?php } ?>
                      <?php //echo validation_errors();
-					
-					$speciality_array = array();
-					if(count($specialities)){
-					  foreach($specialities as $row){
-							$speciality_array[$row['specialityId']] = $row['specialityName'];
-						}
-				  	}
-					?>
+          
+          $speciality_array = array();
+          if(count($specialities)){
+            foreach($specialities as $row){
+              $speciality_array[$row['specialityId']] = $row['specialityName'];
+            }
+            }
+          ?>
 
           
-					
+          
                     
                     <form action="<?php echo base_url('admin/doctor/update/'.$doctor_item['doctorId']);?>" enctype="multipart/form-data" method="post" accept-charset="utf-8" onSubmit="return validateEmail()">
 
@@ -159,8 +159,8 @@ function Cancel(){
                                 <option value="" selected="selected">-Select Speciality-</option>
                                 
                                 <?php foreach($specialities as $row): ?>
-                                	<option value="<?php echo $row["specialityId"]?>" <?php if($row["specialityId"]==$doctor_item['doctorName'])?>selected="selected"><?php echo $row["specialityName"]?></option>
-								<?php endforeach; ?>
+                                  <option value="<?php echo $row["specialityId"]?>" <?php if($row["specialityId"]==$doctor_item['doctorName'])?>selected="selected"><?php echo $row["specialityName"]?></option>
+                <?php endforeach; ?>
                               </select>                            </div>
                           </div>
                         </div>
@@ -172,7 +172,7 @@ function Cancel(){
                             </div>
                           </div>
                         </div>
-						<div class="col-md-6 col-xs-12"  style="clear:left">
+            <div class="col-md-6 col-xs-12"  style="clear:left">
                           <div class="form-group row">
                             <label for="input-rounded" class="col-sm-12 form-control-label">Gender<span class="mandatory">* </span> </label>
                             <div class="col-sm-6">
@@ -219,9 +219,9 @@ function Cancel(){
                           <div class="form-group row">
                             <label for="input-rounded" class="col-sm-12 form-control-label">Known Languages<span class="mandatory">* </span> </label>
                             <?php
-							$lang=explode(',',$doctor_item['knownLanguages']) ;
-							
-							?>
+              $lang=explode(',',$doctor_item['knownLanguages']) ;
+              
+              ?>
                               <div class="col-sm-4">
                               Malayalam<input type="checkbox" name="knownLanguages[]" value="Malayalam" class="form-control"  style="margin-top: -17px;margin-left: 11px;" <?php if(in_array('Malayalam',$lang)){ ?> checked <?php } ?>>
                               </div>
@@ -236,7 +236,7 @@ function Cancel(){
                           <div class="form-group row">
                             <label for="input-rounded" class="col-sm-12 form-control-label">Doctor Address<span class="mandatory">* </span> </label>
                             <div class="col-sm-12">
-                              <textarea  name="doctorAddress" rows="5"  class="form-control"><?php echo $doctor_item['doctorAddress'] ?></textarea>
+                              <textarea  name="doctorAddress" style="height:200px;"  class="form-control"><?php echo $doctor_item['doctorAddress'] ?></textarea>
                             </div>
                           </div>
                         </div> <div class="col-md-6 col-xs-12">
@@ -244,14 +244,14 @@ function Cancel(){
                             <label for="input-rounded" class="col-sm-12 form-control-label">Specialization<span class="mandatory">* </span> </label>
                             <div class="col-sm-12">
                      
-                    	<select name="symptomIds[]" class="form-control" id="symptomIds" multiple="multiple"  style="height:200px;">
-                    	    <option value="" >-Select-</option>
+                      <select name="symptomIds[]" class="form-control" id="symptomIds" multiple="multiple"  style="height:200px !important; overflow-y: scroll !important;">
+                          <option value="" >-Select-</option>
        <?php $vendorcat = explode(',',$data['doctor_item']['specialityId']);?>
-		<?php echo $specialitiesList?>
+    <?php echo $specialitiesList?>
       
           
       </select>
-						</div>
+            </div>
                           </div>
                         </div>
                         
@@ -307,12 +307,12 @@ function Cancel(){
                                
                                <?php
                               if(count($arrLanguage)>0){
-								foreach($arrLanguage as $key=> $value){ ?>
-								 <div class="col-sm-4">
+                foreach($arrLanguage as $key=> $value){ ?>
+                 <div class="col-sm-4">
                              <?php echo $value?>  <input type="checkbox" name="communicationMode[]" value="<?php echo $key?>"  style="margin-top: -17px;margin-left: 11px;" <?php if(in_array($key, $array_of_values)) { ?> checked="checked" <?php } ?> >
  </div>
                              <?php
-								}
+                }
                               }
                               
                               ?>
@@ -366,7 +366,7 @@ function Cancel(){
                           <div class="form-group row">
                             <label for="input-rounded" class="col-sm-12 form-control-label">Doctor Image <span class="mandatory">* </span></label>
                             <div class="col-sm-5">
-                            	<input type = "file" name ="doctorImageUrl" id="doctorImageUrl" class="form-control"  <?php  if($doctor_item['doctorImageUrl'] == ''){ ?>  required <?php } ?> size = "20" />    
+                              <input type = "file" name ="doctorImageUrl" id="doctorImageUrl" class="form-control"  <?php  if($doctor_item['doctorImageUrl'] == ''){ ?>  required <?php } ?> size = "20" />    
                                  <?php
                                     if($doctor_item['doctorImageUrl']<>"" &&  file_exists(AXUPLOADDOCTORSPATH.$doctor_item['doctorImageUrl'])){?>
                                      <span><img src="<?php echo HTTP.AXUPLOADDOCTORSPATH.$doctor_item['doctorImageUrl']?>" width="60" height="60" /></span>
@@ -379,7 +379,7 @@ function Cancel(){
                           <div class="form-group row">
                             <label for="input-rounded" class="col-sm-12 form-control-label">Medical License <span class="mandatory">* </span></label>
                             <div class="col-sm-5">
-                            	<input type = "file" name ="medicalLicense" class="form-control" required size = "20" />    
+                              <input type = "file" name ="medicalLicense" class="form-control" <?php  if($doctor_item['medicalLicense'] == ''){ ?>  required <?php } ?>  size = "20" />    
                                  <?php
                                     if($doctor_item['medicalLicense']<>"" &&  file_exists(AXUPLOADDOCTORSPATH.$doctor_item['medicalLicense'])){?>
                                      <span><img src="<?php echo HTTP.AXUPLOADDOCTORSPATH.$doctor_item['medicalLicense']?>" width="60" height="60" /></span>
@@ -388,7 +388,7 @@ function Cancel(){
                             <span class="note" style="color: #F00; " > Image resolution should be lessthan or equal to 1300*800px. The Valid Extensions are jpg  , jpeg , png .</span>
                           </div>
                         </div>
-						<div class="col-md-6 col-xs-12">
+            <div class="col-md-6 col-xs-12">
                           <div class="form-group row">
                             <label for="input-rounded" class="col-sm-12 form-control-label">License Verification<span class="mandatory">* </span> </label>
                             <div class="col-sm-6">
@@ -403,7 +403,7 @@ function Cancel(){
                           <div class="form-group row">
                             <label for="input-rounded" class="col-sm-12 form-control-label">Counselling Certificate <span class="mandatory">* </span></label>
                             <div class="col-sm-5">
-                            	<input type = "file" name ="counsellingCertificate" required class="form-control" size = "20" />    
+                              <input type = "file" name ="counsellingCertificate"  <?php  if($doctor_item['counsellingCertificate'] == ''){ ?>  required <?php } ?> class="form-control" size = "20" />    
                                  <?php
                                     if($doctor_item['counsellingCertificate']<>"" &&  file_exists(AXUPLOADDOCTORSPATH.$doctor_item['counsellingCertificate'])){?>
                                      <span><img src="<?php echo HTTP.AXUPLOADDOCTORSPATH.$doctor_item['counsellingCertificate']?>" width="60" height="60" /></span>
@@ -426,7 +426,7 @@ function Cancel(){
                          </div>
                           </div>
                         </div>
-						  </div>
+              </div>
 
 
 
@@ -961,7 +961,7 @@ $evening6=$this->doctor_model->getItem_morning($doctor_item['doctorId'],$day7,$s
 
       </div>
       <!-- /.content-wrapper -->
-	</div>
+  </div>
     <!-- /#wrapper -->
 
     <!-- Scroll to Top Button-->
@@ -970,8 +970,8 @@ $evening6=$this->doctor_model->getItem_morning($doctor_item['doctorId'],$day7,$s
     </a>
 
 
-  	<script src="<?php echo base_url('assets/js/jquery-3.1.1.min.js'); ?>"></script>
-   	<script src="<?php echo base_url('assets/js/jquery-ui.min.js'); ?>"></script>
+    <script src="<?php echo base_url('assets/js/jquery-3.1.1.min.js'); ?>"></script>
+    <script src="<?php echo base_url('assets/js/jquery-ui.min.js'); ?>"></script>
     <script src="<?php echo base_url('assets/js/tether.min.js'); ?>"></script>
     <script src="<?php echo base_url('assets/plugins/waves/js/waves.min.js'); ?>"></script>
     <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
@@ -981,7 +981,7 @@ $evening6=$this->doctor_model->getItem_morning($doctor_item['doctorId'],$day7,$s
     <script src="<?php echo base_url('scripts/axCommon.js'); ?>"></script>
     
     <!-- data-table js -->
-	<script src="<?php echo base_url('assets/plugins/data-table/js/jquery.dataTables.min.js'); ?>"></script>
+  <script src="<?php echo base_url('assets/plugins/data-table/js/jquery.dataTables.min.js'); ?>"></script>
     <script src="<?php echo base_url('assets/plugins/data-table/js/dataTables.buttons.min.js'); ?>"></script>
     <script src="<?php echo base_url('assets/plugins/data-table/js/jszip.min.js'); ?>"></script>
     <script src="<?php echo base_url('assets/plugins/data-table/js/pdfmake.min.js'); ?>"></script>
@@ -1018,9 +1018,9 @@ $(document).ready(function(){
    imgheight = this.height;
    
    if(imgwidth != maxwidth || imgheight != maxheight){
-		alert("Image size must be "+maxwidth+"X"+maxheight);
-		$('#doctorImageUrl').val('');
-  	}
+    alert("Image size must be "+maxwidth+"X"+maxheight);
+    $('#doctorImageUrl').val('');
+    }
  };
  img.onerror = function() {
   alert("not a valid file: " + file.type);

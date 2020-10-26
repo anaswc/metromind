@@ -364,7 +364,15 @@ public function updateAvailability($doctorId = NULL,$availableDay=NULL)
 			echo json_encode($data);
 		}
 		
-		
+		public function checkMedicalRegistraionNo()
+		{ 	
+			$medicalRegistrationNumber = $this->input->post_get('medicalRegistrationNumber'); 
+			$doctorId = $this->input->post_get('doctorId'); 
+			 
+			
+			$data = $this->doctor_model->validateDoctorMedicalregistraion($medicalRegistrationNumber,$doctorId);
+			echo json_encode($data);
+		}
 	
 		
 		

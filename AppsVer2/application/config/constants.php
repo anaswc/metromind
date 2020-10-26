@@ -6,27 +6,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
 
-defined('HTTP')    					OR define("HTTP","http://".$_SERVER['HTTP_HOST']."/");
+defined('HTTP')    					OR define("HTTP","http://".$_SERVER['HTTP_HOST']."/metromind/metromind-backend-php/MetromindWebNew/");
 
 
 
-define("AXUPLOADPATH",				HTTP."metromind/metromind-backend-php/MetromindWebNew/uploads/");
+define("AXUPLOADPATH",				HTTP."uploads/");
 
 
 
-define("AXUPLOADDOCTORIMAGEPATH",	HTTP."metromind/metromind-backend-php/MetromindWebNew/uploads/doctors/");
+define("AXUPLOADDOCTORIMAGEPATH",	HTTP."uploads/doctors/");
 
 
 
-define("AXUPLOADPATIENTIMAGEPATH",	HTTP."metromind/metromind-backend-php/MetromindWebNew/uploads/patients/");
+define("AXUPLOADPATIENTIMAGEPATH",	HTTP."uploads/patients/");
 
 
 
-define("AXUPLOADSPECIALITYIMAGEPATH",	HTTP."metromind/metromind-backend-php/MetromindWebNew/uploads/speciality/");
+define("AXUPLOADSPECIALITYIMAGEPATH",	HTTP."uploads/speciality/");
 
 
 
-define("AXUPLOADSYMPTOMSIMAGEPATH",	HTTP."metromind/metromind-backend-php/MetromindWebNew/uploads/symptoms/");
+define("AXUPLOADSYMPTOMSIMAGEPATH",	HTTP."uploads/symptoms/");
 
 defined('RAZORAPIKEY')    		OR define("RAZORAPIKEY","rzp_live_N2yXqxyPS2UgdK");
 
