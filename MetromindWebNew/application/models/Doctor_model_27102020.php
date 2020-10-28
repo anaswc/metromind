@@ -519,20 +519,6 @@ public function get_Patient_appoinmentsforTime($patientId = FALSE,$appointmentDa
 			return $query->row_array();
 
 		}
-		public function getItem_day($doctorId,$availableDay){
-			 $this->db->select('*');
-			
-			$this->db->from('axavailablesessions');
-			 $this->db->where('doctorId',$doctorId);
-			 $this->db->where('availableDay',$availableDay);
-			
-			
-			$query = $this->db->get();
-			//echo $this->db->last_query(); exit; 
-			return $query->result_array();
-
-		}
-
 		
 
 		public function getAvailable_Item($doctorId)
@@ -689,14 +675,27 @@ public function get_Patient_appoinmentsforTime($patientId = FALSE,$appointmentDa
 					
 		} 
 		
-public function updateAvailability($doctorId,$availableDay) {  
-		$this->db->where('doctorId',$doctorId);
-		$this->db->where('availableDay',$availableDay);
-		$this->db->delete('axavailablesessions');
-		$this->load->helper('url');
-		$status=1;
-		$availableDayId = 0;
-		if($availableDay == 'Monday')
+public function updateAvailability($doctorId,$availableDay) { 
+
+//echo $availableDay;exit;
+
+				$this->db->where('doctorId',$doctorId);
+				$this->db->where('availableDay',$availableDay);
+
+				$this->db->delete('axavailablesessions');
+				
+
+
+			$this->load->helper('url');
+			$status=1;
+			
+			//$arrWeekDay		= 	$this->config->item('arrWeekDay');
+			//$arrSessions	= 	$this->config->item('arrSessions');
+			//$availableDay = $this->input->post('availableDay');
+			
+			$availableDayId = 0;
+			
+			if($availableDay == 'Monday')
 				$availableDayId = 1;
 			else if($availableDay == 'Tuesday')
 				$availableDayId = 2;
@@ -709,108 +708,91 @@ public function updateAvailability($doctorId,$availableDay) {
 			else if($availableDay == 'Saturday')
 				$availableDayId = 6;	
 			else if($availableDay == 'Sunday')
-				$availableDayId = 7;
-	$doctorSessionDuration=$this->input->post('doctorSessionDuration');
-	$availableStartTimes=$this->input->post('availabletime');
-	foreach ($availableStartTimes as $key => $availableStartTime) {
-		$availableEndTime = strtotime('+'.$doctorSessionDuration.' minutes', strtotime($availableStartTime));
-		$data = array(
+				$availableDayId = 7;		
+							
+			if($_POST['Morning_Start']<>"" && $_POST['Morning_End']<>"")
+			{
+
+
+			$data = array(
 				'doctorId' => $doctorId,
 				'availableDay'    => $availableDay,
-				'availableSession'      => 'Full Day (IST)',
-				'availableStartTime'      => $availableStartTime,
-				'availableEndTime'      => date('H:i:s', $availableEndTime),
+				'availableSession'      => 'Morning (IST)',
+				'availableStartTime'      => $this->input->post('Morning_Start'),
+				'availableEndTime'      => $this->input->post('Morning_End'),
 				'status'				=>$status,
 				'availableDayId'		=>$availableDayId,
 				'availableSessionsId'	=>1
-				);
-		$this->db->insert('axavailablesessions', $data);
-		$this->db->insert_id();
-
-
-			}
-	// print_r($this->input->post('availabletime'));
-
-
-
-
-			
-			
-					
-							
-			// if($_POST['Morning_Start']<>"" && $_POST['Morning_End']<>"")
-			// {
-
-
 				
 				
-			// 
+				
+			);//print_r($data);exit;
 		
-			// 	$this->db->insert('axavailablesessions', $data);
-			// 	$this->db->insert_id();
+				$this->db->insert('axavailablesessions', $data);
+				$this->db->insert_id();
 			
-			// }	
+			}	
 
-			// if($_POST['AfterNoon_Start']<>"" && $_POST['AfterNoon_End']<>"")
-			// {
-			// $data = array(
-			// 	'doctorId' => $doctorId,
-			// 	'availableDay'    => $availableDay,
-			// 	'availableSession'      => 'After Noon (IST)',
-			// 	'availableStartTime'      => $this->input->post('AfterNoon_Start'),
-			// 	'availableEndTime'      => $this->input->post('AfterNoon_End'),
-			// 	'status'				=>$status,
-			// 	'availableDayId'		=>$availableDayId,
-			// 	'availableSessionsId'	=>2
+			if($_POST['AfterNoon_Start']<>"" && $_POST['AfterNoon_End']<>"")
+			{
+			$data = array(
+				'doctorId' => $doctorId,
+				'availableDay'    => $availableDay,
+				'availableSession'      => 'After Noon (IST)',
+				'availableStartTime'      => $this->input->post('AfterNoon_Start'),
+				'availableEndTime'      => $this->input->post('AfterNoon_End'),
+				'status'				=>$status,
+				'availableDayId'		=>$availableDayId,
+				'availableSessionsId'	=>2
 				
 				
 				
-			// );
+			);//print_r($data);exit;
 		
-			// 	$this->db->insert('axavailablesessions', $data);
-			// 	$this->db->insert_id();
+				$this->db->insert('axavailablesessions', $data);
+				$this->db->insert_id();
 			
-			// }	
+			}	
 
-			// if($_POST['Evening_Start']<>"" && $_POST['Evening_End']<>"")
-			// {
-			// $data = array(
-			// 	'doctorId' => $doctorId,
-			// 	'availableDay'    => $availableDay,
-			// 	'availableSession'      => 'Evening (IST)',
-			// 	'availableStartTime'      => $this->input->post('Evening_Start'),
-			// 	'availableEndTime'      => $this->input->post('Evening_End'),
-			// 	'status'				=>$status,
-			// 	'availableDayId'		=>$availableDayId,
-			// 	'availableSessionsId'	=>3
+			if($_POST['Evening_Start']<>"" && $_POST['Evening_End']<>"")
+			{
+			$data = array(
+				'doctorId' => $doctorId,
+				'availableDay'    => $availableDay,
+				'availableSession'      => 'Evening (IST)',
+				'availableStartTime'      => $this->input->post('Evening_Start'),
+				'availableEndTime'      => $this->input->post('Evening_End'),
+				'status'				=>$status,
+				'availableDayId'		=>$availableDayId,
+				'availableSessionsId'	=>3
 				
 				
 				
-			// );
+			);//print_r($data);exit;
 		
-			// 	$this->db->insert('axavailablesessions', $data);
-			// 	$this->db->insert_id();
+				$this->db->insert('axavailablesessions', $data);
+				$this->db->insert_id();
 			
-			// }	
+			}	
 				
-			// if($_POST['Night_Start']<>"" && $_POST['Night_End']<>"")
-			// {
-			// $data = array(
-			// 	'doctorId' => $doctorId,
-			// 	'availableDay'    => $availableDay,
-			// 	'availableSession'      => 'Night',
-			// 	'availableStartTime'      => $this->input->post('Night_Start'),
-			// 	'availableEndTime'      => $this->input->post('Night_End'),
-			// 	'status'				=>$status
+			if($_POST['Night_Start']<>"" && $_POST['Night_End']<>"")
+			{
+			$data = array(
+				'doctorId' => $doctorId,
+				'availableDay'    => $availableDay,
+				'availableSession'      => 'Night',
+				'availableStartTime'      => $this->input->post('Night_Start'),
+				'availableEndTime'      => $this->input->post('Night_End'),
+				'status'				=>$status
 				
 				
 				
-			// );
+			);//print_r($data);exit;
 		
-			// 	$this->db->insert('axavailablesessions', $data);
-			// 	$this->db->insert_id();
+				$this->db->insert('axavailablesessions', $data);
+				$this->db->insert_id();
 			
-			// }	
+			}	
 				
 
 
@@ -1147,7 +1129,10 @@ public function get_count() {
 				
 				return 0;
 			}
-	return 1;
+			else{
+				return 1;
+			}
+	
 	
 	}		
 		
@@ -1175,7 +1160,6 @@ public function get_count() {
 	return 1;
 	
 	}	
-
 
 
 	public function validateDoctorMedicalregistraion($medicalRegistrationNumber,$doctorId){

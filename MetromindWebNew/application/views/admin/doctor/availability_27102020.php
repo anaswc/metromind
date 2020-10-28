@@ -21,7 +21,7 @@
 
 function Cancel(){
 
-  document.location.href="<?php echo base_url('admin/doctor'); ?>";
+	document.location.href="<?php echo base_url('admin/doctor'); ?>";
 
 }
 
@@ -57,107 +57,129 @@ function Cancel(){
                   <p class="text-center m-t-md"></p>
                   <div class="card-block">
                     <?php 
-          global $arrWeekDay,$arrSessions,$arrTime;
-          $value=$day;
-          ?>
+					global $arrWeekDay,$arrSessions,$arrTime;
+					$value=$day;
+					?>
                     <form name="frmoavailability" action="<?php echo base_url('admin/doctor/updateAvailability/'.$doctor_item['doctorId'].'/'.$value);?>"  method="post" accept-charset="utf-8" onSubmit="return validateTime();">
-
                       <input type="hidden" name="availableDay" value="<?php echo $value ?>">
                       <input type="hidden" name="doctorId" value="<?php echo $doctor_item['doctorId'] ?>">
-                      <input type="hidden" name="doctorSessionDuration" value="<?php echo $doctor_item['doctorSessionDuration'] ?>">
-
-                     <!--   <div class="col-md-12">
+                       <div class="col-md-12">
                              <h6>IST – India Standard Time</h6>
                              </div>
-                       -->
-                      
-
-<!--######################################################################  -->
- <div class="col-md-12 ">
+                      <div class="col-md-12" style="margin-top:10px;">
+                        <div class="form-group row ">
+                          <div class="col-md-8">
+                            <label for="checkbox5"><strong>Morning </strong></label>
+                          </div>
+                        </div>
+                      </div>
+                      	<?php 
+						$morning=array();
+						$morning=$this->doctor_model->getItem_morning($doctor_item['doctorId'],$value,"Morning (IST)");
+						?>
+                      <div class="col-md-6 "  >
                         <div class="form-group row">
-<div class="">
-    <table id="myTable" class=" table order-list">
-  
-    <tbody>
-        <tr>
-            <td class="col-md-8">
-<div class="form-group row">
-   <label for="input-rounded" class="col-sm-12 form-control-label"> Select Time </label>
-   <div class="col-sm-10">
-      <?php
-         $selectedTime = "9:00:00";
-         $firsttime = strtotime('+'.$doctor_item['doctorSessionDuration'].' minutes', strtotime($selectedTime));
-         
-         ?>
-         <input type="time" name="availabletime[]" id="" min="08:59:00" max="20:59:00" class="form-control" value="09:00:00" required>
-  
-   </div>
-</div>
-            </td>
-         
-           
-            <td class="col-md-2"><a class="deleteRow"></a>
+                          <label for="input-rounded" class="col-sm-12 form-control-label"> Start Time </label>
+                          <div class="col-sm-10">
+                            <select name="Morning_Start" id="Morning_Start" class="form-control" >
+                              <option value="">--Select--</option>
+                              <?php foreach ($arrTime as $key1 => $value1) {?>
+                              
+                              <option value="<?php echo $value1 ?>" <?php  if($morning['availableDay']==$value && $morning['availableSession']=="Morning (IST)" && $morning['availableStartTime']==$value1){?> selected='selected' <?php } ?>><?php echo $value1 ?> </option>
+                              <?php } ?>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6 " >
+                        <div class="form-group row">
+                          <label for="input-rounded" class="col-sm-12 form-control-label"> End  Time </label>
+                          <div class="col-sm-10">
+                            <select name="Morning_End" id="Morning_End" class="form-control" >
+                              <option value="">--Select--</option>
+                              <?php foreach ($arrTime as $key1 => $value1) {?>
+                              <option value="<?php echo $value1 ?>" <?php  if($morning['availableDay']==$value && $morning['availableSession']=="Morning (IST)" && $morning['availableEndTime']==$value1){?> selected='selected' <?php } ?>><?php echo $value1 ?> </option>
+                              <?php } ?>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-12" style="margin-top:10px;">
+                        <div class="form-group row ">
+                          <div class="col-md-8">
+                            <label for="checkbox5"> <strong>After Noon </strong></label>
+                          </div>
+                        </div>
+                      </div>
+                      	<?php 
+						$noon=array();
+						$noon=$this->doctor_model->getItem_morning($doctor_item['doctorId'],$value,"After Noon (IST)");
+						?>
+                      <div class="col-md-6 " >
+                        <div class="form-group row">
+                          <label for="input-rounded" class="col-sm-12 form-control-label"> Start Time </label>
+                          <div class="col-sm-10">
+                            <select name="AfterNoon_Start" id="AfterNoon_Start" class="form-control" >
+                              <option value="">--Select--</option>
+                              <?php foreach ($arrTime as $key1 => $value1) {?>
+                              <option value="<?php echo $value1 ?>"
 
-            </td>
-        </tr>
-    </tbody>
-    <tfoot>
-        <tr>
-            <td colspan="5" style="text-align: left;">
-                <input type="button" class="btn btn-lg btn-block " id="addrow" value="Add new Time" />
-            </td>
-        </tr>
-        <tr>
-        </tr>
-    </tfoot>
-</table>
-</div>
-</div>
-</div>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<script>
-  $(document).ready(function () {
-    var counter = 0;
-
-    $("#addrow").on("click", function () {
-        var newRow = $("<tr>");
-        var cols = "";
-
-        cols += '<td><div class="form-group row"><label for="input-rounded" class="col-sm-12 form-control-label">Select Time</label><div class="col-sm-10"><input type="time" name="availabletime[]" id="" min="08:59:00" max="20:59:00" class="form-control" value="09:00:00" required></div></div></td>';
-       
-       
-        cols += '<td><label for="input-rounded" class="col-sm-12 form-control-label">Action</label><input type="button" class="ibtnDel btn btn-md btn-danger "  value="Delete"></td>';
-        newRow.append(cols);
-        $("table.order-list").append(newRow);
-        counter++;
-    });
-
-
-
-    $("table.order-list").on("click", ".ibtnDel", function (event) {
-        $(this).closest("tr").remove();       
-        counter -= 1
-    });
-
-
-});
-
-
-
-
-</script>
-
-
-
-
-
-
-
-
-
-
-<!--##################################################################  -->
-
+                                         <?php  if($noon['availableDay']==$value && $noon['availableSession']=="After Noon (IST)" && $noon['availableStartTime']==$value1 ){?> selected='selected' <?php } ?>><?php echo $value1 ?> </option>
+                              <?php } ?>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label for="input-rounded" id class="col-sm-12 form-control-label"> End  Time </label>
+                          <div class="col-sm-10">
+                            <select name="AfterNoon_End" id="AfterNoon_End" class="form-control" >
+                              <option value="">--Select--</option>
+                              <?php foreach ($arrTime as $key1 => $value1) {?>
+                              <option value="<?php echo $value1 ?>" <?php  if($noon['availableDay']==$value && $noon['availableSession']=="After Noon (IST)" && $noon['availableEndTime']==$value1){?> selected='selected' <?php } ?>><?php echo $value1 ?> </option>
+                              <?php } ?>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-12" style="margin-top:10px;">
+                        <div class="form-group row ">
+                          <div class="col-md-8">
+                            <label for="checkbox5"><strong> Evening</strong> </label>
+                          </div>
+                        </div>
+                      </div>
+                      <?php 
+						$evening=array();
+						$evening=$this->doctor_model->getItem_morning($doctor_item['doctorId'],$value,"Evening (IST)");
+					  ?>
+                      <div class="col-md-6 " >
+                        <div class="form-group row">
+                          <label for="input-rounded" class="col-sm-12 form-control-label"> Start Time </label>
+                          <div class="col-sm-10">
+                            <select name="Evening_Start" id="Evening_Start" class="form-control">
+                              <option value="">--Select--</option>
+                              <?php foreach ($arrTime as $key1 => $value1) {?>
+                              <option value="<?php echo $value1 ?>" <?php  if($evening['availableDay']==$value && $evening['availableSession']=="Evening (IST)" && $evening['availableStartTime']==$value1){?> selected='selected' <?php } ?>><?php echo $value1 ?> </option>
+                              <?php } ?>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6 ">
+                        <div class="form-group row">
+                          <label for="input-rounded" class="col-sm-12 form-control-label"> End  Time </label>
+                          <div class="col-sm-10">
+                            <select name="Evening_End" id="Evening_End" class="form-control" >
+                              <option value="">--Select--</option>
+                              <?php foreach ($arrTime as $key1 => $value1) {?>
+                              <option value="<?php echo $value1 ?>" <?php  if($evening['availableDay']==$value && $evening['availableSession']=="Evening (IST)" && $evening['availableEndTime']==$value1){?> selected='selected' <?php } ?>><?php echo $value1 ?> </option>
+                              <?php } ?>
+                            </select>
+                          </div>
+                        </div>
+                      </div>  
                       <div class="col-md-12" style="margin-top:20px;">
                       <div class="form-group row">
                         <div align="center">
@@ -197,14 +219,14 @@ function validateTime()
 
 {
 
-                var morngstart="09:00:00";
-                var morngend="13:00:00";
-                var nunstart="13:00:00";
-                var nunend="16:00:00";
-                var evngstart="16:00:00";
-                var evngend="21:00:00";
+							  var morngstart="09:00:00";
+							  var morngend="13:00:00";
+							  var nunstart="13:00:00";
+							  var nunend="16:00:00";
+							  var evngstart="16:00:00";
+							  var evngend="21:00:00";
 
-  
+	
 
   var morningStart=document.getElementById("Morning_Start").value;
 
@@ -278,9 +300,9 @@ if(morningEnd=='' && morningStart!='')
 }
 
 if(morningEnd != "" && morningEnd>morngend){
-  alert("Morning end time is"+morngend);
-  return false;
-  }
+	alert("Morning end time is"+morngend);
+	return false;
+	}
 
 
 
@@ -319,9 +341,9 @@ if(noonEnd=='' && noonStart!='')
 }
 
 if(noonEnd != "" && noonEnd>nunend){
-  alert("Noon end time is"+nunend);
-  return false;
-  }
+	alert("Noon end time is"+nunend);
+	return false;
+	}
 
 
 
@@ -363,9 +385,9 @@ if(evngEnd=='' && evngStart!='')
 }
 
 if(evngEnd != "" && evngEnd<evngend){
-  alert("Evening end time is"+evngend);
-  return false;
-  }
+	alert("Evening end time is"+evngend);
+	return false;
+	}
 
 /////Evening end//////////////
 

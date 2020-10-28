@@ -491,41 +491,126 @@ global $arrWeekDay,$arrSessions,$arrTime;
 
      <b style="color: red"><?php echo $day1 ?></b>-  <a href="<?php echo base_url('admin/doctor/updateAvailability/'.$doctor_item["doctorId"].'/'.$day1)?>?returnUrl=<?php echo urlencode(getCurrentPageURL())?>"  data-original-title="Edit" >Manage </a> <div><h6>&nbsp;</h6></div>
 <?php 
-$availtimsun=array();
-$availtimsun=$this->doctor_model->getItem_day($doctor_item['doctorId'],$day1);
+$morning=array();
+$morning=$this->doctor_model->getItem_morning($doctor_item['doctorId'],$day1,$session1);
+
+/*if($morning['availableStartTime']<"12:00:00") 
+                                $morning['availableStartTime']=$morning['availableStartTime']." "."AM";
+                              else
+                                 $morning['availableStartTime']=$morning['availableStartTime']." "."PM";
+
+                                if($morning['availableEndTime']<"12:00:00") 
+                                $morning['availableEndTime']=$morning['availableEndTime']." "."AM";
+                              else
+                                 $morning['availableEndTime']=$morning['availableEndTime']." "."PM";*/
 ?>
 
+  <b>Morning</b><br>
+<span style="color: green"><?php if ($morning['availableDay']==$day1 ) echo date('h:i:s a',strtotime($morning['availableStartTime']))."-" ?>
+<?php if ($morning['availableDay']==$day1) echo date('h:i:s a',strtotime($morning['availableEndTime'])) ?></span>
+        <div><h6>&nbsp;</h6></div>
+  <?php 
+$noon=array();
+$noon=$this->doctor_model->getItem_morning($doctor_item['doctorId'],$day1,$session2);
 
+/*if($noon['availableStartTime']<"12:00:00") 
+                                $noon['availableStartTime']=$noon['availableStartTime']." "."AM";
+                              else
+                                 $noon['availableStartTime']=$noon['availableStartTime']." "."PM";
 
-<span style="color: green">
-  <?php foreach ($availtimsun as $value) {
-    if ($value['availableDay']==$day1 )
-    {
-       echo date('h:i:s a',strtotime($value['availableStartTime']))."-".date('h:i:s a',strtotime($value['availableEndTime']))."<br>";
-    }  
-  }
-  ?></span>
-<div><h6>&nbsp;</h6></div>
+                                if($noon['availableEndTime']<"12:00:00") 
+                                $noon['availableEndTime']=$noon['availableEndTime']." "."AM";
+                              else
+                                 $noon['availableEndTime']=$noon['availableEndTime']." "."PM";*/
+?>
+      
+        <b>After Noon</b><br>
+<span style="color: green"><?php if ($noon['availableDay']==$day1 ) echo date('h:i:s a',strtotime($noon['availableStartTime'])) ."-" ?>
+<?php if ($noon['availableDay']==$day1) echo date('h:i:s a',strtotime($noon['availableEndTime'])) ?></span>
+        <div><h6>&nbsp;</h6></div>
+
+<?php 
+$evening=array();
+$evening=$this->doctor_model->getItem_morning($doctor_item['doctorId'],$day1,$session3);
+
+/*if($evening['availableStartTime']<"12:00:00") 
+                                $evening['availableStartTime']=$evening['availableStartTime']." "."AM";
+                              else
+                                 $evening['availableStartTime']=$evening['availableStartTime']." "."PM";
+
+                                if($evening['availableEndTime']<"12:00:00") 
+                                $evening['availableEndTime']=$evening['availableEndTime']." "."AM";
+                              else
+                                 $evening['availableEndTime']=$evening['availableEndTime']." "."PM";
+*/
+?>   
+        <b>Evening</b><br>
+<span style="color: green"><?php if ($evening['availableDay']==$day1 ) echo date('h:i:s a',strtotime($evening['availableStartTime'])) ."-" ?>
+<?php if ($evening['availableDay']==$day1) echo date('h:i:s a',strtotime($evening['availableEndTime'])) ?></span>
+       <div><h6>&nbsp;</h6></div>
  </div>
 
  <div class="col-sm-3">
 
      <b style="color: red"><?php echo $day2 ?></b>-  <a href="<?php echo base_url('admin/doctor/updateAvailability/'.$doctor_item["doctorId"].'/'.$day2)?>?returnUrl=<?php echo urlencode(getCurrentPageURL())?>"  data-original-title="Edit" >Manage </a> <div><h6>&nbsp;</h6></div>
 <?php 
-$availtimeday2=array();
-$availtimeday2=$this->doctor_model->getItem_day($doctor_item['doctorId'],$day2);
-?>
-<span style="color: green">
-  <?php foreach ($availtimeday2 as $value) {
-    if ($value['availableDay']==$day2 )
-    {
-       echo date('h:i:s a',strtotime($value['availableStartTime']))."-".date('h:i:s a',strtotime($value['availableEndTime']))."<br>";
-    }  
-  }
-  ?></span>
+$morning1=array();
+$morning1=$this->doctor_model->getItem_morning($doctor_item['doctorId'],$day2,$session1);
+
+/*if($morning1['availableStartTime']<"12:00:00") 
+                                $morning1['availableStartTime']=$morning1['availableStartTime']." "."AM";
+                              else
+                                 $morning1['availableStartTime']=$morning1['availableStartTime']." "."PM";
+
+                                if($morning1['availableEndTime']<"12:00:00") 
+                                $morning1['availableEndTime']=$morning1['availableEndTime']." "."AM";
+                              else
+                                 $morning1['availableEndTime']=$morning1['availableEndTime']." "."PM";
+*/?>
+
+  <b>Morning</b><br>
+<span style="color: green"><?php if ($morning1['availableDay']==$day2) echo date('h:i:s a',strtotime($morning1['availableStartTime'])) ."-" ?>
+<?php if ($morning1['availableDay']==$day2) echo date('h:i:s a',strtotime($morning1['availableEndTime'])) ?></span>
       <div><h6>&nbsp;</h6></div>
- 
-   
+  <?php 
+$noon1=array();
+$noon1=$this->doctor_model->getItem_morning($doctor_item['doctorId'],$day2,$session2);
+
+/*if($noon1['availableStartTime']<"12:00:00") 
+                                $noon1['availableStartTime']=$noon1['availableStartTime']." "."AM";
+                              else
+                                 $noon1['availableStartTime']=$noon['availableStartTime']." "."PM";
+
+                                if($noon1['availableEndTime']<"12:00:00") 
+                                $noon1['availableEndTime']=$noon1['availableEndTime']." "."AM";
+                              else
+                                 $noon1['availableEndTime']=$noon1['availableEndTime']." "."PM";*/
+?>
+      
+        <b>After Noon</b><br>
+<span style="color: green"><?php if ($noon1['availableDay']==$day2) echo date('h:i:s a',strtotime($noon1['availableStartTime'])) ."-" ?>
+<?php if ($noon1['availableDay']==$day2)  echo date('h:i:s a',strtotime($noon1['availableEndTime'])) ?></span>
+        <div><h6>&nbsp;</h6></div>
+
+<?php 
+$evening1=array();
+$evening1=$this->doctor_model->getItem_morning($doctor_item['doctorId'],$day2,$session3);
+
+/*if($evening1['availableStartTime']<"12:00:00") 
+                                $evening1['availableStartTime']=$evening1['availableStartTime']." "."AM";
+                              else
+                                 $evening1['availableStartTime']=$evening1['availableStartTime']." "."PM";
+
+                                if($evening1['availableEndTime']<"12:00:00") 
+                                $evening1['availableEndTime']=$evening1['availableEndTime']." "."AM";
+                              else
+                                 $evening1['availableEndTime']=$evening1['availableEndTime']." "."PM";*/
+
+?>   
+        <b>Evening</b><br>
+<span style="color: green"><?php if ($evening1['availableDay']==$day2) echo date('h:i:s a',strtotime($evening1['availableStartTime'])) ."-" ?>
+<?php if ($evening1['availableDay']==$day2) echo date('h:i:s a',strtotime($evening1['availableEndTime'])) ?></span>
+       <div><h6>&nbsp;</h6></div>
 
  </div>
 
@@ -533,36 +618,125 @@ $availtimeday2=$this->doctor_model->getItem_day($doctor_item['doctorId'],$day2);
 
      <b style="color: red"><?php echo $day3 ?>-</b>  <a href="<?php echo base_url('admin/doctor/updateAvailability/'.$doctor_item["doctorId"].'/'.$day3)?>?returnUrl=<?php echo urlencode(getCurrentPageURL())?>"  data-original-title="Edit" >Manage </a> <div><h6>&nbsp;</h6></div>
 <?php 
-$availtimeday3=array();
-$availtimeday3=$this->doctor_model->getItem_day($doctor_item['doctorId'],$day3);
+$morning2=array();
+$morning2=$this->doctor_model->getItem_morning($doctor_item['doctorId'],$day3,$session1);
+
+/*if($morning2['availableStartTime']<"12:00:00") 
+                                $morning2['availableStartTime']=$morning2['availableStartTime']." "."AM";
+                              else
+                                 $morning2['availableStartTime']=$morning2['availableStartTime']." "."PM";
+
+                                if($morning2['availableEndTime']<"12:00:00") 
+                                $morning2['availableEndTime']=$morning2['availableEndTime']." "."AM";
+                              else
+                                 $morning2['availableEndTime']=$morning2['availableEndTime']." "."PM";*/
 ?>
-<span style="color: green">
-  <?php foreach ($availtimeday3 as $value) {
-    if ($value['availableDay']==$day3 )
-    {
-       echo date('h:i:s a',strtotime($value['availableStartTime']))."-".date('h:i:s a',strtotime($value['availableEndTime']))."<br>";
-    }  
-  }
-  ?></span>
+
+  <b>Morning</b><br>
+<span style="color: green"><?php if ($morning2['availableDay']==$day3) echo date('h:i:s a',strtotime($morning2['availableStartTime'])) ."-" ?>
+<?php if ($morning2['availableDay']==$day3) echo date('h:i:s a',strtotime($morning2['availableEndTime'])) ?></span>
+        <div><h6>&nbsp;</h6></div>
+  <?php 
+$noon2=array();
+$noon2=$this->doctor_model->getItem_morning($doctor_item['doctorId'],$day3,$session2);
+
+/*if($noon2['availableStartTime']<"12:00:00") 
+                                $noon2['availableStartTime']=$noon2['availableStartTime']." "."AM";
+                              else
+                                 $noon2['availableStartTime']=$noon2['availableStartTime']." "."PM";
+
+                                if($noon2['availableEndTime']<"12:00:00") 
+                                $noon2['availableEndTime']=$noon2['availableEndTime']." "."AM";
+                              else
+                                 $noon2['availableEndTime']=$noon2['availableEndTime']." "."PM";
+*/?>
+      
+        <b>After Noon</b><br>
+<span style="color: green"><?php if ($noon2['availableDay']==$day3) echo date('h:i:s a',strtotime($noon2['availableStartTime'])) ."-" ?>
+<?php if ($noon2['availableDay']==$day3) echo date('h:i:s a',strtotime($noon2['availableEndTime'])) ?></span>
+       <div><h6>&nbsp;</h6></div>
+
+<?php 
+$evening2=array();
+$evening2=$this->doctor_model->getItem_morning($doctor_item['doctorId'],$day3,$session3);
+
+/*if($evening2['availableStartTime']<"12:00:00") 
+                                $evening2['availableStartTime']=$evening2['availableStartTime']." "."AM";
+                              else
+                                 $evening2['availableStartTime']=$evening2['availableStartTime']." "."PM";
+
+                                if($evening2['availableEndTime']<"12:00:00") 
+                                $evening2['availableEndTime']=$evening2['availableEndTime']." "."AM";
+                              else
+                                 $evening2['availableEndTime']=$evening2['availableEndTime']." "."PM";
+*/
+?>   
+        <b>Evening</b><br>
+<span style="color: green"><?php if ($evening2['availableDay']==$day3) echo date('h:i:s a',strtotime($evening2['availableStartTime'])) ."-" ?>
+<?php if ($evening2['availableDay']==$day3) echo date('h:i:s a',strtotime($evening2['availableEndTime'])) ?></span>
        <div><h6>&nbsp;</h6></div>
 
  </div>
  <div class="col-sm-3">
 
      <b style="color: red"><?php echo $day4 ?>- </b> <a href="<?php echo base_url('admin/doctor/updateAvailability/'.$doctor_item["doctorId"].'/'.$day4)?>?returnUrl=<?php echo urlencode(getCurrentPageURL())?>"  data-original-title="Edit" >Manage </a><div><h6>&nbsp;</h6></div>
+<?php 
+$morning3=array();
+$morning3=$this->doctor_model->getItem_morning($doctor_item['doctorId'],$day4,$session1);
+
+/*if($morning3['availableStartTime']<"12:00:00") 
+                                $morning3['availableStartTime']=$morning3['availableStartTime']." "."AM";
+                              else
+                                 $morning3['availableStartTime']=$morning3['availableStartTime']." "."PM";
+
+                                if($morning3['availableEndTime']<"12:00:00") 
+                                $morning3['availableEndTime']=$morning3['availableEndTime']." "."AM";
+                              else
+                                 $morning3['availableEndTime']=$morning3['availableEndTime']." "."PM";*/
+?>
+
+  <b>Morning</b><br>
+<span style="color: green"><?php if ($morning3['availableDay']==$day4) echo date('h:i:s a',strtotime($morning3['availableStartTime'])) ."-" ?>
+<?php if ($morning3['availableDay']==$day4) echo date('h:i:s a',strtotime($morning3['availableEndTime'])) ?></span>
+       <div><h6>&nbsp;</h6></div>
+  <?php 
+$noon3=array();
+$noon3=$this->doctor_model->getItem_morning($doctor_item['doctorId'],$day4,$session2);
+
+/*if($noon3['availableStartTime']<"12:00:00") 
+                                $noon3['availableStartTime']=$noon3['availableStartTime']." "."AM";
+                              else
+                                 $noon3['availableStartTime']=$noon3['availableStartTime']." "."PM";
+
+                                if($noon3['availableEndTime']<"12:00:00") 
+                                $noon3['availableEndTime']=$noon3['availableEndTime']." "."AM";
+                              else
+                                 $noon3['availableEndTime']=$noon3['availableEndTime']." "."PM";*/
+?>
+      
+        <b>After Noon</b><br>
+<span style="color: green"><?php if ($noon3['availableDay']==$day4) echo date('h:i:s a',strtotime($noon3['availableStartTime'])) ."-" ?>
+<?php if ($noon3['availableDay']==$day4) echo date('h:i:s a',strtotime($noon3['availableEndTime'])) ?></span>
+       <div><h6>&nbsp;</h6></div>
 
 <?php 
-$availtimeday4=array();
-$availtimeday4=$this->doctor_model->getItem_day($doctor_item['doctorId'],$day4);
-?>
-<span style="color: green">
-  <?php foreach ($availtimeday4 as $value) {
-    if ($value['availableDay']==$day4 )
-    {
-       echo date('h:i:s a',strtotime($value['availableStartTime']))."-".date('h:i:s a',strtotime($value['availableEndTime']))."<br>";
-    }  
-  }
-  ?></span>
+$evening3=array();
+$evening3=$this->doctor_model->getItem_morning($doctor_item['doctorId'],$day4,$session3);
+
+/*if($evening3['availableStartTime']<"12:00:00") 
+                                $evening3['availableStartTime']=$evening3['availableStartTime']." "."AM";
+                              else
+                                 $evening3['availableStartTime']=$evening3['availableStartTime']." "."PM";
+
+                                if($evening3['availableEndTime']<"12:00:00") 
+                                $evening3['availableEndTime']=$evening3['availableEndTime']." "."AM";
+                              else
+                                 $evening3['availableEndTime']=$evening3['availableEndTime']." "."PM";*/
+
+?>   
+        <b>Evening</b><br>
+<span style="color: green"><?php if ($evening3['availableDay']==$day4) echo date('h:i:s a',strtotime($evening3['availableStartTime'])) ."-" ?>
+<?php if ($evening3['availableDay']==$day4) echo date('h:i:s a',strtotime($evening3['availableEndTime'])) ?></span>
         <div><h6>&nbsp;</h6></div>
 
 
@@ -577,18 +751,62 @@ $availtimeday4=$this->doctor_model->getItem_day($doctor_item['doctorId'],$day4);
 
      <b style="color: red"><?php echo $day5 ?>- </b> <a href="<?php echo base_url('admin/doctor/updateAvailability/'.$doctor_item["doctorId"].'/'.$day5)?>?returnUrl=<?php echo urlencode(getCurrentPageURL())?>"  data-original-title="Edit" >Manage </a> <div><h6>&nbsp;</h6></div>
 <?php 
-$availtimeday5=array();
-$availtimeday5=$this->doctor_model->getItem_day($doctor_item['doctorId'],$day5);
-?>
-<span style="color: green">
-  <?php foreach ($availtimeday5 as $value) {
-    if ($value['availableDay']==$day5 )
-    {
-       echo date('h:i:s a',strtotime($value['availableStartTime']))."-".date('h:i:s a',strtotime($value['availableEndTime']))."<br>";
-    }  
-  }
-  ?></span>
+$morning4=array();
+$morning4=$this->doctor_model->getItem_morning($doctor_item['doctorId'],$day5,$session1);
 
+/*if($morning4['availableStartTime']<"12:00:00") 
+                                $morning4['availableStartTime']=$morning4['availableStartTime']." "."AM";
+                              else
+                                 $morning4['availableStartTime']=$morning4['availableStartTime']." "."PM";
+
+                                if($morning4['availableEndTime']<"12:00:00") 
+                                $morning4['availableEndTime']=$morning4['availableEndTime']." "."AM";
+                              else
+                                 $morning4['availableEndTime']=$morning4['availableEndTime']." "."PM";*/
+?>
+
+  <b>Morning</b><br>
+<span style="color: green"><?php if ($morning4['availableDay']==$day5) echo date('h:i:s a',strtotime($morning4['availableStartTime'])) ."-" ?>
+<?php if ($morning4['availableDay']==$day5) echo date('h:i:s a',strtotime($morning4['availableEndTime'])) ?></span>
+       <div><h6>&nbsp;</h6></div>
+  <?php 
+$noon4=array();
+$noon4=$this->doctor_model->getItem_morning($doctor_item['doctorId'],$day5,$session2);
+
+/*if($noon4['availableStartTime']<"12:00:00") 
+                                $noon4['availableStartTime']=$noon4['availableStartTime']." "."AM";
+                              else
+                                 $noon4['availableStartTime']=$noon['availableStartTime']." "."PM";
+
+                                if($noon4['availableEndTime']<"12:00:00") 
+                                $noon4['availableEndTime']=$noon4['availableEndTime']." "."AM";
+                              else
+                                 $noon4['availableEndTime']=$noon4['availableEndTime']." "."PM";*/
+?>
+      
+        <b>After Noon</b><br>
+<span style="color: green"><?php if ($noon4['availableDay']==$day5) echo date('h:i:s a',strtotime($noon4['availableStartTime'])) ."-" ?>
+<?php if ($noon4['availableDay']==$day5) echo date('h:i:s a',strtotime($noon4['availableEndTime'])) ?></span>
+        <div><h6>&nbsp;</h6></div>
+
+<?php 
+$evening4=array();
+$evening4=$this->doctor_model->getItem_morning($doctor_item['doctorId'],$day5,$session3);
+
+/*if($evening4['availableStartTime']<"12:00:00") 
+                                $evening4['availableStartTime']=$evening4['availableStartTime']." "."AM";
+                              else
+                                 $evening4['availableStartTime']=$evening4['availableStartTime']." "."PM";
+
+                                if($evening4['availableEndTime']<"12:00:00") 
+                                $evening4['availableEndTime']=$evening4['availableEndTime']." "."AM";
+                              else
+                                 $evening4['availableEndTime']=$evening4['availableEndTime']." "."PM";
+*/
+?>   
+        <b>Evening</b><br>
+<span style="color: green"><?php if ($evening4['availableDay']==$day5) echo date('h:i:s a',strtotime($evening4['availableStartTime'])) ."-" ?>
+<?php if ($evening4['availableDay']==$day5) echo date('h:i:s a',strtotime($evening4['availableEndTime'])) ?></span>
         <div><h6>&nbsp;</h6></div>
 
  </div>
@@ -597,17 +815,62 @@ $availtimeday5=$this->doctor_model->getItem_day($doctor_item['doctorId'],$day5);
 
     <b style="color: red"> <?php echo $day6?>-</b>  <a href="<?php echo base_url('admin/doctor/updateAvailability/'.$doctor_item["doctorId"].'/'.$day6)?>?returnUrl=<?php echo urlencode(getCurrentPageURL())?>"  data-original-title="Edit" >Manage </a><div><h6>&nbsp;</h6></div>
 <?php 
-$availtimeday6=array();
-$availtimeday6=$this->doctor_model->getItem_day($doctor_item['doctorId'],$day6);
+$morning5=array();
+$morning5=$this->doctor_model->getItem_morning($doctor_item['doctorId'],$day6,$session1);
+
+/*if($morning5['availableStartTime']<"12:00:00") 
+                                $morning5['availableStartTime']=$morning5['availableStartTime']." "."AM";
+                              else
+                                 $morning5['availableStartTime']=$morning5['availableStartTime']." "."PM";
+
+                                if($morning5['availableEndTime']<"12:00:00") 
+                                $morning5['availableEndTime']=$morning5['availableEndTime']." "."AM";
+                              else
+                                 $morning5['availableEndTime']=$morning5['availableEndTime']." "."PM";*/
 ?>
-<span style="color: green">
-  <?php foreach ($availtimeday6 as $value) {
-    if ($value['availableDay']==$day6 )
-    {
-       echo date('h:i:s a',strtotime($value['availableStartTime']))."-".date('h:i:s a',strtotime($value['availableEndTime']))."<br>";
-    }  
-  }
-  ?></span>
+
+  <b>Morning</b><br>
+<span style="color: green"><?php if ($morning5['availableDay']==$day6) echo date('h:i:s a',strtotime($morning5['availableStartTime'])) ."-" ?>
+<?php if ($morning5['availableDay']==$day6) echo date('h:i:s a',strtotime($morning5['availableEndTime'])) ?></span>
+        <div><h6>&nbsp;</h6></div>
+  <?php 
+$noon5=array();
+$noon5=$this->doctor_model->getItem_morning($doctor_item['doctorId'],$day6,$session2);
+
+/*if($noon5['availableStartTime']<"12:00:00") 
+                                $noon5['availableStartTime']=$noon5['availableStartTime']." "."AM";
+                              else
+                                 $noon5['availableStartTime']=$noon5['availableStartTime']." "."PM";
+
+                                if($noon5['availableEndTime']<"12:00:00") 
+                                $noon5['availableEndTime']=$noon5['availableEndTime']." "."AM";
+                              else
+                                 $noon5['availableEndTime']=$noon5['availableEndTime']." "."PM";*/
+?>
+      
+        <b>After Noon</b><br>
+<span style="color: green"><?php if ($noon5['availableDay']==$day6) echo date('h:i:s a',strtotime($noon5['availableStartTime'])) ."-" ?>
+<?php if ($noon5['availableDay']==$day6) echo date('h:i:s a',strtotime($noon5['availableEndTime'])) ?></span>
+        <div><h6>&nbsp;</h6></div>
+
+<?php 
+$evening5=array();
+$evening5=$this->doctor_model->getItem_morning($doctor_item['doctorId'],$day6,$session3);
+
+/*if($evening5['availableStartTime']<"12:00:00") 
+                                $evening5['availableStartTime']=$evening5['availableStartTime']." "."AM";
+                              else
+                                 $evening5['availableStartTime']=$evening5['availableStartTime']." "."PM";
+
+                                if($evening5['availableEndTime']<"12:00:00") 
+                                $evening5['availableEndTime']=$evening5['availableEndTime']." "."AM";
+                              else
+                                 $evening5['availableEndTime']=$evening5['availableEndTime']." "."PM";*/
+
+?>   
+        <b>Evening</b><br>
+<span style="color: green"><?php if ($evening5['availableDay']==$day6) echo date('h:i:s a',strtotime($evening5['availableStartTime'])) ."-" ?>
+<?php if ($evening5['availableDay']==$day6) echo date('h:i:s a',strtotime($evening5['availableEndTime'])) ?></span>
         <div><h6>&nbsp;</h6></div>
 
  </div>
@@ -616,17 +879,62 @@ $availtimeday6=$this->doctor_model->getItem_day($doctor_item['doctorId'],$day6);
 
      <b style="color: red"><?php echo $day7 ?></b>-  <a href="<?php echo base_url('admin/doctor/updateAvailability/'.$doctor_item["doctorId"].'/'.$day7)?>?returnUrl=<?php echo urlencode(getCurrentPageURL())?>"  data-original-title="Edit" >Manage </a> <div><h6>&nbsp;</h6></div>
 <?php 
-$availtimeday7=array();
-$availtimeday7=$this->doctor_model->getItem_day($doctor_item['doctorId'],$day7);
+$morning6=array();
+$morning6=$this->doctor_model->getItem_morning($doctor_item['doctorId'],$day7,$session1);
+
+/*if($morning6['availableStartTime']<"12:00:00") 
+                                $morning6['availableStartTime']=$morning6['availableStartTime']." "."AM";
+                              else
+                                 $morning6['availableStartTime']=$morning6['availableStartTime']." "."PM";
+
+                                if($morning6['availableEndTime']<"12:00:00") 
+                                $morning6['availableEndTime']=$morning6['availableEndTime']." "."AM";
+                              else
+                                 $morning6['availableEndTime']=$morning6['availableEndTime']." "."PM";*/
 ?>
-<span style="color: green">
-  <?php foreach ($availtimeday7 as $value) {
-    if ($value['availableDay']==$day7 )
-    {
-       echo date('h:i:s a',strtotime($value['availableStartTime']))."-".date('h:i:s a',strtotime($value['availableEndTime']))."<br>";
-    }  
-  }
-  ?></span>
+
+  <b>Morning</b><br>
+<span style="color: green"><?php if ($morning6['availableDay']==$day7) echo date('h:i:s a',strtotime($morning6['availableStartTime'])) ."-" ?>
+<?php if ($morning6['availableDay']==$day7) echo date('h:i:s a',strtotime($morning6['availableEndTime'])) ?></span>
+       <div><h6>&nbsp;</h6></div>
+  <?php 
+$noon6=array();
+$noon6=$this->doctor_model->getItem_morning($doctor_item['doctorId'],$day7,$session2);
+
+/*if($noon6['availableStartTime']<"12:00:00") 
+                                $noon6['availableStartTime']=$noon6['availableStartTime']." "."AM";
+                              else
+                                 $noon6['availableStartTime']=$noon6['availableStartTime']." "."PM";
+
+                                if($noon6['availableEndTime']<"12:00:00") 
+                                $noon6['availableEndTime']=$noon6['availableEndTime']." "."AM";
+                              else
+                                 $noon6['availableEndTime']=$noon6['availableEndTime']." "."PM";*/
+?>
+      
+        <b>After Noon</b><br>
+<span style="color: green"><?php if ($noon6['availableDay']==$day7) echo date('h:i:s a',strtotime($noon6['availableStartTime'])) ."-" ?>
+<?php if ($noon6['availableDay']==$day7) echo date('h:i:s a',strtotime($noon6['availableEndTime'])) ?></span>
+       <div><h6>&nbsp;</h6></div>
+
+<?php 
+$evening6=array();
+$evening6=$this->doctor_model->getItem_morning($doctor_item['doctorId'],$day7,$session3);
+
+/*if($evening6['availableStartTime']<"12:00:00") 
+                                $evening6['availableStartTime']=$evening6['availableStartTime']." "."AM";
+                              else
+                                 $evening6['availableStartTime']=$evening6['availableStartTime']." "."PM";
+
+                                if($evening6['availableEndTime']<"12:00:00") 
+                                $evening6['availableEndTime']=$evening6['availableEndTime']." "."AM";
+                              else
+                                 $evening6['availableEndTime']=$evening6['availableEndTime']." "."PM";
+*/
+?>   
+        <b>Evening</b><br>
+<span style="color: green"><?php if ($evening6['availableDay']==$day7) echo date('h:i:s a',strtotime($evening6['availableStartTime'])) ."-" ?>
+<?php if ($evening6['availableDay']==$day7) echo date('h:i:s a',strtotime($evening6['availableEndTime'])) ?></span>
        <div><h6>&nbsp;</h6></div>
 
  </div>
