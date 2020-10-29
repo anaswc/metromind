@@ -297,121 +297,6 @@ class Doctor_model extends CI_Model {
 
 	}
 
-// =====================================================================
-
-	public function get_doctor_list_by_specialization($specialityId = NULL)			
-
-	{				
-
-		
-
-		$this->db->select(' doctorId,
-
-							uniqueId AS doctorUniqueId,
-
-							doctorName,
-
-							doctorEmail,
-
-							doctorMobile,
-
-							qualification,
-							
-							qualification1,
-
-							doctorImageUrl,
-
-							youtubeLink,
-
-							doctorFee,
-
-							communicationMode,
-
-							doctorSessionDuration,
-
-							fcmToken,
-							
-							voipToken,
-
-							chatRoomNumber,
-
-							medicalRegistrationNumber,
-							
-							specialization,
-							
-							axdoctors.specialityId,
-
-							loginStatus,
-							
-							axdoctors.isScheduleEnabled,
-							
-							axdoctors.isCallEnabled,
-							
-							axdoctors.isViewDetailInfo,
-							
-							axdoctors. isShowGreen,
-							
-							axdoctors.deviceOS AS doctorDeviceOS
-
-					 	  ');			
-
-		$this->db->from('axdoctors');	
-		$this->db->where('axdoctors.specialityId', $specialityId);	
-
-		if($this->sortColumn == '')			
-
-			$this->sortColumn = "doctorName";			
-
-		if($this->sortDirection == '')			
-
-			$this->sortDirection = "ASC";	
-
-		if(trim($this->status) != "")			
-
-			$this->db->where('axdoctors.status', $this->status);						
-
-		if(trim($this->doctorIds) != ""){
-
-			$doctorIds = explode(",",$this->doctorIds);	
-
-			$this->db->where_in('doctorId', $doctorIds);				
-
-		}	
-
-		if(trim($this->specialityIds) != ""){		
-
-			$specialityIds = explode(",",$this->specialityIds);	
-
-			$this->db->where_in('axdoctors.specialityId', $specialityIds);				
-
-		}
-
-		if(trim($this->specialization) != ""){	
-			
-			$this->db->join('axsymptoms', 'FIND_IN_SET(axsymptoms.symptomId, axdoctors.specialization) > 0', 'left');
-			
-			$this->db->like('axsymptoms.symptomName', $this->specialization);	
-		}
-
-		$this->sortColumn 		= 'axdoctors.specialityId';	
-
-		$this->sortDirection 	= 'ASC';	
-		
-		$this->db->group_by('axdoctors.doctorId');							
-
-		$this->db->order_by("$this->sortColumn", "$this->sortDirection");	
-
-		$query = $this->db->get();	
-
-		//echo 	$this->db->last_query();die();	
-
-		return $query->result_array();			
-
-	}
-
-
-	// ====================================================
-
 	public function get_doctor_list($limit = NULL, $start = NULL)			
 
 	{				
@@ -453,6 +338,8 @@ class Doctor_model extends CI_Model {
 							specialization,
 							
 							axdoctors.specialityId,
+							
+							
 
 							loginStatus,
 							
@@ -1235,11 +1122,7 @@ class Doctor_model extends CI_Model {
 
 		return $query->row_array();	
 
-	}	
-	// ===========================================================
-
-
-	// ======================================================		
+	}			
 
 	public function delete_doctor($doctorIds) { 			
 

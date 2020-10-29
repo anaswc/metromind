@@ -562,7 +562,7 @@ class MetroMind extends CI_Controller
 
 				if ($this->Login_model->loginType == 1) {
 
-					if ($result['doctorImageUrl'] <> '' && file_exists('../uploads/doctors/' . $result['doctorImageUrl']))
+					if ($result['doctorImageUrl'] <> '' && file_exists(AXUPLOADDOCTORIMAGEPATH . $result['doctorImageUrl'])!== null)
 
 						$result['imageUrl'] =  AXUPLOADDOCTORIMAGEPATH . $result['doctorImageUrl'];
 
@@ -800,7 +800,7 @@ class MetroMind extends CI_Controller
 
 				$this->Login_model->add_api_token_members($this->input->post_get('uniqueId'), $token);
 
-				if ($result['doctorImageUrl'] <> '' && file_exists('../uploads/doctors/' . $result['doctorImageUrl'])) {
+				if ($result['doctorImageUrl'] <> '' && file_exists(AXUPLOADDOCTORIMAGEPATH . $result[$i]['doctorImageUrl'])!== null) {
 
 					$result['doctorImageUrl'] =  AXUPLOADDOCTORIMAGEPATH . $result['doctorImageUrl'];
 
@@ -1529,193 +1529,7 @@ class MetroMind extends CI_Controller
 	}
 
 	// For getting the doctors stored in the echo system .
-// =============================================================
-		function doctors_list_by_speciality_get()
 
-	{
-
-		$this->Patient_model->setPostGetVars();
-
-		$this->verify_request();
-
-		$this->Doctor_model->setPostGetVars();
-
-		$this->Doctor_model->status = 1;
-		if ($this->Doctor_model->specialityId <> '') {
-
-
-		$result = $this->Doctor_model->get_doctor_list_by_specialization($this->Doctor_model->specialityId);
-
-		if (!$result) {
-
-			$result = array();
-
-			$tokenData = time() . $this->input->post_get('uniqueId');
-
-			$token = AUTHORIZATION::generateToken($tokenData);
-
-			$this->Login_model->add_api_token_members($this->input->post_get('uniqueId'), $token);
-
-			$response = ['status' => 201, 'token' => $token,  'result' => $result, 'message' => HTTP_STATUS_CODES[204]];
-
-			$this->response($response, 200);
-
-		} else {
-
-			$patientDeviceOS  = $this->Patient_model->get_patient_device_os($this->input->post_get('uniqueId'));
-
-			$status = 200;
-
-			if (is_array($result) && count($result) > 0) {
-
-				$i	= 0;
-
-				foreach ($result as $row) {
-
-					if ($result[$i]['doctorImageUrl'] <> '' && file_exists(AXUPLOADDOCTORIMAGEPATH . $result[$i]['doctorImageUrl'])!== null) {
-
-						$result[$i]['doctorImageUrl'] =  AXUPLOADDOCTORIMAGEPATH . $result[$i]['doctorImageUrl'];
-
-					} else {
-
-						$result[$i]['doctorImageUrl'] = AXUPLOADPATH . 'no_image.png';
-
-					}
-
-					$this->Patient_model->doctorId 	= $result[$i]['doctorId'];
-
-					$result[$i]['isTrialCompleted']   	= 0;
-
-					$result[$i]['hasValidCredits']  	= 0;
-
-					$result[$i]['patientCreditId']  	= 0;
-
-					$result[$i]['hasValidPackage']  	= 0;
-
-					$result[$i]['subscriptionId']  	= 0;
-
-					$result[$i]['noOfSession']  		= 0;
-
-					$result[$i]['sessionDuration']  	= 0;
-
-					$patient_records 					= array();
-
-					$patient_records  					= $this->Patient_model->get_patient_records($this->Patient_model->patientId);
-
-					if (count($patient_records) >= 0) {
-
-						$result[$i]['isTrialCompleted'] = 1;
-
-						$patient_subscriptions 			= array();
-
-						$this->Patient_model->status 	= 1;
-
-						$patient_credits 			= array();
-
-						$patient_credits  			= $this->Patient_model->get_patient_credites($this->Patient_model->patientId, $result[$i]['doctorId']);
-
-						if (count($patient_credits) > 0) {
-
-							$result[$i]['hasValidCredits']   	= 1;
-
-							if (count($patient_credits) > 0) {
-
-								$k	= 0;
-
-								foreach ($patient_credits as $row1) {
-
-									$result[$i]['patientCreditId'] 	= $row1['patientCreditId'];
-
-									$result[$i]['sessionDuration'] 	= $row1['sessionDuration'];
-
-									$result[$i]['noOfSession'] 		= $row1['noOfSession'];
-
-								}
-
-							}
-
-						} else {
-
-							$patient_subscriptions  			= $this->Patient_model->get_patient_subscriptions($this->Patient_model->patientId);
-
-							if (count($patient_subscriptions) > 0) {
-
-								$result[$i]['hasValidPackage']   	= 1;
-
-								if (count($patient_subscriptions) > 0) {
-
-									$k	= 0;
-
-									foreach ($patient_subscriptions as $row1) {
-
-										$result[$i]['subscriptionId'] 	= $row1['subscriptionId'];
-
-										$result[$i]['noOfSession'] 	= $row1['noOfSession'];
-
-										$result[$i]['sessionDuration'] = $this->Package_model->get_default_session_duration();
-
-									}
-
-								}
-
-							}
-
-						}
-
-					}
-
-					$num_of_rating = 0;
-
-					$overall_rating = 0;
-
-					if ($result[$i]['doctorId'] <> '') {
-
-						$num_of_rating = $this->Rating_model->get_rating_count($result[$i]['doctorId']);
-
-						if ($num_of_rating <> 0) {
-
-							$total_rating = $this->Rating_model->get_total_rating($result[$i]['doctorId']);
-
-							$overall_rating =  ($total_rating / $num_of_rating);
-
-						}
-
-					}
-
-					$result[$i]['num_of_rating'] 	= $num_of_rating;
-
-					$result[$i]['overall_rating'] 	= number_format((float)$overall_rating, 2);
-
-					//$this->Patient_model->patientId = $this->Patient_model->get_patient_id_by_uniqueId(trim($this->input->post_get('uniqueId')));
-
-					$result[$i]['unReadCount']   = $this->Patient_model->get_unread_count_patient($this->Patient_model->patientId,$result[$i]['doctorId']);
-
-					
-
-					$result[$i]['patientDeviceOS']   = $patientDeviceOS;
-
-					$i++;
-
-				}
-
-			}
-
-			$tokenData = time() . $this->input->post_get('uniqueId');
-
-			$token = AUTHORIZATION::generateToken($tokenData);
-
-			$this->Login_model->add_api_token_members($this->input->post_get('uniqueId'), $token);
-
-			$response = ['status' => $status, 'token' => $token,  'result' => $result, 'message' => HTTP_STATUS_CODES[200]];
-
-			$this->response($response, 200);
-
-		}
-	}
-
-	}
-
-	// =============================================================
 	function doctors_list_get()
 
 	{
@@ -1754,7 +1568,10 @@ class MetroMind extends CI_Controller
 
 				$i	= 0;
 
+
+
 				foreach ($result as $row) {
+
 
 					if ($result[$i]['doctorImageUrl'] <> '' && file_exists(AXUPLOADDOCTORIMAGEPATH . $result[$i]['doctorImageUrl'])!== null) {
 
@@ -1763,6 +1580,7 @@ class MetroMind extends CI_Controller
 					} else {
 
 						$result[$i]['doctorImageUrl'] = AXUPLOADPATH . 'no_image.png';
+						
 
 					}
 
@@ -1889,6 +1707,8 @@ class MetroMind extends CI_Controller
 			$token = AUTHORIZATION::generateToken($tokenData);
 
 			$this->Login_model->add_api_token_members($this->input->post_get('uniqueId'), $token);
+
+
 
 			$response = ['status' => $status, 'token' => $token,  'result' => $result, 'message' => HTTP_STATUS_CODES[200]];
 
@@ -1932,7 +1752,7 @@ class MetroMind extends CI_Controller
 
 				$status = 200;
 
-				if ($result['doctorImageUrl'] <> '' && file_exists('../uploads/doctors/' . $result['doctorImageUrl'])) {
+				if ($result['doctorImageUrl'] <> '' && file_exists(AXUPLOADDOCTORIMAGEPATH . $result[$i]['doctorImageUrl'])!== null) {
 
 					$result['doctorImageUrl'] =  AXUPLOADDOCTORIMAGEPATH . $result['doctorImageUrl'];
 
@@ -2211,10 +2031,6 @@ class MetroMind extends CI_Controller
 		}
 
 	}
-	// ======================================================
-
-
-	// =========================================================
 
 	// For getting the Symptoms stored in the echo system .
 
@@ -4874,7 +4690,7 @@ class MetroMind extends CI_Controller
 
 				$status = 200;
 
-				if ($result['doctorImageUrl'] <> '' && file_exists('../uploads/doctors/' . $result['doctorImageUrl'])) {
+				if ($result['doctorImageUrl'] <> '' && file_exists(AXUPLOADDOCTORIMAGEPATH . $result[$i]['doctorImageUrl'])!== null) {
 
 					$result['doctorImageUrl'] =  AXUPLOADDOCTORIMAGEPATH . $result['doctorImageUrl'];
 
@@ -5242,7 +5058,7 @@ class MetroMind extends CI_Controller
 
 					if ($this->Signup_model->loginType == 1) {
 
-						if ($result['doctorImageUrl'] <> '' && file_exists('../uploads/doctors/' . $result['doctorImageUrl']))
+						if ($result['doctorImageUrl'] <> '' && file_exists(AXUPLOADDOCTORIMAGEPATH . $result[$i]['doctorImageUrl'])!== null)
 
 							$result['imageUrl'] =  AXUPLOADDOCTORIMAGEPATH . $result['doctorImageUrl'];
 

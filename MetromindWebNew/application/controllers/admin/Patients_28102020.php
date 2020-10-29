@@ -5,7 +5,6 @@ class Patients extends CI_controller{
 		 if(!$this->session->userdata('adminId'))
 		 redirect('admin/login');
 		 $this->load->model('patients_model');
-		 $this->load->model('appointments_model');
 		 $this->load->helper('url_helper');
 		 $this->load->library('pagination');
 		  $this->load->helper('date');
@@ -254,15 +253,8 @@ class Patients extends CI_controller{
 			$data = $this->patients_model->validatePatientMobile($patientMobile,$patientId);
 			echo json_encode($data);
 		}
-		// --------------------------------------
-		public function notifytodayappointment(){
-			$counts=$this->appointments_model->getapproved_appointment_requests();
-			foreach ($counts as $value) {
-				$patient=$this->patients_model->getPatient_id($value['patientId']);
-				//$smsstatus=$this->patients_model->send_notification_user($patient['uniqueId']);
-				$appnotifystatus=$this->patients_model->notify_user_appointment($patient['uniqueId']);
-			}
-		}
+		
+		
 	
 		
 		
