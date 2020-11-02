@@ -792,7 +792,7 @@ public function notify_user_appointment($uniqueId)
     $title = "Metro Mind";
     $body = 'Hi '.$firstName.' '.$lastName.' your appointment has been scheduled today. Contact Doctor on time';
     $notification = array('title' =>$title , 'body' => $body, 'sound' => 'default');
-    $data = array('title' =>$title , 'body' => $body, 'type' => '111');
+    $data = array('title' =>$title , 'body' => $body, 'type' => 'general');
     $arrayToSend = array('to' => $token, 'notification' => $notification,'data'=>$data,'priority'=>'high');
     $json = json_encode($arrayToSend);
     $headers = array();

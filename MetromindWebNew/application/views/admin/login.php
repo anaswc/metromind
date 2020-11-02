@@ -68,7 +68,9 @@
 
             <div class="form-group">
 
+
               <div class="form-label-group">
+
 
 				<?php echo form_password(['name'=>'password','id'=>'password','class'=>'form-control','autofocus'=>'autofocus','value'=>set_value('password'),'required'=>'true']);?>
 
@@ -81,6 +83,7 @@
             </div>
 
 			 <div class="form-group">
+
 
               <div class="form-label-group text-center">
 
