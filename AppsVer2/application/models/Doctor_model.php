@@ -342,6 +342,7 @@ class Doctor_model extends CI_Model {
 							axdoctors.specialityId,
 
 							loginStatus,
+							sequenceOrder,
 							
 							axdoctors.isScheduleEnabled,
 							
@@ -393,7 +394,7 @@ class Doctor_model extends CI_Model {
 			$this->db->like('axsymptoms.symptomName', $this->specialization);	
 		}
 
-		$this->sortColumn 		= 'axdoctors.specialityId';	
+		$this->sortColumn 		= 'sequenceOrder';	
 
 		$this->sortDirection 	= 'ASC';	
 		

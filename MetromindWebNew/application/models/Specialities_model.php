@@ -225,7 +225,7 @@ public function checkIfSeoUriExistsNew($seoUri1,$specialityId){
 				$this->sortColumn = "specialityId";
 			
 			if($this->sortDirection == '')
-				$this->sortDirection = "DESC";	
+				$this->sortDirection = "ASC";	
 						
 			$this->db->order_by("$this->sortColumn", "$this->sortDirection");
 			

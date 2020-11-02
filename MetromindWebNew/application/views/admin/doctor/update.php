@@ -42,7 +42,7 @@ function checkDoctorEmail(doctorEmail) {
                 if(data == 0)
                 {
                    alert("Email already exist !!");
-           document.getElementById('doctorEmail').value="";
+         //  document.getElementById('doctorEmail').value="";
                 }
              
             }
@@ -159,7 +159,7 @@ function Cancel(){
                                 <option value="" selected="selected">-Select Speciality-</option>
                                 
                                 <?php foreach($specialities as $row): ?>
-                                  <option value="<?php echo $row["specialityId"]?>" <?php if($row["specialityId"]==$doctor_item['doctorName'])?>selected="selected"><?php echo $row["specialityName"]?></option>
+                                <option value="<?php echo $row["specialityId"]?>" <?php if($row["specialityId"]==$doctor_item['specialityId'])echo "selected='selected'";?>><?php echo $row["specialityName"]?></option>
                 <?php endforeach; ?>
                               </select>                            </div>
                           </div>
@@ -372,7 +372,7 @@ function Cancel(){
                                      <span><img src="<?php echo HTTP.AXUPLOADDOCTORSPATH.$doctor_item['doctorImageUrl']?>" width="60" height="60" /></span>
                                  <?php }?>                                       
                             </div>
-                            <span class="note" style="color: #F00; " > Image resolution should be lessthan or equal to 1300*800px. The Valid Extensions are jpg  , jpeg , png .</span>
+                            <span class="note" style="color: #F00; " > Image resolution should be lessthan or equal to 278*181px. The Valid Extensions are jpg  , jpeg , png .</span>
                           </div>
                         </div>
                          <div class="col-md-6 col-xs-12"  >

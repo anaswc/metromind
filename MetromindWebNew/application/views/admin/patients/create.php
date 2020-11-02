@@ -216,7 +216,7 @@ if (atposition<1 || dotposition<atposition+2 || dotposition+2>=x.length){
                           <div class="form-group row">
                             <label for="input-rounded" class="col-sm-12 form-control-label">Patient Address<span class="mandatory">* </span> </label>
                             <div class="col-sm-12">
-                              <textarea name="patientAddress" value="" class="form-control" required></textarea>
+                              <textarea name="patientAddress" value="" rows="6" class="form-control" required></textarea>
                             </div>
                           </div>
                         </div>
