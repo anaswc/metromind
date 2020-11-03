@@ -673,7 +673,7 @@ public function send_notification_user($uniqueId){
 
 		if($uniqueId == '')
 			return 0;
-		$this->db->select('uniqueId,firstName,lastName,patientEmail,patientMobile,otp,countryId');
+		$this->db->select('uniqueId,firstName,lastName,patientEmail,patientMobile,countryId');
 
 		$this->db->from('axpatient');
 
@@ -747,6 +747,7 @@ public function send_notification_user($uniqueId){
 
 			}
 
+			//echo  $y;
 			return 1;
 
 		}else{
@@ -819,7 +820,11 @@ return 1;
 
     
 }
+// =================================================
 
+
+
+// ======================================================
 		
 }
 ?>

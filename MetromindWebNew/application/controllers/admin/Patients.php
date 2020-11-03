@@ -260,7 +260,9 @@ class Patients extends CI_controller{
 			foreach ($counts as $value) {
 				$patient=$this->patients_model->getPatient_id($value['patientId']);
 				//$smsstatus=$this->patients_model->send_notification_user($patient['uniqueId']);
-				$appnotifystatus=$this->patients_model->notify_user_appointment($patient['uniqueId']);
+				//$appnotifystatus=$this->patients_model->notify_user_appointment($patient['uniqueId']);
+
+				//$var=$this->patients_model->send_notification_user_va();
 			}
 		}
 	

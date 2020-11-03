@@ -3,7 +3,7 @@ class Notification extends CI_controller{
 	 public function __construct(){
 		 parent:: __construct();
 		 
-		 $this->load->model('patients_model');
+		 $this->load->model('notification_model');
 		 $this->load->model('appointments_model');
 		 $this->load->helper('url_helper');
 		 $this->load->library('pagination');
@@ -29,9 +29,14 @@ class Notification extends CI_controller{
 	public function notifytodayappointment(){
 			$counts=$this->appointments_model->getapproved_appointment_requests();
 			foreach ($counts as $value) {
-				$patient=$this->patients_model->getPatient_id($value['patientId']);
-				$smsstatus=$this->patients_model->send_notification_user($patient['uniqueId']);
-				$appnotifystatus=$this->patients_model->notify_user_appointment($patient['uniqueId']);
+				$patient=$this->notification_model->getPatient_id($value['patientId']);
+
+				$smsstatus=$this->notification_model->send_notification_user($patient['uniqueId']);
+				
+				
+				$appnotifystatus=$this->notification_model->notify_user_appointment($patient['uniqueId']);
+				
+
 			}
 		}
 }
