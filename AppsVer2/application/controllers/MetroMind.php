@@ -1426,7 +1426,9 @@ class MetroMind extends CI_Controller
 
 				foreach ($result as $row) {
 
-					if ($result[$i]['specialityImageUrl'] <> '' && file_exists('../uploads/speciality/' . $result[$i]['specialityImageUrl'])) {
+					//file_exists('../uploads/speciality/' . $result[$i]['specialityImageUrl'])
+
+					if ($result[$i]['specialityImageUrl'] <> '' &&  file_exists(AXUPLOADSPECIALITYIMAGEPATH . $result[$i]['specialityImageUrl'])!== null  ) {
 
 						$result[$i]['specialityImageUrl'] =  AXUPLOADSPECIALITYIMAGEPATH . $result[$i]['specialityImageUrl'];
 
