@@ -1583,6 +1583,7 @@ class MetroMind extends CI_Controller
 						$result[$i]['doctorImageUrl'] = AXUPLOADPATH . 'no_image.png';
 
 					}
+					$result[$i]['today_available_sessions']   	= $this->Doctor_model->get_today_doctor_sessions($result[$i]['doctorId']);
 
 					$this->Patient_model->doctorId 	= $result[$i]['doctorId'];
 
@@ -1934,7 +1935,7 @@ class MetroMind extends CI_Controller
 
 				$status = 200;
 
-				if ($result['doctorImageUrl'] <> '' && file_exists('../uploads/doctors/' . $result['doctorImageUrl'])) {
+				if ($result['doctorImageUrl'] <> '' && file_exists(AXUPLOADDOCTORIMAGEPATH . $result['doctorImageUrl'])!== null) {
 
 					$result['doctorImageUrl'] =  AXUPLOADDOCTORIMAGEPATH . $result['doctorImageUrl'];
 

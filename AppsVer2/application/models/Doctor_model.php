@@ -324,6 +324,7 @@ class Doctor_model extends CI_Model {
 							youtubeLink,
 
 							doctorFee,
+							experience,
 
 							communicationMode,
 
@@ -1251,6 +1252,50 @@ class Doctor_model extends CI_Model {
 		 } 			
 
 	} 		
+	public function get_today_doctor_sessions($doctorId)
+
+	{	
+
+		if($doctorId == '')
+
+			return 0;
+
+		$this->db->select('
+
+							availableDay,
+
+							availableSession,
+
+							TIME_FORMAT(availableStartTime, "%h:%i %p") AS availableStartTime,
+
+							TIME_FORMAT(availableEndTime, "%h:%i %p") AS availableEndTime
+
+						  ');
+
+		$this->db->from('axavailablesessions');
+
+		$this->db->where('doctorId',$doctorId);
+		$availableDay=date("l");
+		$this->db->where('availableDay', $availableDay);	
+
+
+		if(trim($this->availableDay) != "")			
+
+			$this->db->where('availableDay', $this->availableDay);	
+
+		if(trim($this->status) != "")			
+
+			$this->db->where('status', $this->status);							
+		
+		$this->db->order_by("availableDayId ASC,availableSessionsId ASC ");
+
+		$query = $this->db->get();
+
+		//echo  $this->db->last_query();die();
+
+		return $query->result_array();
+
+	}	
 
 	public function get_doctor_sessions($doctorId)
 
