@@ -56,7 +56,10 @@ function checkDoctorEmail(doctorEmail) {
 function checkDoctorMobile(doctorMobile) {
   
     var doctorMobile=document.getElementById('doctorMobile').value;
-  
+   if(doctorMobile.length < 10)
+  {
+    alert("Invalid mobile num");
+  }
    
 
     $.ajax(
@@ -70,7 +73,7 @@ function checkDoctorMobile(doctorMobile) {
                 if(data == 0)
                 {
                    alert("Mobile number already exist !!");
-           document.getElementById('doctorMobile').value="";
+           //document.getElementById('doctorMobile').value="";
                 }
              
             }
@@ -91,6 +94,12 @@ if (atposition<1 || dotposition<atposition+2 || dotposition+2>=x.length){
   alert("Please enter a valid e-mail address");  
   return false;  
   }  
+  var doctorMobile=document.getElementById('doctorMobile').value;
+    if(doctorMobile.length < 10)
+  {
+    alert("Invalid mobile num");
+     return false;  
+  }
 }  
 </script>
 
@@ -168,7 +177,7 @@ function Cancel(){
                           <div class="form-group row">
                             <label for="input-rounded" class="col-sm-12 form-control-label">Doctor Name<span class="mandatory">* </span> </label>
                             <div class="col-sm-12">
-                              <input type="text" name="doctorName" value="<?php echo $doctor_item['doctorName'] ?>" class="form-control" required>
+   <input type="text" name="doctorName" value="<?php echo $doctor_item['doctorName'] ?>" class="form-control"  onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)"  required>
                             </div>
                           </div>
                         </div>
@@ -204,7 +213,7 @@ function Cancel(){
                           <div class="form-group row">
                             <label for="input-rounded" class="col-sm-12 form-control-label">Phone<span class="mandatory">* </span> </label>
                             <div class="col-sm-12">
-                              <input type="text" name="doctorMobile" id="doctorMobile" value="<?php echo $doctor_item['doctorMobile'] ?>" class="form-control" required onBlur="checkDoctorMobile(this.value)">
+                              <input type="text" name="doctorMobile" id="doctorMobile" value="<?php echo $doctor_item['doctorMobile'] ?>"  class="form-control" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" required onBlur="checkDoctorMobile(this.value)">
                             </div>
                           </div>
                         </div>
@@ -244,13 +253,34 @@ function Cancel(){
                             <label for="input-rounded" class="col-sm-12 form-control-label">Specialization<span class="mandatory">* </span> </label>
                             <div class="col-sm-12">
                      
-                      <select name="symptomIds[]" class="form-control" id="symptomIds" multiple="multiple"  style="height:200px !important; overflow-y: scroll !important;">
+                      <!-- <select name="symptomIds[]" class="form-control" id="symptomIds" multiple="multiple"  style="height:200px !important; overflow-y: scroll !important;">
                           <option value="" >-Select-</option>
        <?php $vendorcat = explode(',',$data['doctor_item']['specialityId']);?>
     <?php echo $specialitiesList?>
       
           
+      </select> -->
+
+
+<select name="symptomIds[]"  class="form-control multiselect" id="symptomIds" multiple="multiple" role="multiselect">
+                         
+       <?php $vendorcat = explode(',',$data['doctor_item']['specialityId']);?>
+    <?php echo $specialitiesList?>
+      
+          
       </select>
+
+
+
+
+
+
+
+
+
+
+
+
             </div>
                           </div>
                         </div>
@@ -267,7 +297,7 @@ function Cancel(){
                           <div class="form-group row">
                             <label for="input-rounded" class="col-sm-12 form-control-label">Age<span class="mandatory">* </span> </label>
                             <div class="col-sm-12">
-                              <input type="text" name="age" value="<?php echo $doctor_item['age'] ?>" class="form-control" required>
+                              <input type="number" max="199"  name="age" value="<?php echo $doctor_item['age'] ?>" class="form-control" required>
                             </div>
                           </div>
                         </div>
@@ -293,7 +323,7 @@ function Cancel(){
                           <div class="form-group row">
                             <label for="input-rounded" class="col-sm-12 form-control-label">Fees<span class="mandatory">* </span> </label>
                             <div class="col-sm-12">
-                              <input type="text" name="doctorFee" value="<?php echo $doctor_item['doctorFee'] ?>" class="form-control" required>
+                              <input type="text" name="doctorFee" value="<?php echo $doctor_item['doctorFee'] ?>" class="form-control"  onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" required>
                             </div>
                           </div>
                         </div>
@@ -687,7 +717,8 @@ $availtimeday7=$this->doctor_model->getItem_day($doctor_item['doctorId'],$day7);
 <script src="<?php echo base_url('assets/plugins/data-table/js/jquery-ui-1.12.0/jquery-1.10.2.js'); ?>"></script>
      <script src="<?php echo base_url('assets/plugins/data-table/js/jquery-ui-1.12.0/jquery-ui.js'); ?>"></script>
     
-     
+    <script src="<?php echo base_url('assets/plugins/multi-select/js/multiselect.js')?>"></script>
+ 
        
       
 <script>
@@ -720,8 +751,7 @@ $(document).ready(function(){
 
  });
 });
-</script>
-     
+</script>    
 
 
   </body>

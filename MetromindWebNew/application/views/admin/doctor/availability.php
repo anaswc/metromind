@@ -13,6 +13,9 @@
 <!-- Data Table Css -->
 
 <?php echo link_tag('assets/plugins/data-table/css/dataTables.bootstrap4.min.css'); ?><?php echo link_tag('assets/plugins/data-table/css/buttons.dataTables.min.css'); ?><?php echo link_tag('assets/plugins/data-table/css/responsive.bootstrap4.min.css'); ?><?php echo link_tag('assets/plugins/data-table/css/jquery-ui-1.12.0/jquery-ui.css'); ?>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fecha/2.3.1/fecha.min.js"></script>
 </head>
 
 <body  class="horizontal-fixed fixed">
@@ -82,14 +85,27 @@ function Cancel(){
         <tr>
             <td class="col-md-8">
 <div class="form-group row">
-   <label for="input-rounded" class="col-sm-12 form-control-label"> Select Time </label>
-   <div class="col-sm-10">
+   
+   <div class="col-md-6">
+    <label for="input-rounded" class="col-sm-12 form-control-label"> Select Time </label>
       <?php
-         $selectedTime = "9:00:00";
-         $firsttime = strtotime('+'.$doctor_item['doctorSessionDuration'].' minutes', strtotime($selectedTime));
+         $selectedTime = "9:00";
+         
+         $time = strtotime($selectedTime);
+         
+
+
+        
          
          ?>
-         <input type="time" name="availabletime[]" id="" min="08:59:00" max="20:59:00" class="form-control" value="09:00:00" required>
+         <input type="time" name="availabletime[]" id="1" min="08:59:00" max="20:59:00" class="form-control" value="09:00:00" required onBlur="checktime(this.id)">
+  
+   </div>
+
+   <div class="col-md-6">
+    <label for="input-rounded" class="col-sm-12 form-control-label"> End Time </label>
+     
+         <input type="text" disabled class="form-control" id="endtime1" value="<?php echo date("H:i A", strtotime('+'.$doctor_item['doctorSessionDuration'].' minutes', $time));?>" >
   
    </div>
 </div>
@@ -117,13 +133,13 @@ function Cancel(){
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <script>
   $(document).ready(function () {
-    var counter = 0;
+    var counter = 2;
 
     $("#addrow").on("click", function () {
         var newRow = $("<tr>");
         var cols = "";
 
-        cols += '<td><div class="form-group row"><label for="input-rounded" class="col-sm-12 form-control-label">Select Time</label><div class="col-sm-10"><input type="time" name="availabletime[]" id="" min="08:59:00" max="20:59:00" class="form-control" value="09:00:00" required></div></div></td>';
+        cols += '<td><div class="form-group row"><div class="col-md-6"><label for="input-rounded" class="col-sm-12 form-control-label">Select Time</label><input type="time" name="availabletime[]" id="'+counter+'" min="08:59:00" max="20:59:00" class="form-control" value="09:00:00" required onBlur="checktime(this.id)"></div><div class="col-md-6"><label for="input-rounded" class="col-sm-12 form-control-label"> End Time </label><input type="text" disabled class="form-control" id="endtime'+counter+'" ></div></div></td>';
        
        
         cols += '<td><label for="input-rounded" class="col-sm-12 form-control-label">Action</label><input type="button" class="ibtnDel btn btn-md btn-danger "  value="Delete"></td>';
@@ -141,8 +157,81 @@ function Cancel(){
 
 
 });
+function checktime(id)
+{
+  //alert($("#"+id).val())
+  // $("#endtime"+id).val($("#"+id).val());
+  var timeString=($("#"+id).val());
+
+  var upt=GetEndDate(timeString)
 
 
+  const timeString12hr = new Date('1970-01-01T' + upt + 'Z')
+  .toLocaleTimeString({},
+    {timeZone:'UTC',hour12:true,hour:'numeric',minute:'numeric'}
+  );
+
+
+  
+
+  $("#endtime"+id).val(timeString12hr);
+
+}
+
+function GetEndDate(start_date){ // start_date = "05-25-2017 05:00"
+    var duration = <?php echo $doctor_item['doctorSessionDuration'];?>;
+    var d = fecha.parse(start_date, 'HH:mm');
+
+    d.setMinutes(d.getMinutes() + duration);
+    return fecha.format(d, 'HH:mm');;
+}
+
+
+
+
+
+
+// ===========================
+function validateTime()
+{
+ var timelist = document.forms[0].elements["availabletime[]"];
+ if(timelist.length==undefined)
+ {
+  return true;
+ }
+ else{
+ 
+  for (var i = 0, len = timelist.length; i < len; i++) {
+    var j=0
+    while(j<i)
+    {
+
+    if(timelist[i].value<GetEndDate(timelist[j].value))
+    {
+      alert("Can't add time in another session slot")
+      return false;
+    }
+
+
+
+
+      if(timelist[i].value==timelist[j].value)
+    {
+      alert("Duplicate time found")
+      return false;
+    }
+
+      j=j+1;
+    }
+    
+}
+
+
+ }
+ 
+
+
+}
 
 
 </script>
@@ -163,9 +252,12 @@ function Cancel(){
                         <div align="center">
                           <button type="submit" class="btn btn-mini btn-primary waves-effect waves-light m-r-30">Submit</button>
                           <button type="button" class="btn btn-mini btn-primary waves-effect waves-light m-r-30" onClick="Cancel();" >Cancel</button>
+                          
+                         
                         </div>
                       </div>
                     </form>
+
                   </div>
                 </div>
               </div>
@@ -192,247 +284,6 @@ function Cancel(){
 <script type="text/javascript">
 
   
-
-function validateTime()
-
-{
-
-                var morngstart="09:00:00";
-                var morngend="13:00:00";
-                var nunstart="13:00:00";
-                var nunend="16:00:00";
-                var evngstart="16:00:00";
-                var evngend="21:00:00";
-
-  
-
-  var morningStart=document.getElementById("Morning_Start").value;
-
-  var morningEnd=document.getElementById("Morning_End").value;
-
-  var noonStart=document.getElementById("AfterNoon_Start").value;
-
-  var noonEnd=document.getElementById("AfterNoon_End").value;
-
-  var evngStart=document.getElementById("Evening_Start").value;
-
-  var evngEnd=document.getElementById("Evening_End").value;
-  
-  //alert(morningStart);
-  /*alert(morningEnd);
-  alert(noonStart);
-  alert(noonEnd);
-  alert(evngStart);
-  alert(evngEnd);*/
-  //return false;
-
- 
-if(morningStart === "" && morningEnd ==="" && noonStart ==="" && noonEnd ==="" &&  evngStart ==="" && evngEnd ==="" )
-
-{
-
-  alert("Please select atleast one session!");
-
-
-  return false;
-
-}
-
-
-
-
-
-if(morningStart!='' && morningEnd!='' && morningStart>=morningEnd)
-
-{
-
-  alert("Morning Start Time should be less than Morning end time ");
-
-
-    return false;
-
-}
-
-
-
-if(morningStart=='' && morningEnd!='')
-
-{
-
-  alert("Plase select  Morning Start time");
-
-
-  return false;
-
-}
-
-if(morningEnd=='' && morningStart!='')
-
-{
-
-  alert("Plase select  Morning End time");
-
-
-  return false;
-
-}
-
-if(morningEnd != "" && morningEnd>morngend){
-  alert("Morning end time is"+morngend);
-  return false;
-  }
-
-
-
-///morning section end/////////////
-
-if(noonStart!='' && noonEnd!='' && noonStart>=noonEnd)
-
-{
-
-  alert(" After noon Start Time should be less than end time ");
-
-    return false;
-
-}
-
-
-
-if(noonStart=='' && noonEnd!='')
-
-{
-
-  alert("Plase select  Noon Start time");
-
-  return false;
-
-}
-
-if(noonEnd=='' && noonStart!='')
-
-{
-
-  alert("Plase select  Noon End time");
-
-  return false;
-
-}
-
-if(noonEnd != "" && noonEnd>nunend){
-  alert("Noon end time is"+nunend);
-  return false;
-  }
-
-
-
-////noon end//////////////
-
-if(evngStart!='' && evngEnd!='' && evngStart>=evngEnd)
-
-{
-
-  alert("Evening Start Time should be less than end time ");
-
-
-    return false;
-
-}
-
-
-
-if(evngStart=='' && evngEnd!='')
-
-{
-
-  alert("Plase select  Evening Start time");
-
-
-  return false;
-
-}
-
-if(evngEnd=='' && evngStart!='')
-
-{
-
-  alert("Plase select  Evening End time");
-
-
-  return false;
-
-}
-
-if(evngEnd != "" && evngEnd<evngend){
-  alert("Evening end time is"+evngend);
-  return false;
-  }
-
-/////Evening end//////////////
-
-
-
-
-
-
-
-
-if(noonEnd>evngStart && noonEnd!='' && evngStart!='')
-
-{
-
-  alert("Noon end should be less than Evening start time ");
-
-
-    return false;
-
-}
-
-
-
-if(morningEnd>noonStart && morningEnd!='' && noonStart!='')
-
-{
-
-  alert("Morning Time should be less than After noon endtime ");
-
-
-    return false;
-
-}
-
-if(morningEnd>evngStart && morningEnd!='' && evngStart!='')
-
-{
-
-  alert("Morning end should be less than evening start");
-
-  frm.Evening_Start.focus();
-
-  return false;
-
-}
-
-
-if(noonEnd>evngStart && noonEnd!='' && evngStart!='')
-
-{
-
-  alert("Noon end should be less than Evening start");
-
-  frm.Evening_Start.focus();
-
-  return false;
-
-}
-
-
-
-
-}
-
-
-
-
 
 
 

@@ -26,7 +26,7 @@
 
 <script>
 function Cancel(){
-	document.location.href="<?php echo base_url('admin/patients'); ?>";
+  document.location.href="<?php echo base_url('admin/patients'); ?>";
 }
 </script>    
  <script type="text/javascript">
@@ -42,7 +42,7 @@ function Cancel(){
 
 <script type="text/javascript">
 function validateFile() {
-	
+  
     //Get reference of FileUpload.
     var fileUpload = document.getElementById('profileImgUrl');
 
@@ -69,7 +69,7 @@ function validateFile() {
                     var width = this.width;
                     if (height > 800 || width > 1300) {
                         alert("Invalid Image resolution !!");
-						document.getElementById('profileImgUrl').value="";
+            document.getElementById('profileImgUrl').value="";
                         return false;
                     }
                     
@@ -83,7 +83,7 @@ function validateFile() {
         }
     } else {
         alert("Please select a valid Image file.");
-		document.getElementById('profileImgUrl').value="";
+    document.getElementById('profileImgUrl').value="";
         return false;
     }
 }
@@ -93,11 +93,11 @@ function validateFile() {
 <script type="text/javascript">
 
 function checkPatientEmail(patientEmail) {
-	
+  
 
     var patientEmail=document.getElementById('patientEmail').value;
-	var patientId=document.getElementById('patientId').value;
-	
+  var patientId=document.getElementById('patientId').value;
+  
    
     $.ajax(
         {   
@@ -110,22 +110,25 @@ function checkPatientEmail(patientEmail) {
                 if(data == 0)
                 {
                    alert("Email already exist !!");
-				   document.getElementById('patientEmail').value="";
+           document.getElementById('patientEmail').value="";
                 }
-				     
+             
             }
             
         }
     );
-	
-	
+  
+  
 } 
 
 function checkPatientMobile(patientMobile) {
-	
+  
 
     var patientMobile=document.getElementById('patientMobile').value;
-	
+   if(patientMobile.length < 10)
+  {
+    alert("Invalid mobile num");
+  }
    
     $.ajax(
         {   
@@ -138,15 +141,15 @@ function checkPatientMobile(patientMobile) {
                 if(data == 0)
                 {
                    alert("Mobile number already exist !!");
-				   document.getElementById('patientMobile').value="";
+           document.getElementById('patientMobile').value="";
                 }
-				     
+             
             }
             
         }
     );
-	
-	
+  
+  
 } 
 
 
@@ -160,6 +163,14 @@ if (atposition<1 || dotposition<atposition+2 || dotposition+2>=x.length){
   alert("Please enter a valid e-mail address");  
   return false;  
   }  
+  var patientMobile=document.getElementById('patientMobile').value;
+
+
+    if(patientMobile.length < 10)
+  {
+    alert("Invalid mobile num");
+    return false;
+  }
 }  
 </script>
 
@@ -197,7 +208,7 @@ if (atposition<1 || dotposition<atposition+2 || dotposition+2>=x.length){
                   <div class='text-center error'><?php echo $this->session->flashdata('error'); ?></div>
                 <?php } ?>
                     
-					<form action="<?php echo base_url('admin/patients/update/'.$patient_item['patientId']);?>" enctype="multipart/form-data" method="post" accept-charset="utf-8" onSubmit="return validateEmail()">
+          <form action="<?php echo base_url('admin/patients/update/'.$patient_item['patientId']);?>" enctype="multipart/form-data" method="post" accept-charset="utf-8" onSubmit="return validateEmail()">
 
 
 <input type="hidden" name="patientId" id="patientId" value="<?php echo $patient_item['patientId'] ?>">
@@ -206,14 +217,14 @@ if (atposition<1 || dotposition<atposition+2 || dotposition+2>=x.length){
                           <div class="form-group row">
                             <label for="input-rounded" class="col-sm-12 form-control-label">First Name<span class="mandatory">* </span> </label>
                             <div class="col-sm-12">
-                              <input type="text" name="firstName" value="<?php echo $patient_item['firstName']?>" class="form-control" required>
+                              <input type="text" name="firstName" value="<?php echo $patient_item['firstName']?>" class="form-control" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)" required>
                             </div>
                           </div>
                         </div><div class="col-md-6 col-xs-12">
                           <div class="form-group row">
                             <label for="input-rounded" class="col-sm-12 form-control-label">Last Name<span class="mandatory">* </span> </label>
                             <div class="col-sm-12">
-                              <input type="text" name="lastName" value="<?php echo $patient_item['lastName']?>" class="form-control" required>
+                              <input type="text" name="lastName" value="<?php echo $patient_item['lastName']?>" class="form-control" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)" required>
                             </div>
                           </div>
                         </div>
@@ -238,7 +249,7 @@ if (atposition<1 || dotposition<atposition+2 || dotposition+2>=x.length){
                           <div class="form-group row">
                             <label for="input-rounded" class="col-sm-12 form-control-label">Phone<span class="mandatory">* </span> </label>
                             <div class="col-sm-12">
-                              <input type="text" name="patientMobile" id="patientMobile" value="<?php echo $patient_item['patientMobile']?>" class="form-control" required>
+                              <input type="text" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" name="patientMobile" id="patientMobile" value="<?php echo $patient_item['patientMobile']?>" class="form-control" required>
                             </div>
                           </div>
                         </div>
@@ -258,15 +269,15 @@ if (atposition<1 || dotposition<atposition+2 || dotposition+2>=x.length){
                              <select name="countryId" id="countryId"  class="form-control" required>
                              <option value="">--Select--</option>
                              <?php 
-							 
-							 if(count($country)>0){
-								 foreach($country as $row){
-								 
-								  ?>
+               
+               if(count($country)>0){
+                 foreach($country as $row){
+                 
+                  ?>
                              <option value="<?php echo $row['countryId'] ?>" <?php if($row['countryId']==$patient_item['countryId']){ ?> selected <?php } ?>><?php echo $row['country'] ?></option>
                              <?php }
-							 }
-							  ?>
+               }
+                ?>
                              </select>
                             </div>
                           </div>
@@ -279,7 +290,7 @@ if (atposition<1 || dotposition<atposition+2 || dotposition+2>=x.length){
                             </div>
                           </div>
                         </div>
-						<div class="col-md-6 col-xs-12">
+            <div class="col-md-6 col-xs-12">
                           <div class="form-group row">
                             <label for="input-rounded" class="col-sm-12 form-control-label">Gender<span class="mandatory">* </span> </label>
                             <div class="col-sm-4">
@@ -288,7 +299,7 @@ if (atposition<1 || dotposition<atposition+2 || dotposition+2>=x.length){
                                <div class="col-sm-4">
                                Female<input type="radio" name="gender" id="genderFemale" value="2" class="form-control" required style="margin-top: -17px;margin-left: -25px;"onclick="EnableDisableTextBox()" <?php if($patient_item['gender'] == 2){?> checked="checked" <?php } ?>>
                             </div> 
-							<div class="col-sm-4">
+              <div class="col-sm-4">
                                Other<input type="radio" name="gender" id="genderOther" value="3" class="form-control" required style="margin-top: -17px;margin-left: -25px;"onclick="EnableDisableTextBox()" <?php if($patient_item['gender'] == 3){?> checked="checked" <?php } ?>>
                             </div>
                           </div>
@@ -302,7 +313,7 @@ if (atposition<1 || dotposition<atposition+2 || dotposition+2>=x.length){
                           </div>
                         </div>
                         
-						 <div class="col-md-6 col-xs-12">
+             <div class="col-md-6 col-xs-12">
                           <div class="form-group row">
                             <label for="input-rounded" class="col-sm-12 form-control-label">Patient Verification<span class="mandatory">* </span> </label>
                             <div class="col-sm-6">
@@ -318,7 +329,7 @@ if (atposition<1 || dotposition<atposition+2 || dotposition+2>=x.length){
                           <div class="form-group row">
                             <label for="input-rounded" class="col-sm-12 form-control-label">Image</label>
                             <div class="col-sm-5">
-                            	<input type = "file" name ="profileImgUrl" id="profileImgUrl" class="form-control" onChange="validateFile();"  />    
+                              <input type = "file" name ="profileImgUrl" id="profileImgUrl" class="form-control" onChange="validateFile();"  />    
                                  <?php
                                     if($patient_item['profileImgUrl']<>"" &&  file_exists(AXUPLOADPATIENTSPATH.$patient_item['profileImgUrl'])){?>
  <span><a href="<?php echo base_url().$patient_item['profileImgUrl']?>"  target="_blank"><img src="<?php echo base_url().AXUPLOADPATIENTSPATH.$patient_item['profileImgUrl']?>" width="60" height="60" /></a></span>
@@ -353,7 +364,7 @@ if (atposition<1 || dotposition<atposition+2 || dotposition+2>=x.length){
 
       </div>
       <!-- /.content-wrapper -->
-	</div>
+  </div>
     <!-- /#wrapper -->
 
     <!-- Scroll to Top Button-->
@@ -363,8 +374,8 @@ if (atposition<1 || dotposition<atposition+2 || dotposition+2>=x.length){
 
 
 
-  	<script src="<?php echo base_url('assets/js/jquery-3.1.1.min.js'); ?>"></script>
-   	<script src="<?php echo base_url('assets/js/jquery-ui.min.js'); ?>"></script>
+    <script src="<?php echo base_url('assets/js/jquery-3.1.1.min.js'); ?>"></script>
+    <script src="<?php echo base_url('assets/js/jquery-ui.min.js'); ?>"></script>
     <script src="<?php echo base_url('assets/js/tether.min.js'); ?>"></script>
     <script src="<?php echo base_url('assets/plugins/waves/js/waves.min.js'); ?>"></script>
     <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
@@ -374,7 +385,7 @@ if (atposition<1 || dotposition<atposition+2 || dotposition+2>=x.length){
     <script src="<?php echo base_url('scripts/axCommon.js'); ?>"></script>
     
     <!-- data-table js -->
-	<script src="<?php echo base_url('assets/plugins/data-table/js/jquery.dataTables.min.js'); ?>"></script>
+  <script src="<?php echo base_url('assets/plugins/data-table/js/jquery.dataTables.min.js'); ?>"></script>
     <script src="<?php echo base_url('assets/plugins/data-table/js/dataTables.buttons.min.js'); ?>"></script>
     <script src="<?php echo base_url('assets/plugins/data-table/js/jszip.min.js'); ?>"></script>
     <script src="<?php echo base_url('assets/plugins/data-table/js/pdfmake.min.js'); ?>"></script>

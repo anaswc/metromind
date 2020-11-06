@@ -6220,6 +6220,76 @@ class MetroMind extends CI_Controller
 	}
 	
 
+	function check_availability_by_date_get()
+	{
+		$this->Patient_model->setPostGetVars();
+
+		$this->verify_request();
+
+		$result = array();
+		
+		//$result 	= $this->Doctor_model->get_doctor_sessions( $this->Patient_model->doctorId);
+		$result=$this->Doctor_model->get_doctor_sessions_by_day($this->Patient_model->doctorId,date('l', strtotime($this->Patient_model->requestDate)));
+
+
+		if (!$result) {
+
+			$result = array();
+
+			$tokenData = time() . $this->input->post_get('uniqueId');
+
+			$token = AUTHORIZATION::generateToken($tokenData);
+
+			$this->Login_model->add_api_token_members($this->input->post_get('uniqueId'), $token);
+
+			$response = ['status' => 201, 'token' => $token,  'result' => $result, 'message' => 'No requested appointments'];
+
+			$this->response($response, 200);
+
+		} else {
+
+			$status = 200;
+
+			$tokenData = time() . $this->input->post_get('uniqueId');
+
+			$token = AUTHORIZATION::generateToken($tokenData);
+
+			$this->Login_model->add_api_token_members($this->input->post_get('uniqueId'), $token);
+
+			$i=0;
+			foreach ($result as $row) {
+				//$result[$i]
+				$result[$i]['availabilty']=1;
+
+				$checkavaile=$this->Doctor_model->get_doctor_appointment_by_date($this->Patient_model->doctorId,$this->Patient_model->requestDate,$result[$i]['availableStartTime'],$result[$i]['availableEndTime']);
+
+
+				if($checkavaile!=1)
+				{
+					$result[$i]['availabilty']=0;
+				}
+
+
+				$i++;
+			}
+
+			
+
+
+
+		//	$result['session']= $this->Doctor_model->get_doctor_appointment_by_date($this->Patient_model->doctorId,$this->Patient_model->requestDate);
+
+
+			$response = ['status' => $status, 'token' => $token,  'result' => $result, 'message' => HTTP_STATUS_CODES[200]];
+
+			$this->response($response, 200);
+
+		}
+
+
+	}
+
+
 	
 
 	

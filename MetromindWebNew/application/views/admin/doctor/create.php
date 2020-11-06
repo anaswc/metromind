@@ -72,6 +72,10 @@ function checkDoctorEmail(doctorEmail) {
 function checkDoctorMobile(doctorMobile) {
   
     var doctorMobile=document.getElementById('doctorMobile').value;
+    if(doctorMobile.length < 10)
+  {
+    alert("Invalid mobile num");
+  }
   if(doctorMobile.length != 0)
   {
    
@@ -139,6 +143,13 @@ if (atposition<1 || dotposition<atposition+2 || dotposition+2>=x.length){
   alert("Please enter a valid e-mail address");  
   return false;  
   }  
+
+  var doctorMobile=document.getElementById('doctorMobile').value;
+    if(doctorMobile.length < 10)
+  {
+    alert("Invalid mobile num");
+     return false;  
+  }
 }  
 </script>
 </head>
@@ -199,7 +210,7 @@ function Cancel(){
               <div class="form-group row">
                 <label for="input-rounded" class="col-sm-12 form-control-label">Doctor Name<span class="mandatory">* </span> </label>
                 <div class="col-sm-12">
-                  <input type="text" name="doctorName" value="" class="form-control" required>
+                  <input type="text" name="doctorName" value="" class="form-control" required onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)" >
                 </div>
               </div>
             </div>
@@ -234,7 +245,7 @@ function Cancel(){
               <div class="form-group row">
                 <label for="input-rounded" class="col-sm-12 form-control-label">Phone<span class="mandatory">* </span> </label>
                 <div class="col-sm-12">
-                  <input type="test" name="doctorMobile" id="doctorMobile" value="" class="form-control" required onBlur="checkDoctorMobile(this.value)">
+                  <input type="text" name="doctorMobile" id="doctorMobile" value="" class="form-control" required  onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))"  onBlur="checkDoctorMobile(this.value)">
                 </div>
               </div>
             </div>
@@ -272,12 +283,27 @@ function Cancel(){
               <div class="form-group row">
                 <label for="input-rounded" class="col-sm-12 form-control-label">Specialization</label>
                 <div class="col-sm-12">
-                  <select name="symptomIds[]" class="form-control " id="symptomIds" multiple="multiple" style="height:200px !important; overflow-y: scroll !important;">
+                 <!--  <select name="symptomIds[]" class="form-control " id="symptomIds" multiple="multiple" style="height:200px !important; overflow-y: scroll !important;">
                     <option value="" selected="selected">-select-</option>
                     <?php foreach($symptom as $row):?>
                     <option value="<?php echo $row["symptomId"]?>"><?php echo $row["symptomName"]?></option>
                     <?php endforeach; ?>
-                  </select>
+                  </select> -->
+                  <!-- ========================================== -->
+
+
+<select type="text" name="symptomIds[]" class="form-control multiselect" id="symptomIds" multiple="multiple" role="multiselect">          
+              <?php foreach($symptom as $row):?>
+                    <option value="<?php echo $row["symptomId"]?>"><?php echo $row["symptomName"]?></option>
+                    <?php endforeach; ?>
+            </select> 
+ 
+
+
+
+
+
+                  <!-- ================================================== -->
                 </div>
               </div>
             </div>
@@ -293,7 +319,7 @@ function Cancel(){
               <div class="form-group row">
                 <label for="input-rounded" class="col-sm-12 form-control-label">Age<span class="mandatory">* </span> </label>
                 <div class="col-sm-12">
-                  <input type="text" name="age" value="" class="form-control" required>
+                  <input type="number" max="199" name="age" value="" class="form-control" required>
                 </div>
               </div>
             </div>
@@ -328,7 +354,7 @@ function Cancel(){
               <div class="form-group row">
                 <label for="input-rounded" class="col-sm-12 form-control-label">Fees<span class="mandatory">* </span> </label>
                 <div class="col-sm-12">
-                  <input type="text" name="doctorFee" value="" class="form-control" required>
+                  <input type="text" name="doctorFee" value="" class="form-control"  onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" required>
                 </div>
               </div>
             </div>
@@ -490,6 +516,9 @@ global $arrWeekDay,$arrSessions;
 <script src="<?php echo base_url('assets/plugins/data-table/js/jquery-ui-1.12.0/jquery-1.10.2.js'); ?>"></script> 
 <script src="<?php echo base_url('assets/plugins/data-table/js/jquery-ui-1.12.0/jquery-ui.js'); ?>"></script>
 
+<script src="<?php echo base_url('assets/plugins/multi-select/js/multiselect.js')?>"></script>
+
+
 <script>
 $(document).ready(function(){
 
@@ -521,6 +550,9 @@ $(document).ready(function(){
  });
 });
 </script>
+           <script>
 
+
+            </script>
 </body>
 </html>

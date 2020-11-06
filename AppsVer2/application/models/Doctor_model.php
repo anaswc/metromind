@@ -3029,6 +3029,88 @@ class Doctor_model extends CI_Model {
 		
 	}
 
+public function get_doctor_appointment_by_date($doctorId,$appointmentdate,$availableStartTime,$availableEndTime) 
+	{	
+
+		if($doctorId == '' || $appointmentdate == ''|| $availableStartTime == ''|| $availableEndTime== '')
+
+			return 0;
+		$availableStartTime=date("h:i:s",strtotime($availableStartTime));
+		$availableEndTime=date("h:i:s",strtotime($availableEndTime));
+
+
+		$this->db->select('appointmentStartTime,appointmentEndTime');
+
+		$this->db->from('axappointments');
+
+      $this->db->where('doctorId',$doctorId);
+		
+	$this->db->where('appointmentdate', $appointmentdate);
+	 $this->db->where('appointmentStartTime', $availableStartTime);
+		//$this->db->where('appointmentEndTime', $availableEndTime);
+	$this->db->where('status!=',2);
+		
+		
+
+		$query = $this->db->get();
+
+		//return $query->result_array();
+
+		if($query->num_rows() > 0){	
+
+			return 0;	
+
+		}else{
+
+			return 1;	
+
+		}	
+
+	}
+	public function get_doctor_sessions_by_day($doctorId,$availableDay)
+
+	{	
+
+		if($doctorId == '')
+
+			return 0;
+
+		$this->db->select('
+
+							availableDay,
+
+							availableSession,
+
+							TIME_FORMAT(availableStartTime, "%h:%i %p") AS availableStartTime,
+
+							TIME_FORMAT(availableEndTime, "%h:%i %p") AS availableEndTime
+
+						  ');
+
+		$this->db->from('axavailablesessions');
+
+		$this->db->where('doctorId',$doctorId);
+		$this->db->where('availableDay', $availableDay);	
+
+		if(trim($this->status) != "")			
+
+			$this->db->where('status', $this->status);							
+		
+		$this->db->order_by("availableDayId ASC,availableSessionsId ASC ");
+
+		$query = $this->db->get();
+
+		//echo  $this->db->last_query();die();
+
+		return $query->result_array();
+
+	}	
+
+
+
+
+	
+
 }			
 
 ?>

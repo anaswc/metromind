@@ -128,6 +128,12 @@ function checkPatientMobile(patientMobile) {
   
 
     var patientMobile=document.getElementById('patientMobile').value;
+
+
+    if(patientMobile.length < 10)
+  {
+    alert("Invalid mobile num");
+  }
   if(patientMobile.length != 0)
   {
    
@@ -163,6 +169,15 @@ if (atposition<1 || dotposition<atposition+2 || dotposition+2>=x.length){
   alert("Please enter a valid e-mail address");  
   return false;  
   }  
+
+  var patientMobile=document.getElementById('patientMobile').value;
+
+
+    if(patientMobile.length < 10)
+  {
+    alert("Invalid mobile num");
+    return false;
+  }
 }  
 </script>
 
@@ -202,14 +217,14 @@ if (atposition<1 || dotposition<atposition+2 || dotposition+2>=x.length){
                           <div class="form-group row">
                             <label for="input-rounded" class="col-sm-12 form-control-label">First Name<span class="mandatory">* </span> </label>
                             <div class="col-sm-12">
-                              <input type="text" name="firstName" value="" class="form-control" required>
+                              <input type="text" name="firstName" value="" class="form-control" required onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)">
                             </div>
                           </div>
                         </div><div class="col-md-6 col-xs-12">
                           <div class="form-group row">
                             <label for="input-rounded" class="col-sm-12 form-control-label">Last Name<span class="mandatory">* </span></label>
                             <div class="col-sm-12">
-                              <input type="text" name="lastName" value="" class="form-control" required>
+                              <input type="text" name="lastName" value="" class="form-control" required onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)">
                             </div>
                           </div></div>
               <div class="col-md-6 col-xs-12"  style="clear:left">
@@ -275,7 +290,7 @@ if (atposition<1 || dotposition<atposition+2 || dotposition+2>=x.length){
                           <div class="form-group row">
                             <label for="input-rounded" class="col-sm-12 form-control-label">Phone<span class="mandatory">* </span> </label>
                             <div class="col-sm-12">
-                              <input type="text" name="patientMobile" value="" id="patientMobile" class="form-control" required onBlur="checkPatientMobile(this.value)">
+                              <input type="text" name="patientMobile" value="" id="patientMobile" class="form-control" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" required onBlur="checkPatientMobile(this.value)">
                             </div>
                           </div>
                         </div>
