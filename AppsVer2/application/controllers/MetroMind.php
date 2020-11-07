@@ -2037,7 +2037,28 @@ class MetroMind extends CI_Controller
 
 				$today_available_sessions = array();
 
-				$today_available_sessions = $this->Doctor_model->get_doctor_sessions($result['doctorId']);
+				$today_available_sessions = $this->Doctor_model->get_today_doctor_sessions($result['doctorId']);
+					$i=0;
+			foreach ($today_available_sessions as $row) {
+				//$result[$i]
+				$today_available_sessions[$i]['availabilty']=1;
+
+				$checkavaile=$this->Doctor_model->get_doctor_appointment_by_date($result['doctorId'],date("Y-m-d"),$today_available_sessions[$i]['availableStartTime'],$today_available_sessions[$i]['availableEndTime']);
+
+
+				//$today_available_sessions[$i]['availabilty']=$checkavaile;
+				if($checkavaile!=1)
+				{
+					$today_available_sessions[$i]['availabilty']=0;
+				}
+
+
+				$i++;
+			}
+
+
+
+
 
 				$isAvailable = 0;
 
@@ -6218,6 +6239,7 @@ class MetroMind extends CI_Controller
 		}
 
 	}
+	// =========================================================
 	
 
 	function check_availability_by_date_get()
@@ -6288,7 +6310,6 @@ class MetroMind extends CI_Controller
 
 
 	}
-
 
 	
 
