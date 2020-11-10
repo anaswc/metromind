@@ -196,6 +196,10 @@ class Patient_model extends CI_Model {
 
 		$this->endDateTime 						= "";
 
+		$this->appointmentStartTime				="";
+
+		$this->appointmentEndTime				="";
+
 		$this->get_razor_pay_settings();
 
 	}
@@ -332,7 +336,10 @@ class Patient_model extends CI_Model {
 
 		$this->longitude						= trim($this->input->post_get('longitude'));		
 
-		$this->patientIds						= trim($this->input->post_get('patientIds'));						
+		$this->patientIds						= trim($this->input->post_get('patientIds'));
+
+		$this->appointmentStartTime			= trim($this->input->post_get('appointmentStartTime'));
+		$this->appointmentEndTime			= trim($this->input->post_get('appointmentEndTime'));						
 
 	}			
 
@@ -1399,8 +1406,11 @@ class Patient_model extends CI_Model {
 	public function schedule_appointment_patient()
 
 	{
+		
 
 		$insDate = date("Y-m-d H:i:s", now('Asia/Kolkata'));
+
+
 
 		if($this->requestDate <> '')
 
@@ -1409,6 +1419,22 @@ class Patient_model extends CI_Model {
 		else
 
 			$this->requestDate = '0000-00-00';
+
+		if($this->appointmentStartTime <> '')
+
+			$this->appointmentStartTime = date('H:i:s',strtotime($this->appointmentStartTime));
+
+		else
+
+			$this->appointmentStartTime = '0000-00-00';
+
+		if($this->appointmentEndTime <> '')
+
+			$this->appointmentEndTime = date('H:i:s',strtotime($this->appointmentEndTime));
+
+		else
+
+			$this->appointmentEndTime = '0000-00-00';
 
 		$data = array(
 
@@ -1422,7 +1448,14 @@ class Patient_model extends CI_Model {
 
 			'appointmentNote' 	=> $this->appointmentNote,
 
-			'insDate' 			=> $insDate
+			'insDate' 			=> $insDate,
+
+			'appointmentStartTime' => $this->appointmentStartTime,
+
+			'appointmentEndTime' => $this->appointmentEndTime,
+
+			'appointmentDate' => $this->requestDate
+
 
 		);
 
@@ -1455,6 +1488,7 @@ class Patient_model extends CI_Model {
 		$this->sendScheduleAppointmentFCM($this->patientId,$this->doctorId);
 
 		return $appointmentId;
+		
 
 	}
 

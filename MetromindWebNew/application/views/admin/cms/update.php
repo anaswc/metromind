@@ -44,10 +44,10 @@ function Cancel(){
 
             <div class="col-sm-12 p-0">
               <div class="main-header">
-                    <h4>CMS</h4>
+                    <h4>CMS Settings</h4>
                     <ol class="breadcrumb breadcrumb-title breadcrumb-arrow">
                       <li class="breadcrumb-item"><a href="<?php echo base_url('admin/dashboard'); ?>"><i class="icofont icofont-home"></i></a></li>
-                      <li class="breadcrumb-item"><a href="#">Edit CMS</a></li>
+                      <li class="breadcrumb-item"><a href="#">Edit CMS Settings</a></li>
                     </ol>
                   </div>
             </div>

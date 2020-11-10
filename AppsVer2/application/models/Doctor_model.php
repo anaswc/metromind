@@ -3035,8 +3035,9 @@ public function get_doctor_appointment_by_date($doctorId,$appointmentdate,$avail
 		if($doctorId == '' || $appointmentdate == ''|| $availableStartTime == ''|| $availableEndTime== '')
 
 			return 0;
-		$availableStartTime=date("h:i:s",strtotime($availableStartTime));
-		$availableEndTime=date("h:i:s",strtotime($availableEndTime));
+		$availableStartTime=date("H:i:s",strtotime($availableStartTime));
+		//$availableEndTime=date("h:i:s",strtotime($availableEndTime));
+		$appointmentdate=date("Y-m-d",strtotime($appointmentdate));
 
 
 		$this->db->select('appointmentStartTime,appointmentEndTime');
@@ -3045,17 +3046,18 @@ public function get_doctor_appointment_by_date($doctorId,$appointmentdate,$avail
 
       $this->db->where('doctorId',$doctorId);
 		
-	$this->db->where('appointmentdate', $appointmentdate);
+	$this->db->where('appointmentdate', $appointmentdate );
 	 $this->db->where('appointmentStartTime', $availableStartTime);
 		//$this->db->where('appointmentEndTime', $availableEndTime);
 	$this->db->where('status!=',2);
 		
+
 		
 
 		$query = $this->db->get();
 
-		//return $query->result_array();
-
+	//return $query->result_array();
+		//return  $availableStartTime;
 		if($query->num_rows() > 0){	
 
 			return 0;	

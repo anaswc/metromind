@@ -41,14 +41,14 @@ class  Cms_model extends CI_Model {
 			$this->load->helper('url'); 
 		
 			
-			// $status =1;
+			$status =1;
 			
 						
 			$data = array(
 				'pageName' => $this->input->post('pageName'),
 				'description' => $this->input->post('description'),
 				'shortDescription' => $this->input->post('shortDescription'),
-				// 'status' => $status
+				'status' => $status
 			);
 			
 			$this->db->insert('axcms', $data);
@@ -72,12 +72,12 @@ class  Cms_model extends CI_Model {
 	
 		public function updateSymptom($pageId) { 
 			$this->load->helper('url');
-			// $status=1;		
+			$status=1;		
 			$data = array(
 				'pageName' => $this->input->post('pageName'),
 				'description'    => $this->input->post('description'),
 				'shortDescription'    => $this->input->post('shortDescription'),
-				// 'status' => $status
+				'status' => $status
 				
 			);
 			$this->db->set($data); 

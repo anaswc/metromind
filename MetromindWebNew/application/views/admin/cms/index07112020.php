@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Content Management Settings</title>
+    <title>Content Management</title>
 
 <?php echo link_tag('assets/icon/icofont/css/icofont.css'); ?>
 <?php echo link_tag('assets/icon/simple-line-icons/css/simple-line-icons.css'); ?>
@@ -32,111 +32,111 @@
 <script language="javascript">
 
 function addCms(){
-  document.location.href= "<?php echo base_url('admin/cms/create'); ?>?returnUrl=<?php echo urlencode(getCurrentPageURL())?>";
+	document.location.href= "<?php echo base_url('admin/cms/create'); ?>?returnUrl=<?php echo urlencode(getCurrentPageURL())?>";
 }
 function performAction(action) 
 {
-  var frm       = document.frmCmsList;
-  var checkFlag   = 0;
-  var selectedValue = "";   
-  if(frm.elements["pageId[]"]!=null)
-  {
-    selectedValue   = getCheckedItem(frm,"pageId[]");
-    if (frm.elements["pageId[]"].checked == true) 
-    {   
-      checkFlag = 1;
-    }
-    for(var i=0;i<frm.elements["pageId[]"].length;i++) 
-    {
-      if (frm.elements["pageId[]"][i].checked) 
-      { 
-        checkFlag++;    
-      }   
-    }   
-  }
-  if (checkFlag == 0) 
-  {
-    if (action == "DELETE") 
-    {
-      alert("Please select atleast one content");
-    }
-    else 
-    {
-      alert("Please select one content");
-    }
+	var frm				= document.frmCmsList;
+	var checkFlag		= 0;
+	var selectedValue	= "";		
+	if(frm.elements["pageId[]"]!=null)
+	{
+		selectedValue		= getCheckedItem(frm,"pageId[]");
+		if (frm.elements["pageId[]"].checked == true) 
+		{		
+			checkFlag = 1;
+		}
+		for(var i=0;i<frm.elements["pageId[]"].length;i++) 
+		{
+			if (frm.elements["pageId[]"][i].checked) 
+			{	
+				checkFlag++;		
+			} 	
+		} 	
+	}
+	if (checkFlag == 0) 
+	{
+		if (action == "DELETE") 
+		{
+			alert("Please select atleast one content");
+		}
+		else 
+		{
+			alert("Please select one content");
+		}
 
-    return false;
-  } 
-  else 
-  { 
-    if (action == "DELETE") 
-    {
-      if(confirm("You are about to  "+action.toLowerCase()+"  the selected content(s). Do you wish to continue?")) 
-      {
-        frm.pageIds.value = selectedValue;
-        frm.action.value  = action;
-        frm.action      = "<?php echo base_url('admin/cms/delete')?>?returnUrl=<?php echo urlencode(getCurrentPageURL())?>";
-        frm.submit();     
-      }
-    }
-    else if (action == "EDIT") 
-    {
-      if (checkFlag > 1) 
-      {
-        alert("Please select only one item to "+action.toLowerCase()+"");
-        return false;
-      } 
-      else 
-      {
-        frm.pageId.value  = selectedValue;
-        frm.action.value  = action;
-        frm.action      = "<?php echo base_url('admin/cms/update');?>?returnUrl=<?php echo urlencode(getCurrentPageURL())?>";
-        frm.submit();     
-      }
-    }
-    
+		return false;
+	} 
+	else 
+	{ 
+		if (action == "DELETE") 
+		{
+			if(confirm("You are about to  "+action.toLowerCase()+"  the selected content(s). Do you wish to continue?")) 
+			{
+				frm.pageIds.value	= selectedValue;
+				frm.action.value	= action;
+				frm.action			= "<?php echo base_url('admin/cms/delete')?>?returnUrl=<?php echo urlencode(getCurrentPageURL())?>";
+				frm.submit();			
+			}
+		}
+		else if (action == "EDIT") 
+		{
+			if (checkFlag > 1) 
+			{
+				alert("Please select only one item to "+action.toLowerCase()+"");
+				return false;
+			} 
+			else 
+			{
+				frm.pageId.value	= selectedValue;
+				frm.action.value	= action;
+				frm.action			= "<?php echo base_url('admin/cms/update');?>?returnUrl=<?php echo urlencode(getCurrentPageURL())?>";
+				frm.submit();			
+			}
+		}
+		
 
-    else if (action == "ACTIVATE") 
+		else if (action == "ACTIVATE") 
 
-    {
+		{
 
-      if(confirm("You are about to  "+action.toLowerCase()+"  the selected content(s). Do you wish to continue?")) 
+			if(confirm("You are about to  "+action.toLowerCase()+"  the selected content(s). Do you wish to continue?")) 
 
-      {
+			{
 
-                frm.pageIds.value = selectedValue;
+                frm.pageIds.value	= selectedValue;
 
-        frm.action.value    = action;
+				frm.action.value		= action;
 
-        frm.action        = "<?php echo base_url()?>admin/cms/activate?returnUrl=<?php echo urlencode(getCurrentPageURL())?>";
+				frm.action				= "<?php echo base_url()?>admin/cms/activate?returnUrl=<?php echo urlencode(getCurrentPageURL())?>";
 
-        frm.submit();            
-
-            }
-
-    } else if (action == "DEACTIVATE") 
-
-    {
-
-      if(confirm("You are about to  "+action.toLowerCase()+"  the selected content(s). Do you wish to continue?")) 
-
-      {
-
-                frm.pageIds.value = selectedValue;
-
-        frm.action.value    = action;
-
-        frm.action        = "<?php echo base_url()?>admin/cms/deactivate?returnUrl=<?php echo urlencode(getCurrentPageURL())?>";
-
-        frm.submit();            
+				frm.submit();            
 
             }
 
-    }   
-              
-  
+		} else if (action == "DEACTIVATE") 
 
-  }
+		{
+
+			if(confirm("You are about to  "+action.toLowerCase()+"  the selected content(s). Do you wish to continue?")) 
+
+			{
+
+                frm.pageIds.value	= selectedValue;
+
+				frm.action.value		= action;
+
+				frm.action				= "<?php echo base_url()?>admin/cms/deactivate?returnUrl=<?php echo urlencode(getCurrentPageURL())?>";
+
+				frm.submit();            
+
+            }
+
+		}   
+		   				
+	
+
+	}
 
 }
 
@@ -144,56 +144,56 @@ function performAction(action)
 
 
 function submitPage(){
-  var frm     = document.frmCmsList;
-  var pageSize  = frm.clsaxPatient_pageSize.value;
-  frm.action    = "<?php echo base_url()?>admin/cms"
-          +"?pageName=<?php echo $this->cms_model->pageName?>"
-  +"&sortDirection=<?php echo $this->cms_model->sortDirection?>&sortColumn=<?php echo $this->cms_model->sortColumn?>&pageSize="+pageSize;
+	var frm 		= document.frmCmsList;
+	var	pageSize	= frm.clsaxPatient_pageSize.value;
+	frm.action		= "<?php echo base_url()?>admin/cms"
+					+"?pageName=<?php echo $this->cms_model->pageName?>"
+	+"&sortDirection=<?php echo $this->cms_model->sortDirection?>&sortColumn=<?php echo $this->cms_model->sortColumn?>&pageSize="+pageSize;
 
-  frm.submit();
+	frm.submit();
 
 }
 
 function clearSearch()
 {
-  var frm= document.frmCmsSearch; 
-  frm.pageName.value  = "";
+	var frm= document.frmCmsSearch;	
+	frm.pageName.value	= "";
 }
 function submitSearch() 
 
 
 
-  {
+	{
 
 
 
-    var frm               = document.frmCmsSearch;  
+		var frm								= document.frmCmsSearch;	
 
 
 
-    var pageName            = frm.pageName.value;
-    
-    
+		var pageName						= frm.pageName.value;
+		
+		
 
 
 
-    frm.action                = "<?php echo base_url()?>admin/cms"
+		frm.action								= "<?php echo base_url()?>admin/cms"
 
 
 
-                          +"?pageName="+pageName+""
+													+"?pageName="+pageName+""
 
 
 
-                          +"&pageSize=<?php echo $this->pageSize?>";
+													+"&pageSize=<?php echo $this->pageSize?>";
 
 
 
-    frm.submit(); 
+		frm.submit();	
 
 
 
-  }
+	}
 
 </script>
 
@@ -207,10 +207,10 @@ function submitSearch()
         <div class="container-fluid">
             <div class="col-sm-12 p-0">
               <div class="main-header">
-                    <h4>Settings</h4>
+                    <h4>CMS</h4>
                     <ol class="breadcrumb breadcrumb-title breadcrumb-arrow">
                       <li class="breadcrumb-item"><a href="<?php echo base_url('admin/dashboard'); ?>"><i class="icofont icofont-home"></i></a></li>
-                      <li class="breadcrumb-item"><a href="#">Settings</a></li>
+                      <li class="breadcrumb-item"><a href="#">CMS</a></li>
                     </ol>
                   </div>
             </div>
@@ -219,7 +219,7 @@ function submitSearch()
                 <div class="card-block">
                         <form name="frmCmsSearch" method="post" action="" class="form-inline" onsubmit="return submitSearch();" > 
                         <input type="hidden"  name="clsaxPatient_submitted" value=""> 
-                          <div class="form-group m-r-15">
+                         	<div class="form-group m-r-15">
                                 <input type="text" class="form-control input-rounded" name="pageName" placeholder="Page name"  value="<?php echo $this->cms_model->pageName?>"></div>
                                
                         
@@ -227,13 +227,13 @@ function submitSearch()
                             <button type="submit" class="btn btn-mini btn-primary waves-effect waves-light m-r-30">Search</button>
                             <button type="button" class="btn btn-mini btn-primary waves-effect waves-light m-r-30" onclick="javascript:document.location.href='<?php echo base_url('admin/cms'); ?>';">Cancel</button>
                         </form>
-              </div>
+       	 			</div>
               
-                <div class="card-block">
+              	<div class="card-block">
                    
                     
-                      <!-- <button type="button" class="btn btn-mini btn-primary waves-effect waves-light m-r-30" onclick="performAction('ACTIVATE');">Activate</button>
-                    <button type="button" class="btn btn-mini btn-primary waves-effect waves-light m-r-30" onclick="performAction('DEACTIVATE');" >Deactivate</button> -->
+                   		<button type="button" class="btn btn-mini btn-primary waves-effect waves-light m-r-30" onclick="performAction('ACTIVATE');">Activate</button>
+                    <button type="button" class="btn btn-mini btn-primary waves-effect waves-light m-r-30" onclick="performAction('DEACTIVATE');" >Deactivate</button>
                     <button type="button" class="btn btn-mini btn-primary waves-effect waves-light m-r-30" onclick="performAction('EDIT');" >Edit</button>
                     <button type="button" class="btn btn-mini btn-primary waves-effect waves-light m-r-30" onclick="performAction('DELETE');">Delete</button>
                     <button type="button" class="btn btn-mini btn-primary waves-effect waves-light m-r-30" onclick="addCms();">Add New</button>
@@ -246,18 +246,18 @@ function submitSearch()
                 <?php if ($this->session->flashdata('success')) { ?>
                 <p style="color:green; font-size:18px;"><?php echo $this->session->flashdata('success'); ?></p>
                 <?php } ?>
-                <form  method="post"  name="frmCmsList" action=""> 
-                <input type="hidden"    name="action" value=""> 
-                <input type="hidden"    name="pageIds" value=""> 
-                <input type="hidden"  name="pageId" value=""> 
-                <input type="hidden"  name="returnUrl" value="">
+                <form  method="post"	name="frmCmsList" action=""> 
+                <input type="hidden"  	name="action" value=""> 
+                <input type="hidden"  	name="pageIds" value=""> 
+                <input type="hidden" 	name="pageId" value=""> 
+                <input type="hidden" 	name="returnUrl" value="">
               
            <table cellspacing="0" id="advanced-table" class="table  table-striped table-bordered nowrap">
                   <thead>
                     <tr>
-                    
+                		
                       <th width="2%" height="24" class="nosort">
-                        <input type="checkbox" name="chkAll" value="checkbox" class="checkall"   onClick="selectAll(pageId, this);">        
+                      	<input type="checkbox" name="chkAll" value="checkbox" class="checkall"   onClick="selectAll(pageId, this);"> 			  
                       </th> 
                       <th class="noExport">#</th>
                       <th class="noExport">Action</th>
@@ -265,37 +265,37 @@ function submitSearch()
                        <th>Page name</th>
                        <th>Description</th>
                         <th>Short Description</th>     
-                       <!-- <th>status</th> -->
+                       <th>status</th>
                     </tr>
                   </thead>
                   <tbody>
 
-          <?php
+					<?php
                     if(count($cms_item)) :
                     //$cnt=1; 
                     foreach ($cms_item as $row) :
-            // if($row["status"]==1)
-            // {
-            //  $row["status"]="Active";
-            // }
-            // else if($row["status"]==0)
-            // {
-            //  $row["status"]="Inactive";
-            // }
-            
-            
+						if($row["status"]==1)
+						{
+							$row["status"]="Active";
+						}
+						else if($row["status"]==0)
+						{
+							$row["status"]="Inactive";
+						}
+						
+						
                     ?>               
                     <tr>
                       <td  valign="top" class="rowcontent">
-            <input type="checkbox" name="pageId[]" value="<?php echo $row["pageId"]?>" id="pageId" onCLick='resetChkBox(pageId, chkAll);changeCheckedColor(frmCmsList.pageId);' />
-            </td> 
+						<input type="checkbox" name="pageId[]" value="<?php echo $row["pageId"]?>" id="pageId" onCLick='resetChkBox(pageId, chkAll);changeCheckedColor(frmCmsList.pageId);' />
+					  </td>	
                       <td><?php echo htmlentities($cnt);?></td>
                       <td style="white-space: nowrap;">
-             
-                          <a href="<?php echo 'cms/update/'.$row["pageId"].'' ?>"  data-original-title="Edit" ><i class="ion-edit"></i> </a> &nbsp;&nbsp;&nbsp;
+					   
+                      		<a href="<?php echo 'cms/update/'.$row["pageId"].'' ?>"  data-original-title="Edit" ><i class="ion-edit"></i> </a> &nbsp;&nbsp;&nbsp;
                         <a href="<?php echo 'cms/view/'.$row["pageId"].''  ?>" data-original-title="View" ><i class="ion-eye"></i> </a>
                             
-            
+						
                       </td>
                       
                       
@@ -304,10 +304,10 @@ function submitSearch()
                       
                    
                       <td ><?php echo nl2br($row['shortDescription']);?></td>
-                      <!-- <td ><?php echo $row['status']?></td> -->
+                      <td ><?php echo $row['status']?></td>
                       
                     </tr>
-           <?php 
+					 <?php 
                     $cnt++;
                     endforeach;
                     else : ?>
@@ -324,7 +324,7 @@ function submitSearch()
                 
                <div class="card-block">
                    <select name="actionAll" id="actionAll" class="form-control-list" aria-expanded="false" data-toggle="dropdown">
-                            <option value="">Actions</option>                 
+                            <option value="">Actions</option>									
                             <option value="DELETE">Delete</option>
                         </select>
                     <button class="btn btn-mini btn-primary waves-effect waves-light m-r-30"  onclick="return performAction(document.getElementById('actionAll').value);"><span>Apply to selected</span></button>
@@ -347,9 +347,9 @@ function submitSearch()
 
 
         </div>
-     <script>
+		 <script>
 
-  document.frmCmsSearch.Submit.focus();
+	document.frmCmsSearch.Submit.focus();
 
 </script>
         <!-- /.container-fluid -->
@@ -359,9 +359,9 @@ function submitSearch()
 
       </div>
       <!-- /.content-wrapper -->
-  </div>
+	</div>
     <!-- /#wrapper -->
-  </div>
+	</div>
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
       <i class="fas fa-angle-up"></i>
@@ -369,8 +369,8 @@ function submitSearch()
 
 
 
-  <script src="<?php echo base_url('assets/js/jquery-3.1.1.min.js'); ?>"></script>
-    <script src="<?php echo base_url('assets/js/jquery-ui.min.js'); ?>"></script>
+ 	<script src="<?php echo base_url('assets/js/jquery-3.1.1.min.js'); ?>"></script>
+   	<script src="<?php echo base_url('assets/js/jquery-ui.min.js'); ?>"></script>
     <script src="<?php echo base_url('assets/js/tether.min.js'); ?>"></script>
     <script src="<?php echo base_url('assets/plugins/waves/js/waves.min.js'); ?>"></script>
     <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
@@ -380,7 +380,7 @@ function submitSearch()
     <script src="<?php echo base_url('scripts/axCommon.js'); ?>"></script>
     
     <!-- data-table js -->
-  <script src="<?php echo base_url('assets/plugins/data-table/js/jquery.dataTables.min.js'); ?>"></script>
+	<script src="<?php echo base_url('assets/plugins/data-table/js/jquery.dataTables.min.js'); ?>"></script>
     <!--<script src="<?php echo base_url('assets/plugins/data-table/js/dataTables.buttons.min.js'); ?>"></script>-->
     <script src="<?php echo base_url('assets/plugins/data-table/js/jszip.min.js'); ?>"></script>
     <script src="<?php echo base_url('assets/plugins/data-table/js/pdfmake.min.js'); ?>"></script>
@@ -415,37 +415,37 @@ function submitSearch()
 $(document).ready(function() {
      
  var advance = $('#advanced-table').DataTable( {
-    "searching": false,
-     "paging":   false,
-     "ordering": true,
-     "info":     false,
+	  "searching": false,
+		 "paging":   false,
+		 "ordering": true,
+		 "info":     false,
       dom: 'Bfrtip',
-   
+	 
    
     buttons: [{
-          extend: 'excel',
-       title: 'Client Report',
-       exportOptions: {
-              columns: "thead th:not(.noExport)"
-           },
-      
-    },
-   
-    ], 
-    
-    
-    "order": [ 1, 'asc' ],
-     "columnDefs": [ {
+       		extend: 'excel',
+			 title: 'Client Report',
+			 exportOptions: {
+           	 	columns: "thead th:not(.noExport)"
+       		 },
+			
+	  },
+	 
+	  ], 
+	  
+	  
+	  "order": [ 1, 'asc' ],
+	   "columnDefs": [ {
             "className": 'control',
             "orderable": false,
             "targets":   0
         } ],
-    
+		
     } );
-  
-  
-  
-  
+	
+	
+	
+	
 } );
 </script>
     

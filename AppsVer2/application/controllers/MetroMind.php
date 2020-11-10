@@ -2362,7 +2362,7 @@ class MetroMind extends CI_Controller
 
 		$this->verify_request();
 
-		if ($this->Patient_model->patientId == '' || $this->Patient_model->doctorId == '' || $this->Patient_model->requestDate == '' || $this->Patient_model->requestSession == '') {
+		if ($this->Patient_model->patientId == '' || $this->Patient_model->doctorId == '' || $this->Patient_model->requestDate == '' || $this->Patient_model->requestSession == '' || $this->Patient_model->appointmentStartTime == '' || $this->Patient_model->appointmentEndTime == '') {
 
 			$tokenData = time() . $this->input->post_get('uniqueId');
 
@@ -5049,7 +5049,61 @@ class MetroMind extends CI_Controller
 		}
 
 	}
+	function helpfultips_get()
 
+	{
+
+		$this->Cms_model->setPostGetVars();
+
+		$result = $this->Cms_model->get_cms_id(3);
+
+		if (!$result) {
+
+			$result = array();
+
+			$response = ['status' => 201,  'result' => $result, 'message' => HTTP_STATUS_CODES[204]];
+
+			$this->response($response, 200);
+
+		} else {
+
+			$status = 200;
+
+			$response = ['status' => $status,  'result' => $result, 'message' => HTTP_STATUS_CODES[200]];
+
+			$this->response($response, 200);
+
+		}
+
+	}
+
+function termsandconditions_get()
+
+	{
+
+		$this->Cms_model->setPostGetVars();
+
+		$result = $this->Cms_model->get_cms_id(4);
+
+		if (!$result) {
+
+			$result = array();
+
+			$response = ['status' => 201,  'result' => $result, 'message' => HTTP_STATUS_CODES[204]];
+
+			$this->response($response, 200);
+
+		} else {
+
+			$status = 200;
+
+			$response = ['status' => $status,  'result' => $result, 'message' => HTTP_STATUS_CODES[200]];
+
+			$this->response($response, 200);
+
+		}
+
+	}
 	// Functionality: To report an issue
 
 	// Arguments 	: member id,appModuleId,reportIssueTitle

@@ -222,13 +222,12 @@ global $arrAdminType;
  
                         <!--<li><a class="waves-effect waves-dark" href="<?php echo base_url();?>admin/settings"><i class="icon-arrow-right"></i>Settings</a></li>-->
                         <li><a class="waves-effect waves-dark" href="<?php echo base_url();?>admin/adminuser"><i class="icon-arrow-right"></i>Admin user</a></li>
-                         <li><a class="waves-effect waves-dark" href="<?php echo base_url();?>admin/cms"><i class="icon-arrow-right"></i>CMS Settings</a></li>
+                         <!--<li><a class="waves-effect waves-dark" href="<?php echo base_url();?>admin/cms"><i class="icon-arrow-right"></i>CMS Settings</a></li>-->
                           <!--<li><a class="waves-effect waves-dark" href="<?php echo base_url();?>admin/rating"><i class="icon-arrow-right"></i>Rating</a></li>-->
                            
 
             <li><a class="waves-effect waves-dark" href="<?php echo base_url();?>admin/patientcredits"><i class="icon-arrow-right"></i>Patient credits</a></li>
-              <li><a class="waves-effect waves-dark" href="<?php echo base_url();?>admin/payments"><i class="icon-arrow-right"></i>Payments</a></li>   
-
+              <li><a class="waves-effect waves-dark" href="<?php echo base_url();?>admin/payments"><i class="icon-arrow-right"></i>Payments</a></li>      
 
  </ul>
  </li>
@@ -250,9 +249,9 @@ global $arrAdminType;
 
                     <ul class="treeview-menu">
 
-                        <!-- <li><a class="waves-effect waves-dark" href="<?php echo base_url();?>admin/specialities"><i class="icon-arrow-right"></i>Specialities</a></li> -->
+                        <!--<li><a class="waves-effect waves-dark" href="<?php echo base_url();?>admin/specialities"><i class="icon-arrow-right"></i>Specialities</a></li>
 
-                         <!-- <li><a class="waves-effect waves-dark" href="<?php echo base_url();?>admin/symptom"><i class="icon-arrow-right"></i>Symptoms</a></li> -->
+                         <li><a class="waves-effect waves-dark" href="<?php echo base_url();?>admin/symptom"><i class="icon-arrow-right"></i>Symptoms</a></li>-->
 
                           <li class="treeview"><a href="#"><i class="icon-menu"></i><span> Patients </span><i class="icon-arrow-down"></i></a>
 
@@ -286,19 +285,17 @@ global $arrAdminType;
         
                            <li><a href="<?php echo base_url();?>admin/package"> <i class="icon-arrow-right"></i><span> Packages</span></i> </a> </li>
  
-                        <!-- <li><a class="waves-effect waves-dark" href="<?php echo base_url();?>admin/settings"><i class="icon-arrow-right"></i>Settings</a></li> -->
-                        <!-- <li><a class="waves-effect waves-dark" href="<?php echo base_url();?>admin/adminuser"><i class="icon-arrow-right"></i>Admin user</a></li> -->
-                         
-                          <!-- <li><a class="waves-effect waves-dark" href="<?php echo base_url();?>admin/rating"><i class="icon-arrow-right"></i>Rating</a></li> -->
+                        <!--<li><a class="waves-effect waves-dark" href="<?php echo base_url();?>admin/settings"><i class="icon-arrow-right"></i>Settings</a></li>-->
+                        <li><a class="waves-effect waves-dark" href="<?php echo base_url();?>admin/adminuser"><i class="icon-arrow-right"></i>Admin user</a></li>
+                         <!--<li><a class="waves-effect waves-dark" href="<?php echo base_url();?>admin/cms"><i class="icon-arrow-right"></i>CMS Settings</a></li>-->
+                          <!--<li><a class="waves-effect waves-dark" href="<?php echo base_url();?>admin/rating"><i class="icon-arrow-right"></i>Rating</a></li>-->
                            <li><a class="waves-effect waves-dark" href="<?php echo base_url();?>admin/prescription"><i class="icon-arrow-right"></i>Prescription</a></li>
 
 <li><a class="waves-effect waves-dark" href="<?php echo base_url();?>admin/subscription"><i class="icon-arrow-right"></i>Subscriptions</a></li>
- 
+ <li><a class="waves-effect waves-dark" href="<?php echo base_url();?>admin/adminuser"><i class="icon-arrow-right"></i>Admin users</a></li>
 
 <li><a class="waves-effect waves-dark" href="<?php echo base_url();?>admin/patientcredits"><i class="icon-arrow-right"></i>Patient credits</a></li>
-              <li><a class="waves-effect waves-dark" href="<?php echo base_url();?>admin/payments"><i class="icon-arrow-right"></i>Payments</a></li>   
-              <li><a class="waves-effect waves-dark" href="<?php echo base_url();?>admin/adminuser"><i class="icon-arrow-right"></i>Admin users</a></li> 
-              <li><a class="waves-effect waves-dark" href="<?php echo base_url();?>admin/cms"><i class="icon-arrow-right"></i>Settings</a></li>  
+              <li><a class="waves-effect waves-dark" href="<?php echo base_url();?>admin/payments"><i class="icon-arrow-right"></i>Payments</a></li>      
     </ul>
 
                 </li>
@@ -1783,11 +1780,11 @@ global $arrAdminType;
           </div>
           
           
-         <div class="col-lg-3">
+         <!--<div class="col-lg-3">
 
                 <div class="card dashboard-card-sm">
 
-                 <a href="<?php echo base_url();?>admin/cms">
+                 <a href="<?php echo base_url();?>admin/settings">
 
                     <div class="card-block">
 
@@ -1823,7 +1820,7 @@ global $arrAdminType;
 
               </div>
 
-          </div>
+          </div>-->
 <?php }
 ?>
           

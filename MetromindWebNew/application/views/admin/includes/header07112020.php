@@ -126,7 +126,6 @@ global $arrAdminType;
      <li class="treeview"><a href="<?php echo base_url('admin/adminuser')?>"><span>Admin users</span></a></li>
      <li class="treeview"><a href="<?php echo base_url('admin/patientcredits')?>"><span>Patient Credits</span></a></li>
       <li class="treeview"><a href="<?php echo base_url('admin/payments')?>"><span>Payments</span></a></li>
-      <li class="treeview"><a href="<?php echo base_url('admin/cms')?>"><span>Settings</span></a></li>
     </ul>
   </section>
 </aside>
