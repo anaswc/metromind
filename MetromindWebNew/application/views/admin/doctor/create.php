@@ -210,7 +210,7 @@ function Cancel(){
               <div class="form-group row">
                 <label for="input-rounded" class="col-sm-12 form-control-label">Doctor Name<span class="mandatory">* </span> </label>
                 <div class="col-sm-12">
-                  <input type="text" name="doctorName" value="" class="form-control" required onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)" >
+                  <input type="text" name="doctorName" value="" class="form-control" required >
                 </div>
               </div>
             </div>

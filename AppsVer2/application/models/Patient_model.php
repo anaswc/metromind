@@ -5286,13 +5286,23 @@ class Patient_model extends CI_Model {
 
 		$row_array = $this->db->get()->row_array();
 
-		if(count($row_array)>0){
+		// if(count($row_array)>0){
 
-			return $row_array['phonePrefix'];
+		// 	return $row_array['phonePrefix'];
+
+		// }else{
+
+		// return 0;
+
+		// }
+		if(empty($row_array)){
+
+			return 0;
 
 		}else{
+			return $row_array['phonePrefix'];
 
-		return 0;
+		
 
 		}
 

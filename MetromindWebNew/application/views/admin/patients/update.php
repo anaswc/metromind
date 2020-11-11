@@ -217,7 +217,7 @@ if (atposition<1 || dotposition<atposition+2 || dotposition+2>=x.length){
                           <div class="form-group row">
                             <label for="input-rounded" class="col-sm-12 form-control-label">First Name<span class="mandatory">* </span> </label>
                             <div class="col-sm-12">
-                              <input type="text" name="firstName" value="<?php echo $patient_item['firstName']?>" class="form-control" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)" required>
+                              <input type="text" name="firstName" value="<?php echo $patient_item['firstName']?>" class="form-control" required>
                             </div>
                           </div>
                         </div><div class="col-md-6 col-xs-12">

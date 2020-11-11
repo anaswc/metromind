@@ -61,7 +61,6 @@ class MetroMind extends CI_Controller
 		$this->output->cache(30);
 
 		$this->tokenPass = 0;
-		date_default_timezone_set("Asia/Kolkata");
 
 	}
 
@@ -2052,14 +2051,6 @@ class MetroMind extends CI_Controller
 				{
 					$today_available_sessions[$i]['availabilty']=0;
 				}
-
-				if(date("H:i:s")>date("H:i:s",strtotime($today_available_sessions[$i]['availableStartTime'])))
-				{
-
-					$today_available_sessions[$i]['availabilty']=0;
-					//$today_available_sessions[$i]['time']="success";
-				}
-
 
 
 				$i++;

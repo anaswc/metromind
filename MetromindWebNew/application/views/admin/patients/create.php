@@ -217,14 +217,14 @@ if (atposition<1 || dotposition<atposition+2 || dotposition+2>=x.length){
                           <div class="form-group row">
                             <label for="input-rounded" class="col-sm-12 form-control-label">First Name<span class="mandatory">* </span> </label>
                             <div class="col-sm-12">
-                              <input type="text" name="firstName" value="" class="form-control" required onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)">
+                              <input type="text" name="firstName" value="" class="form-control" required >
                             </div>
                           </div>
                         </div><div class="col-md-6 col-xs-12">
                           <div class="form-group row">
                             <label for="input-rounded" class="col-sm-12 form-control-label">Last Name<span class="mandatory">* </span></label>
                             <div class="col-sm-12">
-                              <input type="text" name="lastName" value="" class="form-control" required onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)">
+                              <input type="text" name="lastName" value="" class="form-control" required >
                             </div>
                           </div></div>
               <div class="col-md-6 col-xs-12"  style="clear:left">
