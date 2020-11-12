@@ -519,7 +519,8 @@ global $arrWeekDay,$arrSessions,$arrTime;
                              </div>
     <div class="col-sm-3">
 
-     <b style="color: red"><?php echo $day1 ?></b>-  <a href="<?php echo base_url('admin/doctor/updateAvailability/'.$doctor_item["doctorId"].'/'.$day1)?>?returnUrl=<?php echo urlencode(getCurrentPageURL())?>"  data-original-title="Edit" >Manage </a> <div><h6>&nbsp;</h6></div>
+     <b style="color: red"><?php echo $day1 ?></b>-  <a href="<?php echo base_url('admin/doctor/updateAvailability/'.$doctor_item["doctorId"].'/'.$day1)?>?returnUrl=<?php echo urlencode(getCurrentPageURL())?>"  data-original-title="Edit" class="btn btn-mini btn-primary waves-effect waves-light m-r-30" >Manage </a> 
+      <a href="<?php echo base_url('admin/doctor/deleteAvailability/'.$doctor_item["doctorId"].'/'.$day1)?>?returnUrl=<?php echo urlencode(getCurrentPageURL())?>"  data-original-title="Edit"  class="btn btn-mini btn-danger waves-effect waves-light m-r-30"  onclick="return confirm('Are you sure you want to delete?');">Delete </a><div></div>
 <?php 
 $availtimsun=array();
 $availtimsun=$this->doctor_model->getItem_day($doctor_item['doctorId'],$day1);
@@ -535,12 +536,14 @@ $availtimsun=$this->doctor_model->getItem_day($doctor_item['doctorId'],$day1);
     }  
   }
   ?></span>
-<div><h6>&nbsp;</h6></div>
+<div></div>
  </div>
 
  <div class="col-sm-3">
 
-     <b style="color: red"><?php echo $day2 ?></b>-  <a href="<?php echo base_url('admin/doctor/updateAvailability/'.$doctor_item["doctorId"].'/'.$day2)?>?returnUrl=<?php echo urlencode(getCurrentPageURL())?>"  data-original-title="Edit" >Manage </a> <div><h6>&nbsp;</h6></div>
+     <b style="color: red"><?php echo $day2 ?></b>-  <a href="<?php echo base_url('admin/doctor/updateAvailability/'.$doctor_item["doctorId"].'/'.$day2)?>?returnUrl=<?php echo urlencode(getCurrentPageURL())?>"  data-original-title="Edit" class="btn btn-mini btn-primary waves-effect waves-light m-r-30">Manage </a> 
+      <a href="<?php echo base_url('admin/doctor/deleteAvailability/'.$doctor_item["doctorId"].'/'.$day2)?>?returnUrl=<?php echo urlencode(getCurrentPageURL())?>"  data-original-title="Edit" class="btn btn-mini btn-danger waves-effect waves-light m-r-30"  onclick="return confirm('Are you sure you want to delete?');" >Delete </a><div>
+     </div>
 <?php 
 $availtimeday2=array();
 $availtimeday2=$this->doctor_model->getItem_day($doctor_item['doctorId'],$day2);
@@ -553,7 +556,7 @@ $availtimeday2=$this->doctor_model->getItem_day($doctor_item['doctorId'],$day2);
     }  
   }
   ?></span>
-      <div><h6>&nbsp;</h6></div>
+      <div></div>
  
    
 
@@ -561,7 +564,8 @@ $availtimeday2=$this->doctor_model->getItem_day($doctor_item['doctorId'],$day2);
 
  <div class="col-sm-3">
 
-     <b style="color: red"><?php echo $day3 ?>-</b>  <a href="<?php echo base_url('admin/doctor/updateAvailability/'.$doctor_item["doctorId"].'/'.$day3)?>?returnUrl=<?php echo urlencode(getCurrentPageURL())?>"  data-original-title="Edit" >Manage </a> <div><h6>&nbsp;</h6></div>
+     <b style="color: red"><?php echo $day3 ?>-</b>  <a href="<?php echo base_url('admin/doctor/updateAvailability/'.$doctor_item["doctorId"].'/'.$day3)?>?returnUrl=<?php echo urlencode(getCurrentPageURL())?>"  data-original-title="Edit"class="btn btn-mini btn-primary waves-effect waves-light m-r-30" >Manage </a>
+      <a href="<?php echo base_url('admin/doctor/deleteAvailability/'.$doctor_item["doctorId"].'/'.$day3)?>?returnUrl=<?php echo urlencode(getCurrentPageURL())?>"  data-original-title="Edit" class="btn btn-mini btn-danger waves-effect waves-light m-r-30"  onclick="return confirm('Are you sure you want to delete?');">Delete </a> <div></div>
 <?php 
 $availtimeday3=array();
 $availtimeday3=$this->doctor_model->getItem_day($doctor_item['doctorId'],$day3);
@@ -574,12 +578,13 @@ $availtimeday3=$this->doctor_model->getItem_day($doctor_item['doctorId'],$day3);
     }  
   }
   ?></span>
-       <div><h6>&nbsp;</h6></div>
+      
 
  </div>
  <div class="col-sm-3">
 
-     <b style="color: red"><?php echo $day4 ?>- </b> <a href="<?php echo base_url('admin/doctor/updateAvailability/'.$doctor_item["doctorId"].'/'.$day4)?>?returnUrl=<?php echo urlencode(getCurrentPageURL())?>"  data-original-title="Edit" >Manage </a><div><h6>&nbsp;</h6></div>
+     <b style="color: red"><?php echo $day4 ?>- </b> <a href="<?php echo base_url('admin/doctor/updateAvailability/'.$doctor_item["doctorId"].'/'.$day4)?>?returnUrl=<?php echo urlencode(getCurrentPageURL())?>"  data-original-title="Edit" class="btn btn-mini btn-primary waves-effect waves-light m-r-30" >Manage </a>
+      <a href="<?php echo base_url('admin/doctor/deleteAvailability/'.$doctor_item["doctorId"].'/'.$day4)?>?returnUrl=<?php echo urlencode(getCurrentPageURL())?>"  data-original-title="Edit" class="btn btn-mini btn-danger waves-effect waves-light m-r-30"  onclick="return confirm('Are you sure you want to delete?');">Delete </a><div></div>
 
 <?php 
 $availtimeday4=array();
@@ -593,19 +598,20 @@ $availtimeday4=$this->doctor_model->getItem_day($doctor_item['doctorId'],$day4);
     }  
   }
   ?></span>
-        <div><h6>&nbsp;</h6></div>
+        <div></div>
 
 
 
 
  </div>
 <div><h6>&nbsp;</h6></div>
-<div><h6>&nbsp;</h6></div>
-<div><h6>&nbsp;</h6></div>
+<!-- <div><h6>&nbsp;</h6></div>
+<div><h6>&nbsp;</h6></div> -->
 
   <div class="col-sm-3">
 
-     <b style="color: red"><?php echo $day5 ?>- </b> <a href="<?php echo base_url('admin/doctor/updateAvailability/'.$doctor_item["doctorId"].'/'.$day5)?>?returnUrl=<?php echo urlencode(getCurrentPageURL())?>"  data-original-title="Edit" >Manage </a> <div><h6>&nbsp;</h6></div>
+     <b style="color: red"><?php echo $day5 ?>- </b> <a href="<?php echo base_url('admin/doctor/updateAvailability/'.$doctor_item["doctorId"].'/'.$day5)?>?returnUrl=<?php echo urlencode(getCurrentPageURL())?>"  data-original-title="Edit" class="btn btn-mini btn-primary waves-effect waves-light m-r-30">Manage </a> 
+      <a href="<?php echo base_url('admin/doctor/deleteAvailability/'.$doctor_item["doctorId"].'/'.$day5)?>?returnUrl=<?php echo urlencode(getCurrentPageURL())?>"  data-original-title="Edit" class="btn btn-mini btn-danger waves-effect waves-light m-r-30"  onclick="return confirm('Are you sure you want to delete?');">Delete </a><div></div>
 <?php 
 $availtimeday5=array();
 $availtimeday5=$this->doctor_model->getItem_day($doctor_item['doctorId'],$day5);
@@ -625,7 +631,8 @@ $availtimeday5=$this->doctor_model->getItem_day($doctor_item['doctorId'],$day5);
 
  <div class="col-sm-3">
 
-    <b style="color: red"> <?php echo $day6?>-</b>  <a href="<?php echo base_url('admin/doctor/updateAvailability/'.$doctor_item["doctorId"].'/'.$day6)?>?returnUrl=<?php echo urlencode(getCurrentPageURL())?>"  data-original-title="Edit" >Manage </a><div><h6>&nbsp;</h6></div>
+    <b style="color: red"> <?php echo $day6?>-</b>  <a href="<?php echo base_url('admin/doctor/updateAvailability/'.$doctor_item["doctorId"].'/'.$day6)?>?returnUrl=<?php echo urlencode(getCurrentPageURL())?>"  data-original-title="Edit" class="btn btn-mini btn-primary waves-effect waves-light m-r-30">Manage </a>
+     <a href="<?php echo base_url('admin/doctor/deleteAvailability/'.$doctor_item["doctorId"].'/'.$day6)?>?returnUrl=<?php echo urlencode(getCurrentPageURL())?>"  data-original-title="Edit" class="btn btn-mini btn-danger waves-effect waves-light m-r-30"  onclick="return confirm('Are you sure you want to delete?');">Delete </a><div></div>
 <?php 
 $availtimeday6=array();
 $availtimeday6=$this->doctor_model->getItem_day($doctor_item['doctorId'],$day6);
@@ -644,7 +651,8 @@ $availtimeday6=$this->doctor_model->getItem_day($doctor_item['doctorId'],$day6);
 
  <div class="col-sm-3">
 
-     <b style="color: red"><?php echo $day7 ?></b>-  <a href="<?php echo base_url('admin/doctor/updateAvailability/'.$doctor_item["doctorId"].'/'.$day7)?>?returnUrl=<?php echo urlencode(getCurrentPageURL())?>"  data-original-title="Edit" >Manage </a> <div><h6>&nbsp;</h6></div>
+     <b style="color: red"><?php echo $day7 ?></b>-  <a href="<?php echo base_url('admin/doctor/updateAvailability/'.$doctor_item["doctorId"].'/'.$day7)?>?returnUrl=<?php echo urlencode(getCurrentPageURL())?>"  data-original-title="Edit" class="btn btn-mini btn-primary waves-effect waves-light m-r-30">Manage </a> 
+      <a href="<?php echo base_url('admin/doctor/deleteAvailability/'.$doctor_item["doctorId"].'/'.$day7)?>?returnUrl=<?php echo urlencode(getCurrentPageURL())?>"  data-original-title="Edit" class="btn btn-mini btn-danger waves-effect waves-light m-r-30"  onclick="return confirm('Are you sure you want to delete?');">Delete </a><div></div>
 <?php 
 $availtimeday7=array();
 $availtimeday7=$this->doctor_model->getItem_day($doctor_item['doctorId'],$day7);

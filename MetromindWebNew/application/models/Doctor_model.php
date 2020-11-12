@@ -688,6 +688,13 @@ public function get_Patient_appoinmentsforTime($patientId = FALSE,$appointmentDa
 			
 					
 		} 
+
+
+		public function deleteAvailability($doctorId,$availableDay) {  
+		$this->db->where('doctorId',$doctorId);
+		$this->db->where('availableDay',$availableDay);
+		$this->db->delete('axavailablesessions');
+	}
 		
 public function updateAvailability($doctorId,$availableDay) {  
 		$this->db->where('doctorId',$doctorId);

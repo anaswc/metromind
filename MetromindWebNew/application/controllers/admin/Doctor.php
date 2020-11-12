@@ -199,7 +199,16 @@ class Doctor extends CI_controller{
 				
 			}
 		   }
+public function deleteAvailability($doctorId = NULL,$availableDay=NULL)
+		{  
 
+			
+			$this->doctor_model->deleteAvailability($doctorId,$availableDay);
+				$this->session->set_flashdata('success', 'Doctor availability deleted Successfully');
+				
+					redirect(base_url().'admin/doctor/update/'.$doctorId.'/'.'?returnUrl=doctor%3F'); 
+
+		}
 
 public function updateAvailability($doctorId = NULL,$availableDay=NULL)
 		{  
