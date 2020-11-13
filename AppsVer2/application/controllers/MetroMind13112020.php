@@ -2597,66 +2597,6 @@ class MetroMind extends CI_Controller
 
 	}
 
-	function cancel_appointment_post()
-
-	{
-
-		$this->Patient_model->setPostGetVars();
-
-		$this->verify_request();
-
-		if ($this->Patient_model->appointmentId == '') {
-
-			$tokenData = time() . $this->input->post_get('uniqueId');
-
-			$token = AUTHORIZATION::generateToken($tokenData);
-
-			$this->Login_model->add_api_token_members($this->input->post_get('uniqueId'), $token);
-
-			$result = array();
-
-			$response = ['status' => 201, 'token' => $token, 'result' => $result, 'message' => HTTP_STATUS_CODES[460]];
-
-			$this->response($response, 200);
-
-		} else {
-
-			$result = $this->Patient_model->cancel_appointment_patient($this->Patient_model->appointmentId);
-
-			if (!$result) {
-
-				$tokenData = time() . $this->input->post_get('uniqueId');
-
-				$token = AUTHORIZATION::generateToken($tokenData);
-
-				$this->Login_model->add_api_token_members($this->input->post_get('uniqueId'), $token);
-
-				$result = array();
-
-				$response = ['status' => 201, 'token' => $token, 'result' => $result,  'message' => HTTP_STATUS_CODES[400]];
-
-				$this->response($response, 200);
-
-			} else {
-
-				$tokenData = time() . $this->input->post_get('uniqueId');
-
-				$token = AUTHORIZATION::generateToken($tokenData);
-
-				$this->Login_model->add_api_token_members($this->input->post_get('uniqueId'), $token);
-
-				$status = 200;
-
-				$response = ['status' => $status, 'token' => $token, 'result' => $result,  'message' => HTTP_STATUS_CODES[481]];
-
-				$this->response($response, 200);
-
-			}
-
-		}
-
-	}
-
 // ------------------------------------------------------
 
 	function delete_appointment_post()
@@ -6476,20 +6416,6 @@ function termsandconditions_get()
 				{
 					$result[$i]['availabilty']=0;
 				}
-
-				
-				if(date("Y-m-d")==date("Y-m-d",strtotime($this->Patient_model->requestDate)))
-				{
-					if(date("H:i:s")>date("H:i:s",strtotime($result[$i]['availableStartTime'])))
-				{
-
-					$result[$i]['availabilty']=0;
-					//$today_available_sessions[$i]['time']="success";
-				}
-				}
-
-
-
 
 
 				$i++;

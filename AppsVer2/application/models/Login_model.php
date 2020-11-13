@@ -1,184 +1,139 @@
 <?php
 
+class Login_model extends CI_Model
+{
 
+    public function __construct()
 
-class Login_model extends CI_Model {
+    {
 
+        $this->loginType = '';
 
+        $this->deviceOS = '';
 
-	public function __construct()
+    }
 
+    public function validate_login($userName, $password)
+    {
 
+        if ($userName == '' || $password == '')
 
-	{
+        return 0;
 
+        $this
+            ->db
+            ->select('doctorId,isVerified');
 
+        $this
+            ->db
+            ->from('axdoctors');
 
-		$this->loginType = '';
+        $this
+            ->db
+            ->group_start();
 
-		$this->deviceOS  = '';
+        $this
+            ->db
+            ->where('doctorEmail', $userName, 'none');
 
-	}
+        $this
+            ->db
+            ->or_where('doctorMobile', $userName, 'none');
 
+        $this
+            ->db
+            ->group_end();
 
+        $query = $this
+            ->db
+            ->get();
 
-	public function validate_login($userName,$password){
+        if ($query->num_rows() > 0)
+        {
 
+            $result = $query->row_array();
 
+            if ($result['isVerified'] == 0)
+            {
 
-		if($userName == ''  || $password == '')
+                $valid = 100;
 
+                return $valid;
 
+            }
 
-			return 0;
+            $result = $this->login_doctor($userName, $password);
 
+            return $result;
 
+        }
+        else
+        {
 
-		$this->db->select('doctorId,isVerified');
+            $this
+                ->db
+                ->select('patientId,isVerified');
 
+            $this
+                ->db
+                ->from('axpatient');
 
+            $this
+                ->db
+                ->group_start();
 
-		$this->db->from('axdoctors');
+            $this
+                ->db
+                ->where('patientEmail', $userName, 'none');
 
+            $this
+                ->db
+                ->or_where('patientMobile', $userName, 'none');
 
+            $this
+                ->db
+                ->group_end();
 
-		$this->db->group_start();
+            $query = $this
+                ->db
+                ->get();
 
+            if ($query->num_rows() > 0)
+            {
 
+                $result = $query->row_array();
 
-			$this->db->where('doctorEmail',$userName,'none');
+                if ($result['isVerified'] == 0)
+                {
 
+                    $valid = 100;
 
+                    return $valid;
 
-			$this->db->or_where('doctorMobile',$userName,'none');
+                }
 
+                $result = $this->login_patient($userName, $password);
 
+                return $result;
 
-		$this->db->group_end();
+            }
+            else
+            {
 
+                return 0;
 
+            }
 
-		$query = $this->db->get();
+        }
 
+    }
 
+    public function login_doctor($userName, $password)
+    {
 
-		if($query->num_rows() > 0){	
-
-		
-
-			$result = $query->row_array();	
-
-
-
-			if($result['isVerified'] == 0){
-
-
-
-				$valid =  100;
-
-					
-
-				return $valid;
-
-			}
-
-			
-
-			$result = $this->login_doctor($userName,$password);
-
-
-
-			return $result;
-
-
-
-		}else{
-
-
-
-				$this->db->select('patientId,isVerified');
-
-
-
-				$this->db->from('axpatient');
-
-
-
-				$this->db->group_start();
-
-
-
-				$this->db->where('patientEmail',$userName,'none');
-
-
-
-				$this->db->or_where('patientMobile',$userName,'none');
-
-
-
-				$this->db->group_end();
-
-
-
-				$query = $this->db->get();
-
-
-
-				if($query->num_rows() > 0){	
-
-
-
-					$result = $query->row_array();	
-
-
-
-					if($result['isVerified'] == 0){
-
-		
-
-						$valid =  100;
-
-							
-
-						return $valid;
-
-					}
-
-			
-
-					$result = $this->login_patient($userName,$password);
-
-
-
-					return $result;
-
-
-
-				}else{
-
-
-
-					return 0;	
-
-
-
-				} 
-
-
-
-		} 
-
-
-
-	}
-
-
-
-	public function login_doctor($userName,$password){
-
-
-
-		$this->db->select('	axdoctors.doctorId,
+        $this
+            ->db
+            ->select('	axdoctors.doctorId,
 
 
 
@@ -228,137 +183,115 @@ class Login_model extends CI_Model {
 
 						');
 
+        $this
+            ->db
+            ->from('axdoctors');
 
+        $this
+            ->db
+            ->group_start();
 
-		$this->db->from('axdoctors');
+        $this
+            ->db
+            ->where('doctorEmail', $userName, 'none');
 
+        $this
+            ->db
+            ->or_where('doctorMobile', $userName, 'none');
 
+        $this
+            ->db
+            ->group_end();
 
-		$this->db->group_start();
+        $query = $this
+            ->db
+            ->get();
 
+        if ($query->num_rows() > 0)
+        {
 
+            $row_array = $query->row_array();
 
-			$this->db->where('doctorEmail',$userName,'none');
+            if ($row_array["doctorId"] <> '')
+            {
 
+                if (trim($this
+                    ->encryption
+                    ->decrypt($row_array["doctorPassword"])) != trim($password))
+                {
 
+                    return 0;
 
-			$this->db->or_where('doctorMobile',$userName,'none');
+                }
+                else if ($row_array["status"] == 0)
+                {
 
+                    return 100;
 
+                }
+                else
+                {
 
-		$this->db->group_end();	
+                    $this->loginType = 1;
 
+                    $this->deviceOS = trim($this
+                        ->input
+                        ->post_get('deviceOS'));
 
+                    if (trim($this->deviceOS) == "") $this->deviceOS = 'iOS';
 
-		$query = $this->db->get();
+                    $data = array(
 
+                        'lastLogin' => date("Y-m-d H:i:s", now('Asia/Kolkata')) ,
 
+                        'deviceRegistrationId' => trim($this
+                            ->input
+                            ->post_get('deviceRegistrationId')) ,
 
-		if($query->num_rows() > 0){	
+                        'deviceOS' => $this->deviceOS,
 
+                        'loginStatus' => 1,
 
+                        'isEngaged' => 0
 
-			$row_array = $query->row_array();
+                    );
 
+                    $this
+                        ->db
+                        ->where("doctorId", $row_array["doctorId"]);
 
+                    $this
+                        ->db
+                        ->update("axdoctors", $data);
 
-			if($row_array["doctorId"] <> ''){
+                    return $row_array;
 
+                }
 
+            }
+            else
+            {
 
-				if (trim($this->encryption->decrypt($row_array["doctorPassword"])) != trim($password)) {
+                return 0;
 
+            }
 
+        }
+        else
+        {
 
-					return 0;
+            return 0;
 
+        }
 
+    }
 
-				}else if ($row_array["status"] == 0) {	
+    public function login_patient($userName, $password)
+    {
 
-
-
-					return 100;
-
-
-
-				}else{
-
-
-
-					$this->loginType = 1;
-					
-					$this->deviceOS = trim($this->input->post_get('deviceOS'));
-
-					if(trim($this->deviceOS) == "") $this->deviceOS = 'iOS';	
-
-					$data = array(
-
-						'lastLogin' 			=> date("Y-m-d H:i:s", now('Asia/Kolkata')),
-
-						'deviceRegistrationId' 	=> trim($this->input->post_get('deviceRegistrationId')),
-						
-						'deviceOS' 				=> $this->deviceOS,
-
-						'loginStatus' 			=>	1,
-						
-						'isEngaged' 			=>	0
-
-
-
-					);
-
-
-
-					$this->db->where("doctorId", $row_array["doctorId"]); 
-
-
-
-					$this->db->update("axdoctors", $data);	
-
-
-
-					return $row_array;					
-
-
-
-				}
-
-
-
-			}else{
-
-
-
-				return 0;
-
-
-
-			}
-
-
-
-		}else{
-
-
-
-			return 0;	
-
-
-
-		}	
-
-
-
-	}
-
-
-
-	public function login_patient($userName,$password){
-
-
-
-		$this->db->select('	patientId,
+        $this
+            ->db
+            ->select('	patientId,
 
 
 
@@ -400,149 +333,115 @@ class Login_model extends CI_Model {
 
 						');
 
+        $this
+            ->db
+            ->from('axpatient');
 
+        $this
+            ->db
+            ->group_start();
 
-		$this->db->from('axpatient');
+        $this
+            ->db
+            ->where('patientEmail', $userName, 'none');
 
+        $this
+            ->db
+            ->or_where('patientMobile', $userName, 'none');
 
+        $this
+            ->db
+            ->group_end();
 
-		$this->db->group_start();
+        $query = $this
+            ->db
+            ->get();
 
+        if ($query->num_rows() > 0)
+        {
 
+            $row_array = $query->row_array();
 
-			$this->db->where('patientEmail',$userName,'none');
+            if ($row_array["patientId"] <> '')
+            {
 
+                if (trim($this
+                    ->encryption
+                    ->decrypt($row_array["patientPassword"])) != trim($password))
+                {
 
+                    return 0;
 
-			$this->db->or_where('patientMobile',$userName,'none');
+                }
+                else if ($row_array["status"] == 0)
+                {
 
+                    return 100;
 
+                }
+                else
+                {
 
-		$this->db->group_end();	
+                    $this->loginType = 2;
 
+                    $this->deviceOS = trim($this
+                        ->input
+                        ->post_get('deviceOS'));
 
+                    if (trim($this->deviceOS) == "") $this->deviceOS = 'iOS';
 
-		$query = $this->db->get();
+                    $data = array(
 
+                        'lastLogin' => date("Y-m-d H:i:s", now('Asia/Kolkata')) ,
 
+                        'deviceRegistrationId' => trim($this
+                            ->input
+                            ->post_get('deviceRegistrationId')) ,
 
-		if($query->num_rows() > 0){	
+                        'deviceOS' => $this->deviceOS,
 
+                        'loginStatus' => 1
 
+                    );
 
-			$row_array = $query->row_array();
+                    $this
+                        ->db
+                        ->where("patientId", $row_array["patientId"]);
 
+                    $this
+                        ->db
+                        ->update("axpatient", $data);
 
+                    return $row_array;
 
-			if($row_array["patientId"] <> ''){
+                }
 
+            }
+            else
+            {
 
+                return 0;
 
-				if (trim($this->encryption->decrypt($row_array["patientPassword"])) != trim($password)) {	
+            }
 
+        }
+        else
+        {
 
+            return 0;
 
-					return 0;
+        }
 
+    }
 
+    public function forgot_password($emailId)
+    {
 
-				}else if ($row_array["status"] == 0) {	
+        if ($emailId == '') return 0;
 
-
-
-					return 100;
-
-
-
-				}else{
-
-
-
-					$this->loginType = 2;
-					
-					$this->deviceOS = trim($this->input->post_get('deviceOS'));
-
-					if(trim($this->deviceOS) == "") $this->deviceOS = 'iOS';					
-
-
-
-					$data = array(
-
-
-
-						'lastLogin' 			=> date("Y-m-d H:i:s", now('Asia/Kolkata')),
-
-						
-
-						'deviceRegistrationId' 	=> trim($this->input->post_get('deviceRegistrationId')),
-
-						
-
-						'deviceOS' 				=> $this->deviceOS,
-
-						
-
-						'loginStatus' 			=>	1
-
-
-
-					);
-
-
-
-					$this->db->where("patientId", $row_array["patientId"]); 
-
-
-
-					$this->db->update("axpatient", $data);
-
-
-
-					return $row_array;					
-
-
-
-				}
-
-
-
-			}else{
-
-
-
-				return 0;
-
-
-
-			}
-
-
-
-		}else{
-
-
-
-			return 0;	
-
-
-
-		}	
-
-
-
-	}
-
-
-
-	public function forgot_password($emailId){	
-
-
-
-		if($emailId == '') return 0;
-
-
-
-		$this->db->select(' patientEmail, 
+        $this
+            ->db
+            ->select(' patientEmail, 
 
 
 
@@ -552,49 +451,46 @@ class Login_model extends CI_Model {
 
 						  ');
 
+        $this
+            ->db
+            ->from('axpatient');
 
+        $this
+            ->db
+            ->group_start();
 
-		$this->db->from('axpatient');
+        $this
+            ->db
+            ->where('patientEmail', $emailId, 'none');
 
+        $this
+            ->db
+            ->or_where('patientMobile', $emailId, 'none');
 
+        $this
+            ->db
+            ->group_end();
 
-		$this->db->group_start();
+        $query = $this
+            ->db
+            ->get();
 
+        if ($query->num_rows() > 0)
+        {
 
+            $row_array = $query->row_array();
 
-		$this->db->where('patientEmail',$emailId,'none');
+            $this->send_login_info($row_array["patientEmail"], $row_array["patientEmail"], $this
+                ->encryption
+                ->decrypt($row_array['patientPassword']));
 
+        }
+        else
+        {
 
-
-		$this->db->or_where('patientMobile',$emailId,'none');
-
-
-
-		$this->db->group_end();	
-
-
-
-		$query = $this->db->get();
-
-
-
-		if($query->num_rows() > 0){	
-
-
-
-			$row_array = $query->row_array();
-
-
-
-			$this->send_login_info($row_array["patientEmail"],$row_array["patientEmail"],$this->encryption->decrypt($row_array['patientPassword']));
-
-
-
-		}else{
-
-
-
-			$this->db->select(' doctorEmail, 
+            $this
+                ->db
+                ->select(' doctorEmail, 
 
 
 
@@ -604,141 +500,133 @@ class Login_model extends CI_Model {
 
 							  ');
 
+            $this
+                ->db
+                ->from('axdoctors');
 
+            $this
+                ->db
+                ->group_start();
 
-			$this->db->from('axdoctors');
+            $this
+                ->db
+                ->where('doctorEmail', $emailId, 'none');
 
-			
+            $this
+                ->db
+                ->or_where('doctorMobile', $emailId, 'none');
 
-			$this->db->group_start();
+            $this
+                ->db
+                ->group_end();
 
+            $query = $this
+                ->db
+                ->get();
 
+            if ($query->num_rows() > 0)
+            {
 
-			$this->db->where('doctorEmail',$emailId,'none');
+                $row_array = $query->row_array();
 
-			
+                $this->send_login_info($row_array["doctorEmail"], $row_array["doctorEmail"], $this
+                    ->encryption
+                    ->decrypt($row_array['doctorPassword']));
 
-			$this->db->or_where('doctorMobile',$emailId,'none');
+            }
+            else
+            {
 
+                return 0;
 
+            }
 
-			$this->db->group_end();	
+        }
 
+        return 1;
 
+    }
 
-			$query = $this->db->get();
+    public function send_login_info($emailId, $userName, $password)
+    {
 
+        if ($emailId == '' || $userName == '' || $password == '')
 
+        return 0;
 
-			if($query->num_rows() > 0){	
+        $settingId = 1;
 
+        $this
+            ->db
+            ->select('adminEmail');
 
+        $this
+            ->db
+            ->from('axsetting');
 
-				$row_array = $query->row_array();
+        $this
+            ->db
+            ->where('settingId', $settingId);
 
+        $row_array = $this
+            ->db
+            ->get()
+            ->row_array();
 
+        $from = $row_array['adminEmail'];
 
-				$this->send_login_info($row_array["doctorEmail"],$row_array["doctorEmail"],$this->encryption->decrypt($row_array['doctorPassword']));
+        $to = $emailId;
 
+        $this
+            ->load
+            ->library('email');
 
+        $this
+            ->email
+            ->initialize(array(
+            'protocol' => 'smtp',
+            'smtp_host' => 'sh101.subhosting.net',
+            'smtp_user' => 'info@drupal.webcastle.in',
+            'smtp_pass' => 'kL?[Y_.f2aE]',
+            'smtp_port' => 587,
+            'crlf' => "\r\n",
+            'newline' => "\r\n"
+        ));
 
-			}else{
+        $this
+            ->email
+            ->from($from, 'METRO MIND');
+        $this
+            ->email
+            ->to($to);
+        $this
+            ->email
+            ->subject('Forgot Password');
+        $this
+            ->email
+            ->set_mailtype("html");
 
+        // $this->email->set_newline("\r\n");
+        
 
+        // $this->email->set_header('MIME-Version', '1.0; charset=utf-8');
+        
 
-				return 0;	
+        // $this->email->set_header('Content-type', 'text/html');
+        
 
+        $message = "";
 
+        // $this->email->from($from, 'METRO MIND');
+        
 
-			}
+        // $this->email->to($to);
+        
 
+        // $this->email->subject('Forgot Password');
+        
 
-
-		}
-
-
-
-		return 1;
-
-
-
-	}
-
-
-
-	
-
-
-
-	public function send_login_info($emailId,$userName,$password){
-
-
-
-		if($emailId == '' ||  $userName == '' || $password == '')	
-
-
-
-			return 0;
-
-
-
-		$settingId = 1;
-
-
-
-		$this->db->select('adminEmail');
-
-
-
-		$this->db->from('axsetting');
-
-
-
-		$this->db->where('settingId',$settingId);
-
-
-
-		$row_array = $this->db->get()->row_array();		
-
-
-
-		$from 			=	$row_array['adminEmail'];
-
-
-
-		$to				= $emailId;
-
-
-
-		$this->email->set_newline("\r\n");
-
-
-
-		$this->email->set_header('MIME-Version', '1.0; charset=utf-8');
-
-
-
-		$this->email->set_header('Content-type', 'text/html');		
-
-
-
-		$message 			= "";			
-
-
-
-		$this->email->from($from, 'METRO MIND'); 
-
-
-
-		$this->email->to($to);			
-
-
-
-		$this->email->subject('Forgot Password');
-
-
-
-		$message 	= '	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+        $message = '	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 
 
@@ -770,11 +658,11 @@ class Login_model extends CI_Model {
 
 
 
-								<p> Username : '.$userName.'</p>
+								<p> Username : ' . $userName . '</p>
 
 
 
-								<p> Password : '.$password.'</p>
+								<p> Password : ' . $password . '</p>
 
 
 
@@ -810,296 +698,207 @@ class Login_model extends CI_Model {
 
 
 
-						</html>	'; 
+						</html>	';
 
+        $this
+            ->email
+            ->message($message);
 
+        //Send mail
+        // $this
+        //     ->email
+        //     ->send();
 
-		 $this->email->message($message); 
+        // // Will only print the email headers, excluding the message subject and body
+        // echo $this
+        //     ->email
+        //     ->print_debugger(array(
+        //     'headers'
+        // ));
 
+        // // $this->email->send();
+        // // print_r($this->email->print_debugger());
+        // die();
 
+        if($this->email->send())
+        
 
-		 //Send mail 
+        return 1;
+        
 
+        else
+        
 
+        return 0;
+        
 
-		 if($this->email->send()) 
+        
+    }
 
+    public function add_api_token_members($uniqueId, $token)
 
+    {
 
-			return 1;
+        if ($uniqueId === '')
 
+        return 0;
 
+        $deviceRegistrationId = '';
 
-		 else 
+        if ($this
+            ->input
+            ->post_get('deviceRegistrationId')) $deviceRegistrationId = $this
+            ->input
+            ->post_get('deviceRegistrationId');
 
+        if ($deviceRegistrationId == '')
 
+        return 0;
 
-			return 0;	
+        $this->delete_api_token_members($uniqueId, $deviceRegistrationId);
 
+        $data = array(
 
+            'uniqueId' => $uniqueId,
 
-	}
+            'deviceRegistrationId' => $deviceRegistrationId,
 
+            'token' => $token
 
+        );
 
-	public function add_api_token_members($uniqueId,$token)
+        $this
+            ->db
+            ->insert('api_tokens', $data);
 
+        return $uniqueId;
 
+    }
 
-	{
+    public function delete_api_token_members($uniqueId, $deviceRegistrationId)
+    {
 
+        if ($uniqueId == '' || $deviceRegistrationId == '')
 
+        return 0;
 
-		if ($uniqueId === '')
+        $data = array(
 
+            'uniqueId' => $uniqueId,
 
+            'deviceRegistrationId' => $deviceRegistrationId
 
-			return 0;
+        );
 
+        if ($this
+            ->db
+            ->delete("api_tokens", $data))
+        {
 
+            return true;
 
-		$deviceRegistrationId 	= '';
+        }
 
+    }
 
+    public function validate_api_token_members($uniqueId, $token)
 
-		if($this->input->post_get('deviceRegistrationId'))	$deviceRegistrationId	=	$this->input->post_get('deviceRegistrationId');
+    {
 
+        if ($uniqueId === '')
 
+        return 0;
 
-		if($deviceRegistrationId == '')
+        $valid = 1;
 
+        $deviceRegistrationId = '';
 
+        if ($this
+            ->input
+            ->post_get('deviceRegistrationId')) $deviceRegistrationId = $this
+            ->input
+            ->post_get('deviceRegistrationId');
 
-			return 0;
+        if ($deviceRegistrationId == '')
 
+        return 0;
 
+        $this
+            ->db
+            ->select('token');
 
-		$this->delete_api_token_members($uniqueId,$deviceRegistrationId);	
+        $this
+            ->db
+            ->from('api_tokens');
 
+        $this
+            ->db
+            ->where('uniqueId', $uniqueId);
 
+        if (trim($deviceRegistrationId) != "")
 
-		$data = array(
+        $this
+            ->db
+            ->like('deviceRegistrationId', $deviceRegistrationId, 'none');
 
+        $this
+            ->db
+            ->order_by("created", "DESC");
 
+        $this
+            ->db
+            ->limit('1');
 
-			'uniqueId' 				=> $uniqueId,
+        $query = $this
+            ->db
+            ->get();
 
+        if ($query->num_rows() > 0)
 
+        {
 
-			'deviceRegistrationId' 	=> $deviceRegistrationId,
+            $result_row = $query->row_array();
 
+            $data = array(
 
+                'incomingToken' => $token
 
-			'token' 				=> $token
+            );
 
+            $this
+                ->db
+                ->set($data);
 
+            $this
+                ->db
+                ->where('uniqueId', $uniqueId);
 
-		);
+            if (trim($deviceRegistrationId) != "")
 
+            $this
+                ->db
+                ->like('deviceRegistrationId', $deviceRegistrationId, 'none');
 
+            $this
+                ->db
+                ->update("api_tokens", $data);
 
-		$this->db->insert('api_tokens', $data);
+            if ($result_row['token'] <> $token)
 
+            $valid = 0;
 
+        }
+        else
+        {
 
-		return $uniqueId;
+            $valid = 0;
 
+        }
 
+        return $valid;
 
-	}
+    }
 
-
-
-	public function delete_api_token_members($uniqueId,$deviceRegistrationId) { 
-
-
-
-		if($uniqueId == '' || $deviceRegistrationId == '')
-
-
-
-			return 0;
-
-
-
-		 $data = array(
-
-
-
-			'uniqueId' 				=> $uniqueId,
-
-
-
-			'deviceRegistrationId' 	=> $deviceRegistrationId
-
-
-
-			);
-
-
-
-		 if ($this->db->delete("api_tokens", $data)) { 
-
-
-
-			return true; 
-
-
-
-		 } 
-
-
-
-		 
-
-
-
-	} 
-
-
-
-	public function validate_api_token_members($uniqueId,$token)
-
-
-
-	{	
-
-
-
-		if ($uniqueId === '')
-
-
-
-			return 0;
-
-
-
-		$valid =  1; 
-
-
-
-		$deviceRegistrationId 	= '';
-
-
-
-		if($this->input->post_get('deviceRegistrationId'))	$deviceRegistrationId	=	$this->input->post_get('deviceRegistrationId');
-
-
-
-		if($deviceRegistrationId == '')
-
-
-
-			return 0;
-
-
-
-		$this->db->select('token');
-
-
-
-		$this->db->from('api_tokens');
-
-
-
-		$this->db->where('uniqueId',$uniqueId);
-
-
-
-		if(trim($deviceRegistrationId) != "")
-
-
-
-			$this->db->like('deviceRegistrationId', $deviceRegistrationId,'none');
-
-
-
-		$this->db->order_by("created", "DESC");
-
-
-
-		$this->db->limit('1');
-
-
-
-		$query = $this->db->get();
-
-
-
-		if($query->num_rows() > 0)
-
-
-
-		{	
-
-
-
-			$result_row = $query->row_array();
-
-
-
-			$data = array(
-
-
-
-				'incomingToken' 	=> $token
-
-
-
-			);
-
-
-
-			$this->db->set($data); 
-
-
-
-			$this->db->where('uniqueId',$uniqueId);
-
-
-
-			if(trim($deviceRegistrationId) != "")
-
-
-
-				$this->db->like('deviceRegistrationId', $deviceRegistrationId,'none'); 
-
-
-
-			$this->db->update("api_tokens", $data); 
-
-
-
-			if($result_row['token'] <> $token)
-
-
-
-				$valid =  0;
-
-
-
-		}else{
-
-
-
-			$valid =  0;	
-
-
-
-		}
-
-
-
-		return $valid;
-
-
-
-	}
-
-
-
-}			
-
-
+}
 
 ?>

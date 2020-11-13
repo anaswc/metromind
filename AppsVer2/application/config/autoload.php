@@ -208,7 +208,7 @@ $autoload['helper'] = array('html','url','form','url_helper','date','string');
 
 */
 
-$autoload['config'] = array();
+$autoload['config'] = array('email');
 
 
 

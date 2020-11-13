@@ -1657,6 +1657,18 @@ class Doctor_model extends CI_Model {
 		return $appointmentId ;
 
 	}
+	public function delete_appointment_doctor($appointmentId)
+
+	{
+
+		if($appointmentId == '') return 0;	
+
+		$this->db->where('appointmentId',$appointmentId);
+		$this->db->where('isCompleted!=',1);
+		$this->db->delete('axappointments');
+		return 1 ;
+
+	}
 
 	public function get_requested_doctor_appointments($doctorId)
 

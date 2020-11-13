@@ -1492,6 +1492,35 @@ class Patient_model extends CI_Model {
 
 	}
 
+public function cancel_appointment_patient($appointmentId)
+
+	{
+
+		if($appointmentId == '') return 0;	
+
+		$completedTime = date("Y-m-d H:i:s", now('Asia/Kolkata'));
+
+		$data = array(
+
+			'isCompleted' 			=> 0,
+			'status' => 4,
+
+			'completedTime' 		=> $completedTime
+
+		);
+
+		$this->db->set($data); 	
+
+		$this->db->where('appointmentId', $appointmentId);	
+
+		$this->db->update("axappointments", $data); 	
+
+		return $appointmentId ;
+
+	}
+
+	// ----------------
+
 	public function add_communication_log_patient()
 
 	{
