@@ -1297,28 +1297,6 @@ class Doctor_model extends CI_Model {
 
 	}	
 
-	public function get_today_doctor_sessions_with_patient($doctorId,$patientId)
-
-	{	
-
-		if($doctorId == '' || $patientId == '')
-			return 0;
-
-
-		$this->db->select('appointmentStartTime,appointmentEndTime');
-		$this->db->from('axappointments');
-		$this->db->where('doctorId',$doctorId);
-		$this->db->where('patientId',$patientId);
-		$this->db->where('appointmentDate', date("Y-m-d"));
-		$this->db->where('status',1);
-		$query = $this->db->get();
-		return $query->result_array();
-
-
-	}
-
-
-
 	public function get_doctor_sessions($doctorId)
 
 	{	

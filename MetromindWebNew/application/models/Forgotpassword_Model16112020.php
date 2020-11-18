@@ -55,52 +55,19 @@
 		$userName = $row_array['userName'];
 		$password = $this->encryption->decrypt($row_array['password']);
 
-		// $this->email->set_newline("\r\n");
+		$this->email->set_newline("\r\n");
 
-		// $this->email->set_header('MIME-Version', '1.0; charset=utf-8');
+		$this->email->set_header('MIME-Version', '1.0; charset=utf-8');
 
-		// $this->email->set_header('Content-type', 'text/html');		
+		$this->email->set_header('Content-type', 'text/html');		
 
-	//	$message 			= "";			
+		$message 			= "";			
 
-		// $this->email->from($from, 'METRO MIND'); 
+		$this->email->from($from, 'METRO MIND'); 
 
-		// $this->email->to($to);			
+		$this->email->to($to);			
 
-		// $this->email->subject('Forgot Password');
-
-
-
-
-$this->load->library('email');
-
-        $this->email->initialize(array(
-            'protocol' => 'smtp',
-            'smtp_host' => 'sh101.subhosting.net',
-            'smtp_user' => 'info@drupal.webcastle.in',
-            'smtp_pass' => 'kL?[Y_.f2aE]',
-            'smtp_port' => 587,
-            'crlf' => "\r\n",
-            'newline' => "\r\n"
-        ));
-$message 			= "";		
-        $this
-            ->email
-            ->from($from, 'METRO MIND');
-        $this
-            ->email
-            ->to($to);
-        $this
-            ->email
-            ->subject('Forgot Password');
-        $this
-            ->email
-            ->set_mailtype("html");
-
-
-
-
-
+		$this->email->subject('Forgot Password');
 
 		$message 	= '	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 

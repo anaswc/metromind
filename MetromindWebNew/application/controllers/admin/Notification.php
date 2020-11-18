@@ -34,7 +34,7 @@ class Notification extends CI_controller{
 				$smsstatus=$this->notification_model->send_notification_user($patient['uniqueId']);
 				
 				
-				$appnotifystatus=$this->notification_model->notify_user_appointment($patient['uniqueId']);
+				$appnotifystatus=$this->notification_model->notify_user_appointment($patient['uniqueId'],$value['doctorId']);
 				
 
 			}

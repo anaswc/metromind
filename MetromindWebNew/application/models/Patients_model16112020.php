@@ -162,7 +162,7 @@ class  Patients_model extends CI_Model {
 				
 				$error = array('error' => $this->upload->display_errors()); 
 				$this->session->set_flashdata('error', $error['error']);
-				return $error;
+				return 0;
 			 } else { 
 				$data1 = array('upload_data' => $this->upload->data()); 
 				
@@ -172,6 +172,7 @@ class  Patients_model extends CI_Model {
 				$this->db->set($data); 
 				$this->db->where("patientId",$patientId); 
 				$this->db->update("axpatient",$data);
+				
 				
 				return $patientId;
 				
@@ -269,8 +270,8 @@ class  Patients_model extends CI_Model {
 			}
 			
 			 
-			print_r( $patientId);
-		//	return $patientId;
+			
+			return $patientId;
 			
 			
 			

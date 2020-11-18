@@ -205,7 +205,7 @@ public function send_notification_user($uniqueId){
 	
 
 
-public function notify_user_appointment($uniqueId)
+public function notify_user_appointment($uniqueId,$doc_id)
 {
 
 	if($uniqueId == '')
@@ -232,9 +232,9 @@ public function notify_user_appointment($uniqueId)
     $token = $fcmtoken;
     $serverKey = 'AAAAy6LCT4s:APA91bGCsaS87ndfK2FppCbZRJjS-XQVxErQ8MsSUDm7dk-4U78HbbtFM-mMSgSR-rxzazhC3FJv5jNErAaoqY7OZ2gxoaCiNTyg67Ma_C99uh52IA1UbMCuHLtHHE_nULXF24JcLXAD';
     $title = "Metro Mind";
-    $body = 'Hi '.$firstName.' '.$lastName.' your appointment has been scheduled today. Contact Doctor on time';
+    $body = 'Hi '.$firstName.' '.$lastName.' your appointment has been scheduled today Contact Doctor on time';
     $notification = array('title' =>$title , 'body' => $body, 'sound' => 'default');
-    $data = array('title' =>$title , 'body' => $body, 'type' => 'general');
+    $data = array('title' =>$title , 'body' => $body,'doc_id'=>$doc_id, 'type' => 'general');
     $arrayToSend = array('to' => $token, 'notification' => $notification,'data'=>$data,'priority'=>'high');
     $json = json_encode($arrayToSend);
     $headers = array();

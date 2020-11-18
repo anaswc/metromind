@@ -329,8 +329,9 @@ if (atposition<1 || dotposition<atposition+2 || dotposition+2>=x.length){
                           <div class="form-group row">
                             <label for="input-rounded" class="col-sm-12 form-control-label">Image</label>
                             <div class="col-sm-5">
+                             
                               <input type = "file" name ="profileImgUrl" id="profileImgUrl" class="form-control" onChange="validateFile();"  />    
-                                 <?php
+                             <?php
                                     if($patient_item['profileImgUrl']<>"" &&  file_exists(AXUPLOADPATIENTSPATH.$patient_item['profileImgUrl'])){?>
  <span><a href="<?php echo base_url().$patient_item['profileImgUrl']?>"  target="_blank"><img src="<?php echo base_url().AXUPLOADPATIENTSPATH.$patient_item['profileImgUrl']?>" width="60" height="60" /></a></span>
                                  <?php }?>                                       
