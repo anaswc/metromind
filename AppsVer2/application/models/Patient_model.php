@@ -1083,7 +1083,8 @@ class Patient_model extends CI_Model {
 
 		if($uniqueId == '') return 0; 
 
-		$config['upload_path']   	= '../uploads/patients/'; 
+		 $config['upload_path']   	= '/var/www/html/metromind/metromind-backend-php/MetromindWebNew/uploads/patients';
+		 // $config['upload_path']   	= '../uploads/patients/'; 
 
 		$config['allowed_types'] 	= 'jpg|gif|png|jpeg|JPG|PNG'; 
 
@@ -1107,6 +1108,25 @@ class Patient_model extends CI_Model {
 
 		$this->upload->initialize($config);
 
+
+
+// $myfile = fopen(AXUPLOADPATIENTIMAGEPATH."newfile.txt", "w") or die("Unable to open file!");
+// $txt = "Mickey Mouse\n";
+// fwrite($myfile, $txt);
+// $txt = "Minnie Mouse\n";
+// fwrite($myfile, $txt);
+// fclose($myfile);
+
+
+// if ( is_writable('http://45.76.238.179/metromind/metromind-backend-php/MetromindWebNew/uploads/doctors/')){
+//    $this->errorMessage="erir";
+// }
+// else{
+// 	$this->errorMessage=AXUPLOADPATIENTIMAGEPATH;
+// }
+
+// $this->errorMessage=AXUPLOADPATIENTIMAGEPATH;
+
 		if ( ! $this->upload->do_upload('profileImgUrl')) {
 
 		$error = array('error' => $this->upload->display_errors()); 
@@ -1121,6 +1141,7 @@ class Patient_model extends CI_Model {
 
 		}
 
+// $this->errorMessage =$error;
 		return 0;
 
 		} else { 
@@ -1135,9 +1156,11 @@ class Patient_model extends CI_Model {
 
 		$result_row = $query->row_array();
 
-		if($result_row['profileImgUrl'] <> '' && file_exists('../uploads/patients/' . $result_row['profileImgUrl']))
+		// if($result_row['profileImgUrl'] <> '' && file_exists('../uploads/patients/' . $result_row['profileImgUrl']))
+		if($result_row['profileImgUrl'] <> '' && file_exists(AXUPLOADPATIENTIMAGEPATH . $result_row['profileImgUrl'])!== null)
 
-			unlink('../uploads/patients/'.$result_row['profileImgUrl']);
+			//unlink(AXUPLOADPATIENTIMAGEPATH.$result_row['profileImgUrl']);
+		unlink('/var/www/html/metromind/metromind-backend-php/MetromindWebNew/uploads/patients/'.$result_row['profileImgUrl']);
 
 		$data1 = array('upload_data' => $this->upload->data()); 
 
