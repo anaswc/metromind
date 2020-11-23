@@ -1972,7 +1972,7 @@ public function cancel_appointment_patient($appointmentId)
 					if($row_array['patientCreditId']  <> '' && $row_array['patientCreditId'] <> 0){
 
 						//$this->db->set('noOfSession', 'noOfSession + 1', FALSE);
-						$this->db->set('noOfSession', 'noOfSession + 1', FALSE);
+						$this->db->set('noOfSession', 'noOfSession - 1', FALSE);
 
 						$this->db->where('patientCreditId', $row_array['patientCreditId']);
 
