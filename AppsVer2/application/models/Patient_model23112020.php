@@ -1898,17 +1898,17 @@ public function cancel_appointment_patient($appointmentId)
 
 					$communicationDuration = explode(':',$this->communicationDuration);
 
-					// if($communicationDuration[0] < 10){
+					if($communicationDuration[0] < 10){
 
-					// 	$isCompleted = 0;
+						$isCompleted = 0;
 
-					// 	$completedTime = '0000-00-00 00:00:00;';
+						$completedTime = '0000-00-00 00:00:00;';
 
-					// }else{
+					}else{
 
-					// 	$isCompleted = 1;
+						$isCompleted = 1;
 
-					// }
+					}
 					$isCompleted = 1;
 
 					$data = array(
@@ -1972,7 +1972,7 @@ public function cancel_appointment_patient($appointmentId)
 					if($row_array['patientCreditId']  <> '' && $row_array['patientCreditId'] <> 0){
 
 						//$this->db->set('noOfSession', 'noOfSession + 1', FALSE);
-						$this->db->set('noOfSession', 'noOfSession - 1', FALSE);
+						$this->db->set('noOfSession', 'noOfSession + 1', FALSE);
 
 						$this->db->where('patientCreditId', $row_array['patientCreditId']);
 

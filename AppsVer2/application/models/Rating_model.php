@@ -192,7 +192,8 @@ class Rating_model extends CI_Model {
 
 			$valid =  0;		
 
-		if($this->rating == '' || $this->rating < 1)
+		// if($this->rating == '' || $this->rating < 1)
+		if($this->rating == '')
 
 			$valid =  0;		
 

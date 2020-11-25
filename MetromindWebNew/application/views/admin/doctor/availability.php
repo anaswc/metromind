@@ -98,7 +98,8 @@ function Cancel(){
         
          
          ?>
-         <input type="time" name="availabletime[]" id="1" min="08:59:00" max="20:59:00" class="form-control" value="09:00:00" required onBlur="checktime(this.id)">
+         <input type="time" name="availabletime[]" id="1"  class="form-control" value="09:00:00" required onBlur="checktime(this.id)">
+         <!-- <input type="time" name="availabletime[]" id="1" min="08:59:00" max="20:59:00" class="form-control" value="09:00:00" required onBlur="checktime(this.id)"> -->
   
    </div>
 
@@ -139,7 +140,7 @@ function Cancel(){
         var newRow = $("<tr>");
         var cols = "";
 
-        cols += '<td><div class="form-group row"><div class="col-md-6"><label for="input-rounded" class="col-sm-12 form-control-label">Select Time</label><input type="time" name="availabletime[]" id="'+counter+'" min="08:59:00" max="20:59:00" class="form-control" value="09:00:00" required onBlur="checktime(this.id)"></div><div class="col-md-6"><label for="input-rounded" class="col-sm-12 form-control-label"> End Time </label><input type="text" disabled class="form-control" id="endtime'+counter+'" ></div></div></td>';
+        cols += '<td><div class="form-group row"><div class="col-md-6"><label for="input-rounded" class="col-sm-12 form-control-label">Select Time</label><input type="time" name="availabletime[]" id="'+counter+'" class="form-control" value="09:00:00" required onBlur="checktime(this.id)"></div><div class="col-md-6"><label for="input-rounded" class="col-sm-12 form-control-label"> End Time </label><input type="text" disabled class="form-control" id="endtime'+counter+'" ></div></div></td>';
        
        
         cols += '<td><label for="input-rounded" class="col-sm-12 form-control-label">Action</label><input type="button" class="ibtnDel btn btn-md btn-danger "  value="Delete"></td>';

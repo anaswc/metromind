@@ -1580,7 +1580,8 @@ class Doctor_model extends CI_Model {
 				
 				$appointmentEndTime 	= date("g:i a",strtotime(date($this->appointmentEndTime)));
 				
-				$notificationTitle = 'Your online appointment with '.$doctorName.'('.$doctorUniqueId.') is confirmed on '.$appointmentDate.' at '.$appointmentStartTime.' - '.$appointmentEndTime.' - '.$this->appointmentSession;
+				$notificationTitle = 'Your online appointment with '.$doctorName.'('.$doctorUniqueId.') is confirmed on '.$appointmentDate.' at '.$appointmentStartTime.' - '.$appointmentEndTime;
+				// $notificationTitle = 'Your online appointment with '.$doctorName.'('.$doctorUniqueId.') is confirmed on '.$appointmentDate.' at '.$appointmentStartTime.' - '.$appointmentEndTime.' - '.$this->appointmentSession;
 
 			}else if($this->status == 2){
 

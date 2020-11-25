@@ -1898,18 +1898,17 @@ public function cancel_appointment_patient($appointmentId)
 
 					$communicationDuration = explode(':',$this->communicationDuration);
 
-					// if($communicationDuration[0] < 10){
+					if($communicationDuration[0] < 10){
 
-					// 	$isCompleted = 0;
+						$isCompleted = 0;
 
-					// 	$completedTime = '0000-00-00 00:00:00;';
+						$completedTime = '0000-00-00 00:00:00;';
 
-					// }else{
+					}else{
 
-					// 	$isCompleted = 1;
+						$isCompleted = 1;
 
-					// }
-					$isCompleted = 1;
+					}
 
 					$data = array(
 
@@ -2013,6 +2012,47 @@ public function cancel_appointment_patient($appointmentId)
 			}
 
 		}
+
+
+		// ==================================================
+		// $this->db->select('appointmentId,patientId,doctorId,communicationDuration,patientCreditId,communicationEndTime,communicationStartTime');
+
+		// $this->db->from('axpatientrecords');
+
+		// $this->db->where('patientRecordId',$patientRecordId);
+		// $query = $this->db->get();
+
+		// if($query->num_rows() > 0){
+
+		// 	$row_array = $query->row_array();
+
+		// 	$this->db->select('doctorSessionDuration');
+		// 	$this->db->from('axdoctors');
+		// 	$this->db->where('doctorId',$row_array['doctorId']);
+		// 	$docdetails = $this->db->get()->row_array();
+		// 	$sessionDuration=$docdetails['doctorSessionDuration']/2;
+
+		// 	$this->db->select('communicationDuration,communicationStartTime,communicationEndTime');
+		// 	$this->db->from('axpatientrecords');
+		// 	$this->db->where('appointmentId',$row_array['appointmentId']);
+		// 	$comduratn = $this->db->get()->result_array();
+		// 	$time = "00:00";
+		// 	foreach ($comduratn as $key) {}
+
+		// 	$communicationDuration1 = (strtotime() - strtotime()) / 60;
+		// $data = array(
+		// 	'total_Duration' 		=> 'd',
+
+		// );
+
+		// $this->db->set($data);
+		// $this->db->where('patientRecordId', $patientRecordId);
+		// $this->db->update("axpatientrecords", $data); 
+		// }
+		
+		// ======================================================
+
+
 
 		return $patientRecordId ;
 
