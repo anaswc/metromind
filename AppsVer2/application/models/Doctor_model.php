@@ -841,7 +841,7 @@ class Doctor_model extends CI_Model {
 
 		if($uniqueId == '') return 0; 
 
-		$config['upload_path']   	= '../uploads/doctors/'; 
+		$config['upload_path']   	= '/var/www/html/metromind/metromind-backend-php/MetromindWebNew/uploads/doctors'; 
 
 		$config['allowed_types'] 	= 'jpg|gif|png|jpeg|JPG|PNG'; 
 
@@ -1305,12 +1305,12 @@ class Doctor_model extends CI_Model {
 			return 0;
 
 
-		$this->db->select('appointmentStartTime,appointmentEndTime');
+		$this->db->select('appointmentStartTime,appointmentEndTime,status,isCompleted');
 		$this->db->from('axappointments');
 		$this->db->where('doctorId',$doctorId);
 		$this->db->where('patientId',$patientId);
 		$this->db->where('appointmentDate', date("Y-m-d"));
-		$this->db->where('status',1);
+		//$this->db->where('status',1);
 		$query = $this->db->get();
 		return $query->result_array();
 
