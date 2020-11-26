@@ -79,6 +79,7 @@ $db['default'] = array(
 	 'username' => 'root',
 	// 'username' => 'metromindapp_app_full',
 	 'password' => '23!45f!vWDDQdpj8',
+	  'password' => '',
 	 //'password' => 'h7$enjY?CBD?',
 	'database' => 'metromindapp_app_full',
 	'dbdriver' => 'mysqli',
