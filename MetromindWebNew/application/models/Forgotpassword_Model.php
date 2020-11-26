@@ -69,33 +69,19 @@
 
 		// $this->email->subject('Forgot Password');
 
+		$this->load->library('email');
 
+		 $this->load->config('email');
+		$this->email->initialize(array($config));
 
+// $this->email->initialize(array( ));
+		
 
-$this->load->library('email');
-
-        $this->email->initialize(array(
-            'protocol' => 'smtp',
-            'smtp_host' => 'sh101.subhosting.net',
-            'smtp_user' => 'info@drupal.webcastle.in',
-            'smtp_pass' => 'kL?[Y_.f2aE]',
-            'smtp_port' => 587,
-            'crlf' => "\r\n",
-            'newline' => "\r\n"
-        ));
 $message 			= "";		
-        $this
-            ->email
-            ->from($from, 'METRO MIND');
-        $this
-            ->email
-            ->to($to);
-        $this
-            ->email
-            ->subject('Forgot Password');
-        $this
-            ->email
-            ->set_mailtype("html");
+        $this->email->from($from, 'METRO MIND');
+        $this->email->to($to);
+        $this->email->subject('Forgot Password');
+        $this->email->set_mailtype("html");
 
 
 
@@ -141,7 +127,10 @@ $message 			= "";
 		 $this->email->message($message); 
 
 		 //Send mail 
-		
+		//  $this->email->send();
+		//  echo $this->email->print_debugger();
+		//  exit(0);
+
 		 if($this->email->send()) 
 
 			return 1;
