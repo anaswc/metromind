@@ -577,18 +577,20 @@ class Login_model extends CI_Model
 
         $to = $emailId;
 
-        $this
-            ->load
-            ->library('email');
+        // $this ->load ->library('email');
+        $this->load->library('email');
 
-        $this
-            ->email
-            ->initialize(array(
+		//  $this->load->config('email');
+		// $this->email->initialize(array($config));
+
+        $this->email->initialize(array(
             'protocol' => 'smtp',
-            'smtp_host' => 'sh101.subhosting.net',
-            'smtp_user' => 'info@drupal.webcastle.in',
-            'smtp_pass' => 'kL?[Y_.f2aE]',
-            'smtp_port' => 587,
+            'smtp_host' => 'smtp.googlemail.com',
+            'smtp_user' => 'usert0562@gmail.com',
+            'smtp_pass' => 'user#test@009',
+            'smtp_port' => 465,
+            'smtp_crypto'=>'ssl',
+            '_smtp_auth'=>TRUE,
             'crlf' => "\r\n",
             'newline' => "\r\n"
         ));
