@@ -118,7 +118,7 @@ function submitSearch()
                         <div class="form-group m-r-15">
       <input type="text" class="form-control input-rounded" name="firstName" placeholder="Patient Name"  value="<?php echo $this->appointments_model->firstName?>"></div>
       
-      <div class="form-group m-r-15"> 
+      <!-- <div class="form-group m-r-15"> 
 					   <select name="appointmentSession" class="form-control input-rounded">
 					   <option value="" <?php  if($this->appointments_model->appointmentSession==""){ echo "selected"; }?>>--Select--</option>
                            <option value="Morning (IST)" <?php  if($this->appointments_model->appointmentSession=="Morning (IST)"){ echo "selected"; }?>>Morning (IST)</option>
@@ -126,7 +126,7 @@ function submitSearch()
                            <option value="Evening (IST)" <?php  if($this->appointments_model->appointmentSession=="Evening (IST)"){ echo "selected"; }?>>Evening (IST)</option>
                            
                              
-                            </select></div>
+                            </select></div> -->
                        <div class="form-group m-r-15">
       <input type="date" class="form-control input-rounded" name="appointmentDate" placeholder="Appointment Date"  value="<?php echo date('Y-m-d')?>"></div>
       <div class="form-group m-r-15"> 
@@ -174,7 +174,7 @@ function submitSearch()
                          <th>Requested Session</th>
 						<th>Appointment Date</th>
 						
-					  <th>Appointment Session</th>
+					  <!-- <th>Appointment Session</th> -->
                        <th>Start time</th>
                       <th>End time</th>
                       <th>Insert Date</th>
@@ -244,7 +244,7 @@ function submitSearch()
                       <td ><?php echo changeDateFormat($row['requestDate'])?></td>
                   <td ><?php echo $row['requestSession']?></td>
                  <td ><?php echo changeDateFormat($row['appointmentDate'])?></td>
-                  <td ><?php echo $row['appointmentSession']?></td>
+                  <!-- <td ><?php// echo $row['appointmentSession']?></td> -->
                   
                   <td ><?php echo date('h:i:s a',strtotime($row['appointmentStartTime']));?></td>
                   <td ><?php echo date('h:i:s a',strtotime($row['appointmentEndTime']));?></td>

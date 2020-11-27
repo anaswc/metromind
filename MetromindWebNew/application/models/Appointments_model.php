@@ -285,15 +285,18 @@ class  Appointments_model extends CI_Model {
 			$now->setTimezone(new DateTimezone('Asia/Kolkata'));
 
 			$createdDate =  $now->format('Y-m-d H:i:s');
-			
+			$strttime=date('H:i:A', strtotime($this->input->post('appointmentStartTime'))); 
+			$endaptime=date('H:i:A', strtotime($appointmentEndTime)); 
+			$appointmentSession=$strttime.' - '.$endaptime;
+
 			$data = array(
 				
 				'doctorId' => $this->doctorId,
 				'patientId' =>$this->input->post('patientId'),
 				'requestDate'=>$this->input->post('appointmentDate'),
-				'requestSession' =>$this->input->post('appointmentSession'),
+				'requestSession' =>$appointmentSession,
 				'appointmentDate'    => $this->input->post('appointmentDate'),
-				'appointmentSession'    => $this->input->post('appointmentSession'),
+				'appointmentSession'    => $appointmentSession,
 				'appointmentStartTime'      => $this->input->post('appointmentStartTime'),
 				'appointmentEndTime'      => $appointmentEndTime,
 				'insDate'      => $createdDate,
@@ -335,12 +338,15 @@ class  Appointments_model extends CI_Model {
 
 			$modifiedDate =  $now->format('Y-m-d H:i:s');
 			
-			
+			$strttime=date('H:i:A', strtotime($this->input->post('appointmentStartTime'))); 
+			$endaptime=date('H:i:A', strtotime($appointmentEndTime)); 
+			$appointmentSession=$strttime.' - '.$endaptime;
+
 			$data = array(
 				
 				'doctorId' => $this->input->post('doctorId'),
 				'appointmentDate'    => $this->input->post('appointmentDate'),
-				'appointmentSession'    => $this->input->post('appointmentSession'),
+				'appointmentSession'    => $appointmentSession,
 				'appointmentStartTime'      => $this->input->post('appointmentStartTime'),
 				'appointmentEndTime'      => $appointmentEndTime,
 				'modifiedDate'      => $modifiedDate,

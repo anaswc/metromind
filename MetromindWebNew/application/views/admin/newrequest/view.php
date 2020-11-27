@@ -178,10 +178,10 @@
                                                                     <td><?php echo $appointment_item['firstName']. ' '.$appointment_item['lastName']; ?></td>
                                                                 </tr>
                                                                 
-                                                                 <tr>
+                                                                 <!-- <tr>
                                                                     <th scope="row">Requested session</th>
-                                                                    <td><?php echo $appointment_item['requestSession']; ?></td>
-                                                                </tr>
+                                                                    <td><?php// echo $appointment_item['requestSession']; ?></td>
+                                                                </tr> -->
                                                                 
                                                                 <tr>
                                                                     <th scope="row">Appointment session</th>

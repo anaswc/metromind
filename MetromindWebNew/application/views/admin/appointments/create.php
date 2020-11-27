@@ -183,7 +183,7 @@ function checkAvailability(doctorId){
 		var evngto="21:00:00";
 		 var doctorId=document.getElementById('doctorId').value;
 		 var appointmentDate=document.getElementById('appointmentDate').value;
- 		 var appointmentSession=document.getElementById('appointmentSession').value;
+ 		//  var appointmentSession=document.getElementById('appointmentSession').value;
 		 var appointmentStartTime=document.getElementById('appointmentStartTime').value;
 		 
 		 
@@ -195,11 +195,11 @@ function checkAvailability(doctorId){
 	 return false;
 	}
 	  
-	  if(appointmentSession == '' )
-  {
-	 alert("Choose a session for the appointment!!") ;
-	 return false;
-	  }
+// 	  if(appointmentSession == '' )
+//   {
+// 	 alert("Choose a session for the appointment!!") ;
+// 	 return false;
+// 	  }
 	//alert(appointmentSession);  
 	  
 	    
@@ -214,7 +214,7 @@ function checkAvailability(doctorId){
             url: "<?php echo base_url(); ?>admin/appointment/get_doctorSessions", 
 			async:false,
             type: "POST",             // Type of request to be send, called as method
-            data : {doctorId:doctorId,apptDay:apptDay,appointmentSession:appointmentSession}, // Data sent to server, a set of key/value pairs (i.e. form fields and values)
+            data : {doctorId:doctorId,apptDay:apptDay}, // Data sent to server, a set of key/value pairs (i.e. form fields and values)
             dataType : "JSON",
             success:function(data)
             {    
@@ -232,51 +232,51 @@ function checkAvailability(doctorId){
 			  
         }
     );
-	if(flag ==1){
+	// if(flag ==1){
 		
-		alert("Doctor is not available for  "+apptDay +" " + appointmentSession);
-		 return false ;}
+	// 	alert("Doctor is not available for  "+apptDay +" " + appointmentSession);
+	// 	 return false ;}
 		 
 	
 		 
 		 
-		if(appointmentSession =='Morning (IST)' ){
+		// if(appointmentSession =='Morning (IST)' ){
 	
-		if(appointmentStartTime >= morngfrom  && appointmentStartTime <= noonfrom){
+		// if(appointmentStartTime >= morngfrom  && appointmentStartTime <= noonfrom){
 			
-			return true;
-			}
-			else{
-				alert("Morning section starts from 09:00:00 AM");
-				return false;
-				}
-		}	
+		// 	return true;
+		// 	}
+		// 	else{
+		// 		alert("Morning section starts from 09:00:00 AM");
+		// 		return false;
+		// 		}
+		// }	
 		
-		if(appointmentSession =='After Noon (IST)' ){
+		// if(appointmentSession =='After Noon (IST)' ){
 	
-		if(appointmentStartTime >= noonfrom  && appointmentStartTime <= evngfrom){
+		// if(appointmentStartTime >= noonfrom  && appointmentStartTime <= evngfrom){
 			
-			return true;
-			}
-			else{
-				alert("After noon section starts from 01:00:00 PM");
-				return false;
-				}
+		// 	return true;
+		// 	}
+		// 	else{
+		// 		alert("After noon section starts from 01:00:00 PM");
+		// 		return false;
+		// 		}
 			
-		}	
+		// }	
  
-		if(appointmentSession =='Evening (IST)' ){
+		// if(appointmentSession =='Evening (IST)' ){
 	
-		if(appointmentStartTime >= evngfrom  && appointmentStartTime <= evngto){
+		// if(appointmentStartTime >= evngfrom  && appointmentStartTime <= evngto){
 			
-			return true;
-			}
-			else{
-				alert("Evening section starts from 04:00:00 PM");
-				return false;
-				}
+		// 	return true;
+		// 	}
+		// 	else{
+		// 		alert("Evening section starts from 04:00:00 PM");
+		// 		return false;
+		// 		}
 			
-		}	
+		// }	
 		
 	}
 		
@@ -285,7 +285,7 @@ function checkappoinmentTime(){
 	var appointmentId=document.getElementById('appointmentId').value;
 	var doctorId=document.getElementById('doctorId').value;
 		 var appointmentDate=document.getElementById('appointmentDate').value;
- 		 var appointmentSession=document.getElementById('appointmentSession').value;
+ 		//  var appointmentSession=document.getElementById('appointmentSession').value;
 		 var appointmentStartTime=document.getElementById('appointmentStartTime').value;
 		 //alert(appointmentStartTime);
 		  var result;
@@ -333,7 +333,7 @@ function checkappoinmentTime(){
 		var appointmentId=document.getElementById('appointmentId').value;
 		var patientId=document.getElementById('patientId').value;
 		 var appointmentDate=document.getElementById('appointmentDate').value;
- 		 var appointmentSession=document.getElementById('appointmentSession').value;
+ 		//  var appointmentSession=document.getElementById('appointmentSession').value;
 		 var appointmentStartTime=document.getElementById('appointmentStartTime').value;
 		 //alert(appointmentStartTime);
 		  var res;
@@ -436,7 +436,7 @@ function checkappoinmentTime(){
                                                     <th class="text-center">Doctor</th>
                                                     <th class="text-center">Patient</th>
                                                     <th class="text-center">Date</th>
-                                                    <th class="text-center">Session</th>
+                                                    <!-- <th class="text-center">Session</th> -->
                                                      <th class="text-center">Time</th>
                                                     
                                                 </tr>
@@ -475,22 +475,22 @@ function checkappoinmentTime(){
                               </td>
                               
 <td><input type="date" name="appointmentDate" id="appointmentDate" min="<?php echo date('Y-m-d') ?>" class="form-control"  value="" required onChange="checkAvailability();"></td>
-<td>
+<!-- <td>
 
  <select name="appointmentSession" id="appointmentSession"  class="form-control" required>
                                 <option value="">Select session</option>
                                 <?php
-								global $arrSessions;
-								 if(count($arrSessions)>0){
-									foreach($arrSessions as $key => $value){
+								// global $arrSessions;
+								//  if(count($arrSessions)>0){
+								// 	foreach($arrSessions as $key => $value){
 										
 									 ?>
-                                <option value="<?php echo $value ?>"><?php echo $value ?></option>
-                                <?php }
-								}?>
+                                <option value="<?php// echo $value ?>"><?php// echo $value ?></option>
+                                <?php // }
+							//	}?>
                               </select>
  
- </td>
+ </td> -->
 <td> <input type="time" name="appointmentStartTime" id="appointmentStartTime" min="08:59:00" max="20:59:00" class="form-control" value="09:00:00" required></td>
                                                    
 
