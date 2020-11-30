@@ -214,6 +214,10 @@ function submitSearch()
 						else if($row["status"]==2)
 						{
 							$row["status"]="Rejected";
+            }
+            else if($row["status"]==4)
+						{
+							$row["status"]="Cancelled";
 						}
 						
 						if($row["isCompleted"]==1)
