@@ -2086,7 +2086,7 @@ class MetroMind extends CI_Controller
 
 			$session_details_with_client=$this->Doctor_model->get_today_doctor_sessions_with_patient($this->Doctor_model->doctorId,$patient_details['patientId']);
 
-$is_session_with_client=0;
+			$is_session_with_client=0;
 			$sessions_with_client=array();
 
 			if (!$session_details_with_client) {
@@ -2095,23 +2095,17 @@ $is_session_with_client=0;
 			else{
 				$is_session_with_client=1;
 				$i=0;
-			foreach ($session_details_with_client as $row){
-
-
-				$session_details_with_client[$i]['date']=date("Y-m-d");
-
-				
-
-$i++;
-
-
-
-			}
+			// foreach ($session_details_with_client as $row){
+				// 	$session_details_with_client[$i]['date']=date("Y-m-d");
+				// 	$i++;
+			// }
 			}
 
 			
 			
 			$sessions_with_client=$session_details_with_client;
+
+			//$upcoming_sessions="hi";
 
 			//$is_session_with_client=$session_details_with_client;
 			
@@ -2277,7 +2271,7 @@ $i++;
 
 				$patientDeviceOS  = $this->Patient_model->get_patient_device_os($this->input->post_get('uniqueId'));
 
-				$response = ['status' => $status, 'token' => $token, 'result' => array(), 'doctorId' => $result['doctorId'], 'doctorUniqueId'  => $result['doctorUniqueId'], 'doctorName'  => $result['doctorName'], 'doctorEmail'  => $result['doctorEmail'], 'doctorMobile'  => $result['doctorMobile'], 'qualification'  => $result['qualification'], 'qualification1'  => $result['qualification1'], 'doctorImageUrl'  => $result['doctorImageUrl'], 'experience'  => $result['experience'], 'knownLanguages'  => $result['knownLanguages'], 'specialization'  => $result['specialization'], 'specialityId'  => $result['specialityId'], 'youtubeLink'  => $result['youtubeLink'], 'doctorAddress'  => $result['doctorAddress'], 'communicationMode'  => $result['communicationMode'], 'doctorFee'  => $result['doctorFee'], 'doctorSessionDuration'  => $result['doctorSessionDuration'], 'fcmToken'  => $result['fcmToken'], 'chatRoomNumber'  => $result['chatRoomNumber'], 'medicalRegistrationNumber'  => $result['medicalRegistrationNumber'], 'loginStatus'  => $result['loginStatus'], 'specialityName'  => $result['specialityName'], 'isScheduleEnabled'  => $result['isScheduleEnabled'], 'isCallEnabled'  => $result['isCallEnabled'], 'isViewDetailInfo'  => $result['isViewDetailInfo'], 'isShowGreen'  => $result['isShowGreen'], 'doctorDeviceOS'  => $result['doctorDeviceOS'], 'num_of_rating'  => $result['num_of_rating'], 'overall_rating'  => $result['overall_rating'], 'isTrialCompleted'  => $result['isTrialCompleted'], 'hasValidCredits'  => $result['hasValidCredits'], 'patientCreditId'  => $result['patientCreditId'], 'hasValidPackage'  => $result['hasValidPackage'], 'subscriptionId'  => $result['subscriptionId'], 'noOfSession'  => $result['noOfSession'], 'sessionDuration'  => $result['sessionDuration'], 'num_of_consultation'  => $result['num_of_consultation'], 'medicalLicense'  => $result['medicalLicense'], 'isVerifiedLicense'  => $result['isVerifiedLicense'], 'counsellingCertificate'  => $result['counsellingCertificate'], 'isVerifiedCertificate'  => $result['isVerifiedCertificate'], 'voipToken'  => $result['voipToken'], 'isAvailable' => $isAvailable, 'patientDeviceOS' => $patientDeviceOS,'is_session_with_client'=>$is_session_with_client,'sessions_with_client'=>$sessions_with_client, 'today_available_sessions' => $today_available_sessions, 'available_sessions' => $available_sessions, 'packages' => $packages, 'rating' => $rating, 'isFavourite' => $isFavourite, 'unReadCount' => $unReadCount, 'message' => $message];
+				$response = ['status' => $status, 'token' => $token, 'result' => array(), 'sessions_with_client'=>$sessions_with_client,'doctorId' => $result['doctorId'], 'doctorUniqueId'  => $result['doctorUniqueId'], 'doctorName'  => $result['doctorName'], 'doctorEmail'  => $result['doctorEmail'], 'doctorMobile'  => $result['doctorMobile'], 'qualification'  => $result['qualification'], 'qualification1'  => $result['qualification1'], 'doctorImageUrl'  => $result['doctorImageUrl'], 'experience'  => $result['experience'], 'knownLanguages'  => $result['knownLanguages'], 'specialization'  => $result['specialization'], 'specialityId'  => $result['specialityId'], 'youtubeLink'  => $result['youtubeLink'], 'doctorAddress'  => $result['doctorAddress'], 'communicationMode'  => $result['communicationMode'], 'doctorFee'  => $result['doctorFee'], 'doctorSessionDuration'  => $result['doctorSessionDuration'], 'fcmToken'  => $result['fcmToken'], 'chatRoomNumber'  => $result['chatRoomNumber'], 'medicalRegistrationNumber'  => $result['medicalRegistrationNumber'], 'loginStatus'  => $result['loginStatus'], 'specialityName'  => $result['specialityName'], 'isScheduleEnabled'  => $result['isScheduleEnabled'], 'isCallEnabled'  => $result['isCallEnabled'], 'isViewDetailInfo'  => $result['isViewDetailInfo'], 'isShowGreen'  => $result['isShowGreen'], 'doctorDeviceOS'  => $result['doctorDeviceOS'], 'num_of_rating'  => $result['num_of_rating'], 'overall_rating'  => $result['overall_rating'], 'isTrialCompleted'  => $result['isTrialCompleted'], 'hasValidCredits'  => $result['hasValidCredits'], 'patientCreditId'  => $result['patientCreditId'], 'hasValidPackage'  => $result['hasValidPackage'], 'subscriptionId'  => $result['subscriptionId'], 'noOfSession'  => $result['noOfSession'], 'sessionDuration'  => $result['sessionDuration'], 'num_of_consultation'  => $result['num_of_consultation'], 'medicalLicense'  => $result['medicalLicense'], 'isVerifiedLicense'  => $result['isVerifiedLicense'], 'counsellingCertificate'  => $result['counsellingCertificate'], 'isVerifiedCertificate'  => $result['isVerifiedCertificate'], 'voipToken'  => $result['voipToken'], 'isAvailable' => $isAvailable, 'patientDeviceOS' => $patientDeviceOS,'is_session_with_client'=>$is_session_with_client, 'today_available_sessions' => $today_available_sessions,'available_sessions' => $available_sessions, 'packages' => $packages, 'rating' => $rating, 'isFavourite' => $isFavourite, 'unReadCount' => $unReadCount, 'message' => $message];
 
 				$this->response($response, 200);
 

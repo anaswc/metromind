@@ -1305,11 +1305,11 @@ class Doctor_model extends CI_Model {
 			return 0;
 
 
-		$this->db->select('appointmentStartTime,appointmentEndTime,status,isCompleted');
+		$this->db->select('appointmentStartTime,appointmentEndTime,appointmentDate AS date,status,isCompleted');
 		$this->db->from('axappointments');
 		$this->db->where('doctorId',$doctorId);
 		$this->db->where('patientId',$patientId);
-		$this->db->where('appointmentDate', date("Y-m-d"));
+		$this->db->where('appointmentDate >=', date("Y-m-d"));
 		//$this->db->where('status',1);
 		$query = $this->db->get();
 		return $query->result_array();
