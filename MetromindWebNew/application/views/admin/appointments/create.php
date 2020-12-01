@@ -78,7 +78,7 @@ function checkAvailability(doctorId){
 						
 				 
                                     html += '<tr>'
-                                         html +='<td>'+data[i].appointmentSession+'</td>'
+                                         html +='<td>'+data[i].requestSession+'</td>'
                                          html +='<td>'+data[i].appointmentStartTime+'</td>'
                                           html +='<td>'+data[i].appointmentEndTime+'</td>'
                                      html +='</tr>'
@@ -148,7 +148,7 @@ function checkAvailability(doctorId){
 						
 				 
                                     html += '<tr>'
-                                         html +='<td>'+data[i].appointmentSession+'</td>'
+                                         html +='<td>'+data[i].requestSession+'</td>'
                                          html +='<td>'+data[i].appointmentStartTime+'</td>'
                                           html +='<td>'+data[i].appointmentEndTime+'</td>'
                                      html +='</tr>'
