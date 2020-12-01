@@ -129,12 +129,12 @@ function submitSearch()
                             </select></div> -->
                        <div class="form-group m-r-15">
       <input type="date" class="form-control input-rounded" name="appointmentDate" placeholder="Appointment Date"  value="<?php echo date('Y-m-d')?>"></div>
-      <div class="form-group m-r-15"> 
+      <!-- <div class="form-group m-r-15"> 
 					   <select name="isCompleted" class="form-control input-rounded">
 					   <option value="" <?php  if($this->appointments_model->isCompleted==""){ echo "selected"; }?>>--Select--</option>
                            <option value="1" <?php  if($this->appointments_model->isCompleted==1){ echo "selected"; }?>>Completed</option>
                             
-                            </select></div>
+                            </select></div> -->
                         
                          
                          

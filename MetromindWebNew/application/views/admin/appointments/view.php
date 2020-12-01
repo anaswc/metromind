@@ -146,10 +146,10 @@
                                                                     <td><?php echo $appointment_item['doctorName']; ?></td>
                                                                 </tr>
                                                                
-                                                                <tr>
+                                                                <!-- <tr>
                                                                     <th scope="row">Requested date</th>
                                                                     <td><?php echo changeDateFormat($appointment_item['requestDate']); ?></td>
-                                                                </tr>
+                                                                </tr> -->
                                                                 <tr>
                                                                     <th scope="row">Appointment date</th>
                                                                     <td><?php echo changeDateFormat($appointment_item['appointmentDate']); ?></td>
@@ -178,14 +178,33 @@
                                                                     <td><?php echo $appointment_item['firstName']. ' '.$appointment_item['lastName']; ?></td>
                                                                 </tr>
                                                                 
-                                                                 <tr>
+                                                                 <!-- <tr>
                                                                     <th scope="row">Requested session</th>
                                                                     <td><?php echo $appointment_item['requestSession']; ?></td>
-                                                                </tr>
+                                                                </tr> -->
                                                                 
                                                                 <tr>
-                                                                    <th scope="row">Appointment session</th>
-                                                                    <td><?php echo $appointment_item['appointmentSession']; ?></td>
+                                                                    <th scope="row">Appointment Status</th>
+                                                                    <?php 
+                                                                    	if($appointment_item["status"]==1)
+                                                                        {
+                                                                            $appointment_item["status"]="Approved";
+                                                                        }
+                                                                        else if($appointment_item["status"]==0)
+                                                                        {
+                                                                            $appointment_item["status"]="Requested";
+                                                                        }
+                                                                        else if($appointment_item["status"]==2)
+                                                                        {
+                                                                            $appointment_item["status"]="Rejected";
+                                                            }
+                                                            else if($row["status"]==4)
+                                                                        {
+                                                                            $appointment_item["status"]="Cancelled";
+                                                                        }
+                                                                    
+                                                                    ?>
+                                                                    <td><?php echo $appointment_item['status']; ?></td>
                                                                 </tr>
                                                                 
                                                                  <tr>

@@ -183,10 +183,10 @@
                                                                     <td><?php// echo $appointment_item['requestSession']; ?></td>
                                                                 </tr> -->
                                                                 
-                                                                <tr>
+                                                                <!-- <tr>
                                                                     <th scope="row">Appointment session</th>
                                                                     <td><?php echo $appointment_item['appointmentSession']; ?></td>
-                                                                </tr>
+                                                                </tr> -->
                                                                 
                                                                  <tr>
                                                                     <th scope="row">End Time </th>

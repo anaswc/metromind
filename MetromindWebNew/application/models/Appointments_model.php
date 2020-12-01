@@ -16,6 +16,7 @@ class  Appointments_model extends CI_Model {
 		$this->appointmentSession     ="";
 		$this->isCompleted     ="";
 		$this->status     ="";
+		
 				
 		$this->completedTime     ="";
 		$this->sortColumn 	  		= '';
@@ -67,7 +68,12 @@ class  Appointments_model extends CI_Model {
 				
 				if(trim($this->isCompleted  )!= "")
 				$this->db->where('axappointments.isCompleted ', $this->isCompleted);
-				
+
+
+				if(trim($this->status) != "")
+			
+					$this->db->where('axappointments.status', $this->status);
+					
 			if($this->doctorId != "")
 				$this->db->where('axappointments.doctorId', $this->doctorId);
 				
@@ -88,8 +94,7 @@ class  Appointments_model extends CI_Model {
 			if(trim($this->isCompleted) != "")
 				$this->db->like('axappointments.isCompleted', $this->isCompleted);
 			
-			if(trim($this->appointmentSession) != "")
-				$this->db->like('axappointments.appointmentSession', $this->appointmentSession);
+			
 				
 			if($this->sortColumn == '')
 				$this->sortColumn = "appointmentId";
@@ -285,8 +290,8 @@ class  Appointments_model extends CI_Model {
 			$now->setTimezone(new DateTimezone('Asia/Kolkata'));
 
 			$createdDate =  $now->format('Y-m-d H:i:s');
-			$strttime=date('H:i:A', strtotime($this->input->post('appointmentStartTime'))); 
-			$endaptime=date('H:i:A', strtotime($appointmentEndTime)); 
+			$strttime=date('h:i A', strtotime($this->input->post('appointmentStartTime'))); 
+			$endaptime=date('h:i A', strtotime($appointmentEndTime)); 
 			$appointmentSession=$strttime.' - '.$endaptime;
 
 			$data = array(
@@ -338,10 +343,10 @@ class  Appointments_model extends CI_Model {
 
 			$modifiedDate =  $now->format('Y-m-d H:i:s');
 			
-			$strttime=date('H:i:A', strtotime($this->input->post('appointmentStartTime'))); 
-			$endaptime=date('H:i:A', strtotime($appointmentEndTime)); 
+			$strttime=date('h:i A', strtotime($this->input->post('appointmentStartTime'))); 
+			$endaptime=date('h:i A', strtotime($appointmentEndTime)); 
 			$appointmentSession=$strttime.' - '.$endaptime;
-
+		
 			$data = array(
 				
 				'doctorId' => $this->input->post('doctorId'),
@@ -350,6 +355,7 @@ class  Appointments_model extends CI_Model {
 				'appointmentStartTime'      => $this->input->post('appointmentStartTime'),
 				'appointmentEndTime'      => $appointmentEndTime,
 				'modifiedDate'      => $modifiedDate,
+				'status'		=> $this->input->post('status')
 				
 			);
 			//print_r($data);exit;
