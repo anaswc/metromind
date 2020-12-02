@@ -2595,7 +2595,7 @@ class Doctor_model extends CI_Model {
 
 			if($this->status == 1){
 
-				$notificationTitle = 'Your online appointment with '.$doctorName.'('.$doctorUniqueId.') is confirmed !';
+				$notificationTitle = 'Your online appointment with '.$doctorName.'('.$doctorUniqueId.') is confirmed! Please make payment';
 
 			}else if($this->status == 2){
 
