@@ -497,13 +497,13 @@ class Patient_model extends CI_Model {
 
 		$valid = 1;			
 
-		if($this->firstName == '')			
+		// if($this->firstName == '')			
 
-			return 0;	
+		// 	return 0;	
 
-		if($this->lastName == '')			
+		// if($this->lastName == '')			
 
-			return 0;	
+		// 	return 0;	
 
 		/*if($this->patientEmail == '')			
 
