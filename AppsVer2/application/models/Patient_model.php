@@ -2768,9 +2768,85 @@ public function cancel_appointment_patient($appointmentId)
 
 		}
 
-		return $paymentId ;
+
+		$this->db->select('patientId,doctorId');
+		$this->db->from("axpayments");
+		$this->db->where('paymentId', $paymentId);
+		$this->db->where('paymentStatus', 1);
+		$query = $this->db->get();
+		$patientId 		= '';
+		$doctorId 		= '';
+		if($query->num_rows() > 0){	
+			$row_array = $query->row_array();
+			$this->db->select('firstName,lastName,uniqueId');
+			$this->db->from("axpatient");
+			$this->db->where('patientId ',$row_array['patientId']);
+			$user = $this->db->get()->row_array();
+			$notificationTitle=$user['firstName']." ".$user['lastName']." (".$user['uniqueId'].") has completed the payment";
+
+			$data = array(
+				'patientId' 		=> $row_array['patientId'],
+				'doctorId' 			=> $row_array['doctorId'],
+				'notificationType' 	=> 8,
+				'notificationTitle' => $notificationTitle
+			);
+
+		$this->db->insert('axnotifications', $data);
+		$notification_id= $this->db->insert_id();
+		$this->notifydoctorFCM($notificationTitle,$row_array['doctorId']);
+	}
+	return $paymentId ;
 
 	}
+	public function notifydoctorFCM($notificationTitle,$doc_id)
+	{
+		if($doc_id == '')
+			return 0;
+		// if($uniqueId == '')
+		// 	return 0;
+		$this->db->select('uniqueId,fcmToken');
+
+		$this->db->from('axdoctors');
+
+		$this->db->where("doctorId ", $doc_id); 
+
+		$result_array = $this->db->get()->result_array();
+
+		if(count($result_array) > 0){
+			$this->uniqueId		= $result_array[0]["uniqueId"];
+			$fcmtoken		= $result_array[0]["fcmToken"];
+			if($fcmtoken <> ''){
+				$url = "https://fcm.googleapis.com/fcm/send";
+				$token = $fcmtoken;
+				$serverKey = 'AAAAy6LCT4s:APA91bGCsaS87ndfK2FppCbZRJjS-XQVxErQ8MsSUDm7dk-4U78HbbtFM-mMSgSR-rxzazhC3FJv5jNErAaoqY7OZ2gxoaCiNTyg67Ma_C99uh52IA1UbMCuHLtHHE_nULXF24JcLXAD';
+				$title = "Patient Completed Payment";
+				$body = $notificationTitle;
+				$notification = array('title' =>$title , 'body' => $body, 'sound' => 'default');
+				$data = array('title' =>$title , 'body' => $body,'doc_id'=>$doc_id, 'type' => 'general');
+				$arrayToSend = array('to' => $token, 'notification' => $notification,'data'=>$data,'priority'=>'high');
+  				$json = json_encode($arrayToSend);
+    			$headers = array();
+    			$headers[] = 'Content-Type: application/json';
+    			$headers[] = 'Authorization: key='. $serverKey;
+    			$ch = curl_init();
+    			curl_setopt($ch, CURLOPT_URL, $url);
+    			curl_setopt($ch, CURLOPT_CUSTOMREQUEST,"POST");
+    			curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
+    			curl_setopt($ch, CURLOPT_HTTPHEADER,$headers);
+    			curl_exec($ch);
+    			if ($response === FALSE) {
+    				die('FCM Send Error: ' . curl_error($ch));
+    			}
+    			curl_close($ch);
+			}
+			return 1;
+		}else{
+
+			return 0;	
+
+		}
+	}
+	// --------------------------------------------------------------------------
 
 	public function add_favourites_patient()
 

@@ -461,6 +461,93 @@ class  Appointments_model extends CI_Model {
 			$this->db->from("axappointments");
 			return $this->db->count_all_results();
 		}
+
+
+// =================================================
+public function getapproved_appointment_requests_in_next_hour($limit = NULL, $start = NULL)
+{	
+
+	$now = new DateTime();
+
+	$now->setTimezone(new DateTimezone('Asia/Kolkata'));
+
+	$createdDate =  $now->format('Y-m-d');
+	$createdTime =  $now->format('H:i:s');
+	$endtime = strtotime($createdTime) + 60*60;
+	$endtime = date('H:i:s', $endtime);
+	
+	$this->db->limit($limit, $start);
+	
+	$this->db->select('
+						axappointments.patientId,axappointments.doctorId,
+						axappointments.requestDate,axappointments.requestSession,
+						axappointments.appointmentDate,axappointments.appointmentSession,
+						axappointments.appointmentStartTime,axappointments.appointmentEndTime,
+						axappointments.appointmentNote,axappointments.insDate,
+						axappointments.status,axappointments.isCompleted,
+						axappointments.completedTime,axappointments.modifiedDate,
+						axappointments.appointmentId,
+						axdoctors.doctorName,
+						axpatient.firstName,axpatient.lastName,
+						
+
+						');
+	
+	$this->db->from('axappointments');
+	$this->db->join('axdoctors', 'axdoctors.doctorId = axappointments.doctorId', 'left');
+	
+	$this->db->join('axpatient', 'axpatient.patientId = axappointments.patientId', 'left');
+	
+	$this->db->where('axappointments.status', 1);
+	$this->db->where('axappointments.isCompleted', 0);
+	$this->db->where('axappointments.appointmentDate', $createdDate);
+	$this->db->where('axappointments.appointmentStartTime>=', $createdTime);
+	$this->db->where('axappointments.appointmentStartTime<=', $endtime);
+
+	if($this->appointmentId != "")
+		$this->db->where('axappointments.appointmentId', $this->appointmentId);
+	
+	if(trim($this->patientId  )!= "")
+		$this->db->where('axappointments.patientId ', $this->patientId );
+		
+	if($this->doctorId != "")
+		$this->db->where('axappointments.doctorId', $this->doctorId);
+		
+	if(trim($this->requestDate) != "")
+		$this->db->like('axappointments.requestDate', $this->requestDate);
+	if(trim($this->doctorName) != "")
+		$this->db->like('axdoctors.doctorName', $this->doctorName);
+	if(trim($this->firstName) != "")
+		$this->db->like('axpatient.firstName', $this->firstName);
+		
+		
+	if($this->requestedSession != ""){
+		
+		$this->db->where_in('axappointments.requestedSession', $this->requestedSession);	
+	}
+	if(trim($this->appointmentDate) != "")
+		$this->db->where('axappointments.appointmentDate', $this->appointmentDate);
+	if(trim($this->isCompleted) != "")
+		$this->db->where('axappointments.isCompleted', $this->isCompleted);
+	if(trim($this->completedTime) != "")
+		$this->db->like('axappointments.completedTime', $this->completedTime);
+	if(trim($this->appointmentSession) != "")
+		$this->db->like('axappointments.appointmentSession', $this->appointmentSession);
+		
+	if($this->sortColumn == '')
+		$this->sortColumn = "appointmentId";
+	
+	if($this->sortDirection == '')
+		$this->sortDirection = "DESC";	
+				
+	$this->db->order_by("$this->sortColumn", "$this->sortDirection");
+	
+	$query = $this->db->get();
+	//echo $this->db->last_query(); exit; 
+
+	return $query->result_array();
+
+}
 		
 		
 }

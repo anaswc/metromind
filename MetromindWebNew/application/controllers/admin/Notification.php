@@ -27,7 +27,7 @@ class Notification extends CI_controller{
 	 }
 
 	public function notifytodayappointment(){
-			$counts=$this->appointments_model->getapproved_appointment_requests();
+			$counts=$this->appointments_model->getapproved_appointment_requests_in_next_hour();
 			foreach ($counts as $value) {
 				$patient=$this->notification_model->getPatient_id($value['patientId']);
 
