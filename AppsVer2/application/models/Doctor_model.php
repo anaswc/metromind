@@ -2637,7 +2637,7 @@ class Doctor_model extends CI_Model {
 
 								"message" 			=> 'Appointment Notification.',
 
-								'title' 			=> $notificationTitle,
+								'body' 			=> $notificationTitle,
 
 								'doctorId' 			=> $this->input->post_get('uniqueId'),
 
