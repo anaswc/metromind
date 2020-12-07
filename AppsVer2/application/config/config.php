@@ -902,7 +902,12 @@ $config['directory_trigger'] = 'd';
 
 
 
-$config['log_threshold'] = 0;
+#$config['log_threshold'] = 0;
+$config['log_threshold'] = 4; // (1/2/3)
+$config['log_path'] = '/var/www/html/metromind/metromind-backend-php/AppsVer2/application/logs/';
+
+
+
 
 
 
@@ -946,7 +951,7 @@ $config['log_threshold'] = 0;
 
 
 
-$config['log_path'] = '';
+#$config['log_path'] = '';
 
 
 
