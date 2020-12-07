@@ -2813,7 +2813,9 @@ public function cancel_appointment_patient($appointmentId)
 		$result_array = $this->db->get()->result_array();
 
 		if(count($result_array) > 0){
-			$this->uniqueId		= $result_array[0]["uniqueId"];
+			if($result_array[0]["status"]===1)
+			{
+				$this->uniqueId		= $result_array[0]["uniqueId"];
 			$fcmtoken		= $result_array[0]["fcmToken"];
 			if($fcmtoken <> ''){
 				$url = "https://fcm.googleapis.com/fcm/send";
@@ -2840,6 +2842,9 @@ public function cancel_appointment_patient($appointmentId)
     			curl_close($ch);
 			}
 			return 1;
+			}
+
+			
 		}else{
 
 			return 0;	
