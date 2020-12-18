@@ -2813,8 +2813,7 @@ public function cancel_appointment_patient($appointmentId)
 		$result_array = $this->db->get()->result_array();
 
 		if(count($result_array) > 0){
-			if($result_array[0]["status"]===1)
-			{
+			
 				$this->uniqueId		= $result_array[0]["uniqueId"];
 			$fcmtoken		= $result_array[0]["fcmToken"];
 			if($fcmtoken <> ''){
@@ -2842,7 +2841,7 @@ public function cancel_appointment_patient($appointmentId)
     			curl_close($ch);
 			}
 			return 1;
-			}
+			
 
 			
 		}else{
