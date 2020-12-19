@@ -1807,7 +1807,7 @@ public function cancel_appointment_patient($appointmentId)
 	public function end_communication_log_patient($patientRecordId)
 
 	{
-		$doctorId 	= $this->Doctor_model->get_doctor_id_by_uniqueId(trim($this->input->post_get('uniqueId')));
+		$doctorId 	= $this->uniqueId;
 	echo $doctorId;
 	echo 'test';
 	die;
