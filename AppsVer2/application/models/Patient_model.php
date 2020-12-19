@@ -1818,7 +1818,7 @@ public function cancel_appointment_patient($appointmentId)
 			$doctorSessionDuration=$query['doctorSessionDuration'];
 
 
-
+print_r($query ); 
 	echo $doctorSessionDuration;
 	echo 'test';
 	die;
