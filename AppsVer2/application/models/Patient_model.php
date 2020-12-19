@@ -1813,9 +1813,18 @@ public function cancel_appointment_patient($appointmentId)
 			$this->db->from("axdoctors");
 
 			$this->db->where('uniqueId', $this->uniqueId);
-			$query = $this->db->get()->row_array();
+			$query = $this->db->get();
+			if($query->num_rows() > 0){	
 
-			$doctorSessionDuration=$query['doctorSessionDuration'];
+				$row_array = $query->row_array();
+				$doctorSessionDuration=$row_array['doctorSessionDuration'];
+			
+			}
+			else{
+				$doctorSessionDuration='nodata';
+			}
+
+			
 
 
 print_r($query ); 
