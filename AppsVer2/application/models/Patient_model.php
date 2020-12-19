@@ -1814,9 +1814,6 @@ public function cancel_appointment_patient($appointmentId)
 			$this->db->where('patientRecordId', $patientRecordId);
 
 			$query = $this->db->get();
-
-			
-
 			if($query->num_rows() > 0){	
 
 				$row_array = $query->row_array();
@@ -1844,7 +1841,7 @@ public function cancel_appointment_patient($appointmentId)
 			
 
 
-	echo $doc_id;
+	print_r($query);
 	echo 'test';
 	die;
 
