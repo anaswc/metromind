@@ -1808,9 +1808,9 @@ public function cancel_appointment_patient($appointmentId)
 
 	{
 		$doctorId 	= $this->Doctor_model->get_doctor_id_by_uniqueId(trim($this->input->post_get('uniqueId')));
-	echo $doc_id;
+	echo $doctorId;
 	die;
-	
+
 
 		if($patientRecordId == '') return 0;
 
