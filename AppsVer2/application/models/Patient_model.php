@@ -1807,8 +1807,19 @@ public function cancel_appointment_patient($appointmentId)
 	public function end_communication_log_patient($patientRecordId)
 
 	{
-		$doctorId 	= $this->uniqueId;
-	echo $doctorId;
+		
+		$this->db->select('doctorSessionDuration');
+
+			$this->db->from("axdoctors");
+
+			$this->db->where('uniqueId', $this->uniqueId);
+			$query = $this->db->get()->row_array();
+
+			$doctorSessionDuration=$query['doctorSessionDuration'];
+
+
+
+	echo $doctorSessionDuration;
 	echo 'test';
 	die;
 
