@@ -2814,34 +2814,7 @@ public function cancel_appointment_patient($appointmentId)
 
 		if(count($result_array) > 0){
 			
-				$this->uniqueId		= $result_array[0]["uniqueId"];
-			$fcmtoken		= $result_array[0]["fcmToken"];
-			if($fcmtoken <> ''){
-				$url = "https://fcm.googleapis.com/fcm/send";
-				$token = $fcmtoken;
-				$serverKey = 'AAAAy6LCT4s:APA91bGCsaS87ndfK2FppCbZRJjS-XQVxErQ8MsSUDm7dk-4U78HbbtFM-mMSgSR-rxzazhC3FJv5jNErAaoqY7OZ2gxoaCiNTyg67Ma_C99uh52IA1UbMCuHLtHHE_nULXF24JcLXAD';
-				$title = "Patient Completed Payment";
-				$body = $notificationTitle;
-				$notification = array('title' =>$title , 'body' => $body, 'sound' => 'default');
-				$data = array('title' =>$title , 'body' => $body,'doc_id'=>$doc_id, 'type' => 'general');
-				$arrayToSend = array('to' => $token, 'notification' => $notification,'data'=>$data,'priority'=>'high');
-  				$json = json_encode($arrayToSend);
-    			$headers = array();
-    			$headers[] = 'Content-Type: application/json';
-    			$headers[] = 'Authorization: key='. $serverKey;
-    			$ch = curl_init();
-    			curl_setopt($ch, CURLOPT_URL, $url);
-    			curl_setopt($ch, CURLOPT_CUSTOMREQUEST,"POST");
-    			curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
-    			curl_setopt($ch, CURLOPT_HTTPHEADER,$headers);
-    			curl_exec($ch);
-    			// if ($response === FALSE) {
-    			// 	die('FCM Send Error: ' . curl_error($ch));
-    			// }
-    			curl_close($ch);
-			}
-			return 1;
-			
+			push_notification_after_payment($result_array[0]["uniqueId"],$result_array[0]["fcmToken"]);
 
 			
 		}else{
@@ -2849,6 +2822,40 @@ public function cancel_appointment_patient($appointmentId)
 			return 0;	
 
 		}
+	}
+
+	public function push_notification_after_payment($cs_uniqueid,$cs_fcmtoken){
+
+		
+		
+		$this->uniqueId		= $cs_uniqueid;
+		$fcmtoken		= $cs_fcmtoken;
+		if($fcmtoken <> ''){
+			$url = "https://fcm.googleapis.com/fcm/send";
+			$token = $fcmtoken;
+			$serverKey = 'AAAAy6LCT4s:APA91bGCsaS87ndfK2FppCbZRJjS-XQVxErQ8MsSUDm7dk-4U78HbbtFM-mMSgSR-rxzazhC3FJv5jNErAaoqY7OZ2gxoaCiNTyg67Ma_C99uh52IA1UbMCuHLtHHE_nULXF24JcLXAD';
+			$title = "Patient Completed Payment";
+			$body = $notificationTitle;
+			$notification = array('title' =>$title , 'body' => $body, 'sound' => 'default');
+			$data = array('title' =>$title , 'body' => $body,'doc_id'=>$doc_id, 'type' => 'general');
+			$arrayToSend = array('to' => $token, 'notification' => $notification,'data'=>$data,'priority'=>'high');
+			  $json = json_encode($arrayToSend);
+			$headers = array();
+			$headers[] = 'Content-Type: application/json';
+			$headers[] = 'Authorization: key='. $serverKey;
+			$ch = curl_init();
+			curl_setopt($ch, CURLOPT_URL, $url);
+			curl_setopt($ch, CURLOPT_CUSTOMREQUEST,"POST");
+			curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
+			curl_setopt($ch, CURLOPT_HTTPHEADER,$headers);
+			curl_exec($ch);
+			// if ($response === FALSE) {
+			// 	die('FCM Send Error: ' . curl_error($ch));
+			// }
+			curl_close($ch);
+		}
+		return 1;
+
 	}
 	// --------------------------------------------------------------------------
 
