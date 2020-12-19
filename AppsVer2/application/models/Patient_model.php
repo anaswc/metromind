@@ -1807,12 +1807,25 @@ public function cancel_appointment_patient($appointmentId)
 	public function end_communication_log_patient($patientRecordId)
 
 	{
-		
-		$this->db->select('doctorSessionDuration');
+		$this->db->select('doctorId');
+
+			$this->db->from("axpatientrecords");
+
+			$this->db->where('patientRecordId', $patientRecordId);
+
+			$query = $this->db->get();
+
+			
+
+			if($query->num_rows() > 0){	
+
+				$row_array = $query->row_array();
+				$doc_id=$row_array['doctorId'];
+				$this->db->select('doctorSessionDuration');
 
 			$this->db->from("axdoctors");
 
-			$this->db->where('uniqueId', $this->uniqueId);
+			$this->db->where('doctorId', $doc_id);
 			$query = $this->db->get();
 			if($query->num_rows() > 0){	
 
@@ -1820,14 +1833,16 @@ public function cancel_appointment_patient($appointmentId)
 				$doctorSessionDuration=$row_array['doctorSessionDuration'];
 			
 			}
-			else{
-				$doctorSessionDuration='nodata';
 			}
 
+
+
+		
+		
+			
 			
 
 
-print_r($query ); 
 	echo $doctorSessionDuration;
 	echo 'test';
 	die;
