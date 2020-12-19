@@ -1840,8 +1840,7 @@ public function cancel_appointment_patient($appointmentId)
 			
 			
 
-
-	print_r($query);
+echo $doc_id;
 	echo 'test';
 	die;
 
