@@ -1836,13 +1836,7 @@ public function cancel_appointment_patient($appointmentId)
 
 
 		
-		
-			
-			
-
-echo $doctorSessionDuration;
-	echo 'test';
-	die;
+	
 
 
 		if($patientRecordId == '') return 0;
@@ -1935,7 +1929,8 @@ echo $doctorSessionDuration;
 
 					$communicationDuration = explode(':',$this->communicationDuration);
 
-					if($communicationDuration[0] < 10){
+					// if($communicationDuration[0] < 10){ 
+						if($communicationDuration[0] < $doctorSessionDuration){  
 
 						$isCompleted = 0;
 
@@ -1967,7 +1962,8 @@ echo $doctorSessionDuration;
 
 				$communicationDuration = explode(':',$this->communicationDuration);
 
-				if($communicationDuration[0] < 10 && $isCreditAdjusted == 0){
+				// if($communicationDuration[0] < 10 && $isCreditAdjusted == 0){ 
+					if($communicationDuration[0] < $doctorSessionDuration && $isCreditAdjusted == 0){ 
 
 					if($row_array['subscriptionId'] <> '' && $row_array['subscriptionId'] <> 0){
 
