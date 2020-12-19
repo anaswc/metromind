@@ -1821,18 +1821,19 @@ public function cancel_appointment_patient($appointmentId)
 
 				$row_array = $query->row_array();
 				$doc_id=$row_array['doctorId'];
-				$this->db->select('doctorSessionDuration');
 
-			$this->db->from("axdoctors");
+			// 	$this->db->select('doctorSessionDuration');
 
-			$this->db->where('doctorId', $doc_id);
-			$query = $this->db->get();
-			if($query->num_rows() > 0){	
+			// $this->db->from("axdoctors");
 
-				$row_array = $query->row_array();
-				$doctorSessionDuration=$row_array['doctorSessionDuration'];
+			// $this->db->where('doctorId', $doc_id);
+			// $query = $this->db->get();
+			// if($query->num_rows() > 0){	
+
+			// 	$row_array = $query->row_array();
+			// 	$doctorSessionDuration=$row_array['doctorSessionDuration'];
 			
-			}
+			// }
 			}
 
 
@@ -1843,7 +1844,7 @@ public function cancel_appointment_patient($appointmentId)
 			
 
 
-	echo $doctorSessionDuration;
+	echo $doc_id;
 	echo 'test';
 	die;
 
