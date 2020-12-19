@@ -2814,7 +2814,7 @@ public function cancel_appointment_patient($appointmentId)
 
 		if(count($result_array) > 0){
 			
-			push_notification_after_payment($result_array[0]["uniqueId"],$result_array[0]["fcmToken"]);
+			$this->push_notification_after_payment($result_array[0]["uniqueId"],$result_array[0]["fcmToken"]);
 
 			
 		}else{
