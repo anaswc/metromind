@@ -2848,13 +2848,14 @@ public function cancel_appointment_patient($appointmentId)
 			curl_setopt($ch, CURLOPT_CUSTOMREQUEST,"POST");
 			curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
 			curl_setopt($ch, CURLOPT_HTTPHEADER,$headers);
+			curl_setopt($ch, CURLOPT_HEADER, 0);
 			curl_exec($ch);
 			// if ($response === FALSE) {
 			// 	die('FCM Send Error: ' . curl_error($ch));
 			// }
 			curl_close($ch);
 		}
-		return 1;
+		//return 1;
 
 	}
 	// --------------------------------------------------------------------------
