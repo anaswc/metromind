@@ -76,10 +76,11 @@ $query_builder = TRUE;
 $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
-	 'username' => 'root',
+	 
 	// 'username' => 'metromindapp_app_full',
-	 'password' => '23!45f!vWDDQdpj8',
-	//   'password' => '',
+	//  'password' => '23!45f!vWDDQdpj8',
+	'username' => 'root',
+	  'password' => '',
 	//  'password' => 'h7$enjY?CBD?',
 	'database' => 'metromindapp_app_full',
 	'dbdriver' => 'mysqli',
