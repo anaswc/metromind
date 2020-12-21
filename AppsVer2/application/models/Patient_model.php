@@ -1803,8 +1803,65 @@ public function cancel_appointment_patient($appointmentId)
 		return $this->patientRecordId ;
 
 	}
+// =======================================
+	function end_communication_log_patient($patientRecordId)
+	{
+		$this->db->select('doctorId,communicationDuration,patientCreditId,appointmentId');
+		$this->db->from("axpatientrecords");
+		$this->db->where('patientRecordId', $patientRecordId);
+		$query = $this->db->get();
+		if($query->num_rows() > 0){
+			$row_array = $query->row_array();
+			$pr_communicationDuration=$row_array['communicationDuration'];
+			$doc_id=$row_array['doctorId'];
+			$patientCreditId=$row_array['patientCreditId'];
+			$this->appointmentId=$row_array['appointmentId'];
+			$this->db->select('doctorSessionDuration');
+			$this->db->from("axdoctors");
+			$this->db->where('doctorId', $doc_id);
+			$query = $this->db->get();
+			if($query->num_rows() > 0){	
+				$row_array = $query->row_array();
+				$doctorSessionDuration=$row_array['doctorSessionDuration']/2;
+			}			
+		}
+		$com=$this->communicationDuration/60;
+		$cmdur=gmdate("H:i:s", $this->communicationDuration);
+		$timestring = $pr_communicationDuration;
+		$latesttime=date('H:i:s', strtotime($timestring) + ($this->communicationDuration));
+		$data = array(
+			'communicationEndTime' 		=> $this->communicationEndTime,
+			'communicationDuration' 	=> $latesttime
 
-	public function end_communication_log_patient($patientRecordId)
+		);
+		$this->db->set($data);
+		$this->db->where('patientRecordId', $patientRecordId);
+		$this->db->update("axpatientrecords", $data); 
+		$communicationDuration = explode(':',$pr_communicationDuration);
+		if($communicationDuration[1] >=$doctorSessionDuration)
+		{
+			$data = array(
+				'noOfSession' 		=> 0,
+			);
+			$this->db->set($data);$this->db->where('patientCreditId', $patientCreditId);
+			$this->db->update("axpatientcredits", $data); 
+		}
+		else{
+			$data = array(
+				'noOfSession' 		=> 1,
+			);
+			$this->db->set($data);$this->db->where('patientCreditId', $patientCreditId);
+			$this->db->update("axpatientcredits", $data); 
+		}
+		
+		return $patientRecordId ;
+	}
+	// =============================================
+
+
+
+
+	public function end_communication_log_patient_old($patientRecordId)
 
 	{
 		$this->db->select('doctorId');
@@ -1828,7 +1885,7 @@ public function cancel_appointment_patient($appointmentId)
 			if($query->num_rows() > 0){	
 
 				$row_array = $query->row_array();
-				$doctorSessionDuration=$row_array['doctorSessionDuration'];
+				$doctorSessionDuration=$row_array['doctorSessionDuration']/2;
 			
 			}
 			}

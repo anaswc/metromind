@@ -3496,10 +3496,12 @@ class MetroMind extends CI_Controller
 		} else {
 
 			$result = $this->Patient_model->end_communication_log_patient($this->Patient_model->patientRecordId);
+			// $result = $this->Patient_model->end_communication_log_patient($this->Patient_model->patientRecordId);
 
 			$doctorId = $this->Patient_model->get_doctor_id_from_record($this->Patient_model->patientRecordId);
 
 			$this->Patient_model->update_available_status($doctorId, 0);
+			
 
 			if (!$result) {
 
