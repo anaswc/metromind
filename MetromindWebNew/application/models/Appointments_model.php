@@ -307,7 +307,8 @@ class  Appointments_model extends CI_Model {
 				'insDate'      => $createdDate,
 				'status'		=>1,
 				'isCompleted'	=>0,
-				
+				'startDateTime'=>$this->input->post('appointmentDate').' '. $this->input->post('appointmentStartTime'),
+				'endDateTime'=>$this->input->post('appointmentDate').' '.$appointmentEndTime
 				
 			);
 			//print_r($data);exit;
