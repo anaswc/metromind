@@ -319,6 +319,19 @@ class  Appointments_model extends CI_Model {
 			if($this->input->post('isCredit')<>"")
 			{
 				$this->update_patientCredit();
+
+				$data = array(			
+					'isPaymentCompleted'=>1
+				);			
+	
+				$this->db->set($data); 			
+	
+				$this->db->where('appointmentId', $this->appointmentId);				
+	
+				$this->db->update("axappointments", $data); 
+
+
+
 				}
 			}
 		

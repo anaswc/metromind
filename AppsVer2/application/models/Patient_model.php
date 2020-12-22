@@ -2885,6 +2885,29 @@ public function cancel_appointment_patient($appointmentId)
 		$notification_id= $this->db->insert_id();
 		$this->notifydoctorFCM($notificationTitle,$row_array['doctorId']);
 	}
+
+	// ------------------
+	
+	$this->db->select('paymentStatus');
+	$this->db->from("axpayments");
+	$this->db->where('paymentId', $paymentId);
+	$query = $this->db->get();
+	if($query->num_rows() > 0){	
+		$row_array = $query->row_array();
+		if($row_array['paymentStatus']==1)
+		{
+			$data = array(
+				'isPaymentCompleted'  	=> 1
+			);
+			$this->db->set($data);
+			$this->db->where('appointmentId',$this->appointmentId);
+			$this->db->update("axappointments", $data);
+		}
+
+	}
+
+
+	
 	return $paymentId ;
 
 	}
