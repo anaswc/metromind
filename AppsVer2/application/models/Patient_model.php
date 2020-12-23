@@ -2400,7 +2400,7 @@ public function cancel_appointment_patient($appointmentId)
 
 			return 0;
 
-		$this->db->select(' axappointments.appointmentId,
+		$this->db->select(' axappointments.appointmentId,axappointments.isPaymentCompleted,
 
 							DATE_FORMAT(axappointments.requestDate, "%d-%b-%Y") AS requestDate,
 
@@ -2520,7 +2520,7 @@ public function cancel_appointment_patient($appointmentId)
 
 			return 0;
 
-		$this->db->select(' axappointments.appointmentId,
+		$this->db->select(' axappointments.appointmentId,axappointments.isPaymentCompleted,
 
 							DATE_FORMAT(axappointments.requestDate, "%d-%b-%Y") AS requestDate,
 
