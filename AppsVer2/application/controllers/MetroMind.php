@@ -4435,7 +4435,7 @@ class MetroMind extends CI_Controller
 
 					if ($result[$i]['communicationDuration'] <> '') {
 
-						$result[$i]['communicationDuration'] =  number_format((float) $result[$i]['communicationDuration'], 2, '.', '') . " Minutes";
+						// $result[$i]['communicationDuration'] =  number_format((float) $result[$i]['communicationDuration'], 2, '.', '') . " Minutes";
 
 					}
 
