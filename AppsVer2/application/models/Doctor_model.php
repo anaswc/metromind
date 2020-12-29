@@ -2159,7 +2159,7 @@ class Doctor_model extends CI_Model {
 
 		$this->db->where('axpatientrecords.communicationEndTime !=','00:00:00');
 
-		$this->db->where('axpatientrecords.communicationDuration >','00.00');
+		// $this->db->where('axpatientrecords.communicationDuration >','00.00');
 
 		$this->db->order_by("patientRecordId", "DESC");
 
