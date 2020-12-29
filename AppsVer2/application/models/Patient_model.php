@@ -3279,7 +3279,7 @@ public function cancel_appointment_patient($appointmentId)
 
 		$this->db->where('axpatientrecords.communicationEndTime !=','00:00:00');
 
-		$this->db->where('axpatientrecords.communicationDuration >','00.00');
+		// $this->db->where('axpatientrecords.communicationDuration >','00.00');
 
 		$this->db->order_by("patientRecordId", "DESC");	
 
