@@ -1849,6 +1849,11 @@ public function cancel_appointment_patient($appointmentId)
 			);
 			$this->db->set($data);$this->db->where('patientCreditId', $patientCreditId);
 			$this->db->update("axpatientcredits", $data); 
+			$data1 = array(
+				'isCompleted' 		=> 1,
+			);
+			$this->db->set($data);$this->db->where('appointmentId', $this->appointmentId);
+			$this->db->update("axappointments", $data1); 
 		}
 		else{
 			$data = array(
