@@ -1852,7 +1852,7 @@ public function cancel_appointment_patient($appointmentId)
 			$data1 = array(
 				'isCompleted' 		=> 1,
 			);
-			$this->db->set($data);$this->db->where('appointmentId', $this->appointmentId);
+			$this->db->set($data1);$this->db->where('appointmentId', $this->appointmentId);
 			$this->db->update("axappointments", $data1); 
 		}
 		else{
