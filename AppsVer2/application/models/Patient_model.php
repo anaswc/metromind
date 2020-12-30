@@ -1833,14 +1833,7 @@ public function cancel_appointment_patient($appointmentId)
 		$cmdur=gmdate("H:i:s", $this->communicationDuration);
 		$timestring = $pr_communicationDuration;
 		$latesttime=date('H:i:s', strtotime($timestring) + ($this->communicationDuration));
-		$data = array(
-			'communicationEndTime' 		=> $this->communicationEndTime,
-			'communicationDuration' 	=> $latesttime
-
-		);
-		$this->db->set($data);
-		$this->db->where('patientRecordId', $patientRecordId);
-		$this->db->update("axpatientrecords", $data); 
+		 
 		$communicationDuration = explode(':',$pr_communicationDuration);
 		if($communicationDuration[1] >=$doctorSessionDuration)
 		{
@@ -1856,6 +1849,16 @@ public function cancel_appointment_patient($appointmentId)
 			$this->db->update("axappointments", $data1); 
 		}
 		else{
+			
+			$data = array(
+				'communicationEndTime' 		=> $this->communicationEndTime,
+				'communicationDuration' 	=> $latesttime
+	
+			);
+			$this->db->set($data);
+			$this->db->where('patientRecordId', $patientRecordId);
+			$this->db->update("axpatientrecords", $data);
+
 			$data = array(
 				'noOfSession' 		=> 1,
 			);
