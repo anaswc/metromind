@@ -5660,7 +5660,7 @@ function termsandconditions_get()
 	
 				} else {
 	
-					$this->Patient_model->end_communication_log_patient($this->Patient_model->patientRecordId);
+					// $this->Patient_model->end_communication_log_patient($this->Patient_model->patientRecordId);
 	
 					$tokenData = time() . $this->input->post_get('uniqueId');
 	
