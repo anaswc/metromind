@@ -5679,6 +5679,9 @@ function termsandconditions_get()
 			}
 
 		}else{
+			$doctorId 	= $this->Doctor_model->get_doctor_id_by_uniqueId(trim($this->input->post_get('recieverUniqueId')));
+			$this->Patient_model->update_available_status($doctorId, 0);
+
 
 			$status = 200;
 
