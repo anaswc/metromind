@@ -6377,6 +6377,10 @@ function termsandconditions_get()
 
 			if (!$result) {
 
+				$doctorId =  $this->Doctor_model->get_doctor_id_by_uniqueId(trim($this->input->post_get('doctorId')));
+				$this->Patient_model->update_available_status($doctorId, 0);
+
+
 				$tokenData = time() . $this->input->post_get('uniqueId');
 
 				$token = AUTHORIZATION::generateToken($tokenData);
@@ -6392,6 +6396,8 @@ function termsandconditions_get()
 				$this->response($response, 200);
 
 			} else {
+				$doctorId =  $this->Doctor_model->get_doctor_id_by_uniqueId(trim($this->input->post_get('doctorId')));
+				$this->Patient_model->update_available_status($doctorId, 0);
 
 				$tokenData = time() . $this->input->post_get('uniqueId');
 
