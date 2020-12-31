@@ -4655,7 +4655,8 @@ public function cancel_appointment_patient($appointmentId)
 
 		$data = array(			
 
-			'isEngaged' 				=> $status
+			// 'isEngaged' 				=> $status
+			'isEngaged' 				=> 0
 
 		);			
 
