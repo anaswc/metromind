@@ -92,5 +92,7 @@ define("AXUPLOADDOCTORSPATH",		"uploads/doctors/");
 define("AXUPLOADPATH",			"uploads/speciality/");
 define("AXADMINMAIL",		"vasanth@ekselan.com");
 
-//define("HTTP",							"http://metromindapp.com/MetromindWeb/");
-define("HTTP",			"http://45.76.238.179/metromind/metromind-backend-php/MetromindWebNew/");
+define("HTTP",							"https://metromindapp.com/metromind/MetromindWebNew/");
+// define("HTTP",			"http://45.76.238.179/metromind/metromind-backend-php/MetromindWebNew/");
+
+
