@@ -80,7 +80,8 @@ $db['default'] = array(
 	// 'username' => 'metromindapp_app_full',
 	
 	'username' => 'root',
-	'password' => '23!45f!vWDDQdpj8',
+	'password' => 'h4QvwrbkE4sYFUzA',
+	// 'password' => '23!45f!vWDDQdpj8',
 	//   'password' => '',
 	//  'password' => 'h7$enjY?CBD?',
 	'database' => 'metromindapp_app_full',
