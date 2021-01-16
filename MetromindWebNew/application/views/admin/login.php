@@ -36,7 +36,9 @@
 
 				<div class="login-card card-block">
 
-                <h3 class="text-center txt-primary">Admin Login</h3>
+                <h3 class="text-center txt-primary">Admin Login
+                  <?php echo $base_url();?>
+                </h3>
 
 <?php if ($this->session->flashdata('error')) { ?>
 
