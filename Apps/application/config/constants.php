@@ -6,7 +6,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
 
-defined('HTTP')    					OR define("HTTP","http://".$_SERVER['HTTP_HOST']."/");
+defined('HTTP')    					OR define("HTTP","https://".$_SERVER['HTTP_HOST']."/");
 
 
 

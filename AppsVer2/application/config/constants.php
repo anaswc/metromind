@@ -6,7 +6,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
 
-defined('HTTP')    					OR define("HTTP","http://".$_SERVER['HTTP_HOST']."/metromind/metromind-backend-php/MetromindWebNew/");
+defined('HTTP')    					OR define("HTTP","http://".$_SERVER['HTTP_HOST']."metromindapp.com/metromind/");
 
 
 

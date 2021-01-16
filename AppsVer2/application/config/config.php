@@ -98,7 +98,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
 
-$config['base_url'] = "http://".$_SERVER['HTTP_HOST']."/";
+$config['base_url'] = "https://".$_SERVER['HTTP_HOST']."/";
 
 
 
@@ -904,7 +904,7 @@ $config['directory_trigger'] = 'd';
 
 #$config['log_threshold'] = 0;
 $config['log_threshold'] = 4; // (1/2/3)
-$config['log_path'] = '/var/www/html/metromind/metromind-backend-php/AppsVer2/application/logs/';
+$config['log_path'] = '/var/www/html/metromind/AppsVer2/application/logs/';
 
 
 
