@@ -1083,7 +1083,7 @@ class Patient_model extends CI_Model {
 
 		if($uniqueId == '') return 0; 
 
-		 $config['upload_path']   	= '/var/www/html/metromind/metromind-backend-php/MetromindWebNew/uploads/patients';
+		 $config['upload_path']   	= '/var/www/html/metromind/MetromindWebNew/uploads/patients';
 		 // $config['upload_path']   	= '../uploads/patients/'; 
 
 		$config['allowed_types'] 	= 'jpg|gif|png|jpeg|JPG|PNG'; 
@@ -1160,7 +1160,7 @@ class Patient_model extends CI_Model {
 		if($result_row['profileImgUrl'] <> '' && file_exists(AXUPLOADPATIENTIMAGEPATH . $result_row['profileImgUrl'])!== null)
 
 			//unlink(AXUPLOADPATIENTIMAGEPATH.$result_row['profileImgUrl']);
-		unlink('/var/www/html/metromind/metromind-backend-php/MetromindWebNew/uploads/patients/'.$result_row['profileImgUrl']);
+		unlink('/var/www/html/metromind/MetromindWebNew/uploads/patients/'.$result_row['profileImgUrl']);
 
 		$data1 = array('upload_data' => $this->upload->data()); 
 
