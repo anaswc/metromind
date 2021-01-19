@@ -586,8 +586,8 @@ class Login_model extends CI_Model
         $this->email->initialize(array(
             'protocol' => 'smtp',
             'smtp_host' => 'smtp.googlemail.com',
-            'smtp_user' => 'usert0562@gmail.com',
-            'smtp_pass' => 'user#test@009',
+            'smtp_user' => 'metromindhospital@gmail.com',
+            'smtp_pass' => 'metromind%8',
             'smtp_port' => 465,
             'smtp_crypto'=>'ssl',
             '_smtp_auth'=>TRUE,
