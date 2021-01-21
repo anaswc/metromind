@@ -6399,6 +6399,8 @@ public function cancel_appointment_patient($appointmentId)
 	{
 		$api = new Api($this->razorPayApiKey, $this->razorPaySecretKey);
 		$post = file_get_contents('php://input');
+		$webbook=$api->utility->verifyWebhookSignature($post,hash_hmac('sha256',$post,'M3T60M1N02K21'),'M3T60M1N02K21');
+        	
         // $data = json_decode($post, true);
         // $payment_report = [
         //     'payment_report' => $post,
@@ -6425,7 +6427,7 @@ public function cancel_appointment_patient($appointmentId)
 	// $this->db->insert('axpatient', $data);
 
 	// $this->patientId = $this->db->insert_id();
-print_r("hai");exit;
+print_r($webhook);exit;
 return $post;
 }
 	
