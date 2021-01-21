@@ -4,10 +4,11 @@ echo "order1->".$order;
 include("Razorpay.php");
 use Razorpay\Api\Api;
 echo "order2->".$order;
-$api_key = 'rzp_live_abEAlYmmQUzUCg';
-// $api_key = 'rzp_test_aNY9pateh9pWYw';
+// $api_key = 'rzp_live_abEAlYmmQUzUCg';
+$api_key = 'rzp_test_aNY9pateh9pWYw';
 
-$api_secret = 'BvrldbyJ1smnv3wU6LEa3QTX';
+$api_secret = 'Jnkou0WzPZ64R3eF3baAk2j8';
+// iHloBNTVN4s8CYJzeX8MzxfB
 // $api_secret = 'BvrldbyJ1smnv3wU6LEa3QTX';
 echo "order3->".$order;
 $api = new Api($api_key, $api_secret);

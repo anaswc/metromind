@@ -3682,6 +3682,7 @@ class MetroMind extends CI_Controller
 			$this->response($response, 200);
 
 		} else {
+			
 
 			$this->Doctor_model->get_doctor_consultation_fee($this->Patient_model->doctorId);
 
@@ -3691,9 +3692,10 @@ class MetroMind extends CI_Controller
 
 			$this->Patient_model->sessionDuration 	= $this->Doctor_model->doctorSessionDuration;
 
-			$result = $this->Patient_model->add_payment_patient();
+			$result = $this->Patient_model->add_payment_patient();	
 
 			$this->Patient_model->add_credits_patient();
+		
 
 			if (!$result) {
 

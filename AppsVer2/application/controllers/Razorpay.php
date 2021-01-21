@@ -66,7 +66,8 @@ class Razorpay extends CI_Controller
     function verification_post()
     {
 		
-        $result = $this->Patient_model->add_payment_webhook();
+		$result = $this->Patient_model->add_payment_webhook();
+		echo "succcess";
     }
 
 }
