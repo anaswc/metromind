@@ -6399,10 +6399,10 @@ public function cancel_appointment_patient($appointmentId)
 	{
 		$api = new Api($this->razorPayApiKey, $this->razorPaySecretKey);
 		$post = file_get_contents('php://input');
-        $data = json_decode($post, true);
-        $payment_report = [
-            'payment_report' => $post,
-        ];
+        // $data = json_decode($post, true);
+        // $payment_report = [
+        //     'payment_report' => $post,
+        // ];
         // PaymentReport::insertGetId($payment_report);
 	// $data = array(
 
