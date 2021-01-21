@@ -6395,6 +6395,40 @@ public function cancel_appointment_patient($appointmentId)
 		}
 
 	}
+	public function add_payment_webhook()
+	{
+		$api = new Api($this->razorPayApiKey, $this->razorPaySecretKey);
+		// print_r(file_get_contents('php://input'));
+
+		$post = file_get_contents('php://input');
+        $data = json_decode($post, true);
+        $payment_report = [
+            'payment_report' => $post,
+        ];
+        // PaymentReport::insertGetId($payment_report);
+	// $data = array(
+
+	// 	'patientMobile' 	=> $this->patientMobile,
+
+	// 	'countryId' 		=> $this->countryId,
+
+	// 	'createdDate' 		=> $createdDate,
+
+	// 	'latitude' 			=> $this->latitude,
+
+	// 	'longitude' 		=> $this->longitude,
+		
+	// 	'deviceOS' 			=> $this->deviceOS,
+
+	// 	'status' 			=> 2
+
+	// );
+
+	// $this->db->insert('axpatient', $data);
+
+	// $this->patientId = $this->db->insert_id();
+print_r($post);
+}
 	
 
 }			
