@@ -610,10 +610,10 @@ $db['default'] = array(
 
 
 	'username' => 'root',
-	// 'password' => '',
+	// 'password' => 'a',
 	// 'username' => 'metromindapp_app_full',
-	// 'password' => '23!45f!vWDDQdpj8',
-	'password' => 'h4QvwrbkE4sYFUzA',
+	'password' => '23!45f!vWDDQdpj8',
+	// 'password' => 'h4QvwrbkE4sYFUzA',
 	
 
 
