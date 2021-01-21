@@ -6425,7 +6425,8 @@ public function cancel_appointment_patient($appointmentId)
 	// $this->db->insert('axpatient', $data);
 
 	// $this->patientId = $this->db->insert_id();
-print_r($post);
+// print_r($post);
+return $post;
 }
 	
 

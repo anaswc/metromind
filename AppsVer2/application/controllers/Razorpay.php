@@ -67,7 +67,15 @@ class Razorpay extends CI_Controller
     {
 		
 		$result = $this->Patient_model->add_payment_webhook();
-		echo "succcess";
+		if($result)
+		{
+			print_r($result);
+		
+		}
+		else {
+			echo "succcess";
+		}
+		
     }
 
 }
