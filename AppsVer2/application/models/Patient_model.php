@@ -6405,7 +6405,9 @@ public function cancel_appointment_patient($appointmentId)
 			'status'				=>0,
 		);
 		$this->db->insert('axpaymentlogs', $data);
+
 		$this->payment_log_id = $this->db->insert_id();
+		// echo 	$this->payment_log_id;exit;
 		if($webbook)
 		{
 			$data = array(
