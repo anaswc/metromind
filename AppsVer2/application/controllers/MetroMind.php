@@ -3734,10 +3734,11 @@ class MetroMind extends CI_Controller
 	function update_payment_status_post()
 
 	{
-
+		
 		$this->Patient_model->setPostGetVars();
 
 		$this->verify_request();
+		
 
 		if ($this->Patient_model->paymentId == '') {
 
@@ -3754,10 +3755,11 @@ class MetroMind extends CI_Controller
 			$this->response($response, 200);
 
 		} else {
-
+		
 			$result = $this->Patient_model->update_payment_status_patient($this->Patient_model->paymentId);
-
+			print($result);exit;
 			if (!$result) {
+				print_r($result);exit;
 
 				$tokenData = time() . $this->input->post_get('uniqueId');
 

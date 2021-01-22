@@ -2906,7 +2906,6 @@ public function cancel_appointment_patient($appointmentId)
 		$this->db->where('paymentId', $paymentId);	
 
 		$this->db->update('axprescriptions');
-
 		$api = new Api($this->razorPayApiKey, $this->razorPaySecretKey);
 
 		$attributes  = array(
@@ -2918,23 +2917,20 @@ public function cancel_appointment_patient($appointmentId)
 							'razorpay_order_id' 	=> $this->razorpay_order_id
 
 							);
+		// print("hai");exit;
 
 		$order  = $api->utility->verifyPaymentSignature($attributes);
 
 		if($order){
-
 			$data = array(
-
 				'isSignatureVerified'  	=> 1
-
 			);
-
 			$this->db->set($data); 	
-
 			$this->db->where('paymentId', $paymentId);	
-
 			$this->db->update("axpayments", $data); 
-
+		}
+		else{
+			return 0;
 		}
 
 
@@ -2945,6 +2941,7 @@ public function cancel_appointment_patient($appointmentId)
 		$query = $this->db->get();
 		$patientId 		= '';
 		$doctorId 		= '';
+
 		if($query->num_rows() > 0){	
 			$row_array = $query->row_array();
 			$this->db->select('firstName,lastName,uniqueId');
@@ -2962,6 +2959,7 @@ public function cancel_appointment_patient($appointmentId)
 
 		$this->db->insert('axnotifications', $data);
 		$notification_id= $this->db->insert_id();
+
 		$this->notifydoctorFCM($notificationTitle,$row_array['doctorId']);
 	}
 
