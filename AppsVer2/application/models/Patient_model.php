@@ -6400,36 +6400,24 @@ public function cancel_appointment_patient($appointmentId)
 		$api = new Api($this->razorPayApiKey, $this->razorPaySecretKey);
 		$post = file_get_contents('php://input');
 		$webbook=$api->utility->verifyWebhookSignature($post,hash_hmac('sha256',$post,'M3T60M1N02K21'),'M3T60M1N02K21');
-        	
-        // $data = json_decode($post, true);
-        // $payment_report = [
-        //     'payment_report' => $post,
-        // ];
-        // PaymentReport::insertGetId($payment_report);
-	// $data = array(
-
-	// 	'patientMobile' 	=> $this->patientMobile,
-
-	// 	'countryId' 		=> $this->countryId,
-
-	// 	'createdDate' 		=> $createdDate,
-
-	// 	'latitude' 			=> $this->latitude,
-
-	// 	'longitude' 		=> $this->longitude,
-		
-	// 	'deviceOS' 			=> $this->deviceOS,
-
-	// 	'status' 			=> 2
-
-	// );
-
-	// $this->db->insert('axpatient', $data);
-
-	// $this->patientId = $this->db->insert_id();
-print_r($post);exit;
-return $post;
-}
+		$data = array(
+			'payment_log' 	=> $post,
+			'status'				=>0,
+		);
+		$this->db->insert('axpaymentlogs', $data);
+		$this->payment_log_id = $this->db->insert_id();
+		if($webbook)
+		{
+			$data = array(
+				'status' 	=> 1
+			);
+	
+			$this->db->set($data); 
+			$this->db->where("id", $this->payment_log_id); 
+			$this->db->update("axpaymentlogs", $data);	
+		}
+		return "success";
+	}
 	
 
 }			
