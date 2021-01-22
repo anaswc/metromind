@@ -5,7 +5,7 @@ include("Razorpay.php");
 use Razorpay\Api\Api;
 echo "order2->".$order;
 // $api_key = 'rzp_live_abEAlYmmQUzUCg';
-$api_key = 'rzp_test_aNY9pateh9pWYw';
+$api_key = 'rzp_test_qNzNL7FiDVFoQH';
 
 $api_secret = 'Jnkou0WzPZ64R3eF3baAk2j8';
 // $api_secret = 'Z89KjX25P47SxYxWRZvp0JL2';//live
