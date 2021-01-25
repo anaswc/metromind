@@ -37,7 +37,8 @@ class Utility
 
     public function verifyWebhookSignature($payload, $actualSignature, $secret)
     {
-        self::verifySignature($payload, $actualSignature, $secret);
+       return  self::verifySignature($payload, $actualSignature, $secret);
+       
     }
 
     public function verifySignature($payload, $actualSignature, $secret)
@@ -53,12 +54,16 @@ class Utility
         {
             $verified = $this->hashEquals($expectedSignature, $actualSignature);
         }
-
+       
+        
         if ($verified === false)
         {
+           
             throw new Errors\SignatureVerificationError(
                 'Invalid signature passed');
         }
+        return $verified;
+       
     }
 
     private function hashEquals($expectedSignature, $actualSignature)
