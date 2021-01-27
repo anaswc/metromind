@@ -6403,6 +6403,10 @@ public function cancel_appointment_patient($appointmentId)
 			'status'				=>0,
 		);
 		$this->db->insert('axpaymentlogs', $data);
+		$datas = json_decode($post, true);
+		$razorpayPaymentId = $datas['payload']['payment']['entity']['id'];
+		$order_id = $datas['payload']['payment']['entity']['order_id'];
+		print_r($datas);exit;
 
 		$this->payment_log_id = $this->db->insert_id();
 		// echo 	$this->payment_log_id;exit;
@@ -6415,6 +6419,111 @@ public function cancel_appointment_patient($appointmentId)
 			$this->db->set($data); 
 			$this->db->where("id", $this->payment_log_id); 
 			$this->db->update("axpaymentlogs", $data);	
+
+
+
+
+
+			// if($paymentId == '') return 0;
+
+		$data = array(
+
+			'paymentStatus' 		=> 1,
+
+			'razorpay_signature'  	=> '', 
+
+			'razorpay_payment_id' 	=> $razorpayPaymentId,  
+
+			'razorpay_order_id' 	=> $order_id
+
+		);
+
+		$this->db->set($data); 	
+
+		$this->db->where('paymentId', $razorpayPaymentId);	
+
+		$this->db->update("axpayments", $data); 
+
+		$this->db->set('status', '1', FALSE);
+
+		$this->db->where('paymentId', $razorpayPaymentId);	
+
+		$this->db->update('axsubscription');
+
+		$this->db->set('status', '1', FALSE);
+
+		$this->db->where('paymentId', $razorpayPaymentId);	
+
+		$this->db->update('axpatientcredits');
+
+		$this->db->set('status', '3', FALSE);
+
+		$this->db->where('paymentId', $razorpayPaymentId);	
+
+		$this->db->update('axprescriptions');
+		$api = new Api($this->razorPayApiKey, $this->razorPaySecretKey);
+
+		// $attributes  = array(
+
+		// 					'razorpay_signature'  	=> $this->razorpay_signature, 
+
+		// 					'razorpay_payment_id' 	=> $this->razorpay_payment_id,  
+
+		// 					'razorpay_order_id' 	=> $this->razorpay_order_id
+
+		// 					);
+		// // print("hai");exit;
+
+		// $order  = $api->utility->verifyPaymentSignature($attributes);
+
+		// if($order){
+			$data = array(
+				'isSignatureVerified'  	=> 1
+			);
+			$this->db->set($data); 	
+			$this->db->where('paymentId', $razorpayPaymentId);	
+			$this->db->update("axpayments", $data); 
+		// }
+		// else{
+		// 	return 0;
+		// }
+
+
+		$this->db->select('patientId,doctorId');
+		$this->db->from("axpayments");
+		$this->db->where('paymentId', $razorpayPaymentId);
+		$this->db->where('paymentStatus', 1);
+		$query = $this->db->get();
+		$patientId 		= '';
+		$doctorId 		= '';
+
+		// if($query->num_rows() > 0){	
+		// 	$row_array = $query->row_array();
+		// 	$this->db->select('firstName,lastName,uniqueId');
+		// 	$this->db->from("axpatient");
+		// 	$this->db->where('patientId ',$row_array['patientId']);
+		// 	$user = $this->db->get()->row_array();
+		// 	$notificationTitle=$user['firstName']." ".$user['lastName']." (".$user['uniqueId'].") has completed the payment";
+
+		// 	$data = array(
+		// 		'patientId' 		=> $row_array['patientId'],
+		// 		'doctorId' 			=> $row_array['doctorId'],
+		// 		'notificationType' 	=> 8,
+		// 		'notificationTitle' => $notificationTitle
+		// 	);
+
+		// $this->db->insert('axnotifications', $data);
+		// $notification_id= $this->db->insert_id();
+
+		// $this->notifydoctorFCM($notificationTitle,$row_array['doctorId']);
+
+		// }
+
+
+
+
+
+
 		}
 		return "success";
 	}

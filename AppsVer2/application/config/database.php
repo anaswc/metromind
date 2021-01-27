@@ -601,7 +601,6 @@ $query_builder = TRUE;
 $db['default'] = array(
 
 
-
 	'dsn'	=> '',
 
 	

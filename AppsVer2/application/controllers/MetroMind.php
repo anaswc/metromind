@@ -3757,10 +3757,8 @@ class MetroMind extends CI_Controller
 		} else {
 		
 			$result = $this->Patient_model->update_payment_status_patient($this->Patient_model->paymentId);
-			print($result);exit;
 			if (!$result) {
-				print_r($result);exit;
-
+				
 				$tokenData = time() . $this->input->post_get('uniqueId');
 
 				$token = AUTHORIZATION::generateToken($tokenData);
