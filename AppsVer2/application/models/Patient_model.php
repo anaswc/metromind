@@ -6471,25 +6471,42 @@ public function cancel_appointment_patient($appointmentId)
 
 		$this->db->set($data); 	
 
-		$this->db->where('paymentId', $razorpayPaymentId);	
+		$this->db->where('order_id', $order_id);	
 
 		$this->db->update("axpayments", $data); 
+// ---------------------------------------------
+$this->db->select("
+
+paymentId
+"
+
+); 
+
+$this->db->from("axpayments");
+$this->db->where('order_id', $order_id);	
+
+$query 	= $this->db->get();
+
+$row 	= $query->row_array();		
+
+$payment_id		= $row["paymentId"];
+// -------------------------------
 
 		$this->db->set('status', '1', FALSE);
 
-		$this->db->where('paymentId', $razorpayPaymentId);	
+		$this->db->where('paymentId', $payment_id);	
 
 		$this->db->update('axsubscription');
 
 		$this->db->set('status', '1', FALSE);
 
-		$this->db->where('paymentId', $razorpayPaymentId);	
+		$this->db->where('paymentId', $payment_id);	
 
 		$this->db->update('axpatientcredits');
 
 		$this->db->set('status', '3', FALSE);
 
-		$this->db->where('paymentId', $razorpayPaymentId);	
+		$this->db->where('paymentId', $payment_id);	
 
 		$this->db->update('axprescriptions');
 		$api = new Api($this->razorPayApiKey, $this->razorPaySecretKey);
@@ -6512,7 +6529,7 @@ public function cancel_appointment_patient($appointmentId)
 				'isSignatureVerified'  	=> 1
 			);
 			$this->db->set($data); 	
-			$this->db->where('paymentId', $razorpayPaymentId);	
+			$this->db->where('paymentId', $payment_id);	
 			$this->db->update("axpayments", $data); 
 		// }
 		// else{
@@ -6522,7 +6539,7 @@ public function cancel_appointment_patient($appointmentId)
 
 		$this->db->select('patientId,doctorId');
 		$this->db->from("axpayments");
-		$this->db->where('paymentId', $razorpayPaymentId);
+		$this->db->where('paymentId', $payment_id);
 		$this->db->where('paymentStatus', 1);
 		$query = $this->db->get();
 		$patientId 		= '';
