@@ -6395,9 +6395,42 @@ public function cancel_appointment_patient($appointmentId)
 	}
 	public function add_payment_webhook()
 	{
+		
+		$this->db->select("
+
+							razorPayApiKey,
+
+							razorPaySecretKey,
+
+							razorPayCurrency,
+
+							calendarLimit
+							
+							"
+
+						); 
+
+		$this->db->from("axsetting");
+
+		$this->db->where("settingId = 1");
+
+		$query 	= $this->db->get();
+
+		$row 	= $query->row_array();		
+
+		$this->razorPayApiKey		= $row["razorPayApiKey"];
+
+		$this->razorPaySecretKey 	= $row["razorPaySecretKey"];
+
+		$this->razorPayCurrency 	= $row["razorPayCurrency"];
+
+		$this->calendarLimit 		= $row["calendarLimit"];
+		
 		$api = new Api($this->razorPayApiKey, $this->razorPaySecretKey);
 		$post = file_get_contents('php://input');
+		
 		$webbook=$api->utility->verifyWebhookSignature($post,hash_hmac('sha256',$post,'M3T60M1N02K21'),'M3T60M1N02K21');
+	
 		$data = array(
 			'payment_log' 	=> $post,
 			'status'				=>0,
@@ -6409,7 +6442,7 @@ public function cancel_appointment_patient($appointmentId)
 		print_r($datas);exit;
 
 		$this->payment_log_id = $this->db->insert_id();
-		// echo 	$this->payment_log_id;exit;
+	
 		if($webbook)
 		{
 			$data = array(
