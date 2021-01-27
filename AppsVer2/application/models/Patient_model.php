@@ -6428,21 +6428,19 @@ public function cancel_appointment_patient($appointmentId)
 		
 		$api = new Api($this->razorPayApiKey, $this->razorPaySecretKey);
 		$post = file_get_contents('php://input');
-		
-		$webbook=$api->utility->verifyWebhookSignature($post,hash_hmac('sha256',$post,'M3T60M1N02K21'),'M3T60M1N02K21');
-	
 		$data = array(
 			'payment_log' 	=> $post,
 			'status'				=>0,
 		);
 		$this->db->insert('axpaymentlogs', $data);
+		$this->payment_log_id = $this->db->insert_id();
+		$webbook=$api->utility->verifyWebhookSignature($post,hash_hmac('sha256',$post,'M3T60M1N02K21'),'M3T60M1N02K21');
+	
+	
 		$datas = json_decode($post, true);
 		$razorpayPaymentId = $datas['payload']['payment']['entity']['id'];
 		$order_id = $datas['payload']['payment']['entity']['order_id'];
 		// print_r($datas);exit;
-
-		$this->payment_log_id = $this->db->insert_id();
-	
 		if($webbook)
 		{
 			$data = array(
