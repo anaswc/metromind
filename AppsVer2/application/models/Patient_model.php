@@ -6395,7 +6395,7 @@ public function cancel_appointment_patient($appointmentId)
 	}
 	public function add_payment_webhook()
 	{
-		
+		// print_r($this->razorPayApiKey);exit;
 		$this->db->select("
 
 							razorPayApiKey,

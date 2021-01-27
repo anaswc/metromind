@@ -10,7 +10,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 //To Solve File REST_Controller not found
 
-require APPPATH . 'libraries/REST_Controller.php';
+// require APPPATH . 'libraries/REST_Controller.php';
 
 require APPPATH . 'libraries/Format.php';
 
@@ -18,11 +18,11 @@ class Razorpay extends CI_Controller
 
 {
 
-	use REST_Controller {
+	// use REST_Controller {
 
-		REST_Controller::__construct as private __resTraitConstruct;
+	// 	REST_Controller::__construct as private __resTraitConstruct;
 
-	}
+	// }
 
 	public function __construct()
 
@@ -32,39 +32,40 @@ class Razorpay extends CI_Controller
 
 		parent::__construct();
 
-		$this->__resTraitConstruct();
+		// $this->__resTraitConstruct();
 
 		$this->load->model('Patient_model');
 
-		$this->load->model('Login_model');
+		// $this->load->model('Login_model');
 
-		$this->load->model('Country_model');
+		// $this->load->model('Country_model');
 
-		$this->load->model('Doctor_model');
+		// $this->load->model('Doctor_model');
 
-		$this->load->model('Speciality_model');
+		// $this->load->model('Speciality_model');
 
-		$this->load->model('Symptom_model');
+		// $this->load->model('Symptom_model');
 
-		$this->load->model('Rating_model');
+		// $this->load->model('Rating_model');
 
-		$this->load->model('Package_model');
+		// $this->load->model('Package_model');
 
-		$this->load->model('Cms_model');
+		// $this->load->model('Cms_model');
 
-		$this->load->model('ReportIssue_model');
+		// $this->load->model('ReportIssue_model');
 
-		$this->load->model('Signup_model');
+		// $this->load->model('Signup_model');
 
-		$this->load->helper(['jwt', 'authorization']);
+		// $this->load->helper(['jwt', 'authorization']);
 
-		$this->output->cache(30);
+		// $this->output->cache(30);
 
-		$this->tokenPass = 0;
+		// $this->tokenPass = 0;
 
     }
-    function verification_post()
+    function verification()
     {
+		// print_r("hai");exit;
 			$result = $this->Patient_model->add_payment_webhook();
 			print_r($result);
     }
