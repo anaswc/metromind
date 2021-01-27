@@ -6439,7 +6439,7 @@ public function cancel_appointment_patient($appointmentId)
 		$datas = json_decode($post, true);
 		$razorpayPaymentId = $datas['payload']['payment']['entity']['id'];
 		$order_id = $datas['payload']['payment']['entity']['order_id'];
-		print_r($datas);exit;
+		// print_r($datas);exit;
 
 		$this->payment_log_id = $this->db->insert_id();
 	
