@@ -3085,7 +3085,7 @@ public function get_doctor_appointment_by_date($doctorId,$appointmentdate,$avail
 	 $this->db->where('appointmentStartTime', $availableStartTime);
 		//$this->db->where('appointmentEndTime', $availableEndTime);
 	$this->db->where('status',0);
-	$this->db->where('status',1);
+	$this->db->or_where('status',1);
 		
 
 		
