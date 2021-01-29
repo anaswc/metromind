@@ -2890,6 +2890,7 @@ public function cancel_appointment_patient($appointmentId)
 	{
 
 		if($paymentId == '') return 0;
+		
 
 		$data = array(
 
@@ -2949,9 +2950,11 @@ public function cancel_appointment_patient($appointmentId)
 			$this->db->where('paymentId', $paymentId);	
 			$this->db->update("axpayments", $data); 
 		}
-		else{
-			return 0;
-		}
+		// else{
+		// 	echo "hi";
+		// exit;
+		// 	return 0;
+		// }
 
 
 		$this->db->select('patientId,doctorId');
