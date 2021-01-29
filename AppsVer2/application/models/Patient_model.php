@@ -1814,6 +1814,14 @@ public function cancel_appointment_patient($appointmentId)
 		
 		
 		if($query->num_rows() > 0){
+
+// ------------
+
+			
+
+			// --------------
+
+
 			$row_array = $query->row_array();
 			
 			
@@ -1821,6 +1829,14 @@ public function cancel_appointment_patient($appointmentId)
 			$doc_id=$row_array['doctorId'];
 			$patientCreditId=$row_array['patientCreditId'];
 			$this->appointmentId=$row_array['appointmentId'];
+
+			$data1 = array(
+				'isCompleted' 		=> 1,
+			);
+			$this->db->set($data1);$this->db->where('appointmentId', $this->appointmentId);
+			$this->db->update("axappointments", $data1); 
+
+
 			if($pr_communicationDuration!=NULL){
 				$this->db->select('doctorSessionDuration');
 			$this->db->from("axdoctors");
@@ -1889,6 +1905,7 @@ public function cancel_appointment_patient($appointmentId)
 		// echo  gmdate("H:i:s", $orgnlduratin*60);
 		// die;
 			
+		
 		
 
 		if($communicationDuration[1] >=$doctorSessionDuration)
