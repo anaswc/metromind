@@ -1627,21 +1627,6 @@ public function cancel_appointment_patient($appointmentId)
 //Move here by Dileep on July 12 sunday for sending patientRecordId 
 
 // ====
-$this->db->select('patientRecordId');
-		$this->db->from("axpatientrecords");
-		$this->db->where('appointmentId', $this->appointmentId);
-		$query = $this->db->get();
-
-		
-		
-		if($query->num_rows() > 0){
-
-			$this->patientRecordId= $query['$patientRecordId'];
-
-		}
-		else{
-
-	
 
 // ======
 
@@ -1675,12 +1660,14 @@ $this->db->select('patientRecordId');
 
 			'insDate' 					=> $insDate
 
-		);
+		);	
+
+		
 
 		$this->db->insert('axpatientrecords', $data);
 
 		$this->patientRecordId = $this->db->insert_id();
-	}
+
 // Ends				
 
 		if($this->communicationMode == 3){
