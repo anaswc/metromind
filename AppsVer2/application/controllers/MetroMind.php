@@ -3332,6 +3332,7 @@ class MetroMind extends CI_Controller
 		$this->verify_request();
 
 		if ($this->input->post_get('loginType') == 1) {
+			
 
 			$this->Patient_model->doctorId 	= $this->Doctor_model->get_doctor_id_by_uniqueId(trim($this->input->post_get('uniqueId')));
 
@@ -3342,9 +3343,12 @@ class MetroMind extends CI_Controller
 			}
 
 		} else if ($this->input->post_get('loginType') == 2) {
+			
 
 			$this->Patient_model->patientId = $this->Patient_model->get_patient_id_by_uniqueId(trim($this->input->post_get('uniqueId')));
 
+			echo $this->Patient_model->get_patient_id_by_uniqueId(trim($this->input->post_get('uniqueId')));
+			
 			if($this->Patient_model->communicationMode == 3){
 
 				$this->Patient_model->doctorId =  $this->Doctor_model->get_doctor_id_by_uniqueId(trim($this->input->post_get('doctorId')));
@@ -3355,6 +3359,8 @@ class MetroMind extends CI_Controller
 
 		if ($this->Patient_model->patientId == '' || $this->Patient_model->doctorId == '' || $this->Patient_model->communicationMode == '' || $this->Patient_model->communicationStartTime == '') {
 
+			
+			
 			$tokenData = time() . $this->input->post_get('uniqueId');
 
 			$token = AUTHORIZATION::generateToken($tokenData);
@@ -3369,6 +3375,7 @@ class MetroMind extends CI_Controller
 
 		} else {
 
+			
 			if ($this->input->post_get('loginType') == 1 && $this->Patient_model->communicationMode <> 3) {
 
 				$tokenData = time() . $this->input->post_get('uniqueId');
