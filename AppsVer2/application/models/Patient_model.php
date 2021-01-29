@@ -1830,11 +1830,11 @@ public function cancel_appointment_patient($appointmentId)
 			$patientCreditId=$row_array['patientCreditId'];
 			$this->appointmentId=$row_array['appointmentId'];
 
-			$data1 = array(
-				'isCompleted' 		=> 1,
-			);
-			$this->db->set($data1);$this->db->where('appointmentId', $this->appointmentId);
-			$this->db->update("axappointments", $data1); 
+			// $data1 = array(
+			// 	'isCompleted' 		=> 1,
+			// );
+			// $this->db->set($data1);$this->db->where('appointmentId', $this->appointmentId);
+			// $this->db->update("axappointments", $data1); 
 
 
 			if($pr_communicationDuration!=NULL){
@@ -2599,6 +2599,9 @@ public function cancel_appointment_patient($appointmentId)
 		$this->db->order_by("YEAR(appointmentDate) DESC, MONTH(appointmentDate) DESC, DAY(appointmentDate) DESC, appointmentStartTime ASC ");
 
 		$query = $this->db->get();
+
+		// echo "hi";
+		// exit;
 		
 		//echo  $this->db->last_query();die();
 
