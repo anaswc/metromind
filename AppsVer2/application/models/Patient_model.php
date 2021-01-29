@@ -1628,22 +1628,18 @@ public function cancel_appointment_patient($appointmentId)
 
 // ====
 
-$this->db->select('patientRecordId');
-$this->db->from("axpatientrecords");
-$this->db->where('patientCreditId', $this->patientCreditId);
-$query = $this->db->get();
-if($query->num_rows() > 0){
-	$row_array = $query->row_array();
-	$this->patientRecordId=$row_array['patientRecordId'];
-}
-else{
+// $this->db->select('patientRecordId');
+// $this->db->from("axpatientrecords");
+// $this->db->where('patientCreditId', $this->patientCreditId);
+// $query = $this->db->get();
+// if($query->num_rows() > 0){
+// 	$row_array = $query->row_array();
+// 	$this->patientRecordId=$row_array['patientRecordId'];
+// }
+// else{
 		
 
 // ======
-
-		$data = array(
-
-			'patientId' 				=> $this->patientId,
 
 			'doctorId' 					=> $this->doctorId,
 
@@ -1680,7 +1676,7 @@ else{
 		$this->patientRecordId = $this->db->insert_id();
 
 		
-	}
+	// }
 
 
 
