@@ -767,11 +767,27 @@ class Patient_model extends CI_Model {
 
 		if(trim($this->deviceOS) == "") $this->deviceOS = 'iOS';		
 
+	
+
+		$this->db->select('phonePrefix');
+
+		$this->db->from('axcountries');
+
+		$this->db->where("countryId", $this->countryId); 
+
+		$result_array = $this->db->get()->result_array();
+
+		if(count($result_array) > 0){
+
+			$newphonePrefix	= $result_array[0]["phonePrefix"];
+		}
+
+		
 		$data = array(
 
 			'patientMobile' 	=> $this->patientMobile,
 
-			'countryId' 		=> $this->countryId,
+			'countryId' 		=>$newphonePrefix,
 
 			'createdDate' 		=> $createdDate,
 
@@ -913,7 +929,11 @@ class Patient_model extends CI_Model {
 
 			$countryId			= $result_array[0]["countryId"];
 
+
+
 			$phonePrefix = $this->get_phonePrefix($countryId);
+
+			
 
 			if($phonePrefix <> 0)
 
