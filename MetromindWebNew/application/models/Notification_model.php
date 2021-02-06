@@ -136,7 +136,7 @@ public function send_notification_user($uniqueId){
 
 			$countryId			= $result_array[0]["countryId"];
 
-			$phonePrefix = $this->get_phonePrefix($countryId);
+			$phonePrefix = $countryId;
 
 			if($phonePrefix <> 0)
 
