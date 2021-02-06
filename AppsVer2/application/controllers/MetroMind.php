@@ -105,6 +105,8 @@ class MetroMind extends CI_Controller
 
 	{
 
+		// echo "ho";
+		// 		exit;
 		$this->Patient_model->setPostGetVars();
 
 		if ($this->Patient_model->patientMobile == '') {

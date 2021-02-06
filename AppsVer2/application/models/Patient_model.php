@@ -963,7 +963,19 @@ class Patient_model extends CI_Model {
 
 				curl_close($x);
 
+
+				$data = array(			
+
+					'phone' 				=> $patientMobile,			
+		
+					'log' 				=> $y	);			
+		
+				$this->db->insert('axsmslogs', $data);	
+
+				
+
 			}
+		
 
 			return 1;
 
