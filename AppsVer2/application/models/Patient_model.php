@@ -931,8 +931,9 @@ class Patient_model extends CI_Model {
 
 
 
-			$phonePrefix = $this->get_phonePrefix($countryId);
+			$phonePrefix = $countryId;
 
+			
 			
 
 			if($phonePrefix <> 0)
