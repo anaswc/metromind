@@ -2787,6 +2787,8 @@ public function cancel_appointment_patient($appointmentId)
 	public function get_patient_completed_appointments($patientId)
 
 	{	
+		// echo "dd";
+		// exit;
 
 		if($patientId == '')
 
@@ -2829,14 +2831,18 @@ public function cancel_appointment_patient($appointmentId)
 		$this->db->join('axprescriptions', 'axprescriptions.appointmentId = axappointments.appointmentId', 'left');
 
 		$this->db->where('axappointments.patientId',$patientId);	
+	
+		$this->db->where('axappointments.isPaymentCompleted',1);
+		$this->db->where('axappointments.appointmentDate <=',date("Y-m-d"));
+		$this->db->where('axappointments.endDateTime <=',date("Y-m-d H:i:s"));
 
-		$this->db->where('axappointments.isCompleted',1);		
+		// $this->db->where('axappointments.isCompleted',1);		
 
 		$this->db->group_by('axappointments.appointmentId');	
 
 		$query = $this->db->get();
 
-		//echo  $this->db->last_query();die();
+		// echo  $this->db->last_query();die();
 
 		return $query->result_array();
 

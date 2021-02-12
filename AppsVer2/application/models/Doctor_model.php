@@ -1978,7 +1978,7 @@ class Doctor_model extends CI_Model {
 		$this->db->where('axappointments.doctorId',$doctorId);
 		$this->db->where('axappointments.isPaymentCompleted',1);
 		$this->db->where('axappointments.appointmentDate <=',date("Y-m-d"));
-		$this->db->where('axappointments.appointmentEndTime <=',date("H:i:s"));
+		$this->db->where('axappointments.endDateTime <=',date("Y-m-d H:i:s"));
 		// $this->db->from('axappointments');
 
 		// $this->db->where('axappointments.isCompleted',1);	
