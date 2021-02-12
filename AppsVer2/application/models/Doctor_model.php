@@ -1937,6 +1937,7 @@ class Doctor_model extends CI_Model {
 
 	{	
 
+		
 		if($doctorId == '')
 
 			return 0;
@@ -1973,17 +1974,29 @@ class Doctor_model extends CI_Model {
 
 		$this->db->join('axprescriptions', 'axprescriptions.appointmentId = axappointments.appointmentId', 'left');
 
+		// $this->db->select('appointmentId');
 		$this->db->where('axappointments.doctorId',$doctorId);
+		$this->db->where('axappointments.isPaymentCompleted',1);
+		$this->db->where('axappointments.appointmentDate <=',date("Y-m-d"));
+		$this->db->where('axappointments.appointmentEndTime <=',date("H:i:s"));
+		// $this->db->from('axappointments');
 
-		$this->db->where('axappointments.isCompleted',1);			
+		// $this->db->where('axappointments.isCompleted',1);	
+		
+		// $this->db->where('axappointments.appointmentDate <=',date("Y-m-d"));
+		// $this->db->where('axappointments.appointmentEndTime <=',date("H:i:s"));
 
 		$this->db->group_by('axappointments.appointmentId');	
 
 		$query = $this->db->get();
+	
 
-		//echo  $this->db->last_query();die();
+		
 
 		return $query->result_array();
+
+
+
 
 	}
 

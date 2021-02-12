@@ -3277,6 +3277,7 @@ class MetroMind extends CI_Controller
 
 			$result 	= $this->Doctor_model->get_doctor_completed_appointments($this->Doctor_model->doctorId);
 
+			
 			if (is_array($result) && count($result) > 0) {
 
 				$i	= 0;
