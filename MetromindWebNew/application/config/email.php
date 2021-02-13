@@ -5,8 +5,8 @@ $config = array(
   
    
      'smtp_host' => 'smtp.googlemail.com',
-    'smtp_user' => 'metromindhospital@gmail.com',
-    'smtp_pass' => 'metromind%8',    
+     'smtp_user' => 'noreplaymetromindapp@gmail.com',
+     'smtp_pass' => 'bljngjvjekqkeymy',  
     'smtp_port' => 465,
     'smtp_crypto'=>'ssl',
     // 'smtp_port' => 587,
