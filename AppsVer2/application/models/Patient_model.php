@@ -767,8 +767,6 @@ class Patient_model extends CI_Model {
 
 		if(trim($this->deviceOS) == "") $this->deviceOS = 'iOS';		
 
-	
-
 		$this->db->select('phonePrefix');
 
 		$this->db->from('axcountries');
@@ -781,6 +779,15 @@ class Patient_model extends CI_Model {
 
 			$newphonePrefix	= $result_array[0]["phonePrefix"];
 		}
+		else{
+			$newphonePrefix	=91;
+
+		}
+		if($this->countryId==94)
+		{
+			$newphonePrefix	=91;
+		}
+
 
 		
 		$data = array(
@@ -933,6 +940,7 @@ class Patient_model extends CI_Model {
 
 			$phonePrefix = $countryId;
 
+		
 			
 			
 
@@ -1068,6 +1076,28 @@ class Patient_model extends CI_Model {
 
 			$this->birthDate = '0000-00-00';
 
+			$this->db->select('phonePrefix');
+
+		$this->db->from('axcountries');
+
+		$this->db->where("countryId", $this->countryId); 
+
+		$result_array = $this->db->get()->result_array();
+
+		if(count($result_array) > 0){
+
+			$newphonePrefix	= $result_array[0]["phonePrefix"];
+		}
+		else{
+			$newphonePrefix	=91;
+
+		}
+		if($this->countryId==94)
+		{
+			$newphonePrefix	=91;
+		}
+
+
 		$data = array(
 
 			'patientEmail' 		=> $this->patientEmail,
@@ -1084,7 +1114,7 @@ class Patient_model extends CI_Model {
 
 			'birthDate' 		=> $this->birthDate,
 
-			'countryId' 		=> $this->countryId,
+			'countryId' 		=> $newphonePrefix,
 
 			'status' 			=> 1,
 
@@ -1219,7 +1249,30 @@ class Patient_model extends CI_Model {
 
 	public function set_patient()			
 
-	{			
+	{
+		
+		$this->db->select('phonePrefix');
+
+		$this->db->from('axcountries');
+
+		$this->db->where("countryId", $this->countryId); 
+
+		$result_array = $this->db->get()->result_array();
+
+		if(count($result_array) > 0){
+
+			$newphonePrefix	= $result_array[0]["phonePrefix"];
+		}
+		else{
+			$newphonePrefix	=91;
+
+		}
+		if($this->countryId==94)
+		{
+			$newphonePrefix	=91;
+		}
+
+
 
 		$gender =  1;			
 
@@ -1229,7 +1282,7 @@ class Patient_model extends CI_Model {
 
 			'firstName' 				=> $this->firstName,			
 
-			'countryId' 				=> $this->countryId,			
+			'countryId' 				=> $newphonePrefix,			
 
 			'lastName' 					=> $this->lastName,			
 
@@ -1269,7 +1322,31 @@ class Patient_model extends CI_Model {
 
 		else
 
-			$this->birthDate = '0000-00-00';		
+			$this->birthDate = '0000-00-00';	
+			
+			
+
+			$this->db->select('phonePrefix');
+
+		$this->db->from('axcountries');
+
+		$this->db->where("countryId", $this->countryId); 
+
+		$result_array = $this->db->get()->result_array();
+
+		if(count($result_array) > 0){
+
+			$newphonePrefix	= $result_array[0]["phonePrefix"];
+		}
+		else{
+			$newphonePrefix	=91;
+
+		}
+		if($this->countryId==94)
+		{
+			$newphonePrefix	=91;
+		}
+
 
 		$data = array(			
 
@@ -1285,7 +1362,7 @@ class Patient_model extends CI_Model {
 
 			'customGender' 					=> $this->customGender,					
 
-			'countryId' 					=> $this->countryId,				
+			'countryId' 					=>$newphonePrefix,				
 
 			'patientAddress' 				=> $this->patientAddress,
 
@@ -1323,13 +1400,35 @@ class Patient_model extends CI_Model {
 
 		//if(!$this->validate_signup_email($this->patientEmail)) return 0;	
 
-		$modifiedDate = date("Y-m-d H:i:s", now('Asia/Kolkata'));		
+		$modifiedDate = date("Y-m-d H:i:s", now('Asia/Kolkata'));	
+		
+		$this->db->select('phonePrefix');
+
+		$this->db->from('axcountries');
+
+		$this->db->where("countryId", $this->countryId); 
+
+		$result_array = $this->db->get()->result_array();
+
+		if(count($result_array) > 0){
+
+			$newphonePrefix	= $result_array[0]["phonePrefix"];
+		}
+		else{
+			$newphonePrefix	=91;
+
+		}
+		if($this->countryId==94)
+		{
+			$newphonePrefix	=91;
+		}
+
 
 		$data = array(			
 
 			'patientMobile' 				=> $this->patientMobile,
 
-			'countryId' 					=> $this->countryId,
+			'countryId' 					=> $newphonePrefix,
 
 			'isVerified' 					=> 0,	
 

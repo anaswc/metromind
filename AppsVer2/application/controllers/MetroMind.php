@@ -105,11 +105,11 @@ class MetroMind extends CI_Controller
 
 	{
 
-		// echo "ho";
-		// 		exit;
+		
 		$this->Patient_model->setPostGetVars();
 
 		if ($this->Patient_model->patientMobile == '') {
+			
 
 			$result = array();
 
@@ -128,10 +128,14 @@ class MetroMind extends CI_Controller
 			$this->response($response, 200);
 
 		}
+		
 
 		$valid = $this->Patient_model->validate_signup_mobile($this->Patient_model->patientMobile);
+		
+		
 
 		if (!$valid) {
+			
 
 			$result = array();
 
@@ -150,6 +154,7 @@ class MetroMind extends CI_Controller
 			$this->response($response, 200);
 
 		} else if ($valid === 100) {
+		
 
 			$result = array();
 
@@ -176,6 +181,8 @@ class MetroMind extends CI_Controller
 			$this->response($response, 200);
 
 		} else if ($valid === 101) {
+
+			
 
 			$result = $this->Patient_model->send_otp_patient($this->Patient_model->uniqueId);
 
@@ -230,6 +237,7 @@ class MetroMind extends CI_Controller
 			}
 
 		} else {
+			
 
 			$result = $this->Patient_model->signup_step1_patient();
 
