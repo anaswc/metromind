@@ -1894,8 +1894,10 @@ class Doctor_model extends CI_Model {
 		$this->db->join('axdoctors', 'axdoctors.doctorId = axappointments.doctorId', 'left');
 
 		$this->db->where('axappointments.doctorId',$doctorId);
-
 		$this->db->where('axappointments.status <=1 ');	
+		$this->db->where('axappointments.startDateTime>=',date('Y-m-d H:i:s'));
+
+
 
 		if($this->input->post_get('appointmentDate') <> ''){
 
@@ -1913,7 +1915,7 @@ class Doctor_model extends CI_Model {
 
 		else{
 
-			$this->db->where('axappointments.isCompleted',0);
+		// 	$this->db->where('axappointments.isCompleted',0);
 
 			$this->db->where('axappointments.requestDate >= ',date("Y-m-d"));	
 
@@ -1925,7 +1927,7 @@ class Doctor_model extends CI_Model {
 
 		$query = $this->db->get();
 
-		//echo  $this->db->last_query();die();
+	
 
 		return $query->result_array();
 
