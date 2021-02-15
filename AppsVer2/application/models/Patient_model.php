@@ -1591,6 +1591,11 @@ class Patient_model extends CI_Model {
 
 			$this->appointmentEndTime = '0000-00-00';
 
+
+		$startDateTime = $this->requestDate .''.$this->appointmentStartTime;
+
+		$endDateTime = $this->requestDate .''.$this->appointmentEndTime;
+
 		$data = array(
 
 			'patientId' 		=> $this->patientId,
@@ -1609,7 +1614,15 @@ class Patient_model extends CI_Model {
 
 			'appointmentEndTime' => $this->appointmentEndTime,
 
-			'appointmentDate' => $this->requestDate
+			'appointmentDate' => $this->requestDate,
+
+			'startDateTime' =>$startDateTime,
+
+			'endDateTime' =>$endDateTime
+
+
+
+			
 
 
 		);
