@@ -1592,9 +1592,9 @@ class Patient_model extends CI_Model {
 			$this->appointmentEndTime = '0000-00-00';
 
 
-		$startDateTime = $this->requestDate .''.$this->appointmentStartTime;
+		$startDateTime = date("Y-m-d H:i:s", strtotime($this->requestDate.$this->appointmentStartTime));;
 
-		$endDateTime = $this->requestDate .''.$this->appointmentEndTime;
+		$endDateTime = $this->requestDate .' '.$this->appointmentEndTime;
 
 		echo $startDateTime;
 		echo $endDateTime;
