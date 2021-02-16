@@ -1599,7 +1599,7 @@ class Doctor_model extends CI_Model {
 			'notificationCount' 		=> $result+1,
 		);
 		$this->db->where('patientId', $row_array['patientId']);
-		$this->db->update("axpatient", $data); 
+		$this->db->update("axpatient", $data3); 
 			
 			}else if($this->status == 3){
 
@@ -1618,7 +1618,7 @@ class Doctor_model extends CI_Model {
 			'notificationCount' 		=> $result+1,
 		);
 		$this->db->where('patientId', $row_array['patientId']);
-		$this->db->update("axpatient", $data); 
+		$this->db->update("axpatient", $data3); 
 
 				}else if($this->input->post_get('loginType') == 2){
 
@@ -1633,7 +1633,7 @@ class Doctor_model extends CI_Model {
 			'notificationCount' 		=> $result+1,
 		);
 		$this->db->where('doctorId', $row_array['doctorId']);
-		$this->db->update("axdoctors", $data); 
+		$this->db->update("axdoctors", $data3); 
 
 				}
 

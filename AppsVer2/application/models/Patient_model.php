@@ -1668,7 +1668,7 @@ class Patient_model extends CI_Model {
 			'notificationCount' 		=> $result+1,
 		);
 		$this->db->where('doctorId', $this->doctorId);
-		$this->db->update("axdoctors", $data); 
+		$this->db->update("axdoctors", $data3); 
 
 
 	
@@ -1969,7 +1969,7 @@ public function cancel_appointment_patient($appointmentId)
 			'notificationCount' 		=> $result+1,
 		);
 		$this->db->where('patientId', $this->patientId);
-		$this->db->update("axpatient", $data); 
+		$this->db->update("axpatient", $data3); 
 
 
 			}else if($this->input->post_get('loginType') == 2){
@@ -1986,7 +1986,7 @@ public function cancel_appointment_patient($appointmentId)
 			'notificationCount' 		=> $result+1,
 		);
 		$this->db->where('doctorId', $this->doctorId);
-		$this->db->update("axdoctors", $data); 
+		$this->db->update("axdoctors", $data3); 
 
 			}
 
@@ -3212,7 +3212,7 @@ public function cancel_appointment_patient($appointmentId)
 			'notificationCount' 		=> $result+1,
 		);
 		$this->db->where('doctorId', $row_array['doctorId']);
-		$this->db->update("axdoctors", $data); 
+		$this->db->update("axdoctors", $data3); 
 
 		$this->notifydoctorFCM($notificationTitle,$row_array['doctorId']);
 	}
