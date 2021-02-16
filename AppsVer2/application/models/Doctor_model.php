@@ -1588,7 +1588,19 @@ class Doctor_model extends CI_Model {
 				$this->db->delete("axnotifications", "appointmentId IN ( ".$appointmentId.")");
 
 				$notificationTitle = 'Your online appointment request with '.$doctorName.'('.$doctorUniqueId.') is cancelled !';
+				
 
+				$this->db->select('notificationCount');
+		$this->db->from("axpatient");
+		$this->db->where('patientId', $row_array['patientId']);
+		$query = $this->db->get()->row_array();
+		$result=$query['notificationCount'];
+		$data3 = array(
+			'notificationCount' 		=> $result+1,
+		);
+		$this->db->where('patientId', $row_array['patientId']);
+		$this->db->update("axpatient", $data); 
+			
 			}else if($this->status == 3){
 
 				$this->db->delete("axnotifications", "appointmentId IN ( ".$appointmentId.")");
@@ -1597,9 +1609,31 @@ class Doctor_model extends CI_Model {
 
 					$notificationTitle = $doctorName.'('.$doctorUniqueId.') cancelled the appointment!';
 
+					$this->db->select('notificationCount');
+		$this->db->from("axpatient");
+		$this->db->where('patientId', $row_array['patientId']);
+		$query = $this->db->get()->row_array();
+		$result=$query['notificationCount'];
+		$data3 = array(
+			'notificationCount' 		=> $result+1,
+		);
+		$this->db->where('patientId', $row_array['patientId']);
+		$this->db->update("axpatient", $data); 
+
 				}else if($this->input->post_get('loginType') == 2){
 
 					$notificationTitle = $patientName.'('.$patientUniqueId.') cancelled the appointment!';
+
+					$this->db->select('notificationCount');
+		$this->db->from("axdoctors");
+		$this->db->where('doctorId', $row_array['doctorId']);
+		$query = $this->db->get()->row_array();
+		$result=$query['notificationCount'];
+		$data3 = array(
+			'notificationCount' 		=> $result+1,
+		);
+		$this->db->where('doctorId', $row_array['doctorId']);
+		$this->db->update("axdoctors", $data); 
 
 				}
 

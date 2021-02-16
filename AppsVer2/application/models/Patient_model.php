@@ -1658,6 +1658,20 @@ class Patient_model extends CI_Model {
 
 		$this->sendScheduleAppointmentFCM($this->patientId,$this->doctorId);
 
+
+		$this->db->select('notificationCount');
+		$this->db->from("axdoctors");
+		$this->db->where('doctorId', $this->doctorId);
+		$query = $this->db->get()->row_array();
+		$result=$query['notificationCount'];
+		$data3 = array(
+			'notificationCount' 		=> $result+1,
+		);
+		$this->db->where('doctorId', $this->doctorId);
+		$this->db->update("axdoctors", $data); 
+
+
+	
 		return $appointmentId;
 		
 
@@ -1946,9 +1960,33 @@ public function cancel_appointment_patient($appointmentId)
 
 				$clientName = $this->get_doctor_name($this->doctorId);
 
+				$this->db->select('notificationCount');
+		$this->db->from("axpatient");
+		$this->db->where('patientId', $this->patientId);
+		$query = $this->db->get()->row_array();
+		$result=$query['notificationCount'];
+		$data3 = array(
+			'notificationCount' 		=> $result+1,
+		);
+		$this->db->where('patientId', $this->patientId);
+		$this->db->update("axpatient", $data); 
+
+
 			}else if($this->input->post_get('loginType') == 2){
 
 				$clientName = $this->get_patient_name($this->patientId);
+
+
+				$this->db->select('notificationCount');
+		$this->db->from("axdoctors");
+		$this->db->where('doctorId', $this->doctorId);
+		$query = $this->db->get()->row_array();
+		$result=$query['notificationCount'];
+		$data3 = array(
+			'notificationCount' 		=> $result+1,
+		);
+		$this->db->where('doctorId', $this->doctorId);
+		$this->db->update("axdoctors", $data); 
 
 			}
 
@@ -3163,6 +3201,18 @@ public function cancel_appointment_patient($appointmentId)
 
 		$this->db->insert('axnotifications', $data);
 		$notification_id= $this->db->insert_id();
+
+
+		$this->db->select('notificationCount');
+		$this->db->from("axdoctors");
+		$this->db->where('doctorId', $row_array['doctorId']);
+		$query = $this->db->get()->row_array();
+		$result=$query['notificationCount'];
+		$data3 = array(
+			'notificationCount' 		=> $result+1,
+		);
+		$this->db->where('doctorId', $row_array['doctorId']);
+		$this->db->update("axdoctors", $data); 
 
 		$this->notifydoctorFCM($notificationTitle,$row_array['doctorId']);
 	}
