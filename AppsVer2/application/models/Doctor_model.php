@@ -1218,6 +1218,8 @@ class Doctor_model extends CI_Model {
 							axdoctors.isViewDetailInfo,
 							
 							axdoctors. isShowGreen,
+
+							axdoctors. notificationCount,
 							
 							axdoctors.deviceOS AS doctorDeviceOS
 

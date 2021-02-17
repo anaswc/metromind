@@ -636,11 +636,13 @@ class MetroMind extends CI_Controller
 
 					$fcmToken			=  $result["fcmToken"];
 
+					$notificationCount			=  $result["notificationCount"];
+
 				}
 
 				$status = 200;
 
-				$response = ['status' => $status, 'token' => $token,'userid'=>$user_id, 'uniqueId' => $uniqueId, 'clientName' => $clientName, 'clientEmail' => $clientEmail, 'clientMobile' => $clientMobile, 'clientAddress' => $clientAddress, 'loginType' => $loginType, 'imageUrl' => $imageUrl, 'youtubeLink' => $youtubeLink, 'fcmToken' => $fcmToken, 'doctorSessionDuration' => $doctorSessionDuration, 'razorPayApiKey' => $this->Patient_model->razorPayApiKey, 'razorPaySecretKey' => $this->Patient_model->razorPaySecretKey, 'razorPayCurrency' => $this->Patient_model->razorPayCurrency, 'calendarLimit' => $this->Patient_model->calendarLimit, 'message' => 'You are in! '];
+				$response = ['status' => $status, 'token' => $token,'userid'=>$user_id, 'uniqueId' => $uniqueId, 'clientName' => $clientName, 'clientEmail' => $clientEmail, 'clientMobile' => $clientMobile, 'clientAddress' => $clientAddress, 'loginType' => $loginType, 'imageUrl' => $imageUrl,'notificationCount'=>$notificationCount, 'youtubeLink' => $youtubeLink, 'fcmToken' => $fcmToken, 'doctorSessionDuration' => $doctorSessionDuration, 'razorPayApiKey' => $this->Patient_model->razorPayApiKey, 'razorPaySecretKey' => $this->Patient_model->razorPaySecretKey, 'razorPayCurrency' => $this->Patient_model->razorPayCurrency, 'calendarLimit' => $this->Patient_model->calendarLimit, 'message' => 'You are in! '];
 
 				$this->response($response, 200);
 
