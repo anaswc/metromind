@@ -3751,6 +3751,12 @@ public function cancel_appointment_patient($appointmentId)
 
 			return 0;
 
+			$data3 = array(
+				'notificationCount' 		=> 0,
+			);
+			$this->db->where('patientId', $patientId);
+			$this->db->update("axpatient", $data3); 
+
 		$this->db->select(' 
 
 							axnotifications.*,
@@ -3800,6 +3806,9 @@ public function cancel_appointment_patient($appointmentId)
 		$query = $this->db->get();
 
 		//echo  $this->db->last_query();die();
+
+
+		
 
 		return $query->result_array();
 

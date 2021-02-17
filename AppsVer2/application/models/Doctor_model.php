@@ -2414,6 +2414,12 @@ class Doctor_model extends CI_Model {
 
 			return 0;
 
+			$data3 = array(
+				'notificationCount' 		=> 0,
+			);
+			$this->db->where('doctorId', $doctorId);
+			$this->db->update("axdoctors", $data3); 
+
 		$this->db->select(' 
 
 							axnotifications.*,
@@ -2463,6 +2469,8 @@ class Doctor_model extends CI_Model {
 		$query = $this->db->get();
 
 		return $query->result_array();
+
+
 
 	}
 
