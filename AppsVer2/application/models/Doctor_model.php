@@ -1583,6 +1583,17 @@ class Doctor_model extends CI_Model {
 				$notificationTitle = 'Your online appointment with '.$doctorName.'('.$doctorUniqueId.') is confirmed on '.$appointmentDate.' at '.$appointmentStartTime.' - '.$appointmentEndTime.' please make the payment';
 				// $notificationTitle = 'Your online appointment with '.$doctorName.'('.$doctorUniqueId.') is confirmed on '.$appointmentDate.' at '.$appointmentStartTime.' - '.$appointmentEndTime.' - '.$this->appointmentSession;
 
+				$this->db->select('notificationCount');
+		$this->db->from("axpatient");
+		$this->db->where('patientId', $row_array['patientId']);
+		$query = $this->db->get()->row_array();
+		$result=$query['notificationCount'];
+		$data3 = array(
+			'notificationCount' 		=> $result+1,
+		);
+		$this->db->where('patientId', $row_array['patientId']);
+		$this->db->update("axpatient", $data3); 
+
 			}else if($this->status == 2){
 
 				$this->db->delete("axnotifications", "appointmentId IN ( ".$appointmentId.")");
