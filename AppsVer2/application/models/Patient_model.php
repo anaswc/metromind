@@ -4355,7 +4355,7 @@ public function get_patient_notification_count_by_uniqueid($patient_unnique_id){
 
 	if($patient_unnique_id == 0)
 
-		return 0;
+		return "f";
 
 	$this->db->select('notificationCount');				
 
@@ -4363,10 +4363,9 @@ public function get_patient_notification_count_by_uniqueid($patient_unnique_id){
 
 	$this->db->where('uniqueId', $patient_unnique_id);	
 
-	$query = $this->db->get()->row_array();
-	echo $query['notificationCount'];
-	exit;
-	return $query['notificationCount'];
+	$query = $this->db->get();
+	
+	return $query->row_array();
 
 }
 
