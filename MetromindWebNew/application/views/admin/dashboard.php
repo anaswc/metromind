@@ -196,7 +196,7 @@ global $arrAdminType;
 
          <li><a class="waves-effect waves-dark" href="<?php echo base_url();?>admin/prescription"><i class="icon-arrow-right"></i>Prescription</a></li>
 
-<li><a class="waves-effect waves-dark" href="<?php echo base_url();?>admin/subscription"><i class="icon-arrow-right"></i>Subscriptions</a></li>
+<!-- <li><a class="waves-effect waves-dark" href="<?php echo base_url();?>admin/subscription"><i class="icon-arrow-right"></i>Subscriptions</a></li> -->
    <li class="treeview"><a href="<?php echo base_url('admin/requestsession')?>"><i class="icon-arrow-right"></i>Request sessions</a></li>
 
           
@@ -261,7 +261,7 @@ global $arrAdminType;
 
          <li><a class="waves-effect waves-dark" href="<?php echo base_url();?>admin/prescription"><i class="icon-arrow-right"></i>Prescription</a></li>
 
-<li><a class="waves-effect waves-dark" href="<?php echo base_url();?>admin/subscription"><i class="icon-arrow-right"></i>Subscriptions</a></li>
+<!-- <li><a class="waves-effect waves-dark" href="<?php echo base_url();?>admin/subscription"><i class="icon-arrow-right"></i>Subscriptions</a></li> -->
    <li class="treeview"><a href="<?php echo base_url('admin/requestsession')?>"><i class="icon-arrow-right"></i>Request sessions</a></li>
 
           
@@ -292,7 +292,7 @@ global $arrAdminType;
                           <!-- <li><a class="waves-effect waves-dark" href="<?php echo base_url();?>admin/rating"><i class="icon-arrow-right"></i>Rating</a></li> -->
                            <li><a class="waves-effect waves-dark" href="<?php echo base_url();?>admin/prescription"><i class="icon-arrow-right"></i>Prescription</a></li>
 
-<li><a class="waves-effect waves-dark" href="<?php echo base_url();?>admin/subscription"><i class="icon-arrow-right"></i>Subscriptions</a></li>
+<!-- <li><a class="waves-effect waves-dark" href="<?php echo base_url();?>admin/subscription"><i class="icon-arrow-right"></i>Subscriptions</a></li> -->
  
 
 <li><a class="waves-effect waves-dark" href="<?php echo base_url();?>admin/patientcredits"><i class="icon-arrow-right"></i>Patient credits</a></li>
@@ -817,7 +817,7 @@ global $arrAdminType;
 
           </div>
 
-          <div class="col-lg-3">
+          <!-- <div class="col-lg-3">
 
                 <div class="card dashboard-card-sm">
 
@@ -847,7 +847,7 @@ global $arrAdminType;
 
                            
 
-                          </div>
+                          </div> 
 
                       </div>
 
@@ -857,7 +857,7 @@ global $arrAdminType;
 
               </div>
 
-          </div> 
+          </div>  -->
           
 
 
@@ -1565,7 +1565,7 @@ global $arrAdminType;
 
           </div>
 
-          <div class="col-lg-3">
+          <!-- <div class="col-lg-3">
 
                 <div class="card dashboard-card-sm">
 
@@ -1605,7 +1605,7 @@ global $arrAdminType;
 
               </div>
 
-          </div> 
+          </div>  -->
           
 
 

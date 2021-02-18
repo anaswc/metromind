@@ -4348,6 +4348,28 @@ public function cancel_appointment_patient($appointmentId)
 
 	}
 
+
+//
+
+public function get_patient_notification_count_by_uniqueid($patient_unnique_id){
+
+	if($patient_unnique_id == 0)
+
+		return 0;
+
+	$this->db->select('notificationCount');				
+
+	$this->db->from('axpatient');			
+
+	$this->db->where('uniqueId', $patient_unnique_id);	
+
+	$query = $this->db->get()->row_array();
+	return $query;
+
+}
+
+	
+
 // Added Dilee July 13 2020
 
 	public function get_patient_fcm_token_new($patientId){
