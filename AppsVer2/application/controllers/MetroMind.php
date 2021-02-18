@@ -1476,17 +1476,14 @@ class MetroMind extends CI_Controller
 			}
 
 			$notificationCount = $this->Patient_model->get_patient_notification_count_by_uniqueid($this->input->post_get('uniqueId'));
-			echo $notificationCount['notificationCount'];
-			print_r( $notificationCount);
-			echo $this->input->post_get('uniqueId');
-			exit;
+			
 			$tokenData = time() . $this->input->post_get('uniqueId');
 
 			$token = AUTHORIZATION::generateToken($tokenData);
 
 			$this->Login_model->add_api_token_members($this->input->post_get('uniqueId'), $token);
 
-			$response = ['status' => $status, 'token' => $token,'notificationCount'=>$notificationCount,  'result' => $result, 'message' => ''];
+			$response = ['status' => $status, 'token' => $token,'notificationCount'=>$notificationCount['notificationCount'],  'result' => $result, 'message' => ''];
 
 			$this->response($response, 200);
 
