@@ -4353,9 +4353,9 @@ public function cancel_appointment_patient($appointmentId)
 
 public function get_patient_notification_count_by_uniqueid($patient_unnique_id){
 
-	if($patient_unnique_id == 0)
+	// if($patient_unnique_id == 0)
 
-		return "f";
+	// 	return "f";
 
 	$this->db->select('notificationCount');				
 
