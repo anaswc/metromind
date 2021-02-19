@@ -2989,7 +2989,8 @@ public function cancel_appointment_patient($appointmentId)
 		$this->db->where('axappointments.appointmentDate <=',date("Y-m-d"));
 		$this->db->where('axappointments.endDateTime <=',date("Y-m-d H:i:s"));
 
-		// $this->db->where('axappointments.isCompleted',1);		
+		// $this->db->where('axappointments.isCompleted',1);	
+		$this->db->order_by("axappointments.appointmentDate DESC");	
 
 		$this->db->group_by('axappointments.appointmentId');	
 
