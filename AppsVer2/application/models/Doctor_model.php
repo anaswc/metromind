@@ -2412,6 +2412,8 @@ class Doctor_model extends CI_Model {
 
 			$this->db->where('axprescriptions.doctorId',$this->doctorId);
 
+			$this->db->order_by("insDate DESC");
+
 		$query = $this->db->get();
 
 		//echo  $this->db->last_query();die();

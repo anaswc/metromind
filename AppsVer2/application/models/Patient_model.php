@@ -3875,6 +3875,8 @@ public function cancel_appointment_patient($appointmentId)
 
 			$this->db->where('axprescriptions.doctorId',$this->doctorId);
 
+			$this->db->order_by("axprescriptions.insDate DESC");
+
 		$query = $this->db->get();
 
 		//echo  $this->db->last_query();die();
