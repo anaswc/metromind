@@ -2034,6 +2034,7 @@ class Doctor_model extends CI_Model {
 		
 		// $this->db->where('axappointments.appointmentDate <=',date("Y-m-d"));
 		// $this->db->where('axappointments.appointmentEndTime <=',date("H:i:s"));
+		$this->db->order_by("axappointments.appointmentDate ASC ");
 
 		$this->db->group_by('axappointments.appointmentId');	
 
