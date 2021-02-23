@@ -27,7 +27,7 @@ class Video_model extends CI_Model {
 		if($this->sortColumn == '')
 			$this->sortColumn = "video_id";
 		if($this->sortDirection == '')
-			$this->sortDirection = "ASC";	
+			$this->sortDirection = "DESC";	
 		$this->db->order_by("$this->sortColumn", "$this->sortDirection");
 		$query = $this->db->get();
 		return $query->result_array();

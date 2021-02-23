@@ -282,6 +282,16 @@ global $arrAdminType;
       </ul>
       </li>
 
+        <!--  -->
+        <li class="treeview"><a href="#"><i class="icon-menu"></i><span> Helpful Tips </span><i class="icon-arrow-down"></i></a>
+            <ul class="treeview-menu">
+                <li><a href="<?php echo base_url();?>admin/videos"><i class="icon-arrow-right"></i> Videos </a> </li>
+                <li><a class="waves-effect waves-dark" href="<?php echo base_url();?>admin/blogs"><i class="icon-arrow-right"></i>Blogs</a></li>
+            </ul>
+        </li>
+        <!--  -->
+
+
                             <li><a class="waves-effect waves-dark" href="<?php echo base_url();?>admin/doctor"><i class="icon-arrow-right"></i>Doctor</a></li>
         
                            <li><a href="<?php echo base_url();?>admin/package"> <i class="icon-arrow-right"></i><span> Packages</span></i> </a> </li>
