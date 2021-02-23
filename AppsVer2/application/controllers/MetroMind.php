@@ -56,6 +56,9 @@ class MetroMind extends CI_Controller
 
 		$this->load->model('Signup_model');
 
+		$this->load->model('Video_model');
+
+
 		$this->load->helper(['jwt', 'authorization']);
 
 		$this->output->cache(30);
@@ -6600,7 +6603,27 @@ function termsandconditions_get()
 	}
 
 	
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+// Video list
+
+function video_list_get()
+
+{
+	$this->Video_model->setPostGetVars();
+	$result = $this->Video_model->get_video();
+	// print_r($result);exit;
+	if (!$result) { // If countries is empty return an empty result array 
+		$result = array();
+		$response = ['status' => 201,  'result' => $result, 'message' => HTTP_STATUS_CODES[204]];
+		$this->response($response, 200);
+	} else {
+		$status = 200;
+		$response = ['status' => $status,  'result' => $result, 'message' => HTTP_STATUS_CODES[200]];
+		$this->response($response, 200);
+	}
+}
 	
 
 }
