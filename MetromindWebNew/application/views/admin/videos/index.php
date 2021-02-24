@@ -271,7 +271,7 @@
   <th class="noExport">Action</th>
   <th>Title</th>
   <th>Vimeo Video ID </th>
-  <th>Status</th>
+  <th>Category</th>
 
   </tr>
   </thead>
@@ -282,15 +282,6 @@
   if(count($videos)) :
   //$cnt=1; 
   foreach ($videos as $row) :
-  if($row["status"]==1)
-  {
-  $row["status"]="Active";
-  }
-  else if($row["status"]==0)
-  {
-  $row["status"]="Inactive";
-  }
-
   ?>               
   <tr>
   <td  valign="top" class="rowcontent">
@@ -302,7 +293,7 @@
   </td>                                
   <td ><?php echo $row['title']?></td>
   <td ><?php echo $row['videoId']?></td>
-  <td ><?php echo $row['status']?></td>
+  <td ><?php echo $row['category']?></td>
 
   </tr>
   <?php 

@@ -100,7 +100,7 @@ function Cancel(){
                           <div class="form-group row">
                             <label for="input-rounded" class="col-sm-12 form-control-label">Password<span class="mandatory">* </span> </label>
                             <div class="col-sm-6">
-                              <input type="patientPassword" name="patientPassword" value="<?php// echo $patient_item['patientPassword']?>" class="form-control" required>
+                              <input type="patientPassword" name="patientPassword" value="<?php // echo $patient_item['patientPassword']?>" class="form-control" required>
                             </div>
                           </div>
                         </div>-->
@@ -226,7 +226,7 @@ function Cancel(){
     <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
     
     <script src="<?php echo base_url('assets/pages/elements.js'); ?>"></script>
-    <!--<script src="<?php// echo base_url('assets/js/common-pages.js'); ?>"></script>-->
+    <!--<script src="<?php // echo base_url('assets/js/common-pages.js'); ?>"></script>-->
     <script src="<?php echo base_url('scripts/axCommon.js'); ?>"></script>
     
     <!-- data-table js -->

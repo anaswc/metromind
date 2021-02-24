@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title> Videos</title>
+  <title> Category</title>
 
   <?php echo link_tag('assets/icon/icofont/css/icofont.css'); ?>
   <?php echo link_tag('assets/css/bootstrap.min.css'); ?>
@@ -30,39 +30,10 @@
 
   <script>
     function Cancel() {
-      document.location.href = "<?php echo base_url('admin/adminuser'); ?>";
+      document.location.href = "<?php echo base_url('admin/category'); ?>";
     }
 
 
-    function validateVideoId(videoid) {
-
-      var formData = new FormData();
-      formData.append('videoid', videoid);
-      //var frm=document.frmOperatorCreate;
-
-      $.ajax({
-        url: "<?php echo base_url(); ?>admin/videos/checkVideoId",
-        type: "POST", // Type of request to be send, called as method
-        data: {
-          videoId: videoid
-        }, // Data sent to server, a set of key/value pairs (i.e. form fields and values)
-        dataType: "JSON",
-        success: function(data) {
-          if (data == 0) {
-            alert("Video id already exist!");
-            document.getElementById('videoId').value = "";
-
-            return false;
-          } else {
-            return true;
-          }
-
-
-
-        }
-
-      });
-    }
   </script>
 
   <div id="wrapper">
@@ -76,7 +47,7 @@
             <h4>Videos </h4>
             <ol class="breadcrumb breadcrumb-title breadcrumb-arrow">
               <li class="breadcrumb-item"><a href="<?php echo base_url('admin/dashboard'); ?>"><i class="icofont icofont-home"></i></a></li>
-              <li class="breadcrumb-item"><a href="#">Edit Video</a></li>
+              <li class="breadcrumb-item"><a href="#">Edit Category</a></li>
             </ol>
           </div>
         </div>
@@ -92,8 +63,8 @@
                   <div class='text-center error'><?php echo $this->session->flashdata('error'); ?></div>
                 <?php } ?>
 
-                <?php echo form_open_multipart('admin/videos/update/' . $videos_item['id ']); ?>
-                <input type="text" name="id" value="<?php echo $videos_item['id']  ?>">
+                <?php echo form_open_multipart('admin/category/update/' . $category_item['catId ']); ?>
+                <input type="hidden" name="id" value="<?php echo $category_item['catId']  ?>">
                 <input type="hidden" name="returnUrl" value="<?php echo $this->input->get('returnUrl') ?>">
 
 
@@ -101,36 +72,11 @@
                   <div class="form-group row">
                     <label for="input-rounded" class="col-sm-12 form-control-label">Title<span class="mandatory">* </span> </label>
                     <div class="col-sm-6">
-                      <input type="text" name="title" id="title" value="<?php echo $videos_item['title']  ?>" class="form-control" required>
+                      <input type="text" name="title" id="title" value="<?php echo $category_item['title']  ?>" class="form-control" required>
                     </div>
                   </div>
                 </div>
-                <div class="col-md-12 col-xs-12">
-                  <div class="form-group row">
-                    <label for="input-rounded" class="col-sm-12 form-control-label">Vimeo Video Id</label>
-                    <div class="col-sm-6">
-                      <input type="text" name="videoId" id="videoId" class="form-control" value="<?php echo $videos_item['videoId']  ?>" required onBlur="validateVideoId(this.value)">
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6 col-xs-12">
-                  <div class="form-group row">
-                    <label for="input-rounded" class="col-sm-12 form-control-label">Category<span class="mandatory">* </span> </label>
-                    <div class="col-sm-12">
-                      <select name="category" id="category" class="form-control" required>
-                        <option value="">--Select--</option>
-                        <?php
-                        if (count($categories) > 0) {
-                          foreach ($categories as $row) {
-                            ?>
-                            <option value="<?php echo $row['catId'] ?>" <?php if ($row['catId'] == $videos_item['category']) { ?> selected <?php } ?>><?php echo $row['title'] ?></option>
-                        <?php }
-                        }
-                        ?>
-                      </select>
-                    </div>
-                  </div>
-                </div>
+                
 
 
                 <div class="col-md-12"></div>

@@ -97,33 +97,21 @@ $data['extraParameters']	= "";
 		
 		public function create()
 		{ 
-		  //  global $arrAdminType;
 			$this->load->helper('form');
 			$this->load->library('form_validation');
-
-			// $data["adminTypeList"]				= 	HTMLOptionKeyValArray($arrAdminType,$this->adminuser_model->adminType);
+			$data['categories'] = $this->videos_model->getCategories();
 			$this->form_validation->set_rules('title', 'videoId', 'required');
-			
-		
 			if ($this->form_validation->run() === FALSE)
 			{	
 				$this->load->view('admin/videos/create',$data); 
-		
 			}
 			else
 			{
-				$id  = $this->videos_model->setVideos();
+				$this->videos_model->setVideos();
 				$this->session->set_flashdata('success', 'Video added Successfully');
 				redirect(base_url('admin/videos'));
-					
-
-				}
-				
 			}
-			
-		
-		
-		
+		}
 		
 		public function update($id = NULL)
 		{ 
@@ -134,20 +122,18 @@ $data['extraParameters']	= "";
 				
 			if($id == NULL){
 				$id = $this->input->post('id');
-				$id = $id[0];
 			}
-			$data['videos_item'] = $this->videos_model->getvideo_table_id($id);
+			$data['categories'] 	= $this->videos_model->getCategories();
+			$data['videos_item'] 	= $this->videos_model->getvideo_table_id($id);
 			$data['title'] = 'update a Admin item';
 			$this->form_validation->set_rules('videoId', 'title', 'required');
 			if ($this->form_validation->run() === FALSE)
 			{	
-// echo $id;exit;
-
 			 $this->load->view('admin/videos/update', $data);
 			}
 			else
 			{	
-				
+				// echo $id;exit;
 						$this->videos_model->updateVideo($id);
 				$this->session->set_flashdata('success', 'videos updated Successfully');
 				if($this->returnUrl <> '')
@@ -265,5 +251,3 @@ $data['extraParameters']	= "";
 		
 	
 }
-
-?>

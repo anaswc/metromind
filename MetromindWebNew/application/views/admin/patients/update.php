@@ -382,7 +382,7 @@ if (atposition<1 || dotposition<atposition+2 || dotposition+2>=x.length){
     <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
     
     <script src="<?php echo base_url('assets/pages/elements.js'); ?>"></script>
-    <!--<script src="<?php// echo base_url('assets/js/common-pages.js'); ?>"></script>-->
+    <!-- <script src="<?php // echo base_url('assets/js/common-pages.js'); ?>"></script> -->
     <script src="<?php echo base_url('scripts/axCommon.js'); ?>"></script>
     
     <!-- data-table js -->

@@ -1,31 +1,66 @@
 <?php
 
-class  Videos_model extends CI_Model {
+class  Blogs_model extends CI_Model {
 	
 	public function __construct(){
 		
-		$this->videoId       	=	"";
+		$this->blogId       	=	"";
 		$this->title    		=	"";
-		$this->id    			=	"";
+		$this->description    	=	"";
 		$this->category    		=	"";
+		$this->image    		=	"";
 		$this->status          	=	"";
 		$this->sortColumn 	  	= 	'';
 		$this->sortDirection  	= 	'';
 		$this->load->database();
 		$this->load->library('upload');
 		$this->setPostGetVars();
-		
 	}
 	public function setPostGetVars(){	
-		$this->videoId						= 	$this->input->post_get('videoId');
+		$this->blogId						= 	$this->input->post_get('blogId');
 		$this->title						= 	trim($this->input->post_get('title'));
 		$this->category						= 	trim($this->input->post_get('category'));
-		$this->id							= 	trim($this->input->post_get('id'));
+		$this->description					= 	trim($this->input->post_get('description'));
+		$this->status						= 	trim($this->input->post_get('status'));
+		$this->image						= 	trim($this->input->post_get('image'));
 		$this->sortColumn					= 	$this->input->post_get('sortColumn');
 		$this->sortDirection				= 	$this->input->post_get('sortDirection');					
 	}
 	
-	
+	public function get_count() {
+			
+		if($this->videoId != "")
+			$this->db->where('videoId', $this->videoId);
+		if(trim($this->title) != "")
+			$this->db->like('title', $this->title);	
+		$this->db->from("axvideos");
+		return $this->db->count_all_results();
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	
 	
 	public function setVideos()
@@ -141,15 +176,7 @@ class  Videos_model extends CI_Model {
         public function setOffset($offset){
             $this->_offset = $offset;
         }
-		public function get_count() {
-			
-			if($this->videoId != "")
-				$this->db->where('videoId', $this->videoId);
-			if(trim($this->title) != "")
-				$this->db->like('title', $this->title);	
-			$this->db->from("axvideos");
-			return $this->db->count_all_results();
-		}
+		
 		public function validateVideos()
 		{
 			$this->db->select('*');

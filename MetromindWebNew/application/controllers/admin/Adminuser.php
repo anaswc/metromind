@@ -100,7 +100,6 @@ $data['extraParameters']	.="adminName=".$this->input->post_get('adminName')."&";
 		   global $arrAdminType;
 			$this->load->helper('form');
 			$this->load->library('form_validation');
-
 			$data["adminTypeList"]				= 	HTMLOptionKeyValArray($arrAdminType,$this->adminuser_model->adminType);
 			$this->form_validation->set_rules('adminName', 'adminName', 'required');
 			
@@ -271,5 +270,3 @@ $data['extraParameters']	.="adminName=".$this->input->post_get('adminName')."&";
 		
 	
 }
-
-?>
