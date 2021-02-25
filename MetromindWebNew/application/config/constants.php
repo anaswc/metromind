@@ -86,6 +86,7 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 define("AXUNIQUEIDDOCTOR",		"METROMINDD");
 define("AXUNIQUEIDPATIENT",		"METROMINDP");
 define("AXUPLOADPATIENTSPATH",		"uploads/patients/");
+define("AXUPLOADBLOGPATH",		    "uploads/blogs/");
 define("AXSYMPTOMSUPLOADPATH",		"uploads/symptoms/");
 define("AXUPLOADSETTINGPATH",		"uploads/setting/");
 define("AXUPLOADDOCTORSPATH",		"uploads/doctors/");

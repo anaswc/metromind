@@ -57,6 +57,8 @@ class MetroMind extends CI_Controller
 		$this->load->model('Signup_model');
 
 		$this->load->model('Video_model');
+		$this->load->model('Category_model');
+		$this->load->model('Blog_model');
 
 
 		$this->load->helper(['jwt', 'authorization']);
@@ -6609,7 +6611,6 @@ function termsandconditions_get()
 // Video list
 
 function video_list_get()
-
 {
 	$this->Video_model->setPostGetVars();
 	$result = $this->Video_model->get_video();
@@ -6624,7 +6625,41 @@ function video_list_get()
 		$this->response($response, 200);
 	}
 }
-	
+	// Category list
 
+	function category_list_get()
+	{
+		$this->Category_model->setPostGetVars();
+		// echo "hai";exit;
+
+		$result = $this->Category_model->get_category();
+		
+		if (!$result) { // If countries is empty return an empty result array 
+			$result = array();
+			$response = ['status' => 201,  'result' => $result, 'message' => HTTP_STATUS_CODES[204]];
+			$this->response($response, 200);
+		} else {
+			$status = 200;
+			$response = ['status' => $status,  'result' => $result, 'message' => HTTP_STATUS_CODES[200]];
+			$this->response($response, 200);
+	}
+}
+	// blog list234d     
+	function blog_list_get()
+	{
+		// print_r("hjg");exit;
+
+		$this->Blog_model->setPostGetVars();
+		$result = $this->Blog_model->get_blog();
+		if (!$result) { // If countries is empty return an empty result array 
+			$result = array();
+			$response = ['status' => 201,  'result' => $result, 'message' => HTTP_STATUS_CODES[204]];
+			$this->response($response, 200);
+		} else {
+			$status = 200;
+			$response = ['status' => $status,  'result' => $result, 'message' => HTTP_STATUS_CODES[200]];
+			$this->response($response, 200);
+		}
+	}
 }
 

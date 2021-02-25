@@ -7,6 +7,7 @@ class Blogs extends CI_controller
 		if (!$this->session->userdata('adminId'))
 			redirect('admin/login');
 		$this->load->model('blogs_model');
+		$this->load->model('category_model');
 		$this->load->helper('url_helper');
 		$this->load->library('pagination');
 		$this->load->helper('date');
@@ -23,60 +24,37 @@ class Blogs extends CI_controller
 	public function index()
 	{
 		global $arrPageRange, $arrStatusList;
-		$data["pageRange"]							= 	HTMLOptionKeyValArray($this->config->item('arrPageRange'), $this->pageSize);
-		$config["base_url"] 						= base_url() . "admin/blogs/";
-		$config["total_rows"] 					= $this->blogs_model->get_count();
-		$config["per_page"]   					= $this->pageSize;
-		$config["uri_segment"] 					= 4;
-		$config['enable_query_strings'] = TRUE;
-		$config['use_page_numbers'] 		= TRUE;
-		$config['query_string_segment'] = 'page';
-		$config['page_query_string'] 		= TRUE;
+		$data["pageRange"]						= 	HTMLOptionKeyValArray($this->config->item('arrPageRange'), $this->pageSize);
+		$config["base_url"] 					= 	base_url() . "admin/blogs/";
+		$config["total_rows"] 					= 	$this->blogs_model->get_count();
+		$config["per_page"]   					= 	$this->pageSize;
+		$config["uri_segment"] 					= 	4;
+		$config['enable_query_strings'] 		= 	TRUE;
+		$config['use_page_numbers'] 			= 	TRUE;
+		$config['query_string_segment'] 		= 	'page';
+		$config['page_query_string'] 			= 	TRUE;
 		$this->pagination->initialize($config);
-		$start = 1;
-
-		$data["links"] = $this->pagination->create_links();
-
-		$limit = $config["per_page"];
-
+		$start									= 	1;
+		$data["links"] 							= 	$this->pagination->create_links();
+		$limit 									= 	$config["per_page"];
 		if ($this->input->get('page')) {
-			$start = (int) trim($this->input->get('page'));
-			$limit = $config['per_page'];
+			$start 								= 	(int) trim($this->input->get('page'));
+			$limit 								= 	$config['per_page'];
 		}
-
 		if ($start <> 1)
-			$data["cnt"] = $limit * ($start - 1) + 1;
+			$data["cnt"]	 					= 	$limit * ($start - 1) + 1;
 		else
-			$data["cnt"] = $start;
-
-
-		$data['videos'] = $this->videos_model->getVideos($limit, $limit * ($start - 1)); //echo "<pre>";print_r($data['adminuser']);echo "</pre>";exit;
-		$data['title'] = 'Videos LIST';
-		if ($this->input->post_get('videoId') <> '') {
-			$data['videoId'] = $this->input->post_get('videoId');
+			$data["cnt"] 						= 	$start;
+		$data['blogs'] 						= 	$this->blogs_model->getBlogs($limit, $limit * ($start - 1)); //echo "<pre>";print_r($data['adminuser']);echo "</pre>";exit;
+		$data['title'] 							= 	'Videos LIST';
+		if ($this->input->post_get('category') <> '') {
+			$data['category'] 					= 	$this->input->post_get('category');
 		} else {
-			$data['videoId'] = '';
-		}
-
-		// if ($this->input->post_get('adminType') <> ''){	
-
-		// 				$data["adminTypeList"]	= 	HTMLOptionKeyValArray($arrAdminType,$this->input->post_get('adminType'));		
-
-		// 			}else{				
-		// 				$data["adminTypeList"]	= 	HTMLOptionKeyValArray($arrAdminType,'');			
-		// 			}
-
-		$data['extraParameters']	= "";
-
-		// $data['extraParameters']	.="adminName=".$this->input->post_get('adminName')."&";
-
+			$data['category'] 					= '';
+		}	
+		$data['extraParameters']				= "";
 		$data['extraParameters']	.= "pageSize=$this->pageSize&submitted=1";
-
-
-
-
-
-		$this->load->view('admin/videos/index', $data);
+		$this->load->view('admin/blogs/index', $data);
 	}
 
 
@@ -87,14 +65,17 @@ class Blogs extends CI_controller
 	{
 		$this->load->helper('form');
 		$this->load->library('form_validation');
-		$data['categories'] = $this->videos_model->getCategories();
-		$this->form_validation->set_rules('title', 'videoId', 'required');
+		$data['categories'] = $this->category_model->getCategories();
+		$this->form_validation->set_rules('title', 'title', 'required');
+		$this->form_validation->set_rules('description', 'description', 'required');
+		$this->form_validation->set_rules('category', 'category', 'required');
+
 		if ($this->form_validation->run() === FALSE) {
-			$this->load->view('admin/videos/create', $data);
+			$this->load->view('admin/blogs/create', $data);
 		} else {
-			$this->videos_model->setVideos();
-			$this->session->set_flashdata('success', 'Video added Successfully');
-			redirect(base_url('admin/videos'));
+			$this->blogs_model->setBlogs();
+			$this->session->set_flashdata('success', 'Blogs added Successfully');
+			redirect(base_url('admin/blogs'));
 		}
 	}
 
@@ -108,20 +89,25 @@ class Blogs extends CI_controller
 		if ($id == NULL) {
 			$id = $this->input->post('id');
 		}
-		$data['categories'] 	= $this->videos_model->getCategories();
-		$data['videos_item'] 	= $this->videos_model->getvideo_table_id($id);
+		// echo $id;exit;
+		$data['categories'] = $this->category_model->getCategories();
+		// $data['categories'] 	= $this->videos_model->getCategories();
+		$data['blogs_item'] 	= $this->blogs_model->getBlog_id($id);
 		$data['title'] = 'update a Admin item';
-		$this->form_validation->set_rules('videoId', 'title', 'required');
+		
+		$this->form_validation->set_rules('title', 'title', 'required');
+		$this->form_validation->set_rules('description', 'description', 'required');
+		$this->form_validation->set_rules('category', 'category', 'required');
 		if ($this->form_validation->run() === FALSE) {
-			$this->load->view('admin/videos/update', $data);
+			$this->load->view('admin/blogs/update', $data);
 		} else {
 			// echo $id;exit;
-			$this->videos_model->updateVideo($id);
-			$this->session->set_flashdata('success', 'videos updated Successfully');
+			$this->blogs_model->updateVideo($id);
+			$this->session->set_flashdata('success', 'Blog updated Successfully');
 			if ($this->returnUrl <> '') {
 				redirect(base_url() . 'admin/' . $this->returnUrl);
 			} else {
-				redirect(base_url() . 'admin/videos');
+				redirect(base_url() . 'admin/blogs');
 			}
 		}
 	}
@@ -134,11 +120,11 @@ class Blogs extends CI_controller
 		}
 
 		if ($ids === FALSE) {
-			redirect(base_url('admin/videos'));
+			redirect(base_url('admin/blogs'));
 		} else {
-			$this->videos_model->delete_video($ids);
-			$this->session->set_flashdata('success', 'Admin user deleted Successfully');
-			redirect(base_url('admin/videos'));
+			$this->blogs_model->delete_blog($ids);
+			$this->session->set_flashdata('success', 'Blog deleted Successfully');
+			redirect(base_url('admin/blogs'));
 		}
 	}
 

@@ -1,33 +1,31 @@
 <?php
 
-class Video_model extends CI_Model {
+class Category_model extends CI_Model {
 	public function __construct()
 	{
-		$this->sortColumn 						= 'videoId';
+		$this->sortColumn 						= 'catId';
 		$this->sortDirection 					= 'ASC';
-		$this->videoId							= "";	
+		$this->catId							= "";	
 		$this->title							= "";	
 	}
 	/** */
 	public function setPostGetVars()
 	{	
-		$this->videoId							= trim($this->input->post_get('videoId'));
+		$this->catId							= trim($this->input->post_get('catId'));
 		$this->title							= trim($this->input->post_get('title'));	
 	}
 	/** */
-	public function get_video($limit = NULL, $start = NULL)
+	public function get_category($limit = NULL, $start = NULL)
 	{	
 		$this->db->limit($limit, $start);
-		$this->db->select('videoId,title,category');
-		$this->db->from('axvideos');
-		if(trim($this->videoId) != "")
-			$this->db->where('videoId', $this->videoId);
+		$this->db->select('catId,title');
+		$this->db->from('axcategories');
+		if(trim($this->catId) != "")
+			$this->db->where('catId', $this->catId);
 		if(trim($this->title) != "")
 			$this->db->like('title', $this->title,'none');	
-			if(trim($this->category) != "")
-			$this->db->like('category', $this->category,'none');	
 		if($this->sortColumn == '')
-			$this->sortColumn = "videoId";
+			$this->sortColumn = "catId";
 		if($this->sortDirection == '')
 			$this->sortDirection = "DESC";	
 		$this->db->order_by("$this->sortColumn", "$this->sortDirection");

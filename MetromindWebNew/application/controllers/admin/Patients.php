@@ -124,7 +124,6 @@ class Patients extends CI_controller{
 				$patientId = $this->input->post('patientId');
 				$patientId = $patientId[0];
 			}
-
 			$data['patient_item'] = $this->patients_model->getPatient_id($patientId);
 			$data['title'] = 'update a Patient ';
 			$this->form_validation->set_rules('firstName', 'firstName', 'required');
@@ -134,9 +133,7 @@ class Patients extends CI_controller{
 			//$this->form_validation->set_rules('password', 'password', 'required');
 			$this->form_validation->set_rules('birthDate', 'birthDate', 'required');
 			$this->form_validation->set_rules('gender', 'gender', 'required');
-			
 			$data['country'] = $this->patients_model->get_countries();
-		
 			if ($this->form_validation->run() === FALSE)
 			{	
 			 $this->load->view('admin/patients/update', $data);

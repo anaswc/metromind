@@ -93,7 +93,7 @@
                 <?php } ?>
 
                 <?php echo form_open_multipart('admin/videos/update/' . $videos_item['id ']); ?>
-                <input type="text" name="id" value="<?php echo $videos_item['id']  ?>">
+                <input type="hidden" name="id" value="<?php echo $videos_item['id']  ?>">
                 <input type="hidden" name="returnUrl" value="<?php echo $this->input->get('returnUrl') ?>">
 
 
