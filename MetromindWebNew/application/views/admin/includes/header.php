@@ -105,6 +105,14 @@ global $arrAdminType;
         <li class="treeview"><a href="<?php echo base_url('admin/requestsession')?>"><span>Request sessions</span></a></li>
       </ul>
       </li>
+      <li class="treeview">
+      <a href="#"><span> Helpful Tips </span><i class="icon-arrow-down"></i></a>
+      <ul class="treeview-menu">
+        
+        <li class="treeview"><a href="<?php echo base_url('admin/videos')?>"><span>Videos</span></a></li>
+        <li class="treeview"><a href="<?php echo base_url('admin/blogs')?>"><span>Blogs</span></a></li>
+        </ul>
+      </li>
       
       <li class="treeview">
       <a href="#"><span> Appointments </span><i class="icon-arrow-down"></i></a>
@@ -174,6 +182,7 @@ global $arrAdminType;
         <li class="treeview"><a href="<?php echo base_url('admin/todaysrequest')?>"><span>Todays Appointments</span></a></li>
       </ul>
       </li>
+     
       
       <!-- <li class="treeview"><a href="<?php echo base_url('admin/settings')?>"><span>Settings</span></a></li>-->
      <!-- <li class="treeview"><a href="<?php echo base_url('admin/cms')?>"><span>CMS Settings</span></a></li>-->

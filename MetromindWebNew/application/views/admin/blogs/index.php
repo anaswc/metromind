@@ -104,7 +104,7 @@
           </div>
           <div class="col-sm-12">
             <div class="card">
-              <div class="card-block">
+              <!-- <div class="card-block">
                 <form name="frmvideosearch" method="post" action="" class="form-inline" onsubmit="return submitSearch();">
                   <input type="hidden" name="clsaxAdmin_submitted" value="">
                   <div class="form-group m-r-15">
@@ -112,7 +112,7 @@
                   <button type="submit" class="btn btn-mini btn-primary waves-effect waves-light m-r-30">Search</button>
                   <button type="button" class="btn btn-mini btn-primary waves-effect waves-light m-r-30" onclick="javascript:document.location.href='<?php echo base_url('admin/blogs'); ?>';">Cancel</button>
                 </form>
-              </div>
+              </div> -->
               <div class="card-block">
                 <!-- <button type="button" class="btn btn-mini btn-primary waves-effect waves-light m-r-30" onclick="performAction('ACTIVATE');">Activate</button>
   <button type="button" class="btn btn-mini btn-primary waves-effect waves-light m-r-30" onclick="performAction('DEACTIVATE');" >Deactivate</button> -->
