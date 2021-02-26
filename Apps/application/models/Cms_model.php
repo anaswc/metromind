@@ -12,6 +12,8 @@ class Cms_model extends CI_Model {
 			$this->pageIds					= "";	
 			$this->videoId					= "";	
 			
+		$this->load->database();
+		$this->load->library('upload');
 			$this->setPostGetVars();
         }
 		
@@ -29,7 +31,10 @@ class Cms_model extends CI_Model {
 			$this->videoId						= trim($this->input->post_get('videoId'));			
 	
 		}
-		
+		public function testfile()
+		{
+			echo "inside model";exit;
+		}
 		public function get_cms($limit = NULL, $start = NULL)
 		{	
 			$this->db->limit($limit, $start);
@@ -184,46 +189,9 @@ class Cms_model extends CI_Model {
 				return 1;
 			}
 		}
-		public function updateBanner() { 
-			// echo "jhjh";exit;
-			$this->load->helper('url');
-			
-			$data = array(
-				'videoId' => $this->videoId,
-			);
-			if($bannerId)
-			{
-				$this->db->set($data); 
-				$this->db->where("bannerId", $bannerId); 
-				$this->db->update("axbanner", $data); 
-			}
-			else{
-				$this->db->insert('axbanner', $data);
-			
-			$this->pageId = $this->db->insert_id();
-			
-			}
-			
-			
-			return $pageId;
-		} 
-		public function getBanner_id_get($bannerId = FALSE)
-		{
-			echo "jhdbhbv";exit;
-
-			if ($pageId === FALSE)
-			{
-					return 0;
-			}
-			$this->db->select('VideoId');
-			$this->db->from('axbanner');
-			// $this->db->where("pageId", $pageId);
-			$result_array = $this->db->get()->result_array();
-			
-			$videoId		= $result_array[0]["videoId"];
-			
-			return $videoId;
-		}
+		
+		
+		
 		
 }
 ?>

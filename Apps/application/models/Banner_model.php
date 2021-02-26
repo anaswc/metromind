@@ -5,7 +5,7 @@ class Banner_model extends CI_Model {
         {
             $this->sortColumn 				= '';
 			$this->sortDirection 			= '';	
-			$this->videoId					= "";	
+			$this->videoId					= '';	
 			
 			$this->setPostGetVars();
         }

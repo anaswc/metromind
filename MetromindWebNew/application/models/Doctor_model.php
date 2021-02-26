@@ -42,6 +42,8 @@ class  Doctor_model extends CI_Model {
 		$this->lastLogin      ="";
 		$this->sortColumn 	  = '';
 		$this->sortDirection  = '';
+		$this->videoId					= "";	
+
 		$this->load->database();
 		$this->load->library('upload');
 		$this->setPostGetVars();
@@ -76,10 +78,55 @@ $this->medicalRegistrationNumber					= $this->input->post_get('medicalRegistrati
 			$this->isVerifiedLicense      =$this->input->post_get('isVerifiedLicense');
 			//$this->counsellingCertificate      =trim($this->input->post_get('counsellingCertificate'));
 			$this->isVerifiedCertificate      =$this->input->post_get('isVerifiedCertificate');
-			$this->symptomIds						= $this->input->post_get('symptomIds');					
+			$this->symptomIds						= $this->input->post_get('symptomIds');	
+			$this->videoId						= trim($this->input->post_get('videoId'));			
+
 								}
-	
-	
+								public function getBanner_id($bannerId)
+								{
+									// echo $bannerId;
+									// exit;
+						
+									if ($bannerId === FALSE)
+									{
+											return 0;
+									}
+									$this->db->select('bannerId,videoId');
+									$this->db->from('axbanner');
+									// $this->db->where("pageId", $pageId);
+									$result_array = $this->db->get()->result_array();
+									
+									// $videoId		= $result_array[0]["bannerId"];
+									// print_r($result_array);
+									return $result_array;
+								}
+								public function updateBanner($bannerId) { 
+									// echo "jhjh";exit;
+									$this->load->helper('url');
+									
+									$data = array(
+										'videoId' => $this->videoId,
+									);
+									if($bannerId)
+									{
+										$this->db->set($data); 
+										$this->db->where("bannerId", $bannerId); 
+										$this->db->update("axbanner", $data); 
+									}
+									else{
+										$this->db->insert('axbanner', $data);
+									
+									$this->pageId = $this->db->insert_id();
+									
+									}
+									
+									
+									return $pageId;
+								} 
+	public function testfile()
+	{
+		echo "hai";exit;
+	}
 	
 	
 	public function setDoctor()

@@ -60,12 +60,12 @@ function Cancel(){
                     <p style="color:green; font-size:18px;"><?php echo $this->session->flashdata('success'); ?></p>
                     <?php } ?>
                     
-					<form action="<?php echo base_url('admin/cms/banner/'.$banner_item['bannerId']);?>" enctype="multipart/form-data" method="post" accept-charset="utf-8">
+					<form action="<?php echo base_url('admin/cms/banner/'.$banner_item[0]['bannerId']);?>" enctype="multipart/form-data" method="post" accept-charset="utf-8">
                        <div class="col-md-12 col-xs-12">
                           <div class="form-group row">
                             <label for="input-rounded" class="col-sm-12 form-control-label">Video Id<span class="mandatory">* </span> </label>
                             <div class="col-sm-6">
-                              <input type="text" name="videoId" value="<?php echo $banner_item['videoId']?>" class="form-control" required>
+                              <input type="text" name="videoId" value="<?php echo $banner_item[0]['videoId'];?>" class="form-control" required>
                             </div>
                           </div>
                         </div>

@@ -1,12 +1,11 @@
 <?php
-class Cms extends CI_controller{
+class Banner extends CI_controller{
 	 public function __construct(){
 		 parent:: __construct();
 		 if(!$this->session->userdata('adminId'))
 		 redirect('admin/login');
 		 $this->load->model('cms_model');
-		 $this->load->model('doctor_model');
-		//  $this->load->model('Banner_model');
+		//  $this->load->model('banner_model');
 		 $this->load->helper('url_helper');
 		 $this->load->library('pagination');
 		  $this->load->helper('date');
@@ -15,9 +14,6 @@ class Cms extends CI_controller{
 				
 				if($this->input->post_get('pageSize')) $this->pageSize = $this->input->post_get('pageSize');
 	 }
-
-
-	
 	 public function index(){
 		 
 			global $arrPageRange;
@@ -32,7 +28,6 @@ class Cms extends CI_controller{
 			$config['query_string_segment'] = 'page';
 			$config['page_query_string'] = TRUE;
 			
-
 	
 			$this->pagination->initialize($config);
 	
@@ -270,13 +265,18 @@ class Cms extends CI_controller{
 		// }
 		public function banner()
 		{ 
+			// echo "hs";exit;
 			$this->load->helper('form');
 			$this->load->library('form_validation');
-				$bannerId = 1;
-			
-// print_r($this->doctor_model->getBanner_id($videoId));exit;
-			$data['banner_item'] = $this->doctor_model->getBanner_id($bannerId);
-			$data['title'] = 'update a banner item';
+				
+			// if($videoId == NULL){
+				$videoId = 1;
+			// }
+			// echo $videoId;exit;
+		// $data['blogs_item'] 	= $this->blogs_model->getBlog_id($id);
+
+			$data['banner_item'] = $this->cms_model->getBanner_id($videoId);
+			$data['title'] = 'update a cs item';
 			
 			$this->form_validation->set_rules('videoId', 'videoId', 'required');
 			
@@ -287,15 +287,18 @@ class Cms extends CI_controller{
 			}
 			else
 			{	
-				$this->doctor_model->updateBanner($bannerId);
-				$this->session->set_flashdata('success', 'Banner updated Successfully');
+				$this->cms_model->updateBanner();
+				$this->session->set_flashdata('success', 'Cms updated Successfully');
 				if($this->input->get('returnUrl') <> '')
 					redirect(base_url('admin/cms'.$this->input->get('returnUrl')));
 				else{
 				redirect(base_url('admin/cms')); 
 				} 
 			 }
-		   }	
+		   }
+		
+		
+		
 	
 }
 
