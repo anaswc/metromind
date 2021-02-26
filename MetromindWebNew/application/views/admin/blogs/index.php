@@ -59,33 +59,33 @@
           } 
         }
       }
-      function submitPage() {
-        var frm = document.frmVideoList;
-        var pageSize = frm.clsaxAdmin_pageSize.value;
-        frm.action = "<?php echo base_url() ?>admin/adminuser" +
-          "?adminName=<?php echo $this->adminuser_model->adminName ?>" +
-          "&adminType=<?php echo $this->adminuser_model->adminType ?>" +
-          "&sortDirection=<?php echo $this->adminuser_model->sortDirection ?>&sortColumn=<?php echo $this->adminuser_model->sortColumn ?>&pageSize=" + pageSize;
-        frm.submit();
-      }
-      function clearSearch() {
-        var frm = document.frmvideosearch;
-        frm.firstName.value = "";
-      }
-      function submitSearch()
-      {
-        var frm = document.frmvideosearch;
-        var adminName = frm.adminName.value;
-        var adminType = frm.adminType.value;
-        frm.action = "<?php echo base_url() ?>admin/adminuser"
-          +
-          "?adminName=" + adminName + ""
-          +
-          "&adminType=" + adminType + ""
-          +
-          "&pageSize=<?php echo $this->pageSize ?>";
-        frm.submit();
-      }
+      // function submitPage() {
+      //   var frm = document.frmVideoList;
+      //   var pageSize = frm.clsaxAdmin_pageSize.value;
+      //   frm.action = "<?php echo base_url() ?>admin/adminuser" +
+      //     "?adminName=<?php echo $this->adminuser_model->adminName ?>" +
+      //     "&adminType=<?php echo $this->adminuser_model->adminType ?>" +
+      //     "&sortDirection=<?php echo $this->adminuser_model->sortDirection ?>&sortColumn=<?php echo $this->adminuser_model->sortColumn ?>&pageSize=" + pageSize;
+      //   frm.submit();
+      // }
+      // function clearSearch() {
+      //   var frm = document.frmvideosearch;
+      //   frm.firstName.value = "";
+      // }
+      // function submitSearch()
+      // {
+      //   var frm = document.frmvideosearch;
+      //   var adminName = frm.adminName.value;
+      //   var adminType = frm.adminType.value;
+      //   frm.action = "<?php echo base_url() ?>admin/adminuser"
+      //     +
+      //     "?adminName=" + adminName + ""
+      //     +
+      //     "&adminType=" + adminType + ""
+      //     +
+      //     "&pageSize=<?php echo $this->pageSize ?>";
+      //   frm.submit();
+      // }
     </script>
   </head>
   <body class="horizontal-fixed fixed">
@@ -131,7 +131,7 @@
                     <input type="hidden" name="pageIndex" value="">
                     <input type="hidden" name="sortColumn" value="<?php echo $this->input->post_get('sortColumn') ?>">
                     <input type="hidden" name="sortDirection" value="<?php echo $this->input->post_get('sortDirection') ?>">
-                    <input type="text" name="ids" value="">
+                    <input type="hidden" name="ids" value="">
                     <input type="hidden" name="id" value="">
                     <input type="hidden" name="returnUrl" value="">
                     <table cellspacing="0" id="advanced-table" class="table  table-striped table-bordered nowrap">

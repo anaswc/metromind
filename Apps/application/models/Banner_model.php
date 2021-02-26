@@ -1,31 +1,17 @@
 <?php
-class Cms_model extends CI_Model {
+class Banner_model extends CI_Model {
 
         public function __construct()
         {
             $this->sortColumn 				= '';
-			$this->sortDirection 			= '';
-			$this->pageId					= "";	
-			$this->pageName					= "";		
-			$this->description				= "";
-			$this->shortDescription			= "";
-			$this->pageIds					= "";	
+			$this->sortDirection 			= '';	
 			$this->videoId					= "";	
 			
 			$this->setPostGetVars();
         }
 		
 		public function setPostGetVars(){	
-
-			$this->pageId						= $this->input->post_get('pageId');
 			
-			$this->pageName						= trim($this->input->post_get('pageName'));
-			
-			$this->description					= trim($this->input->post_get('description'));
-			
-			$this->shortDescription				= trim($this->input->post_get('shortDescription'));
-			
-			$this->pageIds						= trim($this->input->post_get('pageIds'));			
 			$this->videoId						= trim($this->input->post_get('videoId'));			
 	
 		}
@@ -126,7 +112,7 @@ class Cms_model extends CI_Model {
 		} 
 		
 		public function retrieveCms($pageId){
-			// echo "exit";exit;
+			
 			if (trim($pageId) == "") return 0;
 			
 			$this->db->select('*');
@@ -185,7 +171,7 @@ class Cms_model extends CI_Model {
 			}
 		}
 		public function updateBanner() { 
-			// echo "jhjh";exit;
+			echo "jhjh";exit;
 			$this->load->helper('url');
 			
 			$data = array(

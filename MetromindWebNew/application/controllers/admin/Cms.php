@@ -5,6 +5,7 @@ class Cms extends CI_controller{
 		 if(!$this->session->userdata('adminId'))
 		 redirect('admin/login');
 		 $this->load->model('cms_model');
+		//  $this->load->model('banner_model');
 		 $this->load->helper('url_helper');
 		 $this->load->library('pagination');
 		  $this->load->helper('date');
@@ -238,8 +239,64 @@ class Cms extends CI_controller{
 			}
 		}
 		
+		// public function banner()
+		// { 
+		// 	$this->load->helper('form');
+		// 	$this->load->library('form_validation');
+		// 	$data['banner_item'] = $this->cms_model->getbanner_id(1);
+		// 	$data['title'] = 'update a cs item';
+		// 	$this->form_validation->set_rules('videoId', 'videoId', 'required');
+		// 	if ($this->form_validation->run() === FALSE)
+		// 	{	
+		// 		$this->load->view('admin/cms/banner'); 
+		// 	}
+		// 	else
+		// 	{
+		// 		 $this->cms_model->updateBanner($pageId);
+		// 		$this->session->set_flashdata('success', 'Cms updated Successfully');
+		// 		if($this->input->get('returnUrl') <> '')
+		// 			redirect(base_url('admin/cms'.$this->input->get('returnUrl')));
+		// 		else{
+		// 		redirect(base_url('admin/cms')); 
+		// 		} 
+				
+		// 		}
+			
+		// }
+		public function banner()
+		{ 
+			// echo "hs";exit;
+			$this->load->helper('form');
+			$this->load->library('form_validation');
+				
+			// if($videoId == NULL){
+				$videoId = 1;
+			// }
+			// echo $videoId;exit;
+		// $data['blogs_item'] 	= $this->blogs_model->getBlog_id($id);
+
+			$data['banner_item'] = $this->cms_model->getBanner_id_get(1);
+			$data['title'] = 'update a cs item';
+			
+			$this->form_validation->set_rules('videoId', 'videoId', 'required');
+			
 		
-	
+			if ($this->form_validation->run() === FALSE)
+			{	
+			 $this->load->view('admin/cms/banner', $data);
+			}
+			else
+			{	
+				$this->cms_model->updateBanner();
+				$this->session->set_flashdata('success', 'Cms updated Successfully');
+				if($this->input->get('returnUrl') <> '')
+					redirect(base_url('admin/cms'.$this->input->get('returnUrl')));
+				else{
+				redirect(base_url('admin/cms')); 
+				} 
+			 }
+		   }
+		
 		
 		
 	

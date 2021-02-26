@@ -193,6 +193,10 @@ class  Blogs_model extends CI_Model
 		$this->db->where("blogId", $id);
 		$this->db->update("axblogs", $data);
 		$this->id = $id;
+		if ($_FILES["blogImgUrl"]['name'] <> '') {
+			// echo "fjhdg";exit;
+			$this->blogs_model->uploadImage($id);
+		}
 		return $id;
 	}
 

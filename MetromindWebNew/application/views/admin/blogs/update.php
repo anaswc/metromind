@@ -198,9 +198,11 @@ function validateFile() {
                 <?php echo validation_errors(); ?>
                 <?php //echo form_open_multipart('admin/adminuser/create'); 
                 ?>
-                <form name="frmvideoCreate;" action="<?php echo base_url('admin/blogs/create'); ?>" enctype="multipart/form-data" method="post" accept-charset="utf-8" onSubmit="return validateVideoId();">
+                <form name="frmvideoCreate;" action="<?php echo base_url('admin/blogs/update/'.$blogs_item['blogId']); ?>" enctype="multipart/form-data" method="post" accept-charset="utf-8" onSubmit="return validateVideoId();">
 
 
+                <input type="hidden" name="blogId" id="blogId" value="<?php echo $blogs_item['blogId'] ?>">
+            <input type="hidden" name="returnUrl" value="<?php echo $this->input->get('returnUrl')?>">
 
                   <div class="col-md-12 col-xs-12">
                     <div class="form-group row">
@@ -241,6 +243,10 @@ function validateFile() {
                       <label for="input-rounded" class="col-sm-12 form-control-label">Image</label>
                       <div class="col-sm-5">
                         <input type="file" name="blogImgUrl" id="blogImgUrl" class="form-control"  />
+                        <?php
+                                    if($blogs_item['blogImgUrl']<>"" &&  file_exists(AXUPLOADBLOGPATH.$blogs_item['blogImgUrl'])){?>
+ <span><a href="<?php echo base_url().$blogs_item['blogImgUrl']?>"  target="_blank"><img src="<?php echo base_url().AXUPLOADBLOGPATH.$blogs_item['blogImgUrl']?>" width="60" height="60" /></a></span>
+                                 <?php }?>  
                       </div>
                       <span class="note" style="color: #F00; "> Image resolution should be lessthan or equal to 1300*800px. The Valid Extensions are jpg , jpeg , png .</span>
                     </div>

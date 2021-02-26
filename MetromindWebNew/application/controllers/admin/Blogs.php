@@ -101,14 +101,17 @@ class Blogs extends CI_controller
 		if ($this->form_validation->run() === FALSE) {
 			$this->load->view('admin/blogs/update', $data);
 		} else {
-			// echo $id;exit;
-			$this->blogs_model->updateVideo($id);
+			// echo $this->returnUrl;exit;
+			$this->blogs_model->updateBlog($id);
 			$this->session->set_flashdata('success', 'Blog updated Successfully');
-			if ($this->returnUrl <> '') {
-				redirect(base_url() . 'admin/' . $this->returnUrl);
-			} else {
-				redirect(base_url() . 'admin/blogs');
-			}
+			if($this->returnUrl <> '')
+					redirect(base_url().'admin/'.$this->returnUrl); 
+			// if ($this->returnUrl <> '') {
+			// 	redirect(base_url() . 'admin/' . $this->returnUrl);
+			// } 
+			// else {
+			// 	redirect(base_url() . 'admin/blogs');
+			// }
 		}
 	}
 

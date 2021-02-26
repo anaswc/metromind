@@ -34,6 +34,10 @@
 function addCms(){
   document.location.href= "<?php echo base_url('admin/cms/create'); ?>?returnUrl=<?php echo urlencode(getCurrentPageURL())?>";
 }
+function editBanner(){
+  document.location.href= "<?php echo base_url('admin/cms/banner'); ?>?returnUrl=<?php echo urlencode(getCurrentPageURL())?>";
+}
+
 function performAction(action) 
 {
   var frm       = document.frmCmsList;
@@ -237,6 +241,7 @@ function submitSearch()
                     <button type="button" class="btn btn-mini btn-primary waves-effect waves-light m-r-30" onclick="performAction('EDIT');" >Edit</button>
                     <button type="button" class="btn btn-mini btn-primary waves-effect waves-light m-r-30" onclick="performAction('DELETE');">Delete</button>
                     <button type="button" class="btn btn-mini btn-primary waves-effect waves-light m-r-30" onclick="addCms();">Add New</button>
+                    <button type="button" class="btn btn-mini btn-primary waves-effect waves-light m-r-30" onclick="editBanner();">Edit Banner </button>
                        
                     
                 </div>
