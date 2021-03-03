@@ -7,12 +7,17 @@ class Video_model extends CI_Model {
 		$this->sortDirection 					= 'ASC';
 		$this->videoId							= "";	
 		$this->title							= "";	
+		$this->category							= "";	
+
+
 	}
 	/** */
 	public function setPostGetVars()
 	{	
 		$this->videoId							= trim($this->input->post_get('videoId'));
 		$this->title							= trim($this->input->post_get('title'));	
+		$this->category							= trim($this->input->post_get('category'));	
+
 	}
 	/** */
 	public function get_video($limit = NULL, $start = NULL)
@@ -25,7 +30,7 @@ class Video_model extends CI_Model {
 		if(trim($this->title) != "")
 			$this->db->like('title', $this->title,'none');	
 			if(trim($this->category) != "")
-			$this->db->like('category', $this->category,'none');	
+			$this->db->where('category', $this->category);	
 		if($this->sortColumn == '')
 			$this->sortColumn = "videoId";
 		if($this->sortDirection == '')

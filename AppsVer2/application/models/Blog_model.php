@@ -9,6 +9,7 @@ class Blog_model extends CI_Model {
 		$this->blogImgUrl						= "";	
 		$this->title							= "";	
 		$this->blogId							= "";	
+		$this->category							= "";	
 	}
 	/** */
 	public function setPostGetVars()
@@ -16,16 +17,20 @@ class Blog_model extends CI_Model {
 		$this->description						= trim($this->input->post_get('description'));
 		$this->title							= trim($this->input->post_get('title'));	
 		$this->blogImgUrl						= trim($this->input->post_get('blogImgUrl'));	
-		$this->blogId							= trim($this->input->post_get('blogId'));	
+		$this->blogId							= trim($this->input->post_get('blogId'));
+		$this->category							= trim($this->input->post_get('category'));	
+
 	}
 	/** */
-	public function get_blog($limit = NULL, $start = NULL)
+	public function get_blog( $limit = NULL, $start = NULL)
 	{	
 		$this->db->limit($limit, $start);
-		$this->db->select('blogId,title,blogImgUrl,description');
+		$this->db->select('blogId,title,blogImgUrl,description,category');
 		$this->db->from('axblogs');
 		if(trim($this->blogId) != "")
 			$this->db->where('blogId', $this->blogId);
+			if(trim($this->category) != "")
+			$this->db->where('category', $this->category);
 		if(trim($this->title) != "")
 			$this->db->like('title', $this->title,'none');
 		if(trim($this->description) != "")
