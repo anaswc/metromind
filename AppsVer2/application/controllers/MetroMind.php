@@ -6613,10 +6613,10 @@ function termsandconditions_get()
 function video_list_get()
 {
 	$this->Video_model->setPostGetVars();
+	$this->verify_request();
 	
 	$this->Video_model->category=$this->input->post_get('category');
 	$result = $this->Video_model->get_video();
-	// print_r($result);exit;
 	if (!$result) { // If countries is empty return an empty result array 
 		$result = array();
 		$response = ['status' => 201,  'result' => $result, 'message' => HTTP_STATUS_CODES[204]];
@@ -6647,7 +6647,7 @@ function video_list_get()
 	function blog_list_get()
 	{
 		$this->Blog_model->setPostGetVars();
-		// $this->verify_request();
+		$this->verify_request();
 		$this->Blog_model->category=$this->input->post_get('category');
 		$result = $this->Blog_model->get_blog();
 		if (!$result) { // If countries is empty return an empty result array 
