@@ -90,7 +90,7 @@ class  Blogs_model extends CI_Model
 		// $blogId = $this->blogId;
 		$this->id  = $this->db->insert_id();
 		$id = $this->id;
-		
+
 		if ($_FILES["blogImgUrl"]['name'] <> '') {
 			// echo "fjhdg";exit;
 			$this->blogs_model->uploadImage($id);
@@ -120,7 +120,7 @@ class  Blogs_model extends CI_Model
 			$this->session->set_flashdata('error', $error['error']);
 			return $error;
 		} else {
-		// echo $blogImgUrl;exit;
+			// echo $blogImgUrl;exit;
 
 			$data1 = array('upload_data' => $this->upload->data());
 			$data = array(
@@ -225,24 +225,22 @@ class  Blogs_model extends CI_Model
 
 	public function delete_blog($ids)
 	{
-		$imageId=explode(',',$ids);
+		$imageId = explode(',', $ids);
 		$this->db->select('blogImgUrl');
 		$this->db->from('axblogs');
-		$this->db->where_in('blogId',$imageId);
-		$query=$this->db->get();
-		$result=$query->result_array();
-		
-		if(count($result))
-		{
-			foreach($result as $res)
-			{
-				unlink(FCPATH.AXUPLOADBLOGPATH.$res['blogImgUrl']);
-				}
+		$this->db->where_in('blogId', $imageId);
+		$query = $this->db->get();
+		$result = $query->result_array();
+
+		if (count($result)) {
+			foreach ($result as $res) {
+				unlink(FCPATH . AXUPLOADBLOGPATH . $res['blogImgUrl']);
 			}
-			 if ($this->db->delete("axblogs", "blogId IN ( ".$ids.")")) {
-				return true; 
-			 } 
-		} 
+		}
+		if ($this->db->delete("axblogs", "blogId IN ( " . $ids . ")")) {
+			return true;
+		}
+	}
 	public function setPageNumber($pageNumber)
 	{
 		$this->_pageNumber = $pageNumber;
@@ -304,5 +302,32 @@ class  Blogs_model extends CI_Model
 		$this->db->order_by("$this->sortColumn", "$this->sortDirection");
 		$query = $this->db->get();
 		return $query->result_array();
+	}
+
+
+	/** */
+	public function blog_count($ids)
+	{
+		$categoryId = explode(',', $ids);
+		$this->db->select('blogId');
+		$this->db->from('axblogs');
+		$this->db->where_in('category', $categoryId);
+		$query = $this->db->get();
+		//echo $this->db->last_query(); exit; 
+		return $query->result_array();
+		// return $this->db->count_all_results();
+		// $query=$this->db->get();
+		// $result=$query->result_array();
+
+
+		//  if ($this->db->delete("axblogs", "blogId IN ( ".$ids.")")) {
+		// 	return true; 
+		//  } 
+	}
+	public function blog_category_delete($ids)
+	{
+		if ($this->db->delete("axblogs", "category IN ( " . $ids . ")")) {
+			return true;
+		}
 	}
 }

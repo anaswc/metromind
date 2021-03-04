@@ -84,23 +84,29 @@ class  Category_model extends CI_Model
     }
     public function getCategory_id($catId = FALSE)
     {
-        if ($catId === FALSE)
-        {
+        if ($catId === FALSE) {
             return 0;
         }
         $query = $this->db->get_where('axcategories', array('catId' => $catId));
         return $query->row_array();
     }
     /**update */
-    public function updateCategory($catId) { 
-        $this->load->helper('url');				
+    public function updateCategory($catId)
+    {
+        $this->load->helper('url');
         $data = array(
             'title'    => $this->input->post('title')
         );
-        $this->db->set($data); 
-        $this->db->where("catId", $catId); 
-        $this->db->update("axcategories", $data); 
-        $this->catId = $catId;						
+        $this->db->set($data);
+        $this->db->where("catId", $catId);
+        $this->db->update("axcategories", $data);
+        $this->catId = $catId;
         return $catId;
-    } 
+    }
+    public function delete_category($ids)
+    {
+        if ($this->db->delete("axcategories", "catId IN ( " . $ids . ")")) {
+            return true;
+        }
+    }
 }

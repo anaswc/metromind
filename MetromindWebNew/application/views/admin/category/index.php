@@ -1,5 +1,6 @@
   <!DOCTYPE html>
   <html lang="en">
+
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,31 +25,84 @@
       function addCategory() {
         document.location.href = "<?php echo base_url('admin/category/create'); ?>?returnUrl=<?php echo urlencode(getCurrentPageURL()) ?>";
       }
+      function performAction(action) {
+        var frm = document.frmCategoryList;
+        var checkFlag = 0;
+        var selectedValue = "";
+        if (frm.elements["id[]"] != null) {
+          selectedValue = getCheckedItem(frm, "id[]");
+          // console.log(selectedValue);
+          if (frm.elements["id[]"].checked == true) {
+            checkFlag = 1;
+          }
+          for (var i = 0; i < frm.elements["id[]"].length; i++) {
+            if (frm.elements["id[]"][i].checked) {
+              checkFlag++;
+            }
+          }
+        }
+        if (checkFlag == 0) {
+          if (action == "DELETE") {
+            alert("Please select atleast one category");
+          } else {
+            alert("Please select one category");
+          }
+          return false;
+        } else {
+          if (action == "DELETE") {
+            if (confirm("You are about to  " + action.toLowerCase() + "  the selected category(s). Do you wish to continue?")) {
+              frm.ids.value = selectedValue;
+              frm.action.value = action;
+              $.ajax({
+                url: "<?php echo base_url(); ?>admin/category/delete",
+                async: false,
+                type: "POST", // Type of request to be send, called as method
+                data: {
+                  ids: selectedValue
+                },
+                dataType: "JSON",
+                success: function(data) {
+                  if(data.status==0)
+                  {
+                    alert("Category deleted successfully")
+                    window.location.reload();
+                  }
+                  else{             
+                    if (confirm("All content(videos and article) under this category will be deleted.Do you Proceed ? ")) {
+                      deleteCategory(selectedValue);
+                    }
+                  }
+                }
+              });
+            }
+          }
+        }
+      }
+     function deleteCategory(ids) {
+        $.ajax({
+
+          url: "<?php echo base_url(); ?>admin/category/category_delete",
+          async: false,
+          type: "POST", // Type of request to be send, called as method
+          data: {
+            ids: ids
+          }, // Data sent to server, a set of key/value pairs (i.e. form fields and values)
+          dataType: "JSON",
+          success: function(data) {
+            alert("successfully deleted");
+            window.location.reload();
+          event.preventDefault();
+          }
+        });
+
+      }
       function submitPage() {
         var frm = document.frmCategoryList;
         var pageSize = frm.clsaxAdmin_pageSize.value;
-        frm.action = "<?php echo base_url() ?>admin/adminuser" +
+        frm.action = "<?php echo base_url() ?>admin/category" +
           "?adminName=<?php echo $this->adminuser_model->adminName ?>" +
           "&adminType=<?php echo $this->adminuser_model->adminType ?>" +
           "&sortDirection=<?php echo $this->adminuser_model->sortDirection ?>&sortColumn=<?php echo $this->adminuser_model->sortColumn ?>&pageSize=" + pageSize;
-        frm.submit();
-      }
-      function clearSearch() {
-        var frm = document.frmvideosearch;
-        frm.firstName.value = "";
-      }
-      function submitSearch()
-      {
-        var frm = document.frmvideosearch;
-        var adminName = frm.adminName.value;
-        var adminType = frm.adminType.value;
-        frm.action = "<?php echo base_url() ?>admin/adminuser"
-          +
-          "?adminName=" + adminName + ""
-          +
-          "&adminType=" + adminType + ""
-          +
-          "&pageSize=<?php echo $this->pageSize ?>";
         frm.submit();
       }
     </script>
@@ -70,16 +124,18 @@
           <div class="col-sm-12">
             <div class="card">
               <div class="card-block">
-                <form name="frmvideosearch" method="post" action="" class="form-inline" onsubmit="return submitSearch();">
+                <form name="frmvideosearch" method="post" action="" class="form-inline">
                   <input type="hidden" name="clsaxAdmin_submitted" value="">
                   <div class="form-group m-r-15">
                     <input type="text" class="form-control input-rounded" name="title" placeholder="Title" value="<?php echo $this->category_model->title ?>">
                   </div>
                   <button type="submit" class="btn btn-mini btn-primary waves-effect waves-light m-r-30">Search</button>
-                  <button type="button" class="btn btn-mini btn-primary waves-effect waves-light m-r-30" onclick="javascript:document.location.href='<?php echo base_url('admin/videos'); ?>';">Cancel</button>
+                  <button type="button" class="btn btn-mini btn-primary waves-effect waves-light m-r-30" onclick="javascript:document.location.href='<?php echo base_url('admin/category'); ?>';">Cancel</button>
                 </form>
               </div>
               <div class="card-block">
+                <button type="button" class="btn btn-mini btn-primary waves-effect waves-light m-r-30" onclick="performAction('DELETE');">Delete</button>
+
                 <button type="button" class="btn btn-mini btn-primary waves-effect waves-light m-r-30" onclick="addCategory();">Add New</button>
               </div>
               <div class="card-block">
@@ -99,6 +155,9 @@
                     <table cellspacing="0" id="advanced-table" class="table  table-striped table-bordered nowrap">
                       <thead>
                         <tr>
+                          <th width="2%" height="24" class="nosort">
+                            <input type="checkbox" name="chkAll" value="checkbox" class="checkall" onClick="selectAll(catId, this);">
+                          </th>
                           <th class="noExport">#</th>
                           <th class="noExport">Action</th>
                           <th>Title</th>
@@ -111,6 +170,9 @@
                           foreach ($categories as $row) :
                             ?>
                             <tr>
+                              <td valign="top" class="rowcontent">
+                                <input type="checkbox" name="id[]" value="<?php echo $row["catId"] ?>" id="catId" onCLick='resetChkBox(catId, chkAll);changeCheckedColor(frmCategoryList.id);' />
+                              </td>
                               <td><?php echo htmlentities($cnt); ?></td>
                               <td style="white-space: nowrap;">
                                 <a href="<?php echo 'category/update/' . $row["catId"] . '/' ?>?returnUrl=<?php echo urlencode(getCurrentPageURL()) ?>" data-original-title="Edit"><i class="ion-edit"></i> </a> &nbsp;&nbsp;
@@ -148,7 +210,7 @@
             </div>
           </div>
           <script>
-            document.frmvideosearch.Submit.focus();
+            // document.frmvideosearch.Submit.focus();
           </script>
           <!-- /.container-fluid -->
           <!-- Sticky Footer -->

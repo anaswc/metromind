@@ -204,5 +204,21 @@ class  Videos_model extends CI_Model {
 			return $query->result_array();
 
 			}	
-			
+			/** */
+	public function video_count($ids)
+	{
+		$categoryId=explode(',',$ids);
+		$this->db->select('id');
+		$this->db->from('axvideos');
+		$this->db->where_in('category',$categoryId);
+		// return $this->db->count_all_results();
+		$query = $this->db->get();
+			//echo $this->db->last_query(); exit; 
+			return $query->result_array();
+	 }
+	 public function video_category_delete($ids) { 
+		if ($this->db->delete("axvideos", "category IN ( ".$ids.")")) { 
+		   return true; 
+		} 
+   } 
 }

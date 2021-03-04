@@ -7,6 +7,9 @@ class Category extends CI_controller
 		if (!$this->session->userdata('adminId'))
 			redirect('admin/login');
 		$this->load->model('category_model');
+		$this->load->model('blogs_model');
+		$this->load->model('videos_model');
+
 		$this->load->helper('url_helper');
 		$this->load->library('pagination');
 		$this->load->helper('date');
@@ -61,13 +64,12 @@ class Category extends CI_controller
 	{
 		$this->load->helper('form');
 		$this->load->library('form_validation');
-		$this->form_validation->set_rules('title','status','required');
+		$this->form_validation->set_rules('title', 'status', 'required');
 		if ($this->form_validation->run() === FALSE) {
-		// echo $this->form_validation->run();exit;
+			// echo $this->form_validation->run();exit;
 
 			$this->load->view('admin/category/create');
-		} 
-		else {
+		} else {
 			$id  = $this->category_model->setCategory();
 			$this->session->set_flashdata('success', 'Category added Successfully');
 			redirect(base_url('admin/category'));
@@ -84,11 +86,11 @@ class Category extends CI_controller
 		}
 		$data['category_item'] = $this->category_model->getCategory_id($id);
 		$data['title'] = 'update category item';
-		$this->form_validation->set_rules('title','id','required');
+		$this->form_validation->set_rules('title', 'id', 'required');
 		if ($this->form_validation->run() === FALSE) {
 			$this->load->view('admin/category/update', $data);
 		} else {
-// echo $this->returnUrl;
+			// echo $this->returnUrl;
 
 			$this->category_model->updateCategory($id);
 			$this->session->set_flashdata('success', 'category updated Successfully');
@@ -105,5 +107,53 @@ class Category extends CI_controller
 		$this->category_model->title = $this->input->post_get('title');
 		$data = $this->category_model->validateTitle($this->category_model->title);
 		echo json_encode($data);
+	}
+
+	public function delete($ids = NULL)
+	{
+		// $appointmentId=$this->input->post_get('ids');
+
+		if ($ids == NULL) {
+			$ids = $this->input->post_get('ids');
+		}
+
+		if ($ids === FALSE) {
+			redirect(base_url('admin/category'));
+		} else {
+			$blog = $this->blogs_model->blog_count($ids);
+			// $result['data']=$blog;
+			$video_count = $this->videos_model->video_count($ids);
+			$data = [];
+			$data = array_merge($blog, $video_count);
+			if (empty($data)) {
+				$this->category_model->delete_category($ids);
+				$result = json_encode(array(
+					'data' => [],
+					'status' => 0,
+				));
+			} else {
+				$result = json_encode(array(
+					'data' => $data,
+					'status' => 1,
+				));
+			}
+			echo $result;
+		}
+	}
+	public function category_delete($ids = NULL)
+	{
+		// $appointmentId=$this->input->post_get('ids');
+		if ($ids == NULL) {
+			$ids = $this->input->post_get('ids');
+		}
+		if ($ids === FALSE) {
+			redirect(base_url('admin/category'));
+		} else {
+			$this->blogs_model->blog_category_delete($ids);
+			$this->videos_model->video_category_delete($ids);
+			$cat = $this->category_model->delete_category($ids);
+
+			echo json_encode($cat);
+		}
 	}
 }
