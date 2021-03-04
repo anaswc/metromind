@@ -27,8 +27,8 @@
 			document.location.href = "<?php echo base_url('admin/category'); ?>";
 		}
 		function validateTitle(title) {
-			var formData = new FormData();
-			formData.append('title', title);
+			// var formData = new FormData();
+			// formData.append('title', title);
 			$.ajax({
 				url: "<?php echo base_url(); ?>admin/category/checkTitle",
 				type: "POST", 
