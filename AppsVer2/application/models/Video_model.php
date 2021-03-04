@@ -23,7 +23,7 @@ class Video_model extends CI_Model {
 	public function get_video($limit = NULL, $start = NULL)
 	{	
 		$this->db->limit($limit, $start);
-		$this->db->select('videoId,title,category');
+		$this->db->select('id,videoId,title,category');
 		$this->db->from('axvideos');
 		if(trim($this->videoId) != "")
 			$this->db->where('videoId', $this->videoId);
