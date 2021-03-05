@@ -30,7 +30,7 @@ class Blog_model extends CI_Model {
 	public function get_blog( $limit = NULL, $start = NULL)
 	{	
 		$this->db->limit($limit, $start);
-		$this->db->select('axblogs.blogId,axblogs.title,axblogs.blogImgUrl,axblogs.description,axcategories.title as category');
+		$this->db->select('axblogs.blogId,axblogs.title,axblogs.blogImgUrl,axblogs.description, axblogs.author,axblogs.created_at,axcategories.title as category');
 		$this->db->join('axcategories', 'axcategories.catId = axblogs.category', 'left');
 		$this->db->from('axblogs');
 		if(trim($this->blogId) != "")
