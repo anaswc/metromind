@@ -11,6 +11,7 @@ class  Blogs_model extends CI_Model
 		$this->description    	=	"";
 		$this->category    		=	"";
 		$this->image    		=	"";
+		$this->author    		=	"";
 		$this->status          	=	"";
 		$this->sortColumn 	  	= 	'';
 		$this->sortDirection  	= 	'';
@@ -26,6 +27,7 @@ class  Blogs_model extends CI_Model
 		$this->description					= 	trim($this->input->post_get('description'));
 		$this->status						= 	trim($this->input->post_get('status'));
 		$this->image						= 	trim($this->input->post_get('image'));
+		$this->author						= 	trim($this->input->post_get('author'));
 		$this->sortColumn					= 	$this->input->post_get('sortColumn');
 		$this->sortDirection				= 	$this->input->post_get('sortDirection');
 	}
@@ -82,8 +84,10 @@ class  Blogs_model extends CI_Model
 		$status = 1;
 		$data = array(
 			'title' => $this->input->post('title'),
-			'description'    => $this->input->post('description'),
-			'category'    => $this->input->post('category')
+			'description'    	=> $this->input->post('description'),
+			'category'    		=> $this->input->post('category'),
+			'author'    		=> $this->input->post('author'),
+			'created_at'		=> date('Y-m-d H:i:s', now('Asia/Kolkata'))
 		);
 		$this->db->insert('axblogs', $data);
 		// $this->blogId = $this->db->insert_id();
@@ -126,7 +130,7 @@ class  Blogs_model extends CI_Model
 			$data = array(
 				'blogImgUrl' => $blogImgUrl
 			);
-			print_r($data);
+			// print_r($data);
 			$this->db->set($data);
 			$this->db->where("blogId", $blogId);
 			$this->db->update("axblogs", $data);
@@ -188,6 +192,8 @@ class  Blogs_model extends CI_Model
 			'description' => $this->input->post('description'),
 			'title'    => $this->input->post('title'),
 			'category'    => $this->input->post('category'),
+			'author'    => $this->input->post('author'),
+			'created_at'		=> date('Y-m-d H:i:s', now('Asia/Kolkata'))
 		);
 		$this->db->set($data);
 		$this->db->where("blogId", $id);

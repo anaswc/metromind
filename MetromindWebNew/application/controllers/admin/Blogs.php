@@ -68,6 +68,7 @@ class Blogs extends CI_controller
 		$data['categories'] = $this->category_model->getCategories();
 		$this->form_validation->set_rules('title', 'title', 'required');
 		$this->form_validation->set_rules('description', 'description', 'required');
+		$this->form_validation->set_rules('author', 'author', 'required');
 		$this->form_validation->set_rules('category', 'category', 'required');
 
 		if ($this->form_validation->run() === FALSE) {

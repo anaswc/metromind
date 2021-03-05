@@ -238,6 +238,14 @@ function validateFile() {
                       </div>
                     </div>
                   </div>
+                  <div class="col-md-12 col-xs-12">
+                    <div class="form-group row">
+                      <label for="input-rounded" class="col-sm-12 form-control-label">Author<span class="mandatory">* </span> </label>
+                      <div class="col-sm-6">
+                        <input type="text" name="author" id="author" value="<?php echo  $blogs_item['author'] ?>" class="form-control" required>
+                      </div>
+                    </div>
+                  </div>
                   <div class="col-md-6 col-xs-12" style="clear:left">
                     <div class="form-group row">
                       <label for="input-rounded" class="col-sm-12 form-control-label">Image</label>
