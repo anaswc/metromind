@@ -132,7 +132,19 @@
                   </div>
                 </div>
 
-
+                <div class="col-md-6 col-xs-12" style="clear:left">
+                  <div class="form-group row">
+                    <label for="input-rounded" class="col-sm-12 form-control-label">Image</label>
+                    <div class="col-sm-5">
+                      <input type="file" name="videoImgUrl" id="videoImgUrl" class="form-control" />
+                      <?php
+                      if ($videos_item['videoImgUrl'] <> "" &&  file_exists(AXUPLOADBLOGPATH . $videos_item['videoImgUrl'])) { ?>
+                        <span><a href="<?php echo base_url() . $videos_item['videoImgUrl'] ?>" target="_blank"><img src="<?php echo base_url() . AXUPLOADBLOGPATH . $videos_item['videoImgUrl'] ?>" width="60" height="60" /></a></span>
+                      <?php } ?>
+                    </div>
+                    <span class="note" style="color: #F00; "> Image resolution should be lessthan or equal to 1300*800px. The Valid Extensions are jpg , jpeg , png .</span>
+                  </div>
+                </div>
                 <div class="col-md-12"></div>
                 <div class="col-md-12 col-xs-12">
                   <div class="form-group row">

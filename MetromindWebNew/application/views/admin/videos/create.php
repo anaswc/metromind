@@ -96,10 +96,7 @@
                 <?php echo validation_errors(); ?>
                 <?php //echo form_open_multipart('admin/adminuser/create'); 
                 ?>
-                <form name="frmvideoCreate;" action="<?php echo base_url('admin/videos/create'); ?>" method="post" accept-charset="utf-8" onSubmit="return validateVideoId();">
-
-
-
+                <form name="frmvideoCreate;" action="<?php echo base_url('admin/videos/create'); ?>" method="post" enctype="multipart/form-data" accept-charset="utf-8" >
                   <div class="col-md-12 col-xs-12">
                     <div class="form-group row">
                       <label for="input-rounded" class="col-sm-12 form-control-label">Title<span class="mandatory">* </span> </label>
@@ -135,7 +132,15 @@
                     </div>
                   </div>
 
-
+                  <div class="col-md-6 col-xs-12" style="clear:left">
+                    <div class="form-group row">
+                      <label for="input-rounded" class="col-sm-12 form-control-label">Image</label>
+                      <div class="col-sm-5">
+                        <input type="file" name="videoImgUrl" id="videoImgUrl" class="form-control"  />
+                      </div>
+                      <span class="note" style="color: #F00; "> Image resolution should be lessthan or equal to 1300*800px. The Valid Extensions are jpg , jpeg , png .</span>
+                    </div>
+                  </div>
                   <div class="col-md-12"></div>
                   <div class="col-md-12 col-xs-12">
                     <div class="form-group row">

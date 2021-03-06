@@ -87,6 +87,8 @@ define("AXUNIQUEIDDOCTOR",		"METROMINDD");
 define("AXUNIQUEIDPATIENT",		"METROMINDP");
 define("AXUPLOADPATIENTSPATH",		"uploads/patients/");
 define("AXUPLOADBLOGPATH",		    "uploads/blogs/");
+define("AXUPLOADVIDEOPATH",		    "uploads/videos/");
+
 define("AXSYMPTOMSUPLOADPATH",		"uploads/symptoms/");
 define("AXUPLOADSETTINGPATH",		"uploads/setting/");
 define("AXUPLOADDOCTORSPATH",		"uploads/doctors/");

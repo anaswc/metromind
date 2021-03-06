@@ -139,32 +139,6 @@ class  Blogs_model extends CI_Model
 	}
 
 
-	public function validateImage()
-	{
-		if ($_FILES["profileImgUrl"]['name'] <> '') {
-
-			$config['upload_path']   = AXUPLOADPATIENTSPATH;
-			$config['allowed_types'] = 'jpg|png|jpeg';
-			//$config['max_size']      = 100; 
-			$config['overwrite'] 	  = TRUE;
-			$config['max_width']     = 1300;
-			$config['max_height']    = 800;
-			$this->load->library('upload', $config);
-			$this->upload->initialize($config);
-			if (!$this->upload->do_upload('profileImgUrl')) {
-				$error = array('error' => $this->upload->display_errors());
-				$this->session->set_flashdata('error', $error['error']);
-				return 0;
-			} else {
-				unlink(AXUPLOADPATIENTSPATH . $_FILES["profileImgUrl"]['name']);
-				return 1;
-			}
-		} else {
-			return 1;
-		}
-	}
-
-
 
 
 

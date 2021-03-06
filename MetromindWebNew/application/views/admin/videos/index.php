@@ -271,6 +271,7 @@
   <th class="noExport">Action</th>
   <th>Title</th>
   <th>Vimeo Video ID </th>
+  <th>Thumbnail </th>
   <th>Category</th>
 
   </tr>
@@ -293,6 +294,10 @@
   </td>                                
   <td ><?php echo $row['title']?></td>
   <td ><?php echo $row['videoId']?></td>
+  <td><?php
+							if($row['videoImgUrl']<>"" &&  file_exists(AXUPLOADVIDEOPATH.$row['videoImgUrl'])){?>
+                        <span><img src="<?php echo base_url().AXUPLOADVIDEOPATH.$row['videoImgUrl']?>" width="60" height="60" /></span>
+                        <?php }?></td>
   <td ><?php echo $row['category']?></td>
 
   </tr>
