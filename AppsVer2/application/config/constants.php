@@ -24,6 +24,7 @@ define("AXUPLOADPATIENTIMAGEPATH",	HTTP."uploads/patients/");
 
 define("AXUPLOADSPECIALITYIMAGEPATH",	HTTP."uploads/speciality/");
 
+define("AXUPLOADBLOGPATH",		    HTTP."uploads/blogs/");
 
 
 define("AXUPLOADSYMPTOMSIMAGEPATH",	HTTP."uploads/symptoms/");

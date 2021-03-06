@@ -29,8 +29,13 @@ class Blog_model extends CI_Model {
 	/** */
 	public function get_blog( $limit = NULL, $start = NULL)
 	{	
+		//   echo base_url();exit;
 		$this->db->limit($limit, $start);
-		$this->db->select('axblogs.blogId,axblogs.title,axblogs.blogImgUrl,axblogs.description, axblogs.author,axblogs.created_at,axcategories.title as category');
+		$this->db->select (
+			'DATE(created_at) AS blog_date ,TIME( created_at ) as blog_time,axblogs.blogId, 
+			axblogs.title,CONCAT("'.AXUPLOADBLOGPATH.'/uploads/blogs/",axblogs.blogImgUrl) as blogImgUrl,axblogs.description, axblogs.author,
+			axblogs.created_at,
+			axcategories.title as category') ;
 		$this->db->join('axcategories', 'axcategories.catId = axblogs.category', 'left');
 		$this->db->from('axblogs');
 		if(trim($this->blogId) != "")
@@ -47,6 +52,7 @@ class Blog_model extends CI_Model {
 			$this->sortDirection = "DESC";	
 		$this->db->order_by("$this->sortColumn", "$this->sortDirection");
 		$query = $this->db->get();
+		// print_r($query->result_array());exit;
 		return $query->result_array();
 	}
 }
