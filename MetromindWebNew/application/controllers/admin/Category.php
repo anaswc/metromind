@@ -123,9 +123,9 @@ class Category extends CI_controller
 			$blog = $this->blogs_model->blog_count($ids);
 			// $result['data']=$blog;
 			$video_count = $this->videos_model->video_count($ids);
-			$data = [];
-			$data = array_merge($blog, $video_count);
-			if (empty($data)) {
+			$datas = [];
+			$datas = array_merge($blog, $video_count);
+			if (empty($datas)) {
 				$this->category_model->delete_category($ids);
 				$result = json_encode(array(
 					'data' => [],
@@ -133,7 +133,7 @@ class Category extends CI_controller
 				));
 			} else {
 				$result = json_encode(array(
-					'data' => $data,
+					'data' => $datas,
 					'status' => 1,
 				));
 			}

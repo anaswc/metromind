@@ -61,7 +61,7 @@ class  Category_model extends CI_Model
         $this->db->from('axcategories');
         if ($this->id != "")
             $this->db->where('id  != ', $this->id);
-        if (trim($this->title) != "")
+        if ($this->title != "")
             $this->db->where('title', $this->title);
         $query     = $this->db->get();
         if ($query->num_rows() > 0) {

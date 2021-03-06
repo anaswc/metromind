@@ -75,7 +75,7 @@
 								<?php echo validation_errors(); ?>
 								<?php //echo form_open_multipart('admin/adminuser/create'); 
 								?>
-								<form name="frmvideoCreate;" action="<?php echo base_url('admin/category/create'); ?>" method="post" accept-charset="utf-8" >
+								<form name="frmCategoryCreate;" action="<?php echo base_url('admin/category/create'); ?>" method="post" accept-charset="utf-8" >
 									<div class="col-md-12 col-xs-12">
 										<div class="form-group row">
 											<label for="input-rounded" class="col-sm-12 form-control-label">Title<span class="mandatory">*

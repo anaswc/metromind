@@ -124,7 +124,7 @@
           <div class="col-sm-12">
             <div class="card">
               <div class="card-block">
-                <form name="frmvideosearch" method="post" action="" class="form-inline">
+                <form name="frmCategorysearch" method="post" action="" class="form-inline">
                   <input type="hidden" name="clsaxAdmin_submitted" value="">
                   <div class="form-group m-r-15">
                     <input type="text" class="form-control input-rounded" name="title" placeholder="Title" value="<?php echo $this->category_model->title ?>">
