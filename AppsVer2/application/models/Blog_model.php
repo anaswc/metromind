@@ -33,7 +33,7 @@ class Blog_model extends CI_Model {
 		$this->db->limit($limit, $start);
 		$this->db->select (
 			'DATE(created_at) AS blog_date ,TIME( created_at ) as blog_time,axblogs.blogId, 
-			axblogs.title,CONCAT("'.AXUPLOADBLOGPATH.'/uploads/blogs/",axblogs.blogImgUrl) as blogImgUrl,axblogs.description, axblogs.author,
+			axblogs.title,CONCAT("'.AXUPLOADBLOGPATH.'",axblogs.blogImgUrl) as blogImgUrl,axblogs.description, axblogs.author,
 			axblogs.created_at,
 			axcategories.title as category') ;
 		$this->db->join('axcategories', 'axcategories.catId = axblogs.category', 'left');
