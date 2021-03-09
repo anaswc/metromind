@@ -667,7 +667,19 @@ class Doctor_model extends CI_Model {
 
 	}
 	// -----------------------------
+/**banner */
 
+
+
+public function getbanner($limit = NULL, $start = NULL)
+	{	
+		$this->db->limit($limit, $start);
+		$this->db->select('bannerId,videoId,CONCAT("'.AXUPLOADBANNERPATH.'",axbanner.bannerImgUrl) as bannerImgUrl');
+		$this->db->from('axbanner');
+		$query = $this->db->get();
+		return $query->result_array();
+	}
+//////////////////////////////////////////////////////////////////////////////////////////////////
 	public function validate_doctor(){			
 
 		$valid = 1;			

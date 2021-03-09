@@ -26,6 +26,7 @@ define("AXUPLOADSPECIALITYIMAGEPATH",	HTTP."uploads/speciality/");
 
 define("AXUPLOADBLOGPATH",		    HTTP."uploads/blogs/");
 define("AXUPLOADVIDEOPATH",		    HTTP."uploads/videos/");
+define("AXUPLOADBANNERPATH",		    HTTP."uploads/banners/");
 
 
 

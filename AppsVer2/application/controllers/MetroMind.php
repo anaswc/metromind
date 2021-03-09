@@ -1488,7 +1488,8 @@ class MetroMind extends CI_Controller
 
 			$this->Login_model->add_api_token_members($this->input->post_get('uniqueId'), $token);
 			$admindoc=$this->Doctor_model->getadmin_doc();
-			$response = ['status' => $status, 'token' => $token,'notificationCount'=>$notificationCount['notificationCount'], 'admindoctor'=>$admindoc, 'result' => $result, 'message' => ''];
+			$banner=$this->Doctor_model->getbanner();
+			$response = ['status' => $status, 'token' => $token,'notificationCount'=>$notificationCount['notificationCount'], 'admindoctor'=>$admindoc, 'banner'=>$banner, 'result' => $result, 'message' => ''];
 
 			$this->response($response, 200);
 

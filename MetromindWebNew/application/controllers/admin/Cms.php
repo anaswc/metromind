@@ -273,9 +273,8 @@ class Cms extends CI_controller{
 			$this->load->helper('form');
 			$this->load->library('form_validation');
 				$bannerId = 1;
-			
-// print_r($this->doctor_model->getBanner_id($videoId));exit;
-			$data['banner_item'] = $this->doctor_model->getBanner_id($bannerId);
+
+			$data['banner_item'] = $this->doctor_model->getBanner_id();
 			$data['title'] = 'update a banner item';
 			
 			$this->form_validation->set_rules('videoId', 'videoId', 'required');

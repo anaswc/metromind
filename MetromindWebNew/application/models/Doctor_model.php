@@ -43,7 +43,7 @@ class  Doctor_model extends CI_Model {
 		$this->sortColumn 	  = '';
 		$this->sortDirection  = '';
 		$this->videoId					= "";	
-
+		$this->bannerImgUrl					= "";	
 		$this->load->database();
 		$this->load->library('upload');
 		$this->setPostGetVars();
@@ -80,55 +80,74 @@ $this->medicalRegistrationNumber					= $this->input->post_get('medicalRegistrati
 			$this->isVerifiedCertificate      =$this->input->post_get('isVerifiedCertificate');
 			$this->symptomIds						= $this->input->post_get('symptomIds');	
 			$this->videoId						= trim($this->input->post_get('videoId'));			
+			$this->bannerImgUrl						= trim($this->input->post_get('bannerImgUrl'));			
 
 								}
-								public function getBanner_id($bannerId)
-								{
-									// echo $bannerId;
-									// exit;
-						
-									if ($bannerId === FALSE)
-									{
-											return 0;
-									}
-									$this->db->select('bannerId,videoId');
-									$this->db->from('axbanner');
-									// $this->db->where("pageId", $pageId);
-									$result_array = $this->db->get()->result_array();
-									
-									// $videoId		= $result_array[0]["bannerId"];
-									// print_r($result_array);
-									return $result_array;
-								}
-								public function updateBanner($bannerId) { 
-									// echo "jhjh";exit;
-									$this->load->helper('url');
-									
-									$data = array(
-										'videoId' => $this->videoId,
-									);
-									if($bannerId)
-									{
-										$this->db->set($data); 
-										$this->db->where("bannerId", $bannerId); 
-										$this->db->update("axbanner", $data); 
-									}
-									else{
-										$this->db->insert('axbanner', $data);
-									
-									$this->pageId = $this->db->insert_id();
-									
-									}
-									
-									
-									return $pageId;
-								} 
+	public function getBanner_id()
+	{
+		$this->db->select('bannerId,videoId,bannerImgUrl');
+		$this->db->from('axbanner');
+		$result_array = $this->db->get()->result_array();
+		return $result_array;
+	}
+	public function updateBanner($bannerId)
+	{
+		// echo "jhjh";exit;
+		$this->load->helper('url');
+
+		$data = array(
+			'videoId' => $this->videoId,
+		);
+		if ($bannerId) {
+			$this->db->set($data);
+			$this->db->where("bannerId", $bannerId);
+			$this->db->update("axbanner", $data);
+		} else {
+			$this->db->insert('axbanner', $data);
+
+			$this->pageId = $this->db->insert_id();
+		}
+		if ($_FILES["bannerImgUrl"]['name'] <> '') {
+			// echo "fjhdg";exit;
+			$this->doctor_model->uploadBannerImage($bannerId);
+		}
+
+		return $bannerId;
+	}
 	public function testfile()
 	{
-		echo "hai";exit;
+		echo "hai";
+		exit;
 	}
-	
-	
+	public function uploadBannerImage($bannerId)
+	{
+		$config['upload_path']   = AXUPLOADBANNERPATH;
+		$config['allowed_types'] = 'jpg|png|jpeg';
+		//$config['max_size']      = 100; 
+		$config['overwrite'] 	  = TRUE;
+		$config['max_width']     = 1300;
+		$config['max_height']    = 800;
+		$filename 		= $_FILES["bannerImgUrl"]['name'];
+		$type    		= substr(strrchr(trim($filename), "."), 1);
+		$bannerImgUrl	= $bannerId . "." . $type;
+		$config['file_name'] = $bannerImgUrl;
+		$this->load->library('upload', $config);
+		$this->upload->initialize($config);
+		if (!$this->upload->do_upload('bannerImgUrl')) {
+			$error = array('error' => $this->upload->display_errors());
+			$this->session->set_flashdata('error', $error['error']);
+			return $error;
+		} else {
+			$data1 = array('upload_data' => $this->upload->data());
+			$data = array(
+				'bannerImgUrl' => $bannerImgUrl
+			);
+			$this->db->set($data);
+			$this->db->where("bannerId", $bannerId);
+			$this->db->update("axbanner", $data);
+			return $bannerId;
+		}
+	}
 	public function setDoctor()
 		{
 			
