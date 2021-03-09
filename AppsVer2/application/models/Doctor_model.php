@@ -597,6 +597,77 @@ class Doctor_model extends CI_Model {
 
 	}
 
+
+
+	// admindoc
+
+	public function getadmin_doc()
+
+	{	
+
+	
+
+		$this->db->select('
+
+							axdoctors.doctorId,
+
+							axdoctors.uniqueId AS doctorUniqueId,
+
+							axdoctors.doctorName,
+
+							axdoctors.doctorEmail,
+
+							axdoctors.doctorMobile,
+
+							axdoctors.qualification,
+							
+							axdoctors.qualification1,
+
+							axdoctors.doctorImageUrl,
+
+							axdoctors.experience,
+
+							axdoctors.knownLanguages,
+
+							
+
+							axdoctors.doctorAddress,
+
+							axdoctors.communicationMode,
+
+							axdoctors.doctorFee,
+
+							axdoctors.doctorSessionDuration,
+
+							axdoctors.medicalRegistrationNumber,
+
+							axdoctors.loginStatus,
+
+						
+							
+							axdoctors.deviceOS AS doctorDeviceOS
+
+							');
+
+		$this->db->from('axdoctors');
+
+	
+
+			$this->db->where('axdoctors.uniqueId','METROMINDCH001');
+
+		
+
+		$this->db->group_by('axdoctors.doctorId');
+
+		$query = $this->db->get();
+
+		//echo  $this->db->last_query();die();
+
+		return $query->row_array();
+
+	}
+	// -----------------------------
+
 	public function validate_doctor(){			
 
 		$valid = 1;			

@@ -34,35 +34,7 @@
     }
 
 
-    function validateVideoId(videoid) {
-
-      var formData = new FormData();
-      formData.append('videoid', videoid);
-      //var frm=document.frmOperatorCreate;
-
-      $.ajax({
-        url: "<?php echo base_url(); ?>admin/videos/checkVideoId",
-        type: "POST", // Type of request to be send, called as method
-        data: {
-          videoId: videoid
-        }, // Data sent to server, a set of key/value pairs (i.e. form fields and values)
-        dataType: "JSON",
-        success: function(data) {
-          if (data == 0) {
-            alert("Video id already exist!");
-            document.getElementById('videoId').value = "";
-
-            return false;
-          } else {
-            return true;
-          }
-
-
-
-        }
-
-      });
-    }
+    
   </script>
 
   <div id="wrapper">
@@ -109,7 +81,7 @@
                   <div class="form-group row">
                     <label for="input-rounded" class="col-sm-12 form-control-label">Vimeo Video Id</label>
                     <div class="col-sm-6">
-                      <input type="text" name="videoId" id="videoId" class="form-control" value="<?php echo $videos_item['videoId']  ?>" required onBlur="validateVideoId(this.value)">
+                      <input type="text" name="videoId" id="videoId" class="form-control" value="<?php echo $videos_item['videoId']  ?>" required >
                     </div>
                   </div>
                 </div>
