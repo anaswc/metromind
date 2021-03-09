@@ -635,7 +635,7 @@ class Doctor_model extends CI_Model {
 
 							axdoctors.communicationMode,
 
-							axdoctors.doctorFee,
+							axdoctors.fcmToken,
 
 							axdoctors.doctorSessionDuration,
 
