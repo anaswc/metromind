@@ -462,6 +462,7 @@ class Patient_model extends CI_Model {
 							axpatient.customGender,
 
 							axpatient.countryId,
+							axcountries.countryId as countriesId,
 
 							DATE_FORMAT(axpatient.birthDate, "%d-%b-%Y") AS birthDate,
 
