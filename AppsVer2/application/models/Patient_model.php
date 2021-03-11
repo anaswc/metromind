@@ -462,7 +462,7 @@ class Patient_model extends CI_Model {
 							axpatient.customGender,
 
 							axpatient.countryId,
-							axcountries.countryId as countriesId,
+						
 
 							DATE_FORMAT(axpatient.birthDate, "%d-%b-%Y") AS birthDate,
 
@@ -485,6 +485,36 @@ class Patient_model extends CI_Model {
 		}
 
 		$this->db->group_by('axpatient.patientId');
+
+		$query = $this->db->get();
+
+		//echo  $this->db->last_query();die();
+
+		return $query->row_array();
+
+	}
+
+
+	public function get_country_by_phoneprefix($prefix)
+
+	{	
+
+		if($prefix == '')
+
+			return 0;
+
+		$this->db->select('
+
+				
+
+						countryId
+
+							');
+							$this->db->where('phonePrefix',$prefix);
+
+		$this->db->from('axcountries');
+
+	
 
 		$query = $this->db->get();
 
