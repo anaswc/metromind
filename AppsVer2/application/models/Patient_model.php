@@ -475,7 +475,7 @@ class Patient_model extends CI_Model {
 
 		$this->db->from('axpatient');
 
-		$this->db->join('axcountries', 'axcountries.countryId = axpatient.countryId', 'left');
+		$this->db->join('axcountries', 'axcountries.phonePrefix = axpatient.countryId', 'left');
 
 		if($uniqueId != ""){
 
