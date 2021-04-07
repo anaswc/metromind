@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Blogs</title>
+    <title>Articles</title>
     <?php echo link_tag('assets/icon/icofont/css/icofont.css'); ?>
     <?php echo link_tag('assets/icon/simple-line-icons/css/simple-line-icons.css'); ?>
     <?php echo link_tag('assets/icon/ion-icon/css/ionicons.min.css'); ?>
@@ -49,7 +49,7 @@
           return false;
         } else {
           if (action == "DELETE") {
-            if (confirm("You are about to  " + action.toLowerCase() + "  the selected Blog(s). Do you wish to continue?")) {
+            if (confirm("You are about to  " + action.toLowerCase() + "  the selected Article(s). Do you wish to continue?")) {
               // alert(selectedValue);
               frm.ids.value = selectedValue;
               frm.action.value = action;
@@ -95,10 +95,10 @@
         <div class="container-fluid">
           <div class="col-sm-12 p-0">
             <div class="main-header">
-              <h4>Blogs</h4>
+              <h4>Articles</h4>
               <ol class="breadcrumb breadcrumb-title breadcrumb-arrow">
                 <li class="breadcrumb-item"><a href="<?php echo base_url('admin/dashboard'); ?>"><i class="icofont icofont-home"></i></a></li>
-                <li class="breadcrumb-item"><a href="#"> Blogs</a></li>
+                <li class="breadcrumb-item"><a href="#"> Articles</a></li>
               </ol>
             </div>
           </div>

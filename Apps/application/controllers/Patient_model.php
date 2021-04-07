@@ -328,7 +328,7 @@ class Patient_model extends CI_Model {
 
 		$this->db->from('axpatient');			
 
-		$this->db->join('axcountries', 'axcountries.countryId = axpatient.countryId', 'left');
+		$this->db->join('axcountries', 'axcountries.phonePrefix = axpatient.countryId', 'left');
 
 		if(trim($this->patientId) != "")			
 
@@ -432,8 +432,7 @@ class Patient_model extends CI_Model {
 
 		$this->db->from('axpatient');
 
-		$this->db->join('axcountries', 'axcountries.countryId = axpatient.countryId', 'left');
-
+		$this->db->join('axcountries', 'axcountries.phonePrefix = axpatient.countryId', 'left');
 		if($uniqueId != ""){
 
 			$this->db->where('axpatient.uniqueId',$uniqueId);

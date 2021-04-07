@@ -913,6 +913,10 @@ class MetroMind extends CI_Controller
 
 				$country_array = $this->Country_model->get_country_dropdown();
 
+$country_id=$this->Patient_model->get_country_by_phoneprefix( $result['countryId']);
+$result['countryId']=$country_id['countryId'];
+	
+
 				$response = ['status' => $status, 'token' => $token, 'result' => array(), 'patientId' => $result['patientId'], 'patientUniqueId'  => $result['patientUniqueId'], 'firstName'  => $result['firstName'], 'lastName'  => $result['lastName'], 'patientEmail'  => $result['patientEmail'], 'patientMobile'  => $result['patientMobile'], 'profileImgUrl'  => $result['profileImgUrl'], 'countryId'  => $result['countryId'], 'birthDate'  => $result['birthDate'], 'gender'  => $result['gender'], 'customGender'  => $result['customGender'], 'patientAddress'  => $result['patientAddress'], 'country'  => $result['country'], 'country_array'  => $country_array, 'message' => HTTP_STATUS_CODES[200]];
 
 				$this->response($response, 200);

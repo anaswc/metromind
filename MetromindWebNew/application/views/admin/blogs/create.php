@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title> Blogs </title>
+  <title> Article </title>
 
   <?php echo link_tag('assets/icon/icofont/css/icofont.css'); ?>
   <?php echo link_tag('assets/css/bootstrap.min.css'); ?>
@@ -175,10 +175,10 @@ function validateFile() {
 
         <div class="col-sm-12 p-0">
           <div class="main-header">
-            <h4>Blogs </h4>
+            <h4>Article </h4>
             <ol class="breadcrumb breadcrumb-title breadcrumb-arrow">
               <li class="breadcrumb-item"><a href="<?php echo base_url('admin/dashboard'); ?>"><i class="icofont icofont-home"></i></a></li>
-              <li class="breadcrumb-item"><a href="#">Create Blogs</a></li>
+              <li class="breadcrumb-item"><a href="#">Create Article</a></li>
             </ol>
           </div>
         </div>

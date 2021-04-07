@@ -110,7 +110,7 @@ global $arrAdminType;
       <ul class="treeview-menu">
         
         <li class="treeview"><a href="<?php echo base_url('admin/videos')?>"><span>Videos</span></a></li>
-        <li class="treeview"><a href="<?php echo base_url('admin/blogs')?>"><span>Blogs</span></a></li>
+        <li class="treeview"><a href="<?php echo base_url('admin/blogs')?>"><span>Article</span></a></li>
         </ul>
       </li>
       <li class="treeview"><a href="<?php echo base_url('admin/category')?>"><span>Category</span></a></li>
