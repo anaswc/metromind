@@ -208,9 +208,13 @@ public function send_notification_user($uniqueId){
 public function notify_user_appointment($uniqueId,$doc_id)
 {
 
+
+
+		
+	
 	if($uniqueId == '')
 			return 0;
-		$this->db->select('uniqueId,firstName,lastName,fcmToken');
+		$this->db->select('uniqueId,firstName,lastName,fcmToken','notificationCount');
 
 		$this->db->from('axpatient');
 
@@ -218,12 +222,25 @@ public function notify_user_appointment($uniqueId,$doc_id)
 
 		$result_array = $this->db->get()->result_array();
 
+		// $this->db->select('notificationCount');				
+	
+		// $this->db->from('axpatient');			
+	
+		// $this->db->where('uniqueId', $patient_unnique_id);	
+	
+		// $query = $this->db->get();
+		
+		// return $query->row_array();
+
+
 		if(count($result_array) > 0){
 			$this->uniqueId		= $result_array[0]["uniqueId"];
 
 			$firstName			= $result_array[0]["firstName"];
 
 			$lastName			= $result_array[0]["lastName"];
+			$notificationCount			= $result_array[0]["notificationCount"];
+
 
 			$fcmtoken		= $result_array[0]["fcmToken"];
 			if($fcmtoken <> ''){
@@ -233,9 +250,9 @@ public function notify_user_appointment($uniqueId,$doc_id)
     $serverKey = 'AAAAy6LCT4s:APA91bGCsaS87ndfK2FppCbZRJjS-XQVxErQ8MsSUDm7dk-4U78HbbtFM-mMSgSR-rxzazhC3FJv5jNErAaoqY7OZ2gxoaCiNTyg67Ma_C99uh52IA1UbMCuHLtHHE_nULXF24JcLXAD';
     $title = "Metro Mind";
     $body = 'Hi '.$firstName.' '.$lastName.' your appointment has been scheduled today Contact Doctor on time';
-    $notification = array('title' =>$title , 'body' => $body, 'sound' => 'default');
+    $notification = array('title' =>$title , 'body' => $body, 'sound' => 'default','badge'=>$notificationCount);
     $data = array('title' =>$title , 'body' => $body,'doc_id'=>$doc_id, 'type' => 'general');
-    $arrayToSend = array('to' => $token, 'notification' => $notification,'data'=>$data,'priority'=>'high');
+	$arrayToSend = array('to' => $token, 'notification' => $notification,'data'=>$data,'priority'=>'high');
     $json = json_encode($arrayToSend);
     $headers = array();
     $headers[] = 'Content-Type: application/json';
