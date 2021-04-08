@@ -108,6 +108,7 @@ class Doctor_model extends CI_Model {
 		$this->currentDayTime 					= "";
 		
 		$this->countryId 						= "";
+		$this->notificationCount					="";
 
 	}
 
@@ -194,7 +195,9 @@ class Doctor_model extends CI_Model {
 		$this->countryId						= trim($this->input->post_get('countryId'));	
 
 		$this->doctorIds						= trim($this->input->post_get('doctorIds'));						
-
+		$this->notificationCount						= trim($this->input->post_get('notificationCount'));						
+		
+		
 	}			
 
 					
@@ -2181,9 +2184,8 @@ class Doctor_model extends CI_Model {
 				axpatient.fcmToken AS patientFcmToken,
 
 				axpatient.loginStatus AS patientLoginStatus,
-				
 				axpatient.uniqueId  AS patientUniqueId,
-				
+				axpatient.notificationCount  AS notificationCount,
 				axdoctors.uniqueId AS doctorUniqueId
 
 				');
@@ -2231,6 +2233,7 @@ class Doctor_model extends CI_Model {
 			$doctorUniqueId 	= $row_array['doctorUniqueId'];
 			
 			$patientUniqueId 	= $row_array['patientUniqueId'];
+			$notificationCount 	= $row_array['notificationCount'];
 
 			$to = '';
 
@@ -2320,7 +2323,8 @@ class Doctor_model extends CI_Model {
 
 								'doctorName' 		=> $doctorName,
 
-								'type' 				=> $this->input->post_get('type')
+								'type' 				=> $this->input->post_get('type'),
+								'bade'				=>$notificationCount
 
 						),                
 
@@ -2396,7 +2400,7 @@ class Doctor_model extends CI_Model {
 
 			return 0;
 
-		$this->db->select('fcmToken,chatRoomNumber');				
+		$this->db->select('fcmToken,chatRoomNumber,notificationCount');				
 
 		$this->db->from('axdoctors');			
 
@@ -2411,6 +2415,8 @@ class Doctor_model extends CI_Model {
 				$this->fcmToken			= $row_array['fcmToken'];
 
 				$this->chatRoomNumber	= $row_array['chatRoomNumber'];
+				$this->notificationCount	= $row_array['notificationCount'];
+
 
 				return 1;
 

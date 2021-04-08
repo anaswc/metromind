@@ -148,6 +148,7 @@ class Patient_model extends CI_Model {
 		$this->razorpay_payment_id 				= "";
 		
 		$this->razorpay_signature 				= "";
+		$this->notificationCount				="";
 
 	}
 
@@ -276,7 +277,9 @@ class Patient_model extends CI_Model {
 		
 		$this->razorpay_signature				= trim($this->input->post_get('razorpay_signature'));		
 
-		$this->patientIds						= trim($this->input->post_get('patientIds'));						
+		$this->patientIds						= trim($this->input->post_get('patientIds'));	
+		$this->notificationCount				= trim($this->input->post_get('notificationCount'));	
+		
 
 	}			
 
@@ -3671,7 +3674,7 @@ class Patient_model extends CI_Model {
 
 			
 
-		$this->db->select('fcmToken,firstName,lastName');				
+		$this->db->select('fcmToken,firstName,lastName,notificationCount');				
 
 		$this->db->from('axpatient');			
 
@@ -3683,9 +3686,9 @@ class Patient_model extends CI_Model {
 
 				$row_array = $query->row_array();
 
-				$this->firstName	= $row_array['firstName'];
-
-				$this->lastName		= $row_array['lastName'];
+				$this->firstName				= $row_array['firstName'];
+				$this->lastName					= $row_array['lastName'];
+				$this->notificationCount		= $row_array['notificationCount'];
 
 				return $row_array['fcmToken'];
 
@@ -3711,7 +3714,7 @@ class Patient_model extends CI_Model {
 
 			
 
-		$this->db->select('fcmToken,chatRoomNumber');				
+		$this->db->select('fcmToken,chatRoomNumber,notificationCount');				
 
 		$this->db->from('axdoctors');			
 
@@ -3726,6 +3729,7 @@ class Patient_model extends CI_Model {
 				$this->fcmToken			= $row_array['fcmToken'];
 
 				$this->chatRoomNumber	= $row_array['chatRoomNumber'];
+				$this->notificationCount	= $row_array['notificationCount'];
 
 				return 1;
 
@@ -3955,7 +3959,8 @@ class Patient_model extends CI_Model {
 
 						'appointmentNote' 	=> $this->appointmentNote,
 
-						'type' 				=> $this->input->post_get('type')
+						'type' 				=> $this->input->post_get('type'),
+						'badge' 			=> $this->notificationCount
 
 				),                
 
