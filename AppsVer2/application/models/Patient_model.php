@@ -4194,7 +4194,7 @@ public function cancel_appointment_patient($appointmentId)
 
 								'type' 				=> $this->input->post_get('type'),
 
-								'badge' 	=> $this->notificationCount    //Added by Dileep on july 12 sunday 						
+								'badge' 	=> $this->notificationCount   						
 
 
 						),                
@@ -4291,7 +4291,7 @@ public function cancel_appointment_patient($appointmentId)
 
 										'sound' => 'default', 
 
-										'badge' 	=> $this->notificationCount,
+										'badge' 				=> $this->notificationCount,
 
 										'data' 	=> array (
 
@@ -4313,7 +4313,8 @@ public function cancel_appointment_patient($appointmentId)
 
 											'patientRecordId' 	=> $this->patientRecordId,    //Added by Dileep on july 12 sunday 
 
-											'type' 				=> $this->input->post_get('type')
+											'type' 				=> $this->input->post_get('type'),
+											'badge' 				=> $this->notificationCount,
 											
 									),
 
@@ -4698,7 +4699,7 @@ public function get_patient_notification_count_by_uniqueid($patient_unnique_id){
 
 										'sound' => 'default', 
 
-										'badge' => 0, 
+										'badge' => $this->notificationCount, 
 
 										'data' 	=> array (
 
@@ -4880,7 +4881,7 @@ public function get_patient_notification_count_by_uniqueid($patient_unnique_id){
 
 										'sound' => 'default', 
 
-										'badge' => 0, 
+										'badge' 				=> $this->notificationCount,
 
 										'data' 	=> array (
 
@@ -5113,7 +5114,7 @@ public function get_patient_notification_count_by_uniqueid($patient_unnique_id){
 
 							'type' 				=> $this->input->post_get('type'),
 
-							'badge' 				=> $this->notificationCount,
+							'badge' 			=> $this->notificationCount,
 
 
 					),                
@@ -6486,7 +6487,7 @@ public function get_patient_notification_count_by_uniqueid($patient_unnique_id){
 
                         'sound' => 'default', 
 
-                        'badge' => 0, 
+                        'badge' => $this->notificationCount, 
 
                         'data' 	=> array (
 

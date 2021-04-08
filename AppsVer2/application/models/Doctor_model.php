@@ -2813,7 +2813,8 @@ public function getbanner($limit = NULL, $start = NULL)
 							
 								'doctorDeviceOS' 		=> $doctorDeviceOS,
 
-								'type' 					=> $this->input->post_get('type')
+								'type' 					=> $this->input->post_get('type'),
+								'badge'					=>14
 
 						),                
 
@@ -2891,7 +2892,7 @@ public function getbanner($limit = NULL, $start = NULL)
 
 			return 0;
 
-		$this->db->select('fcmToken,chatRoomNumber,voipToken,deviceOS');				
+		$this->db->select('fcmToken,chatRoomNumber,voipToken,deviceOS,notificationCount');				
 
 		$this->db->from('axdoctors');			
 
@@ -2908,6 +2909,7 @@ public function getbanner($limit = NULL, $start = NULL)
 				$this->chatRoomNumber		= $row_array['chatRoomNumber'];
 				
 				$this->doctorDeviceOS		= $row_array['deviceOS'];
+				$this->notificationCount		= $row_array['notificationCount'];
 
 				return 1;
 
