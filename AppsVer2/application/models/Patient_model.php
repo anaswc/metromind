@@ -199,6 +199,7 @@ class Patient_model extends CI_Model {
 		$this->appointmentStartTime				="";
 
 		$this->appointmentEndTime				="";
+		$this->notificationCount				="";
 
 		$this->get_razor_pay_settings();
 
@@ -340,7 +341,8 @@ class Patient_model extends CI_Model {
 
 		$this->appointmentStartTime			= trim($this->input->post_get('appointmentStartTime'));
 		$this->appointmentEndTime			= trim($this->input->post_get('appointmentEndTime'));						
-
+		$this->notificationCount				= trim($this->input->post_get('notificationCount'));	
+		
 	}			
 
 	public function get_patient($limit = NULL, $start = NULL)			
@@ -4190,7 +4192,10 @@ public function cancel_appointment_patient($appointmentId)
 
 								'patientRecordId' 	=> $this->patientRecordId,    //Added by Dileep on july 12 sunday 						
 
-								'type' 				=> $this->input->post_get('type')
+								'type' 				=> $this->input->post_get('type'),
+
+								'badge' 	=> $this->notificationCount    //Added by Dileep on july 12 sunday 						
+
 
 						),                
 
@@ -4286,7 +4291,7 @@ public function cancel_appointment_patient($appointmentId)
 
 										'sound' => 'default', 
 
-										'badge' => 0, 
+										'badge' 	=> $this->notificationCount,
 
 										'data' 	=> array (
 
@@ -4309,7 +4314,7 @@ public function cancel_appointment_patient($appointmentId)
 											'patientRecordId' 	=> $this->patientRecordId,    //Added by Dileep on july 12 sunday 
 
 											'type' 				=> $this->input->post_get('type')
-
+											
 									),
 
 								);
@@ -4348,7 +4353,7 @@ public function cancel_appointment_patient($appointmentId)
 
 			return 0;
 
-		$this->db->select('fcmToken,firstName,lastName,uniqueId,loginStatus, voipToken, deviceOS');				
+		$this->db->select('fcmToken,firstName,lastName,uniqueId,loginStatus, voipToken, deviceOS,notificationCount');				
 
 		$this->db->from('axpatient');			
 
@@ -4371,6 +4376,7 @@ public function cancel_appointment_patient($appointmentId)
 				$this->patientVoipToken		= $row_array['voipToken'];	// Added Dileep			
 
 				$this->patientDeviceOS		= $row_array['deviceOS'];
+				$this->notificationCount		= $row_array['notificationCount'];
 
 				return $row_array['fcmToken'];
 
@@ -5105,7 +5111,10 @@ public function get_patient_notification_count_by_uniqueid($patient_unnique_id){
 							
 							'doctorSessionDuration' => $this->doctorSessionDuration,
 
-							'type' 				=> $this->input->post_get('type')
+							'type' 				=> $this->input->post_get('type'),
+
+							'badge' 				=> $this->notificationCount,
+
 
 					),                
 
@@ -5765,7 +5774,9 @@ public function get_patient_notification_count_by_uniqueid($patient_unnique_id){
 
 							'doctorDeviceOS' 	=> $this->doctorDeviceOS,
 
-							'type' 				=> $this->input->post_get('type')
+							'type' 				=> $this->input->post_get('type'),
+							'badge' 			=> $this->notificationCount
+
 
 					),                
 
