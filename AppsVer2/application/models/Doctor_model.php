@@ -2643,7 +2643,9 @@ public function getbanner($limit = NULL, $start = NULL)
 				
 				axpatient.deviceOS AS patientDeviceOS,
 				
-				axdoctors.deviceOS AS doctorDeviceOS
+				axdoctors.deviceOS AS doctorDeviceOS,
+				axpatient.notificationCount AS notificationCount
+
 
 				');
 
@@ -2696,7 +2698,8 @@ public function getbanner($limit = NULL, $start = NULL)
 			$doctorDeviceOS 	= $row_array['doctorDeviceOS'];
 			
 			$patientDeviceOS 	= $row_array['patientDeviceOS'];
-
+			$notificationCount 	= $row_array['notificationCount'];
+			
 			$to = '';
 
 			$loginStatus = '';
@@ -2814,7 +2817,7 @@ public function getbanner($limit = NULL, $start = NULL)
 								'doctorDeviceOS' 		=> $doctorDeviceOS,
 
 								'type' 					=> $this->input->post_get('type'),
-								'badge'					=>14
+								'badge'					=>$notificationCount
 
 						),                
 
