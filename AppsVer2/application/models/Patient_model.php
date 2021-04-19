@@ -3282,7 +3282,7 @@ public function cancel_appointment_patient($appointmentId)
 			return 0;
 		// if($uniqueId == '')
 		// 	return 0;
-		$this->db->select('uniqueId,fcmToken');
+		$this->db->select('uniqueId,fcmToken,notificationCount');
 
 		$this->db->from('axdoctors');
 
@@ -3292,7 +3292,7 @@ public function cancel_appointment_patient($appointmentId)
 
 		if(count($result_array) > 0){
 			
-			$this->push_notification_after_payment($result_array[0]["uniqueId"],$result_array[0]["fcmToken"],$notificationTitle,$doc_id);
+			$this->push_notification_after_payment($result_array[0]["uniqueId"],$result_array[0]["fcmToken"],$notificationTitle,$doc_id,$result_array[0]["notificationCount"]);
 
 			
 		}else{
@@ -3302,7 +3302,7 @@ public function cancel_appointment_patient($appointmentId)
 		}
 	}
 
-	public function push_notification_after_payment($cs_uniqueid,$cs_fcmtoken,$notificationTitle,$doc_id){
+	public function push_notification_after_payment($cs_uniqueid,$cs_fcmtoken,$notificationTitle,$doc_id,$notificationCount){
 
 		
 		
@@ -3316,7 +3316,7 @@ public function cancel_appointment_patient($appointmentId)
 			$body = $notificationTitle;
 			$notification = array('title' =>$title , 'body' => $body, 'sound' => 'default');
 			$data = array('title' =>$title , 'body' => $body,'doc_id'=>$doc_id, 'type' => 'general');
-			$arrayToSend = array('to' => $token, 'notification' => $notification,'data'=>$data,'priority'=>'high');
+			$arrayToSend = array('to' => $token, 'notification' => $notification,'data'=>$data,'priority'=>'high','badge'=>$notificationCount);
 			  $json = json_encode($arrayToSend);
 			$headers = array();
 			$headers[] = 'Content-Type: application/json';
@@ -4461,7 +4461,7 @@ public function get_patient_notification_count_by_uniqueid($patient_unnique_id){
 
 			return 0;
 
-		$this->db->select('fcmToken,chatRoomNumber,uniqueId,loginStatus,voipToken,deviceOS,doctorSessionDuration');				
+		$this->db->select('fcmToken,chatRoomNumber,uniqueId,loginStatus,voipToken,deviceOS,doctorSessionDuration,notificationCount');				
 
 		$this->db->from('axdoctors');			
 
@@ -4488,6 +4488,7 @@ public function get_patient_notification_count_by_uniqueid($patient_unnique_id){
 				
 
 				$this->doctorSessionDuration	= $row_array['doctorSessionDuration'];
+				$this->notificationCount	= $row_array['notificationCount'];
 
 				return 1;
 
@@ -5089,7 +5090,7 @@ public function get_patient_notification_count_by_uniqueid($patient_unnique_id){
 					"collapse_key" 	=>  "type_a",
 
 					'priority' 		=> 'high',
-
+					'badge' 			=> $this->notificationCount,
 					$fieldName  	=> 	array (
 
 							"message" 			=> 'New appointment request',

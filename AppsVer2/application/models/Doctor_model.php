@@ -1908,6 +1908,8 @@ public function getbanner($limit = NULL, $start = NULL)
 							axdoctors.voipToken AS doctorVoipToken,
 							
 							axpatient.deviceOS AS patientDeviceOS,
+
+							axdoctors.notificationCount AS notificationCount,
 							
 							axdoctors.deviceOS AS doctorDeviceOS
 
