@@ -3291,8 +3291,8 @@ public function cancel_appointment_patient($appointmentId)
 		$result_array = $this->db->get()->result_array();
 
 		if(count($result_array) > 0){
-			
-			$this->push_notification_after_payment($result_array[0]["uniqueId"],$result_array[0]["fcmToken"],$notificationTitle,$doc_id,$result_array[0]["notificationCount"]);
+			$notificationCount=$result_array[0]["notificationCount"]+1;
+			$this->push_notification_after_payment($result_array[0]["uniqueId"],$result_array[0]["fcmToken"],$notificationTitle,$doc_id,$notificationCount);
 
 			
 		}else{
@@ -4377,7 +4377,7 @@ public function cancel_appointment_patient($appointmentId)
 				$this->patientVoipToken		= $row_array['voipToken'];	// Added Dileep			
 
 				$this->patientDeviceOS		= $row_array['deviceOS'];
-				$this->notificationCount		= $row_array['notificationCount'];
+				$this->notificationCount		= $row_array['notificationCount']+1;
 
 				return $row_array['fcmToken'];
 
@@ -4488,7 +4488,7 @@ public function get_patient_notification_count_by_uniqueid($patient_unnique_id){
 				
 
 				$this->doctorSessionDuration	= $row_array['doctorSessionDuration'];
-				$this->notificationCount	= $row_array['notificationCount'];
+				$this->notificationCount	= $row_array['notificationCount'] + 1;
 
 				return 1;
 
@@ -5753,6 +5753,7 @@ public function get_patient_notification_count_by_uniqueid($patient_unnique_id){
 					'to' 			=> $to,
 
 					"collapse_key" 	=>  "type_a",
+					'badge' 			=> $this->notificationCount,
 
 					$fieldName		=> array (
 
