@@ -3291,7 +3291,7 @@ public function cancel_appointment_patient($appointmentId)
 		$result_array = $this->db->get()->result_array();
 
 		if(count($result_array) > 0){
-			$notificationCount=$result_array[0]["notificationCount"]+1;
+			$notificationCount=$result_array[0]["notificationCount"];
 			$this->push_notification_after_payment($result_array[0]["uniqueId"],$result_array[0]["fcmToken"],$notificationTitle,$doc_id,$notificationCount);
 
 			
@@ -3315,9 +3315,10 @@ public function cancel_appointment_patient($appointmentId)
 			$title = "Patient Completed Payment";
 			$body = $notificationTitle;
 			$notification = array('title' =>$title , 'body' => $body, 'sound' => 'default');
-			$data = array('title' =>$title , 'body' => $body,'doc_id'=>$doc_id, 'type' => 'general');
-			$arrayToSend = array('to' => $token, 'notification' => $notification,'data'=>$data,'priority'=>'high','badge'=>$notificationCount);
+			$data = array('title' =>$title , 'body' => $body,'doc_id'=>$doc_id, 'type' => 'general','badge'=>(int)$notificationCount);
+			$arrayToSend = array('to' => $token, 'notification' => $notification,'data'=>$data,'priority'=>'high','badge'=>(int)$notificationCount);
 			  $json = json_encode($arrayToSend);
+			//   print_r($json);exit;
 			$headers = array();
 			$headers[] = 'Content-Type: application/json';
 			$headers[] = 'Authorization: key='. $serverKey;
@@ -4488,7 +4489,7 @@ public function get_patient_notification_count_by_uniqueid($patient_unnique_id){
 				
 
 				$this->doctorSessionDuration	= $row_array['doctorSessionDuration'];
-				$this->notificationCount	= $row_array['notificationCount'] + 1;
+				$this->notificationCount	= $row_array['notificationCount'];
 
 				return 1;
 
@@ -5090,7 +5091,7 @@ public function get_patient_notification_count_by_uniqueid($patient_unnique_id){
 					"collapse_key" 	=>  "type_a",
 
 					'priority' 		=> 'high',
-					'badge' 			=> $this->notificationCount,
+					'badge' 			=> (int)$this->notificationCount,
 					$fieldName  	=> 	array (
 
 							"message" 			=> 'New appointment request',
@@ -5115,7 +5116,7 @@ public function get_patient_notification_count_by_uniqueid($patient_unnique_id){
 
 							'type' 				=> $this->input->post_get('type'),
 
-							'badge' 			=> $this->notificationCount,
+							'badge' 			=> (int)$this->notificationCount,
 
 
 					),                
@@ -5123,7 +5124,7 @@ public function get_patient_notification_count_by_uniqueid($patient_unnique_id){
 			);
 
 			$fields = json_encode ( $fields );
-
+// print_r($fields);exit;
 			$headers = array (
 
 					'Authorization: key=' . $API_ACCESS_KEY,

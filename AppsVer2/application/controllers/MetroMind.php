@@ -2446,6 +2446,7 @@ $result['countryId']=$country_id['countryId'];
 		$this->Patient_model->setPostGetVars();
 
 		$this->verify_request();
+		// print_r($this->Patient_model->doctorId);exit;
 
 		if ($this->Patient_model->patientId == '' || $this->Patient_model->doctorId == '' || $this->Patient_model->requestDate == '' || $this->Patient_model->requestSession == '' || $this->Patient_model->appointmentStartTime == '' || $this->Patient_model->appointmentEndTime == '') {
 
