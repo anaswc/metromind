@@ -3314,7 +3314,7 @@ public function cancel_appointment_patient($appointmentId)
 			$serverKey = 'AAAAy6LCT4s:APA91bGCsaS87ndfK2FppCbZRJjS-XQVxErQ8MsSUDm7dk-4U78HbbtFM-mMSgSR-rxzazhC3FJv5jNErAaoqY7OZ2gxoaCiNTyg67Ma_C99uh52IA1UbMCuHLtHHE_nULXF24JcLXAD';
 			$title = "Patient Completed Payment";
 			$body = $notificationTitle;
-			$notification = array('title' =>$title , 'body' => $body, 'sound' => 'default','badge'=>(int)$notificationCount);
+			$notification = array('title' =>$title , 'body' => $body, 'sound' => 'default','badge'=>10);
 			$data = array('title' =>$title , 'body' => $body,'doc_id'=>$doc_id, 'type' => 'general','badge'=>(int)$notificationCount);
 			$arrayToSend = array('to' => $token, 'notification' => $notification,'data'=>$data,'priority'=>'high','badge'=>(int)$notificationCount);
 			  $json = json_encode($arrayToSend);
