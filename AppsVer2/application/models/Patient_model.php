@@ -3314,11 +3314,11 @@ public function cancel_appointment_patient($appointmentId)
 			$serverKey = 'AAAAy6LCT4s:APA91bGCsaS87ndfK2FppCbZRJjS-XQVxErQ8MsSUDm7dk-4U78HbbtFM-mMSgSR-rxzazhC3FJv5jNErAaoqY7OZ2gxoaCiNTyg67Ma_C99uh52IA1UbMCuHLtHHE_nULXF24JcLXAD';
 			$title = "Patient Completed Payment";
 			$body = $notificationTitle;
-			$notification = array('title' =>$title , 'body' => $body, 'sound' => 'default');
+			$notification = array('title' =>$title , 'body' => $body, 'sound' => 'default','badge'=>(int)$notificationCount);
 			$data = array('title' =>$title , 'body' => $body,'doc_id'=>$doc_id, 'type' => 'general','badge'=>(int)$notificationCount);
 			$arrayToSend = array('to' => $token, 'notification' => $notification,'data'=>$data,'priority'=>'high','badge'=>(int)$notificationCount);
 			  $json = json_encode($arrayToSend);
-			//   print_r($json);exit;
+			  print_r($json);exit;
 			$headers = array();
 			$headers[] = 'Content-Type: application/json';
 			$headers[] = 'Authorization: key='. $serverKey;
@@ -5091,6 +5091,7 @@ public function get_patient_notification_count_by_uniqueid($patient_unnique_id){
 					"collapse_key" 	=>  "type_a",
 
 					'priority' 		=> 'high',
+					
 					'badge' 			=> (int)$this->notificationCount,
 					$fieldName  	=> 	array (
 
