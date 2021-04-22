@@ -3318,7 +3318,7 @@ public function cancel_appointment_patient($appointmentId)
 			$data = array('title' =>$title , 'body' => $body,'doc_id'=>$doc_id, 'type' => 'general','badge'=>(int)$notificationCount);
 			$arrayToSend = array('to' => $token, 'notification' => $notification,'data'=>$data,'priority'=>'high','badge'=>(int)$notificationCount);
 			  $json = json_encode($arrayToSend);
-			  print_r($json);exit;
+			//   print_r($json);exit;
 			$headers = array();
 			$headers[] = 'Content-Type: application/json';
 			$headers[] = 'Authorization: key='. $serverKey;
